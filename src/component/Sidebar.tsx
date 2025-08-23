@@ -1,4 +1,5 @@
 import "./sidebar.css"
+import { LuLayoutDashboard } from "react-icons/lu";
 import { SiShopware } from "react-icons/si";
 export const Sidebar = ()=>{
   return(
@@ -9,7 +10,7 @@ export const Sidebar = ()=>{
     <div className="navlist-container">
       <ul>
        <li className="nav-name">
-        <p>Dashboard</p> 
+        <p><LuLayoutDashboard size={20}fontWeight={50}/> Dashboard</p> 
        </li>
        <li className="nav-name">
         <p>Stock</p>
