@@ -1,6 +1,15 @@
 .search-container{
     display: flex;
     flex-direction: row;
-    background-color: rgb(222, 222, 222);
-    padding: 0px;
+    background-color: rgb(244, 244, 244);
+    padding-left: 20px;
+    
+}
+.search-container input{
+    background-color:rgb(244, 244, 244) ;
+    color:black;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    margin-left: 12px;
 }

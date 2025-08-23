@@ -8,7 +8,7 @@ export default function Layout() {
       <div className="sidebar-fixed">
         <Sidebar/>
       </div>
-      <main>
+      <main className="main-content">
         <Outlet/>
       </main>
     </div>
