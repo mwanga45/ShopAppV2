@@ -1,0 +1,36 @@
+.ac-container{
+    display: flex;
+    width: 300px;
+    height: 70px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+.avator{
+    background-color: rgb(15, 15, 15);
+    border-radius: 50%;
+    height: 45px;
+    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.acc-details{
+   padding: 0%;
+
+   
+}
+.acc-name{
+    margin: 0;
+    
+}
+.acc-email{
+    margin: 0;
+    color: grey;
+    font-size: 15px;
+}
