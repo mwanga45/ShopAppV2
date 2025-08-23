@@ -1,7 +1,33 @@
 .nav-container{
-   /* margin-left: 2px; */
+    /* margin-left: 2px;  */
    background-color: aliceblue;
    border: 2px solid red;
    width: 20vw;
    height: 100vh;
+   color: black;
+}
+.navlist-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    border: 2px solid green;
+
+}
+.navlist-container ul{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.nav-name{
+  display: flex;
+  align-items: flex-start;
+  
+  width: 100%;
+  list-style: none;
+  border: 2px solid red;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
