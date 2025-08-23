@@ -4,6 +4,7 @@ import Button from "../component/button/Button"
 import { CardReport } from "../component/card-report/card";
 import { IoNotificationsCircleSharp } from "react-icons/io5";
 import { Accountbar } from "../component/account/Account"
+import { Daysales } from "../component/daysales/Daysales";
 export const Dashboard = () =>{
     return(
       <div className="dash-container">
@@ -30,6 +31,8 @@ export const Dashboard = () =>{
         <div className="main-dashboard">
           <div className="main-firstlayor">
             <CardReport/>
+            <CardReport/>
+            <Daysales/>
           </div>
         </div>
       
