@@ -5,6 +5,7 @@ import { CardReport } from "../component/card-report/card";
 import { IoNotificationsCircleSharp } from "react-icons/io5";
 import { Accountbar } from "../component/account/Account"
 import { Daysales } from "../component/daysales/Daysales";
+import { Salesdeviation } from "../component/daysales/Salesdeviation";
 export const Dashboard = () =>{
     return(
       <div className="dash-container">
@@ -32,7 +33,10 @@ export const Dashboard = () =>{
           <div className="main-firstlayor">
             <CardReport/>
             <CardReport/>
+            <div className="sale-info">
             <Daysales/>
+            <Salesdeviation/>
+            </div>
           </div>
         </div>
       
