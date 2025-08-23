@@ -1,9 +1,10 @@
 .nav-container{
    background-color: aliceblue;
-   border: 2px solid red;
    width: 20vw;
    height: 100vh;
+   border-radius:5px;
    color: black;
+   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .navlist-container{
     display: flex;
@@ -12,7 +13,6 @@
     align-items: center;
     width: auto;
     height: auto;
-    border: 2px solid green;
 
 }
 .navlist-container ul{
@@ -23,10 +23,9 @@
 .nav-name{
   display: flex;
   align-items: flex-start;
-  
+  justify-items: center;
   width: 200px;
   list-style: none;
-  border: 2px solid red;
   margin-top: 10px;
   margin-bottom: 10px;
 }

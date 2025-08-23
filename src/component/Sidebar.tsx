@@ -1,6 +1,10 @@
 import "./sidebar.css"
 import { LuLayoutDashboard } from "react-icons/lu";
+import { LuPackageOpen } from "react-icons/lu";
+import { FaAppleWhole } from "react-icons/fa6";
+import { FaApple } from "react-icons/fa";
 import { SiShopware } from "react-icons/si";
+import { IoSettingsOutline } from "react-icons/io5";
 export const Sidebar = ()=>{
   return(
     <div className="nav-container">
@@ -13,16 +17,16 @@ export const Sidebar = ()=>{
         <p><LuLayoutDashboard size={20}fontWeight={50}/> Dashboard</p> 
        </li>
        <li className="nav-name">
-        <p>Stock</p>
+        <p>< LuPackageOpen size={20}fontWeight={50} />Stock-details</p>
        </li>
        <li className="nav-name">
-        <p>Whole-sales</p>
+        <p><FaAppleWhole size={20} fontWeight={50} />Whole-sales</p>
        </li>
        <li className="nav-name">
-        <p>Retails-sales</p>
+        <p>< FaApple size={20} fontWeight={50}/>Retails-sales</p>
        </li>
        <li className="nav-name">
-        <p>Setting</p>
+        <p><IoSettingsOutline fontWeight={50} size={20}/>Setting</p>
        </li>
       </ul>
     </div>
