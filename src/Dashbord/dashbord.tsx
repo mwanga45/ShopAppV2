@@ -1,6 +1,7 @@
 import "./dash.css"
 import { Search } from "../component/search/Search"
 import Button from "../component/button/Button"
+import { CardReport } from "../component/card-report/card";
 import { IoNotificationsCircleSharp } from "react-icons/io5";
 import { Accountbar } from "../component/account/Account"
 export const Dashboard = () =>{
@@ -24,6 +25,11 @@ export const Dashboard = () =>{
           </div>
           <div className="export-data">
             <Button/>
+          </div>
+        </div>
+        <div className="main-dashboard">
+          <div className="main-firstlayor">
+            <CardReport/>
           </div>
         </div>
       

@@ -1,0 +1,78 @@
+.card-container{
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 250px;
+    padding: 10px;
+    justify-content: space-between;
+    color: white;
+    font-size: 16px;
+    background-color: rgb(5, 3, 11);
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.card-title{
+  display: flex;
+  width: 100%;
+  height: auto;
+  margin: 0 0 5px 0;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-icon {
+    font-size: 16px;
+    color: #008DB8;
+    flex-shrink: 0;
+}
+
+.fast-low{
+    font-size: 18px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.product-class{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 5px;
+}
+
+.prd-cls{
+ font-size: 14px;
+ list-style: none;
+ color: #008DB8;
+ display: flex;
+ align-items: center;
+ gap: 6px;
+ margin-bottom: 2px;
+ line-height: 1.2;
+}
+
+.list-icon {
+    font-size: 12px;
+    color: #008DB8;
+    flex-shrink: 0;
+}
+
+.percentage-remain{
+  font-size: 16px;
+  font-weight: 700;
+  font-style: italic;
+  margin: 0;
+}
+
+.percentage-remain li{
+    list-style: none;
+    font-size: 14px;
+    margin-bottom: 2px;
+    line-height: 1.2;
+}
