@@ -1,5 +1,6 @@
 import "./card.css"
 import { FaChartLine, FaBoxes, FaShoppingCart, FaPercentage } from "react-icons/fa"
+import { GiArmoredBoomerang } from "react-icons/gi";
 
 export const CardReport = () => {
     return (
@@ -30,6 +31,11 @@ export const CardReport = () => {
                         <li className="prd-cls">%Productname Remain</li>
                         <li className="prd-cls">%Productname Remain</li>
                     </ul>
+                </div>
+            </div>
+            <div className="show-more">
+                <div className="show-morebg">
+                <GiArmoredBoomerang color="black" size={30}/>
                 </div>
             </div>
         </div>
