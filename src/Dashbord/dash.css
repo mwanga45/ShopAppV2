@@ -55,7 +55,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: flex-start;
-     padding-left: 50px;
+     padding-left: 24px;
 }
 
 .sale-info{
@@ -63,9 +63,16 @@
     flex-direction: column;
     row-gap: 5px;
 }
+
 .cardreport{
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 12px;
+    width: 100%;
+    max-width: 800px;
+}
 
+.cardreport > *:nth-child(3),
+.cardreport > *:nth-child(4) {
+    grid-column: span 1;
 }

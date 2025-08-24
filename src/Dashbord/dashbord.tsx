@@ -7,6 +7,7 @@ import { Accountbar } from "../component/account/Account"
 import { Daysales } from "../component/daysales/Daysales";
 import { Salesdeviation } from "../component/daysales/Salesdeviation";
 import { SimpleChart } from "../component/product/simplechart";
+import { Debtor } from "../component/Debtor/Debtor";
 export const Dashboard = () =>{
     return(
       <div className="dash-container">
@@ -36,6 +37,7 @@ export const Dashboard = () =>{
             <CardReport/>
             <CardReport/>
             <SimpleChart/>
+            <Debtor/>
             </div>
             <div className="sale-info">
             <Daysales/>
