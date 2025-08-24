@@ -89,7 +89,7 @@
   width: 100%;
   margin-bottom: 15px;
   background: #f8f9fa;
-  padding: 12px;
+  padding: 0px;
   border-radius: 12px;
   border: 1px solid #e9ecef;
 }
@@ -99,6 +99,8 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  margin: 0%;
+  padding: 0%;
 }
 
 .stat-label {
@@ -122,9 +124,10 @@
 
 .chart-section h3 {
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 22px;
   font-size: 1.1rem;
   color: #333;
+
 }
 
 .bar-chart {
@@ -135,6 +138,7 @@
   padding: 12px 0 80px 0;
   gap: 5px;
   position: relative;
+  
 }
 
 .bar-container {
