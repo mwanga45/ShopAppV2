@@ -28,7 +28,7 @@
 }
 .title-part{
     color: rgb(30, 29, 29);
-    padding: 0;
+    padding: 0 5px 0 0;
     margin: 0;
     display: flex;
     justify-content: space-between;
@@ -61,4 +61,10 @@
     display: flex;
     flex-direction: column;
     row-gap: 5px;
+}
+.cardreport{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 20px;
+
 }
