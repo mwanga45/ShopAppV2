@@ -16,25 +16,21 @@ export const Debtor = () => {
             <span className="stat-value">$12,450</span>
           </div>
           <div className="debtor-list">
-            <div className="debtor-name">
-                <ul>
-                    <p className="name-title">Names</p>
-                    <li className="act-list"></li>
-                    <li className="act-list"></li>
-                    <li className="act-list"></li>
-                    <li className="act-list"></li>
-                </ul>
-
+            <div className="debtor-head">
+                <div className="debtor-title">
+                    <p className="actl-head">Name</p>
+                    <p className="actl-head">Return date</p>
+                </div>
+                <div className="debtor-details">
+                    <p>Eliamin mwanga</p>
+                    <p>10-12-2015</p>
+                </div>
+                    <div className="debtor-details">
+                    <p>Eliamin mwanga</p>
+                    <p>10-12-2015</p>
+                </div>
             </div>
-            <div className="debtor-date">
-                <ul>
-                    <p className="debtoe-name">Date return</p>
-                    <li className="act-list"></li>
-                    <li className="act-list"></li>
-                    <li className="act-list"></li>
-                    <li className="act-list"></li>
-                </ul>
-            </div>
+           
           </div>
         </div>
         <div className="dbt-chart">
