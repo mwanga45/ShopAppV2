@@ -1,0 +1,209 @@
+.donut-chart-container {
+  width: 100%;
+  max-width: 300px;
+  height: 400px;
+  background: transparent;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 12px;
+}
+
+.chart-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.chart-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.product-info {
+  margin-bottom: 12px;
+}
+
+.product-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 4px 0;
+}
+
+.product-category {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0;
+  font-style: italic;
+}
+
+.stock-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.stock-percentage {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.stock-label {
+  font-size: 0.8rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.chart-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 10px 0;
+}
+
+.chart-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.center-content {
+  text-align: center;
+}
+
+.center-percentage {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  line-height: 1;
+}
+
+.center-label {
+  display: block;
+  font-size: 0.7rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.chart-footer {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.stock-details {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.detail-label {
+  font-size: 0.75rem;
+  color: #666;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.detail-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.product-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #dee2e6;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator-dot.active {
+  background: #28a745;
+  transform: scale(1.2);
+  box-shadow: 0 0 6px rgba(40, 167, 69, 0.4);
+}
+
+.indicator-dot:hover {
+  background: #adb5bd;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .donut-chart-container {
+    max-width: 250px;
+    height: 250px;
+    padding: 15px;
+  }
+  
+  .chart-wrapper {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .stock-percentage {
+    font-size: 1.5rem;
+  }
+  
+  .center-percentage {
+    font-size: 1rem;
+  }
+}
+
+/* Hover effects */
+.donut-chart-container:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Color variations based on stock level */
+.donut-chart-container.low-stock .stock-percentage,
+.donut-chart-container.low-stock .center-percentage {
+  color: #dc3545;
+}
+
+.donut-chart-container.medium-stock .stock-percentage,
+.donut-chart-container.medium-stock .center-percentage {
+  color: #ffc107;
+}
+
+.donut-chart-container.high-stock .stock-percentage,
+.donut-chart-container.high-stock .center-percentage {
+  color: #28a745;
+}

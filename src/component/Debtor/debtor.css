@@ -142,3 +142,23 @@
     transition: all ease-in 300ms;
     padding-left: 5px;
 }
+.indicator-debtor{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.description{
+    font-weight: 600;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+.descr-color{
+    width: 100px;
+    height: 18px;
+    background-color: #ac2020;
+}
+.color-descr{
+    width: 100px;
+    height: 18px;
+    background-color: #58ac20;
+}

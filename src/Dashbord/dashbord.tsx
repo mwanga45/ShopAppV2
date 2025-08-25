@@ -8,6 +8,7 @@ import { Daysales } from "../component/daysales/Daysales";
 import { Salesdeviation } from "../component/daysales/Salesdeviation";
 import { SimpleChart } from "../component/product/simplechart";
 import { Debtor } from "../component/Debtor/Debtor";
+import { DonalChart } from "../component/donatchart/Donalchart";
 export const Dashboard = () =>{
     return(
       <div className="dash-container">
@@ -42,6 +43,7 @@ export const Dashboard = () =>{
             <div className="sale-info">
             <Daysales/>
             <Salesdeviation/>
+            <DonalChart/>
             </div>
           </div>
         </div>

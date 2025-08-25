@@ -30,10 +30,17 @@ export const Debtor = () => {
                     <p>10-12-2015</p>
                 </div>
             </div>
-           
           </div>
         </div>
-        <div className="dbt-chart">
+        <div className="indicator-debtor">
+            <div className="reach">
+                <p className="description">Playment reach</p>
+                 <div className="descr-color"></div>
+            </div>
+            <div className="not-reach">
+                <p className="description">Not yet Reach</p>
+                <div className="color-descr"></div>
+            </div>
         </div>
       </div>
     </div>

@@ -67,7 +67,7 @@
 .cardreport{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 12px;
+    grid-gap: 6px;
     width: 100%;
     max-width: 800px;
 }
