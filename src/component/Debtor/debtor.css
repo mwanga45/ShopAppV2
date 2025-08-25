@@ -1,10 +1,10 @@
 .dbt-container {
-  width: 350px;
+  width: 260px;
   height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 20px;
+  padding: 12px;
   margin: 0;
   background-color: white;
   color: #333;
@@ -15,11 +15,11 @@
 }
 
 .dbt-title {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .dbt-head {
-  font-size: 1.3rem;
+  font-size: 1.05rem;
   font-weight: bold;
   margin: 0;
   color: #333;
@@ -28,41 +28,41 @@
 .dbt-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   flex: 1;
 }
 
 .dbt-stat {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
 }
 
 .stat-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0;
+  padding: 5px 0;
   border-bottom: 1px solid #f0f0f0;
 }
 
 .stat-label {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #666;
   font-weight: 500;
 }
 
 .stat-value {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold;
   color: #28a745;
 }
 
 .dbt-chart {
   display: flex;
-  gap: 20px;
+  gap: 10px;
   align-items: end;
-  height: 120px;
+  height: 100px;
   margin-top: auto;
 }
 
@@ -71,11 +71,11 @@
   flex-direction: column;
   align-items: center;
   flex: 1;
-  gap: 8px;
+  gap: 5px;
 }
 
 .bar-label {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: #666;
   font-weight: 500;
 }
@@ -84,7 +84,7 @@
   width: 100%;
   background: linear-gradient(to top, #dc3545, #e74c3c);
   border-radius: 4px 4px 0 0;
-  min-height: 20px;
+  min-height: 16px;
   transition: all 0.3s ease;
 }
 
@@ -96,69 +96,69 @@
   background: linear-gradient(to top, #dc3545, #e74c3c);
 }
 .debtor-list{
-  max-height: 450px; 
+  max-height: 360px; 
   overflow-y: auto;  
   width: 100%;  
-  padding: 10px;
+  padding: 6px;
   display: flex;
   justify-content: space-between;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
 .debtor-head{
-   display: flex;
-   width: 100%;
-   flex-direction: column;
-   justify-items: center;
-   align-items: center; 
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center; 
 }
 .actl-head{
-    font-size: 20px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-style: italic;
-    margin: 0%;
-    padding: 0%;
+  font-size: 15px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-style: italic;
+  margin: 0%;
+  padding: 0%;
 }
 
 .debtor-title{
-    width: 100%;
-    display: flex;
-    font-size: 18px;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  font-size: 15px;
+  justify-content: space-between;
 }
 .debtor-details{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-    height: 50px;
-} 
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  height: 38px;
+}
 .debtor-details:hover{
-    background-color: #28a745;
-    color: #e9ecef;
-    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
-    border-radius: 10px;
-    scale: 1.03;
-    transition: all ease-in 300ms;
-    padding-left: 5px;
+  background-color: #28a745;
+  color: #e9ecef;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+  border-radius: 10px;
+  scale: 1.02;
+  transition: all ease-in 300ms;
+  padding-left: 3px;
 }
 .indicator-debtor{
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 .description{
-    font-weight: 600;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
 }
 .descr-color{
-    width: 100px;
-    height: 18px;
-    background-color: #ac2020;
+  width: 80px;
+  height: 12px;
+  background-color: #ac2020;
 }
 .color-descr{
-    width: 100px;
-    height: 18px;
-    background-color: #58ac20;
+  width: 80px;
+  height: 12px;
+  background-color: #58ac20;
 }

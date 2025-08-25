@@ -1,12 +1,12 @@
 .card-container{
     display: flex;
     flex-direction: column;
-    width: 250px;
-    height: 250px;
-    padding: 10px;
+    width: 230px;
+    height: 230px;
+    padding: 8px;
     justify-content: space-between;
     color: white;
-    font-size: 16px;
+    font-size: 15px;
     background: linear-gradient(135deg, rgb(5, 3, 11) 0%, rgb(15, 13, 25) 50%, rgb(5, 3, 11) 100%);
     box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
     border-radius: 12px;
@@ -41,37 +41,31 @@
 }
 
 @keyframes shine {
-    0% {
-        left: -100%;
-    }
-    50% {
-        left: 100%;
-    }
-    100% {
-        left: 100%;
-    }
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
 }
 
 .card-title{
   display: flex;
   width: 100%;
   height: auto;
-  margin: 0 0 5px 0;
+  margin: 0 0 4px 0;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   position: relative;
   z-index: 2;
 }
 
 .card-icon {
-    font-size: 16px;
+    font-size: 14px;
     color: #008DB8;
     flex-shrink: 0;
     text-shadow: 0 0 8px rgba(0, 141, 184, 0.6);
 }
 
 .fast-low{
-    font-size: 18px;
+    font-size: 16px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-style: italic;
     font-weight: 700;
@@ -86,32 +80,32 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
   position: relative;
   z-index: 2;
 }
 
 .prd-cls{
- font-size: 14px;
+ font-size: 13px;
  list-style: none;
  color: #008DB8;
  display: flex;
  align-items: center;
- gap: 6px;
+ gap: 5px;
  margin-bottom: 2px;
  line-height: 1.2;
  text-shadow: 0 0 6px rgba(0, 141, 184, 0.5);
 }
 
 .list-icon {
-    font-size: 12px;
+    font-size: 11px;
     color: #008DB8;
     flex-shrink: 0;
     text-shadow: 0 0 6px rgba(0, 141, 184, 0.5);
 }
 
 .percentage-remain{
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   font-style: italic;
   margin: 0;
@@ -121,7 +115,7 @@
 
 .percentage-remain li{
     list-style: none;
-    font-size: 14px;
+    font-size: 13px;
     margin-bottom: 2px;
     line-height: 1.2;
 }
@@ -136,8 +130,8 @@
 }
 
 .show-morebg{
-    width: 35px;
-    height: 35px;
+    width: 32px;
+    height: 32px;
     background: linear-gradient(135deg, rgb(229, 251, 217) 0%, #c7e0ff 100%);
     justify-content: center;
     align-items: center;
