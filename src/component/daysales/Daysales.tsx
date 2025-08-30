@@ -14,6 +14,7 @@ export const Daysales = ()=>{
       </div>
     ) 
 }
+
 export const DayResult = ({title_name, total_value}:Result)=>{
   return(
     <div className="dayresult-contaier">
@@ -21,7 +22,7 @@ export const DayResult = ({title_name, total_value}:Result)=>{
         <p className="dayanalys">{title_name}</p>
       </div>
       <div>
-        <p className="total_value">{total_value}</p>
+        <p className="total_value">{total_value}.Tsh</p>
       </div>
 
     </div>

@@ -56,3 +56,12 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
 }
+.whole-retail-analysis{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 20px;
+    
+}
