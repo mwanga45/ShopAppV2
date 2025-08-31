@@ -3,6 +3,7 @@ import { Accountbar } from "../component/account/Account"
 import { Search } from "../component/search/Search"
 import { DayResult } from "../component/daysales/Daysales"
 import { Daysale_list } from "../component/daysales/Daysales"
+import Form from "../component/Form-comp/Form"
 
 export default function SalesToday() {
   return (
@@ -29,6 +30,9 @@ export default function SalesToday() {
          <div className="resultTb-container">
             <Daysale_list/>
          </div>
+        <div className="form-popup">
+            <Form/>
+        </div>
     </div>
   )
 }

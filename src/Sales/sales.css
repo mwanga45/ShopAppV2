@@ -54,6 +54,17 @@
     animation: titleGlow 3s ease-in-out infinite alternate;
 }
 
+.form-popup{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    flex: 1;
+}
+
 .page-title::before {
     content: '';
     position: absolute;
@@ -185,5 +196,4 @@
     .sales-header {
         margin-bottom: 15px;
     }
-}
 }
