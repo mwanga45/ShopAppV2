@@ -1,8 +1,14 @@
 import "./form_comp.css"
+import { RiCloseFill } from "react-icons/ri";
 
 export default function FormComp() {
   return (
     <div className='form-main-container'>
+        <div className="icon-conyainer">
+          <div className="icon">
+            <RiCloseFill color="white" size={30} fontWeight={500}/>
+          </div>
+        </div>
         <div className="frm-container">
             <div className="form-title">
               <p>Whole sales Record</p>
