@@ -1,4 +1,5 @@
 import { Accountbar } from "../component/account/Account"
+import { CiSearch } from "react-icons/ci";
 import "./stock.css"
 export default function Stock() {
   return (
@@ -8,6 +9,20 @@ export default function Stock() {
             </div>   
         <div className="sales-header">
           <h1 className="page-title">Stock  Analysis page</h1>
+       </div>
+       <div className="stock-content-main">
+        <p className="filter-title">Filter by</p>
+       <div className="filter-container">
+          <div className="filter-by-category">
+            <button name="">All</button>
+             <button name="">Type</button>
+            <button name="">Category</button>
+          </div>
+          <div className="filter-by-name">
+             < CiSearch/>
+            <input type="text" name="search" placeholder="seach by name" />
+          </div>
+        </div>        
        </div>
     </div>
   )

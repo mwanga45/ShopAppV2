@@ -48,3 +48,34 @@
     letter-spacing: 3px;
     animation: titleGlow 3s ease-in-out infinite alternate;
 }
+.stock-content-main{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 60vh;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+}
+.filter-title{
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 600;
+}
+.filter-container{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.filter-by-category{
+    display: flex;
+    width: 50%;
+    column-gap: 15px;
+}
+.filter-by-category button{
+    background-color: aliceblue;
+    color: rgb(9, 9, 9);
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+}
