@@ -7,7 +7,7 @@ export default function Stock() {
                <Accountbar/>
             </div>   
         <div className="sales-header">
-          <h1 className="page-title">Stock </h1>
+          <h1 className="page-title">Stock  Analysis page</h1>
        </div>
     </div>
   )
