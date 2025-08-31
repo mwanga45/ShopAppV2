@@ -7,6 +7,27 @@ export default function FormComp() {
             <div className="form-title">
               <p>Whole sales Record</p>
             </div>
+            <div className="main-form-content">
+              <label htmlFor="product-name">Product-Name</label>
+              <div className="input-value">
+              <select name="productname" id="product-name">
+                <option value="">Name of Product</option>
+                <option value="">Pallet Starter</option>
+                <option value="">Tumbili seed</option>
+                <option value="">Pallet</option>
+                <option value="">Harsho food</option>
+              </select>
+              </div>
+                <div className="input-value">
+                    <label htmlFor="Valueby">pc/kg/litre</label>
+                    <input type="text" name="price" id="Valueby" value={6000} />
+                </div>
+                    <div className="input-value">
+                    <label htmlFor="Value per each">Value per Each</label>
+                 <input type="text" value={12000} name="value" id = "Value per each" readOnly />
+               </div>
+
+            </div>
         </div>
     </div>
   )
