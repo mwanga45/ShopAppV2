@@ -4,8 +4,18 @@ import { Search } from "../component/search/Search"
 import { DayResult } from "../component/daysales/Daysales"
 import { Daysale_list } from "../component/daysales/Daysales"
 import Form from "../component/Form-comp/Form"
+import { useState } from "react"
 
 export default function SalesToday() {
+  const [isFormOpen, setIsFormOpen] = useState<boolean>(false)
+  
+  const handleOpenForm = () => {
+    setIsFormOpen(true)
+  }
+  
+  const handleCloseForm = () => {
+    setIsFormOpen(false)
+  }
   return (
     <div className="Wh-Rtsales-container">
          <div className="salesbar">
@@ -16,7 +26,7 @@ export default function SalesToday() {
        </div>
        <div className="trigger-container">
         <div className="trigger-btn">
-            <button type="submit" name="Whole-sales">Whole-sales</button>
+            <button type="submit" name="Whole-sales" onClick={handleOpenForm}>Whole-sales</button>
             <button type="submit" name="Retail-ssales">Retail-sales</button>
         </div>
         <div>
@@ -30,9 +40,11 @@ export default function SalesToday() {
          <div className="resultTb-container">
             <Daysale_list/>
          </div>
-        <div className="form-popup">
-            <Form/>
-        </div>
+        {isFormOpen && (
+          <div className="form-popup">
+            <Form onClose={handleCloseForm} isOpen={isFormOpen} />
+          </div>
+        )}
     </div>
   )
 }
