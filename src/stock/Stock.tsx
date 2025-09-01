@@ -1,6 +1,7 @@
 import { Accountbar } from "../component/account/Account"
 import { CiSearch } from "react-icons/ci";
 import "./stock.css"
+import Stockcard from "../component/stock-card/stockcard";
 export default function Stock() {
   return (
     <div className="stock-main-conatiner">
@@ -22,7 +23,16 @@ export default function Stock() {
              < CiSearch/>
             <input type="text" name="search" placeholder="seach by name" />
           </div>
-        </div>        
+        </div>
+           <div className="card-stock-list">
+            <Stockcard/>
+            <Stockcard/>
+            <Stockcard/>
+            <Stockcard/>
+             <Stockcard/>
+              <Stockcard/>
+               <Stockcard/>
+          </div>        
        </div>
     </div>
   )

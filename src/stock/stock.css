@@ -95,6 +95,15 @@
     background-color: aliceblue;
     color: #222a38;
     height: 6vh;
-    border: none;
-    
+    border: none;   
+}
+.card-stock-list{
+    width: 100%;
+    min-height: 30vh;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+    align-items: start;
+    justify-items: center;
 }

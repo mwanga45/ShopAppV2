@@ -1,6 +1,8 @@
 import type React from "react"
 import { useState } from "react"
 import "./Login.css"
+import { login } from "./service/auth,api"
+import { AxiosError } from "axios"
 
 interface LoginProps {
   onLogin?: (email: string, password: string, userType: "admin" | "user") => void
@@ -53,12 +55,31 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     e.preventDefault()
     setIsLoading(true)
 
-    setTimeout(() => {
-      if (onLogin) {
-        onLogin(email, password, userType)
+    try {
+      const response = await login({ email, password })
+      if (response && response.access_token) {
+        localStorage.setItem("access_token", response.access_token)
+        alert("Login successful!")
+        if (onLogin) {
+          onLogin(email, password, userType)
+        }
+      } else {
+        alert("Login failed. Please check your credentials or an unexpected error occurred.")
       }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.response) {
+          alert(`Login failed: ${error.response.data.message}`)
+        } else {
+          alert("Network error or server unreachable. Please try again.")
+        }
+      } else {
+        console.error("Login error:", error)
+        alert("An unexpected error occurred during login. Please try again.")
+      }
+    } finally {
       setIsLoading(false)
-    }, 1500)
+    }
   }
 
   return (
