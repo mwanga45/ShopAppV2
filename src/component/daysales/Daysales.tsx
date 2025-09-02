@@ -1,8 +1,26 @@
 import { color } from "chart.js/helpers";
 import "./daysales.css"
 import { SiMoneygram } from "react-icons/si";
+import { useState, useEffect } from 'react';
+import { fetchWholeSales } from '../../Sales/service/sales.api';
 
+interface ProductInfo {
+  id: string;
+  product_name: string;
+  product_category: string;
+  product_type: string;
+  purchase_price: string;
+  wholesales_price: string;
+}
 
+interface SaleItem {
+  id: string;
+  Total_pc_pkg_litre: string;
+  TotalGenerated: string;
+  TotalProfit: string;
+  productId: string;
+  product: ProductInfo;
+}
 
 type Result ={
   title_name:string
@@ -74,6 +92,34 @@ export const DayResult = ({title_name, total_value}:Result)=>{
 }
 
 export const Daysale_list = () =>{
+  const [sales, setSales] = useState<SaleItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const getSales = async () => {
+      try {
+        const data = await fetchWholeSales();
+        setSales(data);
+      } catch (err) {
+        setError("Failed to fetch sales data.");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getSales();
+  }, []);
+
+  if (loading) {
+    return <div className="daylist-container">Loading sales data...</div>;
+  }
+
+  if (error) {
+    return <div className="daylist-container" style={{ color: 'red' }}>Error: {error}</div>;
+  }
+
   return(
     <div className="daylist-container">
       <div className="filter-list-container">
@@ -96,15 +142,15 @@ export const Daysale_list = () =>{
             </tr>
           </thead>
           <tbody>
-            {salesData.map((item, index) => (
+            {sales.map((item, index) => (
               <tr key={item.id} className={`table-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
-                <td className="product-name">{item.productName}</td>
-                <td className="product-id">{item.id}</td>
-                <td className="product-category">{item.category}</td>
-                <td className="product-type">{item.type}</td>
-                <td className="product-pc">{item.pc}</td>
-                <td className="total-generate">{item.totalGenerate} Tsh</td>
-                <td className="profit-generated">{item.profitGenerated} Tsh</td>
+                <td className="product-name">{item.product.product_name}</td>
+                <td className="product-id">{item.productId}</td>
+                <td className="product-category">{item.product.product_category}</td>
+                <td className="product-type">{item.product.product_type}</td>
+                <td className="product-pc">{item.Total_pc_pkg_litre}</td>
+                <td className="total-generate">{item.TotalGenerated} Tsh</td>
+                <td className="profit-generated">{item.TotalProfit} Tsh</td>
               </tr>
             ))}
           </tbody>
