@@ -29,9 +29,9 @@ export default function Stock() {
             <Stockcard/>
             <Stockcard/>
             <Stockcard/>
-             <Stockcard/>
-              <Stockcard/>
-               <Stockcard/>s
+            <Stockcard/>
+            <Stockcard/>
+            <Stockcard/>s
           </div>        
        </div>
     </div>
