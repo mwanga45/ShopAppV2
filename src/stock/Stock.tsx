@@ -8,8 +8,8 @@ export default function Stock() {
            <div className="account">
                <Accountbar/>
             </div>   
-        <div className="sales-header">
-          <h1 className="page-title">Stock  Analysis page</h1>
+        <div className="Sock-header">
+          <h1 className="stpage-title">Stock  Analysis page</h1>
        </div>
        <div className="stock-content-main">
         <p className="filter-title">Filter by</p>

@@ -29,43 +29,67 @@ type Result ={
 }
 
 // Sample data for the table
-const salesData = [
+const salesData: SaleItem[] = [
   {
-    id: "001",
-    productName: "Palet Starter",
-    category: "Electronics",
-    type: "Premium",
-    pc: 15,
-    totalGenerate: "2,300,000",
-    profitGenerated: "450,000"
+    id: "sale_001",
+    Total_pc_pkg_litre: "15",
+    TotalGenerated: "2300000",
+    TotalProfit: "450000",
+    productId: "prod_001",
+    product: {
+      id: "prod_001",
+      product_name: "Palet Starter",
+      product_category: "Electronics",
+      product_type: "Premium",
+      purchase_price: "1850000",
+      wholesales_price: "2300000",
+    },
   },
   {
-    id: "002", 
-    productName: "Basic Palet",
-    category: "Electronics",
-    type: "Standard",
-    pc: 8,
-    totalGenerate: "1,800,000",
-    profitGenerated: "320,000"
+    id: "sale_002",
+    Total_pc_pkg_litre: "8",
+    TotalGenerated: "1800000",
+    TotalProfit: "320000",
+    productId: "prod_002",
+    product: {
+      id: "prod_002",
+      product_name: "Basic Palet",
+      product_category: "Electronics",
+      product_type: "Standard",
+      purchase_price: "1480000",
+      wholesales_price: "1800000",
+    },
   },
   {
-    id: "003",
-    productName: "Premium Palet",
-    category: "Electronics", 
-    type: "Premium",
-    pc: 12,
-    totalGenerate: "3,200,000",
-    profitGenerated: "680,000"
+    id: "sale_003",
+    Total_pc_pkg_litre: "12",
+    TotalGenerated: "3200000",
+    TotalProfit: "680000",
+    productId: "prod_003",
+    product: {
+      id: "prod_003",
+      product_name: "Premium Palet",
+      product_category: "Electronics",
+      product_type: "Premium",
+      purchase_price: "2520000",
+      wholesales_price: "3200000",
+    },
   },
   {
-    id: "004",
-    productName: "Enterprise Palet",
-    category: "Electronics",
-    type: "Enterprise", 
-    pc: 5,
-    totalGenerate: "4,500,000",
-    profitGenerated: "1,200,000"
-  }
+    id: "sale_004",
+    Total_pc_pkg_litre: "5",
+    TotalGenerated: "4500000",
+    TotalProfit: "1200000",
+    productId: "prod_004",
+    product: {
+      id: "prod_004",
+      product_name: "Enterprise Palet",
+      product_category: "Electronics",
+      product_type: "Enterprise",
+      purchase_price: "3300000",
+      wholesales_price: "4500000",
+    },
+  },
 ];
 
 export const Daysales = ()=>{
@@ -92,24 +116,24 @@ export const DayResult = ({title_name, total_value}:Result)=>{
 }
 
 export const Daysale_list = () =>{
-  const [sales, setSales] = useState<SaleItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [sales, setSales] = useState<SaleItem[]>(salesData);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const getSales = async () => {
-      try {
-        const data = await fetchWholeSales();
-        setSales(data);
-      } catch (err) {
-        setError("Failed to fetch sales data.");
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+    // const getSales = async () => {
+    //   try {
+    //     const data = await fetchWholeSales();
+    //     setSales(data);
+    //   } catch (err) {
+    //     setError("Failed to fetch sales data.");
+    //     console.error(err);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
 
-    getSales();
+    // getSales();
   }, []);
 
   if (loading) {

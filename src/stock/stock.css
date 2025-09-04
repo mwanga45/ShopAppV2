@@ -22,13 +22,14 @@
     align-items: center;
     padding-right: 12px;
 }
-.sales-header {
+.stock-header {
     width: 100%;
     text-align: center;
     margin-bottom: 30px;
     animation: headerEntrance 1s ease-out;
 }
-.page-title {
+
+.stpage-title {
     font-size: 3rem;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-weight: 800;
@@ -47,6 +48,30 @@
     text-transform: uppercase;
     letter-spacing: 3px;
     animation: titleGlow 3s ease-in-out infinite alternate;
+}
+.stpage-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+    animation: titleShimmer 4s infinite;
+    z-index: 1;
+}
+
+.stpage-title::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+    border-radius: 25px;
+    pointer-events: none;
+    z-index: 1;
 }
 .stock-content-main{
     display: flex;
