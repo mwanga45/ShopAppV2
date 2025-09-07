@@ -1,7 +1,7 @@
 // import React from 'react'
 
 import { Accountbar } from "../component/account/Account"
-import Button from "../component/button/Button"
+import {Button} from "../component/button/Button"
 import "./overview.css"
 export default function Overview() {
   return (
@@ -13,8 +13,8 @@ export default function Overview() {
         <p>Business OverView -Summary</p>
        </div>
        <div className="overView-info-container">
-        <Button/>
-        <Button/>
+        <Button buttonName="Debtor" />
+        <Button buttonName="OrderList"/>
        </div>
     </div>
   )

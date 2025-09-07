@@ -1,6 +1,6 @@
 import "./dash.css"
 import { Search } from "../component/search/Search"
-import Button from "../component/button/Button"
+import {Button} from "../component/button/Button"
 import { CardReport } from "../component/card-report/card";
 import { IoNotificationsCircleSharp } from "react-icons/io5";
 import { Accountbar } from "../component/account/Account"
@@ -29,7 +29,7 @@ export const Dashboard = () =>{
           <p className="title-desc">Welcome to ShopApp-V2</p>
           </div>
           <div className="export-data">
-            <Button/>
+            <Button buttonName="export"/>
           </div>
         </div>
         <div className="main-dashboard">
