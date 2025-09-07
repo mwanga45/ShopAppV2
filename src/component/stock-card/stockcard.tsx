@@ -13,7 +13,7 @@ export default function Stockcard() {
           <p className="info-real">20%</p>
         </div>
         <div className="stock-card-donut">
-            <SimpleDonutChart percentage={20}/>
+            <SimpleDonutChart percentage={50}/>
         </div>
       </div>
     </div>
