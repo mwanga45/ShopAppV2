@@ -11,7 +11,7 @@ export const SummaryCard:React.FC<SummaryCardProps> =({icon:Icon,SummaryActInfo,
     return(
         <div className="summary-card-container">
             <div className="summary-icon">
-               <Icon size={20}/>
+               <Icon size={25}/>
             </div>
             <div className="summary-info">
                 <p className="summary-titlename">
