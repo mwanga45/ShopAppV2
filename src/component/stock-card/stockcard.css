@@ -1,18 +1,17 @@
 .stock-card-container{
-    width: 320px;
-    height:250px;
+    width: 330px;
+    height:290px;
     border-radius: 40px;
-    cursor: pointer;
     padding: 4px;
     background-color: rgb(236, 242, 247);
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     
 }
-.stock-card-container:hover { /* Hover effect */
-    transform: translateY(-5px); /* Lift card slightly */
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 25px 50px -12px; /* Enhanced shadow on hover */
-    transition: all 0.3s ease-in-out; /* Smooth transition */
+.stock-card-container:hover { 
+    transform: translateY(-5px); 
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 25px 50px -12px; 
+    transition: all 0.3s ease-in-out; 
 }
 .stock-card-main{
     display: flex;
@@ -21,14 +20,14 @@
     width: 100%;
     height: 240px;
     padding: 5px;
-    border-radius: 35px; /* Added border-radius */
+    border-radius: 35px; 
 }
 .stock-card-info{
     display: flex;
     flex-direction: column;
     padding: 0;
     margin: 0;
-    row-gap: 5px; /* Adjusted row-gap */
+    row-gap: 5px; 
     width: 45%;
     height: 100%;
     color: black;
@@ -37,7 +36,6 @@
     width: 55%;
     height: 100%;
     color: black;
-    /* Removed border: 2px solid rgb(53, 0, 128); */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,25 +47,34 @@
     margin-left: 0%;
     margin-right: 0%;
     margin-top: 0%;
-    color: #555; /* Darker color */
-    font-size: 0.9rem; /* Slightly smaller font */
+    color: #555; 
+    font-size: 0.9rem; 
 }
 .info-real{
-    font-weight: 600; /* Increased font-weight */
+    font-weight: 600; 
     margin-top:0%;
     margin-left: 0%;
     margin-right: 0%;
-    margin-bottom: 15px; /* Adjusted margin-bottom */
-    text-decoration: none; /* Removed underline by default */
-    color: #007bff; /* Blue color for values */
-    font-size: 1.1rem; /* Adjusted font size */
+    margin-bottom: 15px; 
+    text-decoration: none; 
+    color: #007bff; 
+    font-size: 1.1rem; 
 }
 .info-real:hover{
-    font-size: 1.2rem; /* Adjusted hover font size */
+    font-size: 1.2rem; 
     transition:  ease-in 300ms;
 }
 .chart-container {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.stock-update{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+.stock-update button:hover{
+  scale: 1.1;
+  transition: all ease-in 300ms;
 }

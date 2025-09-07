@@ -16,6 +16,9 @@ export default function Stockcard() {
             <SimpleDonutChart percentage={50}/>
         </div>
       </div>
+      <div className="stock-update">
+        <button name="update stock">Update stock</button>
+      </div>
     </div>
   )
 }
