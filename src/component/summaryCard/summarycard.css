@@ -1,5 +1,5 @@
 .summary-card-container{
-    width: 300px;
+    width: 250px;
     height: 120px;
     background-color: azure;
     color: rgb(40, 38, 38);
@@ -8,4 +8,22 @@
 .summary-card-container:hover{
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     transition: all ease-in 300ms;
+}
+.summary-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.summary-titlename {
+  font-size: medium;
+  font-weight: 600;
+  height: 12px;
+
+}
+.summary-act-info{
+   font-size: large;
+  font-weight: 700;
+  margin-bottom: 5px;
 }

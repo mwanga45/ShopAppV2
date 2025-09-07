@@ -1,7 +1,7 @@
 // import React from 'react'
 
 import { Accountbar } from "../component/account/Account"
-import { FaAppleWhole } from "react-icons/fa6";
+import { FcSalesPerformance } from "react-icons/fc";
 import {Button} from "../component/button/Button"
 import { SummaryCard } from "../component/summaryCard/summarycard"
 import "./overview.css"
@@ -20,13 +20,13 @@ export default function Overview() {
        </div>
        <div className="business-summary">
         <div className="category-summary">
-          <SummaryCard SummaryActInfo="2500.sh" SummaryTitle="Most  Sales Wholesales Product" icon={FaAppleWhole }/>
-          <SummaryCard SummaryActInfo="2500.sh" SummaryTitle="Most  Sales Wholesales Product" icon={FaAppleWhole }/>
-          <SummaryCard SummaryActInfo="2500.sh" SummaryTitle="Most  Sales Wholesales Product" icon={FaAppleWhole }/>
-          <SummaryCard SummaryActInfo="2500.sh" SummaryTitle="Most  Sales Wholesales Product" icon={FaAppleWhole }/>
+          <SummaryCard SummaryActInfo="250000" SummaryTitle="Most  Sales Wholesales Product" icon={FcSalesPerformance}/>
+          <SummaryCard SummaryActInfo="25000" SummaryTitle="Profit Made" icon={FcSalesPerformance}/>
+          <SummaryCard SummaryActInfo="20000" SummaryTitle="Most  Sales Retailsales Product" icon={FcSalesPerformance}/>
+          <SummaryCard SummaryActInfo="5000" SummaryTitle="Profit Made" icon={FcSalesPerformance}/>
         </div>
         <div className="totalprofit-summary">
-           <SummaryCard SummaryActInfo="2500.sh" SummaryTitle="Most  Sales Wholesales Product" icon={FaAppleWhole }/>
+           <SummaryCard SummaryActInfo="25500" SummaryTitle="Most  Sales Wholesales Product" icon={FcSalesPerformance}/>
         </div>
        </div>
     </div>
