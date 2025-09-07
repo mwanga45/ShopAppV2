@@ -29,6 +29,9 @@ export default function Overview() {
            <SummaryCard SummaryActInfo="25500" SummaryTitle="Most  Sales Wholesales Product" icon={FcSalesPerformance}/>
         </div>
        </div>
+       <div className="product-and-sales-comparison">
+        <h2 className="comarisons-title">Business Comparisons</h2>
+       </div>
     </div>
   )
 }

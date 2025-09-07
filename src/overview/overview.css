@@ -59,3 +59,10 @@
     height: auto;
 
 }
+.product-and-sales-comparison{
+    display: flex;
+    flex-direction: column;
+}
+.comarisons-title{
+    color: black;
+}
