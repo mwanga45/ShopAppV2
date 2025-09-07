@@ -16,6 +16,14 @@ export default function Overview() {
         <Button buttonName="Debtor" />
         <Button buttonName="OrderList"/>
        </div>
+       <div className="business-summary">
+        <div className="category-summary">
+          
+        </div>
+        <div className="totalprofit-summary">
+
+        </div>
+       </div>
     </div>
   )
 }
