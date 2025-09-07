@@ -1,10 +1,10 @@
-/* Keyframe for a subtle fade-in animation */
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Keyframe for a subtle button press animation */
+
 @keyframes buttonPress {
   from { transform: scale(1); }
   to { transform: scale(0.98); }
@@ -12,21 +12,22 @@
 
 .stock-sheet-container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: row; /* Ensure row direction */
+  justify-content: space-around; /* Distribute items with space around */
+  flex-wrap: wrap;
   gap: 40px;
   padding: 40px;
-  background-color:rgba(0, 0, 0, 0.8); /* Lighter, more saturated background */
+  background-color: #f5f5f5; /* Light grey background */
   min-height: calc(100vh - 80px);
   animation: fadeIn 0.8s ease-out forwards;
 }
 
 .stock-form-container,
 .stock-information-container {
-  background-color: #ffffff;
+  background-color: #ffffff; /* Pure white background for forms */
   padding: 35px;
   border-radius: 15px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); /* More pronounced, vibrant shadow */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Softer shadow */
   width: 48%;
   max-width: 500px;
   min-width: 320px;
@@ -35,8 +36,8 @@
 
 .stock-form-container:hover,
 .stock-information-container:hover {
-  transform: translateY(-8px); /* More pronounced lift */
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25); /* Even stronger shadow on hover */
+  transform: translateY(-5px); /* Gentle lift effect on hover */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
 }
 
 .update-stock {
@@ -44,12 +45,12 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 25px; /* Increased gap */
+  gap: 20px; /* Slightly reduced gap */
 }
 
 .update-stock h2 {
   font-size: 2rem;
-  color: #263238; /* Darker, richer text */
+  color: #333333; /* Black text */
   margin-bottom: 30px;
   text-align: center;
   width: 100%;
@@ -59,67 +60,63 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  flex: 1 1 calc(50% - 12.5px); /* Two columns with increased gap */
+  flex: 1 1 calc(50% - 10px); /* Two columns with gap */
   min-width: 200px;
 }
 
 .update-input-container label {
-  position: absolute;
-  top: 18px;
-  left: 15px;
-  color: #78909c; 
-  font-size: 1rem; 
-  transition: all 0.25s ease-out;
-  pointer-events: none;
+  position: static; /* Label outside input */
+  margin-bottom: 8px; /* Space between label and input */
+  color: #333333; /* Black label text */
+  font-size: 1rem;
+  font-weight: 600; /* Bolder label */
+  transition: none; /* No animation for label */
+  pointer-events: auto;
 }
 
 .update-input-container input {
-  padding: 15px;
-  padding-top: 28px;
-  border: 2px solid #b0bec5; 
-  border-radius: 10px; 
-  font-size: 1.1rem;
-  color: #37474f;
-  background-color: #eceff1; 
+  padding: 12px;
+  border: 2px solid #e0e0e0; /* Light grey border */
+  border-radius: 8px;
+  font-size: 1.05rem;
+  color: #333333; /* Black input text */
+  background-color: #fcfcfc; /* Very light background */
   transition: border-color 0.25s ease-out, box-shadow 0.25s ease-out;
 }
 
-.update-input-container input:focus,
-.update-input-container input:not(:placeholder-shown) {
-  border-color: #00bcd4; /* Vibrant cyan on focus */
-  box-shadow: 0 0 0 4px rgba(0, 188, 212, 0.25); /* Vibrant cyan shadow */
+.update-input-container input:focus {
+  border-color: #4CAF50; /* Green on focus */
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.25); /* Green shadow */
   outline: none;
 }
 
-.update-input-container input:focus + label,
+/* Remove placeholder-shown label animation as label is static */
 .update-input-container input:not(:placeholder-shown) + label {
-  top: 8px;
-  left: 12px;
-  font-size: 0.85rem;
-  color: #00bcd4; /* Vibrant cyan label on focus */
-  font-weight: 600;
+  transform: none;
+  font-size: 1rem;
+  color: #333333;
 }
 
 .update-stock button {
-  background-image: linear-gradient(to right, #00bcd4 0%, #00acc1 100%); /* Cyan gradient button */
+  background-image: linear-gradient(to right, #4CAF50 0%, #388E3C 100%); /* Green gradient button */
   color: white;
-  padding: 16px 30px;
+  padding: 15px 25px;
   border: none;
-  border-radius: 10px;
-  font-size: 1.25rem;
+  border-radius: 8px;
+  font-size: 1.15rem;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  margin-top: 30px;
-  letter-spacing: 1px;
+  margin-top: 25px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  box-shadow: 0 6px 20px rgba(0, 188, 212, 0.3);
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
   flex: 1 1 100%;
 }
 
 .update-stock button:hover {
-  background-image: linear-gradient(to right, #00acc1 0%, #00bcd4 100%);
-  transform: translateY(-5px) scale(1.03); /* More pronounced hover */
-  box-shadow: 0 10px 30px rgba(0, 188, 212, 0.45);
+  background-image: linear-gradient(to right, #388E3C 0%, #4CAF50 100%);
+  transform: translateY(-3px) scale(1.02); /* Gentle hover */
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
 }
 
 .update-stock button:active {
@@ -129,12 +126,12 @@
 .stock-information-container {
   display: flex;
   flex-direction: column;
-  gap: 25px; /* Increased gap */
+  gap: 20px; /* Adjusted gap */
 }
 
 .stock-information-container h2 {
   font-size: 2rem;
-  color: #263238;
+  color: #333333; /* Black text */
   margin-bottom: 30px;
   text-align: center;
 }
@@ -142,9 +139,9 @@
 .stock-spec-info {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Increased gap */
-  padding: 12px 0;
-  border-bottom: 1px dashed #e0f2f7; /* Lighter, more saturated dashed separator */
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px dashed #e0e0e0; /* Light grey dashed separator */
 }
 
 .stock-spec-info:last-child {
@@ -152,16 +149,16 @@
 }
 
 .stock-spec-info label {
-  font-weight: 600; /* Bolder labels */
-  color: #546e7a; /* Muted but professional blue-gray */
+  font-weight: 600;
+  color: #555555; /* Dark grey labels */
   font-size: 0.95rem;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.5px;
 }
 
 .stock-spec-info h2 {
   margin: 0;
-  font-size: 1.5rem; /* Larger value font */
-  color: #00bcd4; /* Vibrant cyan for values */
+  font-size: 1.4rem;
+  color: #4CAF50; /* Green for values */
   font-weight: 700;
 }
