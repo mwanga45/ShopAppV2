@@ -12,23 +12,21 @@
 
 .stock-sheet-container {
   display: flex;
-  flex-direction: row; /* Ensure row direction */
-  justify-content: space-around; /* Distribute items with space around */
-  flex-wrap: wrap;
+  flex-direction: row; 
+  justify-content: space-around; 
   gap: 40px;
   padding: 40px;
-  background-color: #f5f5f5; /* Light grey background */
+  background-color: #f5f5f5; 
   min-height: calc(100vh - 80px);
   animation: fadeIn 0.8s ease-out forwards;
 }
 
 .stock-form-container,
 .stock-information-container {
-  background-color: #ffffff; /* Pure white background for forms */
+  background-color: #ffffff; 
   padding: 35px;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Softer shadow */
-  width: 48%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
   max-width: 500px;
   min-width: 320px;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -36,8 +34,8 @@
 
 .stock-form-container:hover,
 .stock-information-container:hover {
-  transform: translateY(-5px); /* Gentle lift effect on hover */
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
+  transform: translateY(-5px); 
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); 
 }
 
 .update-stock {
@@ -45,12 +43,12 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 20px; /* Slightly reduced gap */
+  gap: 20px;
 }
 
 .update-stock h2 {
   font-size: 2rem;
-  color: #333333; /* Black text */
+  color: #333333;
   margin-bottom: 30px;
   text-align: center;
   width: 100%;
@@ -60,37 +58,36 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  flex: 1 1 calc(50% - 10px); /* Two columns with gap */
+  flex: 1 1 calc(50% - 10px); 
   min-width: 200px;
 }
 
 .update-input-container label {
-  position: static; /* Label outside input */
-  margin-bottom: 8px; /* Space between label and input */
-  color: #333333; /* Black label text */
+  position: static; 
+  margin-bottom: 8px; 
+  color: #333333; 
   font-size: 1rem;
-  font-weight: 600; /* Bolder label */
-  transition: none; /* No animation for label */
+  font-weight: 600; 
+  transition: none;
   pointer-events: auto;
 }
 
 .update-input-container input {
   padding: 12px;
-  border: 2px solid #e0e0e0; /* Light grey border */
+  border: 2px solid #e0e0e0; 
   border-radius: 8px;
   font-size: 1.05rem;
-  color: #333333; /* Black input text */
-  background-color: #fcfcfc; /* Very light background */
+  color: #333333; 
+  background-color: #fcfcfc; 
   transition: border-color 0.25s ease-out, box-shadow 0.25s ease-out;
 }
 
 .update-input-container input:focus {
-  border-color: #4CAF50; /* Green on focus */
-  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.25); /* Green shadow */
+  border-color: #4CAF50; 
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.25); 
   outline: none;
 }
 
-/* Remove placeholder-shown label animation as label is static */
 .update-input-container input:not(:placeholder-shown) + label {
   transform: none;
   font-size: 1rem;
@@ -115,7 +112,7 @@
 
 .update-stock button:hover {
   background-image: linear-gradient(to right, #388E3C 0%, #4CAF50 100%);
-  transform: translateY(-3px) scale(1.02); /* Gentle hover */
+  transform: translateY(-3px) scale(1.02); 
   box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
 }
 
@@ -126,12 +123,12 @@
 .stock-information-container {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Adjusted gap */
+  gap: 20px; 
 }
 
 .stock-information-container h2 {
   font-size: 2rem;
-  color: #333333; /* Black text */
+  color: #333333;
   margin-bottom: 30px;
   text-align: center;
 }
@@ -141,7 +138,7 @@
   flex-direction: column;
   gap: 8px;
   padding: 10px 0;
-  border-bottom: 1px dashed #e0e0e0; /* Light grey dashed separator */
+  border-bottom: 1px dashed #e0e0e0; 
 }
 
 .stock-spec-info:last-child {
@@ -150,7 +147,7 @@
 
 .stock-spec-info label {
   font-weight: 600;
-  color: #555555; /* Dark grey labels */
+  color: #555555; 
   font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -159,6 +156,6 @@
 .stock-spec-info h2 {
   margin: 0;
   font-size: 1.4rem;
-  color: #4CAF50; /* Green for values */
+  color: #4CAF50; 
   font-weight: 700;
 }
