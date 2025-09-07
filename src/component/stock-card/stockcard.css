@@ -9,6 +9,11 @@
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     
 }
+.stock-card-container:hover { /* Hover effect */
+    transform: translateY(-5px); /* Lift card slightly */
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 25px 50px -12px; /* Enhanced shadow on hover */
+    transition: all 0.3s ease-in-out; /* Smooth transition */
+}
 .stock-card-main{
     display: flex;
     justify-content: space-between;
@@ -16,13 +21,14 @@
     width: 100%;
     height: 240px;
     padding: 5px;
+    border-radius: 35px; /* Added border-radius */
 }
 .stock-card-info{
     display: flex;
     flex-direction: column;
     padding: 0;
     margin: 0;
-    row-gap: 0px;
+    row-gap: 5px; /* Adjusted row-gap */
     width: 45%;
     height: 100%;
     color: black;
@@ -31,29 +37,37 @@
     width: 55%;
     height: 100%;
     color: black;
-    border: 2px solid rgb(53, 0, 128);
-
+    /* Removed border: 2px solid rgb(53, 0, 128); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .info-about{
     font-weight: 700;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Changed font */
     margin-bottom: 2px;
     margin-left: 0%;
     margin-right: 0%;
     margin-top: 0%;
-
+    color: #555; /* Darker color */
+    font-size: 0.9rem; /* Slightly smaller font */
 }
 .info-real{
-    font-weight: 500;
+    font-weight: 600; /* Increased font-weight */
     margin-top:0%;
     margin-left: 0%;
     margin-right: 0%;
-    margin-bottom: 20px;
-    text-decoration: underline;
-    color: rgb(67, 109, 0);
+    margin-bottom: 15px; /* Adjusted margin-bottom */
+    text-decoration: none; /* Removed underline by default */
+    color: #007bff; /* Blue color for values */
+    font-size: 1.1rem; /* Adjusted font size */
 }
 .info-real:hover{
-    font-size: 21px;
+    font-size: 1.2rem; /* Adjusted hover font size */
     transition:  ease-in 300ms;
-
+}
+.chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

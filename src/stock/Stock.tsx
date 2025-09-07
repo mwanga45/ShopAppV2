@@ -2,6 +2,7 @@ import { Accountbar } from "../component/account/Account"
 import { CiSearch } from "react-icons/ci";
 import "./stock.css"
 import Stockcard from "../component/stock-card/stockcard";
+// import Donat_chart from "../component/stock-card/chart"
 export default function Stock() {
   return (
     <div className="stock-main-conatiner">
@@ -32,7 +33,8 @@ export default function Stock() {
             <Stockcard/>
             <Stockcard/>
             <Stockcard/>s
-          </div>        
+          </div> 
+        {/* <Donat_chart/>     */}
        </div>
     </div>
   )

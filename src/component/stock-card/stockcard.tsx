@@ -1,4 +1,4 @@
-import Donat_chart from "./chart"
+import { SimpleDonutChart } from "./SimpleDonutChart";
 import "./stockcard.css"
 export default function Stockcard() {
   return (
@@ -13,7 +13,7 @@ export default function Stockcard() {
           <p className="info-real">20%</p>
         </div>
         <div className="stock-card-donut">
-            <Donat_chart/>
+            <SimpleDonutChart percentage={20}/>
         </div>
       </div>
     </div>
