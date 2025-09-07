@@ -48,6 +48,10 @@ export default function FormComp({onClick, onClose, isOpen = true}: FormCompProp
                     <label htmlFor="Valueby">pc/kg/litre</label>
                     <input type="text" name="price" id="Valueby" value={6000} />
                 </div>
+                 <div className="input-value">
+                    <label htmlFor="Valueby">pc/kg/litre</label>
+                    <input type="date" name="price" id="Valueby"  />
+                </div>
                     <div className="input-value">
                     <label htmlFor="Value per each">Value per Each</label>
                  <input type="text" value={12000} name="value" id = "Value per each" readOnly />
