@@ -1,11 +1,10 @@
-// import React from 'react'
 
 import { Accountbar } from "../component/account/Account"
 import { FcSalesPerformance } from "react-icons/fc";
 import {Button} from "../component/button/Button"
 import { SummaryCard } from "../component/summaryCard/summarycard"
 import "./overview.css"
-import { Complinechart } from "../component/comparisonchart/Complinechart";
+import { Complinechart, BarCompChart } from "../component/comparisonchart/Complinechart"; 
 export default function Overview() {
   return (
     <div className='overview-container' >
@@ -37,7 +36,7 @@ export default function Overview() {
               <Complinechart Pname="Pallet starter"/>
           </div>
         <div className="Barcomponet-container">
-             <Complinechart Pname="Marsh"/>
+            <BarCompChart Pname="Marsh"/> {/* Use BarCompChart */} 
         </div>
         </div>
        </div>

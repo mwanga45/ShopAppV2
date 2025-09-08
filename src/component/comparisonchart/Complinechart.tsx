@@ -7,7 +7,9 @@ import {
     XAxis,
     YAxis,
     CartesianGrid,
-    LineChart
+    LineChart,
+    BarChart, // Added BarChart
+    Bar // Added Bar
     
 } from "recharts"
 interface ChartPops {
@@ -57,7 +59,7 @@ export const Complinechart:React.FC<ChartPops> = ({Pname}) =>{
         </div>
     );
 }
-export const  BarCompChart = ()=>{
+export const  BarCompChart:React.FC<ChartPops> = ({Pname})=>{
         const Thisweek = [
         {day:"Monday", Sales:20450},
         {day:"Tuesday", Sales:10400},
@@ -71,9 +73,43 @@ export const  BarCompChart = ()=>{
         {day:"Wensday",SalesProfit:32400},
         {day:"Thursday",SalesProfit:10400},
         {day:"Friday", SalesProfit:20000},
-        {day:"Saturday",SalesProfites:14400},
+        {day:"Saturday",SalesProfit:14400},
         {day:"Sunday", SalesProfit:13510}
        
     ]
 
+    // Combine data for BarChart
+    const combinedData = Thisweek.map((weekData) => {
+        const lastWeekMatch = LastWeek.find((lastWeekData) => lastWeekData.day === weekData.day);
+        return {
+            ...weekData,
+            LastWeekSalesProfit: lastWeekMatch ? lastWeekMatch.SalesProfit : 0, // Add LastWeekSalesProfit or default to 0
+        };
+    });
+
+    return (
+        <div style={{display:"flex",flexDirection:"column"}}>
+            <h1 style={{color:"black",fontSize:"20px",fontWeight:"bold"}}>{Pname}</h1>
+            <ResponsiveContainer width="100%" height={300}>
+                <BarChart
+                    data={combinedData} // Use combined data for the chart
+                    margin={{
+                        top: 5,
+                        right: 30,
+                        left: 20,
+                        bottom: 5,
+                    }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="day" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="Sales" fill="#8884d8" name="This Week Sales" />
+                    {/* Removed data={LastWeek} and changed dataKey to LastWeekSalesProfit */}
+                    <Bar dataKey="LastWeekSalesProfit" fill="#82ca9d" name="Last Week Profit" />
+                </BarChart>
+            </ResponsiveContainer>
+        </div>
+    );
 } 
