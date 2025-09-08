@@ -59,9 +59,15 @@
     height: auto;
 }
 .product-and-sales-comparison{
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
 .comarisons-title{
     color: black;
+}
+.comparison-chart{
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
 }

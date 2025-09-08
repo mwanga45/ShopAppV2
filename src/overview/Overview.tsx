@@ -5,6 +5,7 @@ import { FcSalesPerformance } from "react-icons/fc";
 import {Button} from "../component/button/Button"
 import { SummaryCard } from "../component/summaryCard/summarycard"
 import "./overview.css"
+import { Complinechart } from "../component/comparisonchart/Complinechart";
 export default function Overview() {
   return (
     <div className='overview-container' >
@@ -31,6 +32,10 @@ export default function Overview() {
        </div>
        <div className="product-and-sales-comparison">
         <h2 className="comarisons-title">Business Comparisons</h2>
+        <div className="comparison-chart">
+          <Complinechart Pname="Pallet starter"/>
+          <Complinechart Pname="Pallet starter"/>
+        </div>
        </div>
     </div>
   )

@@ -24,7 +24,6 @@ export default function Stocksheet() {
                 </div>
                 <button name='update'>Update Stock</button>
             </div>
-
         </div>
         <div className="stock-information-container">
                <h2>Stock Information</h2>
