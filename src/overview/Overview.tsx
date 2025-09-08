@@ -20,13 +20,13 @@ export default function Overview() {
        </div>
        <div className="business-summary">
         <div className="category-summary">
-          <SummaryCard SummaryActInfo="250000" SummaryTitle="Most  Sales Wholesales Product" icon={FcSalesPerformance}/>
-          <SummaryCard SummaryActInfo="25000" SummaryTitle="Profit Made" icon={FcSalesPerformance}/>
-          <SummaryCard SummaryActInfo="20000" SummaryTitle="Most  Sales Retailsales Product" icon={FcSalesPerformance}/>
-          <SummaryCard SummaryActInfo="5000" SummaryTitle="Profit Made" icon={FcSalesPerformance}/>
+          <SummaryCard SummaryActInfo="250000" SummaryTitle="Most  Sales Wholesales Product" icon={FcSalesPerformance} style={{ animationDelay: '0.7s' }}/>
+          <SummaryCard SummaryActInfo="25000" SummaryTitle="Profit Made" icon={FcSalesPerformance} style={{ animationDelay: '0.8s' }}/>
+          <SummaryCard SummaryActInfo="20000" SummaryTitle="Most  Sales Retailsales Product" icon={FcSalesPerformance} style={{ animationDelay: '0.9s' }}/>
+          <SummaryCard SummaryActInfo="5000" SummaryTitle="Profit Made" icon={FcSalesPerformance} style={{ animationDelay: '1.0s' }}/>
         </div>
         <div className="totalprofit-summary">
-           <SummaryCard SummaryActInfo="25500" SummaryTitle="Most  Sales Wholesales Product" icon={FcSalesPerformance}/>
+           <SummaryCard SummaryActInfo="25500" SummaryTitle="Most  Sales Wholesales Product" icon={FcSalesPerformance} style={{ animationDelay: '1.5s' }}/>
         </div>
        </div>
        <div className="product-and-sales-comparison">
