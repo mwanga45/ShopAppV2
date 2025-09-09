@@ -4,8 +4,8 @@
     height: 100%;
     min-height: 100vh;
     background-color: azure;
-    overflow-x: hidden;
     flex: 1;
+    overflow-y:hidden;
     margin: 0;
     padding: 20px;
     box-sizing: border-box;
@@ -47,5 +47,26 @@
     width: 100%;
     height: 100vh;
     display: flex;
+    column-gap: 5px;
+    overflow-y: scroll;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.admin-product-details-container{
+    width: 30%;
+    height: 100%;
+    border:2px solid black ;
+
+}
+.admin-report-analysis-container{
+   width: 40%;
+    height: 100%;
+    border:2px solid black ;
+}
+.admin-sales-summary-stock{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
 }

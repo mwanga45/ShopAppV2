@@ -15,16 +15,24 @@ export  const AdminPanel = () =>{
             </div>
             <div className="busniess-details-container">
             <SummaryCard SummaryActInfo="250000" SummaryTitle="Business Money" icon={GiTakeMyMoney } style={{ animationDelay: '0.7s'}}/>
-            <SummaryCard SummaryActInfo="25000" SummaryTitle="Business Capital " icon={ GiDjedPillar } style={{ animationDelay: '0.8s' }}/>
+            <SummaryCard SummaryActInfo="250000" SummaryTitle="Business Capital " icon={ GiDjedPillar } style={{ animationDelay: '0.8s' }}/>
             <SummaryCard SummaryActInfo="20000" SummaryTitle="Busines Profit" icon={GiProfit } style={{ animationDelay: '0.9s' }}/>
             </div>
             <div className="admin-action-container">
                 <Button buttonName="Register Product"/>
                 <Button buttonName="Business Target"/>
-                <Button buttonName="Dviation Record"/>
+                <Button buttonName="Deviation Record"/>
             </div>
             <div className="business-other-info">
-                
+                <div className="admin-product-details-container">
+                   
+                </div>
+                <div className="admin-report-analysis-container">
+
+                </div>
+                <div className="admin-sales-summary-stock">
+                    <Button buttonName="User-Register"/>
+                </div>
             </div>
 
         </div>
