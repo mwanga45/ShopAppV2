@@ -1,0 +1,92 @@
+.animated-card {
+  width: 240px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fafc 100%);
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.08);
+  overflow: hidden;
+  transform: translateY(8px);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  animation: cardEntrance 480ms cubic-bezier(.22,.98,.52,1) both;
+}
+
+.animated-card:hover {
+  transform: translateY(0) scale(1.02);
+  box-shadow: 0 14px 36px rgba(16, 24, 40, 0.14);
+}
+
+.card-top {
+  padding: 18px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.icon-wrapper {
+  width: 54px;
+  height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(16,185,129,0.08));
+  transition: transform 300ms ease;
+}
+
+.animated-card:hover .icon-wrapper {
+  transform: rotate(-6deg) scale(1.04);
+}
+
+.card-icon {
+  font-size: 22px;
+  opacity: 0.96;
+}
+
+.card-body {
+  padding: 16px 18px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.money-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.money-value {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1;
+  color: #0f172a;
+}
+
+.money-currency {
+  font-weight: 600;
+  font-size: 14px;
+  color: #475569;
+}
+
+.card-details {
+  font-size: 13px;
+  color: #64748b;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Small responsive tweak */
+@media (max-width: 420px) {
+  .animated-card { width: 100%; }
+}

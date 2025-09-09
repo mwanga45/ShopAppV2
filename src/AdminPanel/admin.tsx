@@ -3,9 +3,11 @@ import { SummaryCard } from "../component/summaryCard/summarycard";
 import { GiDjedPillar } from "react-icons/gi";
 import { GiProfit } from "react-icons/gi";
 import { GiTakeMyMoney } from "react-icons/gi";
+import {  FaWallet, FaPiggyBank } from "react-icons/fa";
 
 import "./admin.css"
 import { Button } from "../component/button/Button";
+import AnimatedCard from "../component/Admincord/animatedcard";
 export  const AdminPanel = () =>{
     return(
         <div className="adminpanel-container">
@@ -25,13 +27,17 @@ export  const AdminPanel = () =>{
             </div>
             <div className="business-other-info">
                 <div className="admin-product-details-container">
-                   
+                    <Button buttonName="Money Usage"/>
+                    <AnimatedCard details="Bank-dept" icon={FaPiggyBank} money={23000}/>
                 </div>
                 <div className="admin-report-analysis-container">
 
                 </div>
                 <div className="admin-sales-summary-stock">
                     <Button buttonName="User-Register"/>
+                    <div className="critical-stock-product">
+
+                    </div>
                 </div>
             </div>
 
