@@ -45,7 +45,7 @@
 }
 .business-other-info{
     width: 100%;
-    height: 100vh;
+    height: auto;
     display: flex;
     column-gap: 5px;
     overflow-y: scroll;

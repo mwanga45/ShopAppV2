@@ -4,6 +4,7 @@ import { GiDjedPillar } from "react-icons/gi";
 import { GiProfit } from "react-icons/gi";
 import { GiTakeMyMoney } from "react-icons/gi";
 import {  FaWallet, FaPiggyBank } from "react-icons/fa";
+import { FcDebt } from "react-icons/fc";
 
 import "./admin.css"
 import { Button } from "../component/button/Button";
@@ -28,16 +29,17 @@ export  const AdminPanel = () =>{
             <div className="business-other-info">
                 <div className="admin-product-details-container">
                     <Button buttonName="Money Usage"/>
-                    <AnimatedCard details="Bank-dept" icon={FaPiggyBank} money={23000}/>
+                    <AnimatedCard details="Bank-dept" icon={FaPiggyBank} money={2300000}/>
+                    <AnimatedCard details="Debt" icon={FcDebt} money={23000}/>
                 </div>
                 <div className="admin-report-analysis-container">
-
+               
                 </div>
                 <div className="admin-sales-summary-stock">
                     <Button buttonName="User-Register"/>
                     <div className="critical-stock-product">
-
                     </div>
+                    <AnimatedCard details="Total salesToday" icon={FaWallet} money={25000}/>
                 </div>
             </div>
 
