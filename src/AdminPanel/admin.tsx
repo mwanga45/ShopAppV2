@@ -6,44 +6,95 @@ import { GiTakeMyMoney } from "react-icons/gi";
 import {  FaWallet, FaPiggyBank } from "react-icons/fa";
 import { FcDebt } from "react-icons/fc";
 
+
 import "./admin.css"
 import { Button } from "../component/button/Button";
 import AnimatedCard from "../component/Admincord/animatedcard";
+import { motion } from "framer-motion";
+
 export  const AdminPanel = () =>{
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: { 
+            opacity: 1, 
+            transition: { 
+                staggerChildren: 0.15, 
+                duration: 0.8, 
+                ease: "easeOut" 
+            }
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 }, 
+        visible: { 
+            opacity: 1, 
+            y: 0,
+            transition: { 
+                duration: 0.6, 
+                ease: "easeOut" 
+            }
+        }
+    };
+
     return(
-        <div className="adminpanel-container">
-            <div className="panel-title-account-container">
+        <motion.div 
+            className="adminpanel-container"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+        >
+            <motion.div className="panel-title-account-container" variants={itemVariants}>
                 <h2>Admin-Panel</h2>
                 <Accountbar/>
-            </div>
-            <div className="busniess-details-container">
+            </motion.div>
+            <motion.div className="busniess-details-container" variants={itemVariants}>
             <SummaryCard SummaryActInfo="250000" SummaryTitle="Business Money" icon={GiTakeMyMoney } style={{ animationDelay: '0.7s'}}/>
             <SummaryCard SummaryActInfo="250000" SummaryTitle="Business Capital " icon={ GiDjedPillar } style={{ animationDelay: '0.8s' }}/>
             <SummaryCard SummaryActInfo="20000" SummaryTitle="Busines Profit" icon={GiProfit } style={{ animationDelay: '0.9s' }}/>
-            </div>
-            <div className="admin-action-container">
+            </motion.div>
+            <motion.div className="admin-action-container" variants={itemVariants}>
                 <Button buttonName="Register Product"/>
                 <Button buttonName="Business Target"/>
                 <Button buttonName="Deviation Record"/>
-            </div>
-            <div className="business-other-info">
-                <div className="admin-product-details-container">
+            </motion.div>
+            <motion.div className="business-other-info" variants={itemVariants}>
+                <motion.div className="admin-product-details-container" variants={itemVariants}>
                     <Button buttonName="Money Usage"/>
                     <AnimatedCard details="Bank-dept" icon={FaPiggyBank} money={2300000}/>
                     <AnimatedCard details="Debt" icon={FcDebt} money={23000}/>
-                </div>
-                <div className="admin-report-analysis-container">
-               
-                </div>
-                <div className="admin-sales-summary-stock">
+                </motion.div>
+                <motion.div className="admin-report-analysis-container" variants={itemVariants}>
+                    <div className="report-card black">
+                        <h3>Most Selling Day</h3>
+                        <p className="detail-item">Date: 2024-07-20</p>
+                        <p className="detail-item">Sales: 1,000,000 Tsh</p>
+                    </div>
+                    <div className="report-card white">
+                        <h3>Least Selling Day</h3>
+                        <p className="detail-item">Date: 2024-07-15</p>
+                        <p className="detail-item">Sales: 100,000 Tsh</p>
+                    </div>
+                    <div className="report-card green">
+                        <h3>Biggest Debt</h3>
+                        <p className="detail-item">Customer: John Doe</p>
+                        <p className="detail-item">Amount: 500,000 Tsh</p>
+                    </div>
+                    <div className="report-card black">
+                        <h3>Business Situation</h3>
+                        <p className="detail-item">Overall: Stable</p>
+                        <p className="detail-item">Trend: Upward</p>
+                    </div>
+                </motion.div>
+                <motion.div className="admin-sales-summary-stock" variants={itemVariants}>
                     <Button buttonName="User-Register"/>
                     <div className="critical-stock-product">
                     </div>
                     <AnimatedCard details="Total salesToday" icon={FaWallet} money={25000}/>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
 
-        </div>
+        </motion.div>
     )
 
 }
