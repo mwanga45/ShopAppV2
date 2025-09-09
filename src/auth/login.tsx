@@ -3,6 +3,8 @@ import { useState } from "react"
 import "./Login.css"
 import { login } from "./service/auth,api"
 import { AxiosError } from "axios"
+import Snackbar from "@mui/material/Snackbar";
+import { useNavigate } from "react-router-dom"
 
 interface LoginProps {
   onLogin?: (email: string, password: string, userType: "admin" | "user") => void
@@ -50,7 +52,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [userType, setUserType] = useState<"admin" | "user">("user")
-
+  const [Open, setOpen] = useState<boolean>(false)
+  const Navigate = useNavigate()
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
@@ -58,11 +61,14 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     try {
       const response = await login({ email, password })
       if (response && response.access_token) {
-        localStorage.setItem("access_token", response.access_token)
-        alert("Login successful!")
+       localStorage.setItem("access_token", response.access_token)
+        setOpen(true)
         if (onLogin) {
           onLogin(email, password, userType)
         }
+        setEmail('')
+        setPassword('')
+        Navigate("/dashboard")
       } else {
         alert("Login failed. Please check your credentials or an unexpected error occurred.")
       }
@@ -80,10 +86,19 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     } finally {
       setIsLoading(false)
     }
+  
+
   }
 
   return (
     <div className="login-container" key="mwanga-login-v2">
+          <Snackbar
+        open={Open}
+        message="Succesufuly login!"
+        autoHideDuration={3000}
+        onClose={() => setOpen(false)}
+      />
+      
       <div className="login-background">
         <div className="floating-shape shape-1"></div>
         <div className="floating-shape shape-2"></div>
