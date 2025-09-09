@@ -5,7 +5,7 @@ import Stockcard from "../component/stock-card/stockcard";
 import StockSheet from "../component/stock-card/stocksheet"
 export default function Stock() {
   return (
-    <div className="stock-main-conatiner">
+    <div className="stock-main-conatiner animated-enter">
            <div className="account">
                <Accountbar/>
             </div>   

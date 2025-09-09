@@ -6,10 +6,13 @@ import { Dashboard } from './Dashbord/dashbord'
 import SalesToday from "./Sales/SalesToday"
 import Stock from './stock/Stock'
 import Overview from './overview/Overview'
+// import { AnimatePresence } from "framer-motion";
 function App() {
+  // const location = useLocation();
   return (
    <div>
-        <Routes>
+        {/* <AnimatePresence mode="wait"> */}
+        <Routes /* location={location} key={location.pathname} */>
           <Route path='/' element = {<Login/>} />
            <Route element={<Layout/>}>
             <Route path='/dashboard'element= {<Dashboard/>}></Route>
@@ -18,6 +21,7 @@ function App() {
             <Route path='/overview' element={<Overview/>}></Route>
             </Route>
         </Routes>
+        {/* </AnimatePresence> */}
    </div> 
   )
 }

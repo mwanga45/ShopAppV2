@@ -8,8 +8,8 @@ import {
     YAxis,
     CartesianGrid,
     LineChart,
-    BarChart, // Added BarChart
-    Bar // Added Bar
+    BarChart, 
+    Bar 
     
 } from "recharts"
 interface ChartPops {
