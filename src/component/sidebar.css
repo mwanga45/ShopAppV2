@@ -27,7 +27,13 @@
     margin: 0;
     list-style: none;
 }
-
+.logo-container{
+  width: 100%;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .nav-name{
   display: flex;
   align-items: center;
