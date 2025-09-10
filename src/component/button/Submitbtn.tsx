@@ -1,3 +1,5 @@
+import React from "react"
+import "./button.css"
 interface Submitbtnprops{
     onclick?:React.MouseEventHandler<HTMLButtonElement>
     buttonName:string
@@ -11,10 +13,8 @@ export  const Submitbtn:React.FC<Submitbtnprops> = ({onclick,buttonName})=>{
         }
     }
     return(
-        <div className="submit-btn-container">
-             <button name="submit" onClick={handleClick}>
-                {buttonName}
-             </button>
-        </div>
+        <button className="submit-btn-container" onClick={handleClick}>
+        {buttonName}
+        </button>
     )
 }

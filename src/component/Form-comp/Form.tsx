@@ -1,6 +1,7 @@
 import "./form_comp.css"
 import { RiCloseFill } from "react-icons/ri";
 import {useState} from "react";
+import { Submitbtn } from "../button/Submitbtn";
 
 interface FormCompProps {
   onClick?: () => void;
@@ -56,7 +57,7 @@ export default function FormComp({onClick, onClose, isOpen = true}: FormCompProp
                     <label htmlFor="Value per each">Value per Each</label>
                  <input type="text" value={12000} name="value" id = "Value per each" readOnly />
                </div>
-                  
+                  <Submitbtn buttonName="Create-product"/>
             </div>
         </div>
     </div>
