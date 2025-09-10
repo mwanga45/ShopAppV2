@@ -56,7 +56,7 @@ export default function FormComp({onClick, onClose, isOpen = true}: FormCompProp
                     <label htmlFor="Value per each">Value per Each</label>
                  <input type="text" value={12000} name="value" id = "Value per each" readOnly />
                </div>
-
+                  
             </div>
         </div>
     </div>

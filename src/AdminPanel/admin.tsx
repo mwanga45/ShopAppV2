@@ -12,7 +12,7 @@ import { Button } from "../component/button/Button";
 import AnimatedCard from "../component/Admincord/animatedcard";
 import { motion } from "framer-motion";
 import FormComp from "../component/Form-comp/Form";
-import React, { useState } from "react";
+import  { useState } from "react";
 
 export  const AdminPanel = () =>{
     const [productShown, setproductShown] = useState<boolean>(false)
