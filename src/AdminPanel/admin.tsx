@@ -5,6 +5,7 @@ import { GiProfit } from "react-icons/gi";
 import { GiTakeMyMoney } from "react-icons/gi";
 import {  FaWallet, FaPiggyBank } from "react-icons/fa";
 import { FcDebt } from "react-icons/fc";
+import { FaCoins } from "react-icons/fa";
 
 
 import "./admin.css"
@@ -63,7 +64,7 @@ export  const AdminPanel = () =>{
             </motion.div>
             <motion.div className="admin-action-container" variants={itemVariants}>
                 <Button buttonName="Register Product" Onclick={handleopenproductregForm}/>
-                <Button buttonName="Business Target"/>
+                <Button buttonName="Update-stock"/>
                 <Button buttonName="Deviation Record"/>
             </motion.div>
             <motion.div className="business-other-info" variants={itemVariants}>
@@ -71,6 +72,7 @@ export  const AdminPanel = () =>{
                     <Button buttonName="Money Usage"/>
                     <AnimatedCard details="Bank-dept" icon={FaPiggyBank} money={2300000}/>
                     <AnimatedCard details="Debt" icon={FcDebt} money={23000}/>
+                    <AnimatedCard details="Business-Networth" icon={FaCoins} money={12000000}/>
                 </motion.div>
                 <motion.div className="admin-report-analysis-container" variants={itemVariants}>
                     <div className="report-card black">

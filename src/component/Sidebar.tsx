@@ -1,6 +1,5 @@
 import "./sidebar.css"
 import { LuLayoutDashboard } from "react-icons/lu";
-import { FaApple } from "react-icons/fa";
 import { SiShopware } from "react-icons/si";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdAdminPanelSettings } from "react-icons/md";
