@@ -63,7 +63,6 @@ export default function FormComp({onClick, onClose, isOpen = true}: FormCompProp
   )
 }
 
-// Export the close functionality
 export const useFormClose = () => {
   const [isOpen, setIsOpen] = useState(true);
   
