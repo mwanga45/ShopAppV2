@@ -120,6 +120,16 @@
 .report-card p {
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
+.product-reg-popup{
+    position:fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    flex: 1;
+}
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }

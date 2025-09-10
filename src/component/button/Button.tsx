@@ -9,11 +9,9 @@ export const  Button:React.FC<ButtonTraits> =({buttonName,Onclick})=> {
   const handleClick:React.MouseEventHandler<HTMLButtonElement> = (e) => {
     if(Onclick){
       Onclick(e)
+      console.log("Button clicked!")
     }
-    console.log("Button clicked!")
   }
-
-
   return (
     <button className="animated-btn" onClick={handleClick}>
       {buttonName}
