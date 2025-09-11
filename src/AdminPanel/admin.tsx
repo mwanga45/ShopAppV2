@@ -6,20 +6,23 @@ import { GiTakeMyMoney } from "react-icons/gi";
 import {  FaWallet, FaPiggyBank } from "react-icons/fa";
 import { FcDebt } from "react-icons/fc";
 import { FaCoins } from "react-icons/fa";
-
-
+import ProductList from "../component/List-comp/productedit"
 import "./admin.css"
 import { Button } from "../component/button/Button";
 import AnimatedCard from "../component/Admincord/animatedcard";
 import { motion } from "framer-motion";
 import FormComp from "../component/Form-comp/Form";
 import  { useState } from "react";
+// import {ProductList} from "../component/List-comp/productedit";
 
 export  const AdminPanel = () =>{
     const [productShown, setproductShown] = useState<boolean>(false)
+    const [Productlist, setProductlist] = useState<boolean>(false)
     const handleopenproductregForm=()=>{
-       
         setproductShown(!productShown)
+    }
+    const handleOpenList =()=>{
+        setProductlist(!Productlist)
     }
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -64,7 +67,7 @@ export  const AdminPanel = () =>{
             </motion.div>
             <motion.div className="admin-action-container" variants={itemVariants}>
                 <Button buttonName="Register Product" Onclick={handleopenproductregForm}/>
-                <Button buttonName="Update-stock"/>
+                <Button buttonName="Update-stock"Onclick={handleOpenList}/>
                 <Button buttonName="Deviation Record"/>
             </motion.div>
             <motion.div className="business-other-info" variants={itemVariants}>
@@ -107,6 +110,12 @@ export  const AdminPanel = () =>{
           <div className="product-reg-popup">
             <FormComp isOpen={productShown} onClose={handleopenproductregForm}/>
           </div>
+            }
+            {
+                Productlist && 
+                <div className="product-reg-popup">
+                    <ProductList/>
+                </div>
             }
         </motion.div>
     )

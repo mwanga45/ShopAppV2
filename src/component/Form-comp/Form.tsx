@@ -15,7 +15,7 @@ export default function FormComp({onClick, onClose, isOpen = true}: FormCompProp
   const [close, setClose] = useState<boolean>(isOpen);
   const [formData, setFormData] = useState({
     product_name: '',
-    product_category: 'none',
+    product_category: 'wholesales',
     product_type: 'Solid',
     Rs_price: '',
     Ws_price: '',
@@ -39,12 +39,26 @@ export default function FormComp({onClick, onClose, isOpen = true}: FormCompProp
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await productRegister(formData);
+      const payload: any = {
+        product_name: formData.product_name,
+        product_category: formData.product_category,
+        product_type: formData.product_type,
+      };
+
+      if (formData.product_category === "retailsales") {
+        if (formData.Rs_price) payload.Rs_price = formData.Rs_price;
+        if (formData.rpurchase_price) payload.rpurchase_price = formData.rpurchase_price;
+      } else if (formData.product_category === "wholesales") {
+        if (formData.Ws_price) payload.Ws_price = formData.Ws_price;
+        if (formData.wpurchase_price) payload.wpurchase_price = formData.wpurchase_price;
+      }
+
+      await productRegister(payload);
       alert('Product registered successfully!');
       handleClose();
-    } catch (error) {
-      alert('Failed to register product.');
-      console.error(error);
+    } catch (error: any) {
+      console.error("Error registering product:", error.response ? error.response.data : error.message);
+      alert('Failed to register product: ' + (error.response?.data?.message || error.message));
     }
   };
 
@@ -66,14 +80,13 @@ export default function FormComp({onClick, onClose, isOpen = true}: FormCompProp
             <form className="main-form-content" onSubmit={handleSubmit}>
               <div className="input-value">
                 <label htmlFor="ProductName">Product Name</label>
-                <input type="text" name="product_name" id= "ProductName" value={formData.product_name} onChange={handleChange} />
+                <input type="text" name="product_name" id= "ProductName" value={formData.product_name} onChange={handleChange} required />
               </div>
 
               <div className="two-column-inputs">
                 <div className="input-value">
                     <label htmlFor="product-category">Category</label>
                     <select name="product_category" id="product-category" value={formData.product_category} onChange={handleChange}>
-                      <option value="none">Select Category</option>
                       <option value="wholesales">Wholesales</option>
                       <option value="retailsales">Retailsales</option>
                     </select>
@@ -81,8 +94,8 @@ export default function FormComp({onClick, onClose, isOpen = true}: FormCompProp
                 <div className="input-value">
                     <label htmlFor="product-type">Type</label>
                     <select name="product_type" id="product-type" value={formData.product_type} onChange={handleChange}>
-                      <option value="solid">Solid</option>
-                      <option value="liquid">Liquid</option>
+                      <option value="Solid">Solid</option>
+                      <option value="Liquid">Liquid</option>
                     </select>
                 </div>
                 {formData.product_category === "retailsales"&&(
@@ -93,13 +106,12 @@ export default function FormComp({onClick, onClose, isOpen = true}: FormCompProp
                 </div>
                 <div className="input-value">
                     <label htmlFor="Rpurchase-price">Retailpurchase Price</label>
-                 <input type="text" value={formData.rpurchase_price} name="purchase_price" id = "purchase-price" onChange={handleChange} placeholder="e.g., 5000" />
+                 <input type="text" value={formData.rpurchase_price} name="rpurchase_price" id = "purchase-price" onChange={handleChange} placeholder="e.g., 5000" />
                </div>
                </>
-                )
-                }
+                )}
                 {
-                  formData.product_category === "retailsales"&& (
+                  formData.product_category === "wholesales"&& (
                   <>
                 <div className="input-value">
                     <label htmlFor="ws-price">Wholesale Price</label>
@@ -107,9 +119,9 @@ export default function FormComp({onClick, onClose, isOpen = true}: FormCompProp
                 </div>
                 <div className="input-value">
                     <label htmlFor="Wpurchase-price">Wholepurchase Price</label>
-                 <input type="text" value={formData.wpurchase_price} name="purchase_price" id = "purchase-price" onChange={handleChange} placeholder="e.g., 5000" />
+                 <input type="text" value={formData.wpurchase_price} name="wpurchase_price" id = "purchase-price" onChange={handleChange} placeholder="e.g., 5000" />
                </div>
-                    </>
+                 </>
                   )
                 }
               </div>
