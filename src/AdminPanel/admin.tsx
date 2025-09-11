@@ -6,15 +6,13 @@ import { GiTakeMyMoney } from "react-icons/gi";
 import {  FaWallet, FaPiggyBank } from "react-icons/fa";
 import { FcDebt } from "react-icons/fc";
 import { FaCoins } from "react-icons/fa";
-import ProductList from "../component/List-comp/productedit"
 import "./admin.css"
 import { Button } from "../component/button/Button";
 import AnimatedCard from "../component/Admincord/animatedcard";
 import { motion } from "framer-motion";
 import FormComp from "../component/Form-comp/Form";
+import { RiCloseFill } from "react-icons/ri";
 import  { useState } from "react";
-// import {ProductList} from "../component/List-comp/productedit";
-
 export  const AdminPanel = () =>{
     const [productShown, setproductShown] = useState<boolean>(false)
     const [Productlist, setProductlist] = useState<boolean>(false)
@@ -113,8 +111,10 @@ export  const AdminPanel = () =>{
             }
             {
                 Productlist && 
-                <div className="product-reg-popup">
-                    <ProductList/>
+                <div className="pop-background">
+                    <div className="close-poup">
+                    <RiCloseFill onClick={()=>setProductlist(!Productlist)}/>
+                    </div>
                 </div>
             }
         </motion.div>
