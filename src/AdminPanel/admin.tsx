@@ -112,8 +112,10 @@ export  const AdminPanel = () =>{
             {
                 Productlist && 
                 <div className="pop-background">
-                    <div className="close-poup">
-                    <RiCloseFill onClick={()=>setProductlist(!Productlist)}/>
+                    <div className="close-poup-container">
+                        <div className="icon-close">
+                        <RiCloseFill onClick={()=>setProductlist(!Productlist)}/>
+                        </div>
                     </div>
                 </div>
             }
