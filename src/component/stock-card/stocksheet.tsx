@@ -1,5 +1,4 @@
 import './stocksheet.css'
-
 export default function Stocksheet() {
   return (
     <div className='stock-sheet-container'>
@@ -8,11 +7,11 @@ export default function Stocksheet() {
                 <h2>Update Stock</h2>
                 <div className="update-input-container">
                     <label htmlFor="Pname">ProductName</label>
-                    <input type="text" name='productname'id='Pname' readOnly value={"Pallet-starter"} />
+                    <input type="text" name='productname'id='Pname'/>
                 </div>
                   <div className="update-input-container">
                     <label htmlFor="categ">Category</label>
-                    <input type="text" name='Category'id='Categ' readOnly value={"Wholesales"}/>
+                    <input type="text" name='Category'id='Categ' />
                 </div>
                   <div className="update-input-container">
                     <label htmlFor="Add">Add-stock</label>
