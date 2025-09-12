@@ -1,9 +1,16 @@
 import { Accountbar } from "../component/account/Account"
 import { CiSearch } from "react-icons/ci";
 import "./stock.css"
-import Stockcard from "../component/stock-card/stockcard";
+import {Stockcard} from "../component/stock-card/stockcard";
 import StockSheet from "../component/stock-card/stocksheet"
+import { RiCloseFill } from "react-icons/ri";
+import { useState } from "react";
 export default function Stock() {
+  const [Showupdate, setShowupdate] = useState<boolean>(false)
+  const handleShowUpdateForm:React.MouseEventHandler<HTMLButtonElement> = (e)=>{
+    e.preventDefault()
+    setShowupdate(!Showupdate)
+  }
   return (
     <div className="stock-main-conatiner animated-enter">
            <div className="account">
@@ -26,15 +33,27 @@ export default function Stock() {
           </div>
         </div>
            <div className="card-stock-list">
-            <Stockcard/>
-            <Stockcard/>
-            <Stockcard/>
-            <Stockcard/>
-            <Stockcard/>
-            <Stockcard/>
-            <Stockcard/>s
-          </div> 
-          <StockSheet/>
+            <Stockcard onclick={handleShowUpdateForm}/>
+            <Stockcard onclick={handleShowUpdateForm}/>
+            <Stockcard onclick={handleShowUpdateForm}/>
+            <Stockcard onclick={handleShowUpdateForm}/>
+            <Stockcard onclick={handleShowUpdateForm}/>
+            <Stockcard onclick={handleShowUpdateForm}/>
+            <Stockcard onclick={handleShowUpdateForm}/>s
+          </div> {Showupdate &&
+                             <div className="pop-background">
+                              <div className="close-poup-container">
+                                  <div className="icon-close" onClick={()=>setShowupdate(!Showupdate)}>
+                                  <RiCloseFill  size={30}/>
+                                  </div>
+                              </div>
+                              <div className="content-container-component">
+                                <StockSheet/>
+                              </div>
+                          </div>
+
+          }
+
        </div>
     </div>
   )

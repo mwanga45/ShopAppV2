@@ -1,6 +1,17 @@
+import type React from "react";
 import { SimpleDonutChart } from "./SimpleDonutChart";
 import "./stockcard.css"
-export default function Stockcard() {
+interface CardProps {
+  onclick?:React.MouseEventHandler<HTMLButtonElement>
+}
+export const Stockcard:React.FC<CardProps> =({onclick})=> {
+  const handleonclick:React.MouseEventHandler<HTMLButtonElement> = (e)=>{
+    if(onclick){
+     onclick(e) 
+     console.log("clicked")
+    }
+
+  }
   return (
     <div className="stock-card-container">
       <div className="stock-card-main">
@@ -17,7 +28,7 @@ export default function Stockcard() {
         </div>
       </div>
       <div className="stock-update">
-        <button name="update stock">Update stock</button>
+        <button name="update stock" onClick={handleonclick}>Update stock</button>
       </div>
     </div>
   )
