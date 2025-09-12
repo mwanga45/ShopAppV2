@@ -1,5 +1,33 @@
+import { GetproductList } from "../../AdminPanel/adminservice"
 import "./list.css"
+import { useEffect, useState} from "react"
+export interface ProductInfo{
+    id:number,
+    UpdateAt: string,
+    product_name: string,
+    userId: 1,
+    product_category: string,
+    product_type: string,
+    wpurchase_price?: string |null,
+    rpurchase_price: string|null,
+    wholesales_price: string|null,
+    retailsales_price: string|null
+}
 export const ListComp = ()=>{
+    const [product, setproduct] = useState<ProductInfo[]>([])
+    useEffect(()=>{
+    const fetchallproduct = async()=>{
+        try{
+            const productddata = await GetproductList()
+            setproduct(productddata)
+        }catch(err){
+           console.error("something went wrong", err)
+           throw err
+        }
+        
+    }
+    fetchallproduct()   
+    },[])
     return(
         <div className="product-list-container">
               <div className="product-list-title">
@@ -21,17 +49,26 @@ export const ListComp = ()=>{
                                 </tr>
                             </thead>
                             <tbody>
-                               <tr className="product-table-row">
-                                <td>P001</td>
-                                <td>Pallet Starter</td>
-                                <td>Wholesales</td>
-                                <td>Solid</td>
-                                <td>63000</td>
-                                <td>66000</td>
-                                <td>John Doe</td>
-                                <td>2023-10-26</td>
+                               {product.length > 0 ?(
+                                product.map((p,index)=>(
+                             <tr className="product-table-row" key={p.id}>
+                                {/* <td>{`P${(index + 1).toString().padStart(3, "0")}`}</td> */}
+                                <td>{`P${(index + 1).toString().padStart(3,'0')}`}</td>
+                                <td>{p.product_name}</td>
+                                <td>{p.product_category}</td>
+                                <td>{p.product_type}</td>
+                                <td>{p.wpurchase_price ?? p.rpurchase_price ?? 0}</td>
+                                <td>{p.wholesales_price ?? p.retailsales_price ?? 0}</td>
+                                <td>{p.userId}</td>
+                                <td>{p.UpdateAt.substring(0,11)}</td>
                                 <td>Edit</td>
                                </tr>
+                                ))
+                               ):(
+                                <tr>
+                                    <td>No product is found</td>
+                                </tr>
+                               )}
                             </tbody>
                         </table>
               </div>
