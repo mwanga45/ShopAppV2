@@ -12,6 +12,7 @@ import AnimatedCard from "../component/Admincord/animatedcard";
 import { motion } from "framer-motion";
 import FormComp from "../component/Form-comp/Form";
 import { RiCloseFill } from "react-icons/ri";
+import { ListComp } from "../component/List-comp/Listcomp";
 import  { useState } from "react";
 export  const AdminPanel = () =>{
     const [productShown, setproductShown] = useState<boolean>(false)
@@ -116,6 +117,9 @@ export  const AdminPanel = () =>{
                         <div className="icon-close">
                         <RiCloseFill onClick={()=>setProductlist(!Productlist)}/>
                         </div>
+                    </div>
+                    <div className="content-container-component">
+                    <ListComp/>
                     </div>
                 </div>
             }
