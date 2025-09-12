@@ -3,6 +3,7 @@ import { RiCloseFill } from "react-icons/ri";
 import {useState} from "react";
 import { Submitbtn } from "../button/Submitbtn";
 import { productRegister } from "./formservice";
+import { StockUpdate } from "../../stock/stockservice";
 
 
 interface FormCompProps {
@@ -151,7 +152,7 @@ export const StockupdateForm:React.FC<StuckFormprops> = ({onClose,isOpen=true,ca
     }
   }
   const [StockData, setStockData] = useState({
-    Product_id:"",
+    Product_id:product_id,
     total_stock:"",
     category:"",
     product_type:"",
@@ -163,7 +164,9 @@ export const StockupdateForm:React.FC<StuckFormprops> = ({onClose,isOpen=true,ca
  const handleSubmit =(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
     try{
-
+     if(product_id){
+       StockUpdate(product_id,StockData)
+     }
     }catch(err){
       console.log(err)
       throw err

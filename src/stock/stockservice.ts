@@ -1,11 +1,11 @@
 import { api } from "../global.api"
 
-export const StockUpdate = async(id:number,updatestock:any)=>{
+export const StockUpdate = async(id:string,updatestock:any)=>{
     try{
-        const response =  await api.patch(`/stock/${id}`,updatestock)
-        return response.data
+    const response =  await api.patch(`/stock/${id}`,updatestock)
+    return response.data
     }catch(err){
-      console.error("Failed to updatestock")
+      console.error("Failed to updatestock", err)
       throw err
     }
 }
