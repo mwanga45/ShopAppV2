@@ -12,6 +12,9 @@ export interface ProductInfo{
     rpurchase_price: string|null,
     wholesales_price: string|null,
     retailsales_price: string|null
+    user:{
+        fullname:string|null
+    }
 }
 export const ListComp = ()=>{
     const [product, setproduct] = useState<ProductInfo[]>([])
@@ -59,7 +62,7 @@ export const ListComp = ()=>{
                                 <td>{p.product_type}</td>
                                 <td>{p.wpurchase_price ?? p.rpurchase_price ?? 0}</td>
                                 <td>{p.wholesales_price ?? p.retailsales_price ?? 0}</td>
-                                <td>{p.userId}</td>
+                                <td>{p.user.fullname}</td>
                                 <td>{p.UpdateAt.substring(0,11)}</td>
                                 <td>Edit</td>
                                </tr>
