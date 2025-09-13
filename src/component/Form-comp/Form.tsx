@@ -5,6 +5,8 @@ import { Submitbtn } from "../button/Submitbtn";
 import { productRegister } from "./formservice";
 import { StockUpdate } from "../../stock/stockservice";
 import {ProductInfo} from "./formservice"
+import  Toggle from "../button/toggle"
+
 
 
 interface FormCompProps {
@@ -141,19 +143,20 @@ interface StockFormprops{
   onClose?: () => void;
   isOpen?: boolean;
   product_id?:string;
-  productname?:string
 }
 interface productInfo {
   id:number,
   product_category:string,
   product_name:string
 
+
 }
-export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true,product_id,productname}) =>{
+export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true,product_id}) =>{
   const [isopen, setidopen ] = useState<boolean>(isOpen)
-  const [wproductInfo, setwproductInfo] = useState<productInfo>()
-  const [rproductInfo, setrproductInfo] = useState<productInfo>()
+  const [wproductInfo, setwproductInfo] = useState<productInfo[]>()
+  const [rproductInfo, setrproductInfo] = useState<productInfo[]>()
   const [Hearder,setHearder] = useState<String>("Wholesales-Stock-Reg")
+  const [isDefault, setisDefault] = useState<boolean>(false)
   const handleClose = ()=>{
     setidopen(!isopen)
     if(onClose){
@@ -161,14 +164,22 @@ export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true,produ
     }
   }
   const [StockData, setStockData] = useState({
-    Product_id:product_id,
+    product_id:'',
     total_stock:"",
-    category:"",
-    product_type:"",
+    product_category:"",
   })
   const handleChange = (e:React.ChangeEvent<HTMLInputElement|HTMLSelectElement>)=>{
     const {name , value} = e.target
-    setStockData(prev=>({...prev,[name]:value}))
+    if(name === 'product_category'){
+      const selectedProduct = wproductInfo?.find((p)=> String(p.id) === value) || rproductInfo?.find((p)=> String(p.id) === value)
+      setStockData((prev)=>({...prev,product_id:value,product_category:selectedProduct?.product_category || ""}))
+    }else{
+      setStockData(prev=>({...prev,[name]:value}))
+    }
+ }
+ const handleChangeCategory = (next:boolean)=>{
+  setisDefault(next)
+    setHearder( next ? "Retalsales-Stock-Reg":"Wholesales-Stock-Reg")
  }
  useEffect(()=>{
    const handleproductInfo = async()=>{
@@ -204,17 +215,38 @@ export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true,produ
           </div>
         </div>
         <div className="frm-container">
-            <div className="form-title">
+            <div className="form-title" style={{background:"#2A7B9B",display:"flex",columnGap:"10px"}}>
+               <Toggle onChange={handleChangeCategory}checked= {isDefault}/>
               <p>{Hearder}</p>
             </div>
             <form className="main-form-content" onSubmit={handleSubmit}>
-              <div className="input-value">
-                <label htmlFor="ProductName">Product Name</label>
-                <input type="text" name="productname" id= "ProductName" value={productname} onChange={handleChange} required readOnly/>
-              </div>
+                <div className="input-value">
+                    <label htmlFor="product-category">Category</label>
+                    <select name="product_category" id="product-category" value={StockData.product_id} onChange={handleChange}>
+                      <option value="">Please select Product category</option>
+                     {
+                      !isDefault ?(
+                      wproductInfo?(
+                       wproductInfo.map((p)=>(
+                        <option key={p.id} value={p.id}>{p.product_name}</option>
+                       ))
+                      ):(
+                        <option>No product in this category</option>
+                      )):(
+                        rproductInfo?(
+                          rproductInfo.map((p)=>(
+                            <option key={p.id} value={p.id}>{p.product_name}</option>
+                          ))
+                        ):(
+                          <option value="">No product yet in this category</option>
+                        )
+                      )
+                     }
+                    </select>
+                </div>
                 <div className="input-value">
                     <label htmlFor="cat">Category</label>
-                    <input type="text" name="category" id="cat" value={StockData.category} onChange={handleChange} required readOnly />
+                    <input type="text" name="category" id="cat" value={StockData.product_category} onChange={handleChange} required  readOnly />
                 </div>
                    <div className="input-value">
                     <label htmlFor="stock">Stock Number</label>
