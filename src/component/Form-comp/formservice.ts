@@ -9,3 +9,13 @@ export const productRegister = async (productData: any) => {
     throw error;
   }
 };
+
+export  const ProductInfo = async()=>{
+  try{
+    const response = await api.get('/stock/prInfo')
+    return response
+  }catch(err){
+    console.error("Failed to fetch the data",err)
+    throw err
+  }
+}

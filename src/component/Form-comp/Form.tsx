@@ -1,9 +1,10 @@
 import "./form_comp.css"
 import { RiCloseFill } from "react-icons/ri";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { Submitbtn } from "../button/Submitbtn";
 import { productRegister } from "./formservice";
 import { StockUpdate } from "../../stock/stockservice";
+import {ProductInfo} from "./formservice"
 
 
 interface FormCompProps {
@@ -136,14 +137,23 @@ export default function FormComp({ onClose, isOpen = true}: FormCompProps) {
 }
 
 
-interface StuckFormprops{
+interface StockFormprops{
   onClose?: () => void;
   isOpen?: boolean;
   product_id?:string;
   productname?:string
 }
-export const StockRegForm:React.FC<StuckFormprops> = ({onClose,isOpen=true,product_id,productname}) =>{
+interface productInfo {
+  id:number,
+  product_category:string,
+  product_name:string
+
+}
+export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true,product_id,productname}) =>{
   const [isopen, setidopen ] = useState<boolean>(isOpen)
+  const [wproductInfo, setwproductInfo] = useState<productInfo>()
+  const [rproductInfo, setrproductInfo] = useState<productInfo>()
+  const [Hearder,setHearder] = useState<String>("Wholesales-Stock-Reg")
   const handleClose = ()=>{
     setidopen(!isopen)
     if(onClose){
@@ -160,6 +170,20 @@ export const StockRegForm:React.FC<StuckFormprops> = ({onClose,isOpen=true,produ
     const {name , value} = e.target
     setStockData(prev=>({...prev,[name]:value}))
  }
+ useEffect(()=>{
+   const handleproductInfo = async()=>{
+    try{
+      const response = await ProductInfo() 
+      setwproductInfo(response.data.ForWholesales)
+      setrproductInfo(response.data.ForRetailsales)
+    }catch(err){
+      console.error("Failed to connect  to server")
+      throw err
+    }
+   }
+    handleproductInfo()
+ },[])
+
  const handleSubmit =(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
     try{
@@ -181,7 +205,7 @@ export const StockRegForm:React.FC<StuckFormprops> = ({onClose,isOpen=true,produ
         </div>
         <div className="frm-container">
             <div className="form-title">
-              <p>Product-Register</p>
+              <p>{Hearder}</p>
             </div>
             <form className="main-form-content" onSubmit={handleSubmit}>
               <div className="input-value">
@@ -201,7 +225,6 @@ export const StockRegForm:React.FC<StuckFormprops> = ({onClose,isOpen=true,produ
                </div>
             </form>
         </div>
-       
     </div>
   )
 }
