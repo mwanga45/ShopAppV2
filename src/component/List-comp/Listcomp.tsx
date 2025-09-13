@@ -68,8 +68,8 @@ export const ListComp = ()=>{
                                </tr>
                                 ))
                                ):(
-                                <tr>
-                                    <td>No product is found</td>
+                                <tr style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
+                                    <td style={{color:"black", fontSize:"20px", fontWeight:"700"}}>No product is found</td>
                                 </tr>
                                )}
                             </tbody>

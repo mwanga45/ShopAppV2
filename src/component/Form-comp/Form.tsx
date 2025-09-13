@@ -12,7 +12,7 @@ interface FormCompProps {
   isOpen?: boolean;
 }
 
-export default function FormComp({onClick, onClose, isOpen = true}: FormCompProps) {
+export default function FormComp({ onClose, isOpen = true}: FormCompProps) {
   const [close, setClose] = useState<boolean>(isOpen);
   const [formData, setFormData] = useState({
     product_name: '',

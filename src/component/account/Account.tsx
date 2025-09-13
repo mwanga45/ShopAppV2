@@ -24,12 +24,12 @@ export const Accountbar = () => {
   return (
     <div className="ac-container">
       <div className="avator">
-        <PiUserCircleDashedFill color="pink" size={40} />
+        <PiUserCircleDashedFill color="pink" size={40} />  
       </div>
       <div className="acc-details">
         <p className="acc-name">{userInfo?.fullname?? "Guest"}</p>
-        <p className="acc-name">{userInfo?.role ?? "Invited"}</p>
         <p className="acc-email">{userInfo?.email ?? "Not logged in"}</p>
+        <p className="acc-email">{userInfo?.role ?? "Invited"}</p>
       </div>
     </div>
   );
