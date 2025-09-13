@@ -140,10 +140,9 @@ interface StuckFormprops{
   onClose?: () => void;
   isOpen?: boolean;
   product_id?:string;
-  category:string;
   productname?:string
 }
-export const StockupdateForm:React.FC<StuckFormprops> = ({onClose,isOpen=true,category,product_id,productname}) =>{
+export const StockRegForm:React.FC<StuckFormprops> = ({onClose,isOpen=true,product_id,productname}) =>{
   const [isopen, setidopen ] = useState<boolean>(isOpen)
   const handleClose = ()=>{
     setidopen(!isopen)
@@ -191,7 +190,7 @@ export const StockupdateForm:React.FC<StuckFormprops> = ({onClose,isOpen=true,ca
               </div>
                 <div className="input-value">
                     <label htmlFor="cat">Category</label>
-                    <input type="text" name="category" id="cat" value={category} onChange={handleChange} required readOnly />
+                    <input type="text" name="category" id="cat" value={StockData.category} onChange={handleChange} required readOnly />
                 </div>
                    <div className="input-value">
                     <label htmlFor="stock">Stock Number</label>

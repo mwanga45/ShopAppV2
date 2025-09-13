@@ -13,15 +13,20 @@ import { motion } from "framer-motion";
 import FormComp from "../component/Form-comp/Form";
 import { RiCloseFill } from "react-icons/ri";
 import { ListComp } from "../component/List-comp/Listcomp";
+import { StockRegForm } from "../component/Form-comp/Form";
 import  { useState } from "react";
 export  const AdminPanel = () =>{
     const [productShown, setproductShown] = useState<boolean>(false)
     const [Productlist, setProductlist] = useState<boolean>(false)
+    const [showStockreg, setShowStockreg] = useState<boolean>(false)
     const handleopenproductregForm=()=>{
         setproductShown(!productShown)
     }
     const handleOpenList =()=>{
         setProductlist(!Productlist)
+    }
+    const handleopenStockreg = ()=>{
+        setShowStockreg(!showStockreg)
     }
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -67,7 +72,7 @@ export  const AdminPanel = () =>{
             <motion.div className="admin-action-container" variants={itemVariants}>
                 <Button buttonName="Register Product" Onclick={handleopenproductregForm}/>
                 <Button buttonName="Update-stock"Onclick={handleOpenList}/>
-                <Button buttonName="Deviation Record"/>
+                <Button buttonName="Stock-register" Onclick={handleopenStockreg}/>
             </motion.div>
             <motion.div className="business-other-info" variants={itemVariants}>
                 <motion.div className="admin-product-details-container" variants={itemVariants}>
@@ -123,6 +128,13 @@ export  const AdminPanel = () =>{
                     </div>
                 </div>
             }
+    {showStockreg &&
+          <div className="product-reg-popup">
+            <StockRegForm isOpen={productShown} onClose={handleopenStockreg} />
+          </div>
+            }
+
+
         </motion.div>
     )
 
