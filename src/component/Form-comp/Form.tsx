@@ -8,6 +8,7 @@ import { StockCreate } from "../../stock/stockservice";
 import {ProductInfo} from "./formservice"
 import  Toggle from "../button/toggle"
 import { Alert } from "@mui/material";
+import {Toast} from '@'
 
 
 
@@ -200,8 +201,11 @@ export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true}) =>{
     e.preventDefault()
     try{
        const response = await StockCreate(StockData)
-       Alert(response.data.message)
-       return response
+       if(!response.data.success){
+        Alert(response.data.message)
+        return
+       }
+       
 
     }catch(err){
       console.log(err)
@@ -255,7 +259,7 @@ export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true}) =>{
                     <input type="text" name="total_stock" id="stock" value={StockData.total_stock} onChange={handleChange} required />
                 </div>
                <div className="btn-container">
-                  <Submitbtn buttonName="Create-product" type="submit"/>
+                  <Submitbtn buttonName="Create Stock" type="submit"/>
                </div>
             </form>
         </div>
