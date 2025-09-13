@@ -9,6 +9,15 @@ export const StockUpdate = async(id:string,updatestock:any)=>{
       throw err
     }
 }
+export  const StockCreate = async(stockInfo:any)=>{
+    try{
+        const response  = await api.post('/stock/create',stockInfo)
+        return response
+    }catch(err){
+        console.error("Failed to send data")
+        throw err
+    }
+}
 export const Stockresult =async()=>{
     try{
         const stockinfo =     await api.get('/stock/stockresult')

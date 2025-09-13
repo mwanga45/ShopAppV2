@@ -3,9 +3,11 @@ import { RiCloseFill } from "react-icons/ri";
 import {useEffect, useState} from "react";
 import { Submitbtn } from "../button/Submitbtn";
 import { productRegister } from "./formservice";
-import { StockUpdate } from "../../stock/stockservice";
+// import { StockUpdate } from "../../stock/stockservice";
+import { StockCreate } from "../../stock/stockservice";
 import {ProductInfo} from "./formservice"
 import  Toggle from "../button/toggle"
+import { Alert } from "@mui/material";
 
 
 
@@ -142,7 +144,6 @@ export default function FormComp({ onClose, isOpen = true}: FormCompProps) {
 interface StockFormprops{
   onClose?: () => void;
   isOpen?: boolean;
-  product_id?:string;
 }
 interface productInfo {
   id:number,
@@ -151,7 +152,7 @@ interface productInfo {
 
 
 }
-export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true,product_id}) =>{
+export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true}) =>{
   const [isopen, setidopen ] = useState<boolean>(isOpen)
   const [wproductInfo, setwproductInfo] = useState<productInfo[]>()
   const [rproductInfo, setrproductInfo] = useState<productInfo[]>()
@@ -195,12 +196,13 @@ export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true,produ
     handleproductInfo()
  },[])
 
- const handleSubmit =(e:React.FormEvent<HTMLFormElement>)=>{
+ const handleSubmit = async(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
     try{
-     if(product_id){
-       StockUpdate(product_id,StockData)
-     }
+       const response = await StockCreate(StockData)
+       Alert(response.data.message)
+       return response
+
     }catch(err){
       console.log(err)
       throw err
