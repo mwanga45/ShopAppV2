@@ -3,12 +3,10 @@ import { RiCloseFill } from "react-icons/ri";
 import {useEffect, useState} from "react";
 import { Submitbtn } from "../button/Submitbtn";
 import { productRegister } from "./formservice";
-// import { StockUpdate } from "../../stock/stockservice";
 import { StockCreate } from "../../stock/stockservice";
 import {ProductInfo} from "./formservice"
 import  Toggle from "../button/toggle"
-import { Alert } from "@mui/material";
-import {Toast} from '@'
+import { toast, ToastContainer } from "react-toastify";
 
 
 
@@ -202,9 +200,10 @@ export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true}) =>{
     try{
        const response = await StockCreate(StockData)
        if(!response.data.success){
-        Alert(response.data.message)
+        alert(response.data.message)
         return
        }
+       toast.success(response.data.message)
        
 
     }catch(err){
@@ -216,6 +215,7 @@ export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true}) =>{
   return(
     <div className='form-main-container'>
       <div className="icon-conyainer">
+        <ToastContainer/>
           <div className="icon" onClick={handleClose}>
             <RiCloseFill color="white" size={30} fontWeight={500}/>
           </div>
