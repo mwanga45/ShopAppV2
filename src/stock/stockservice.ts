@@ -27,3 +27,10 @@ export const Stockresult =async()=>{
         throw err
     }
 }
+export  const StockCardResult = async() =>{
+    try{
+     
+    }catch(err){
+
+    }
+}
