@@ -29,8 +29,10 @@ export const Stockresult =async()=>{
 }
 export  const StockCardResult = async() =>{
     try{
-     
+      const response = await api.get('stock/stock_result')
+      return response
     }catch(err){
-
+      console.error("Failed  to get data", err)
+      throw ( err)
     }
-}
+}  
