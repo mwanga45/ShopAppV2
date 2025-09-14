@@ -1,10 +1,12 @@
 import type React from "react";
 import { SimpleDonutChart } from "./SimpleDonutChart";
+import type{ Stockprops } from "../../stock/Stock";
 import "./stockcard.css"
 interface CardProps {
   onclick?:React.MouseEventHandler<HTMLButtonElement>
 }
-export const Stockcard:React.FC<CardProps> =({onclick})=> {
+type StockCardprops = CardProps & Stockprops
+export const Stockcard:React.FC<StockCardprops> =({onclick,product_id,product_name, user_id, fullname,last_add_stock,last_stock,CreatedAt,percentageRemain})=> {
   const handleonclick:React.MouseEventHandler<HTMLButtonElement> = (e)=>{
     if(onclick){
      onclick(e) 
@@ -13,18 +15,19 @@ export const Stockcard:React.FC<CardProps> =({onclick})=> {
 
   }
   return (
-    <div className="stock-card-container">
+    <div className="stock-card-container" key=
+    {product_id}>
       <div className="stock-card-main">
         <div className="stock-card-info">
           <p className="info-about">Product-name</p>
-          <p className="info-real">Pallet starter</p>
+          <p className="info-real">{product_name}r</p>
           <p className="info-about">Remain Product</p>
-          <p className="info-real">5/20 pc</p>
+          <p className="info-real">{last_stock}/{last_add_stock}</p>
           <p className="info-about">% Remain </p>
-          <p className="info-real">20%</p>
+          <p className="info-real">{percentageRemain}%</p>
         </div>
         <div className="stock-card-donut">
-            <SimpleDonutChart percentage={50}/>
+            <SimpleDonutChart percentage={percentageRemain}/>
         </div>
       </div>
       <div className="stock-update">

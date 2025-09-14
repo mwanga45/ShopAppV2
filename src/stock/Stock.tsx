@@ -7,7 +7,7 @@ import { RiCloseFill } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import { StockCardResult } from "./stockservice";
 
-  export interface StockCard {
+  export interface Stockprops {
       product_id: number,
       product_name: string,
       user_id: number,
@@ -19,18 +19,26 @@ import { StockCardResult } from "./stockservice";
 }
 export default function Stock() {
   const [Showupdate, setShowupdate] = useState<boolean>(false)
-  const [Carddata, setCarddata] =  useState<StockCard[]>([])
+  const [Carddata, setCarddata] =  useState<Stockprops[]>([])
   const handleShowUpdateForm:React.MouseEventHandler<HTMLButtonElement> = (e)=>{
     e.preventDefault()
     setShowupdate(!Showupdate)
   }
   useEffect(()=>{
-   try{
-
+    const handlecardData = async()=>{
+    try{
+    const response = await StockCardResult()
+    if (!response.data.success){
+      alert(response.data.message)
+    }
+    setCarddata(response.data.data)
    }catch(err){
     console.error("Something went")
     alert("Something went wrong")
    }
+    }
+    handlecardData()
+    console.log(Carddata)
   },[])
   return (
     <div className="stock-main-conatiner animated-enter">
@@ -53,15 +61,29 @@ export default function Stock() {
             <input type="text" name="search" placeholder="seach by name" />
           </div>
         </div>
-           <div className="card-stock-list">
-            <Stockcard onclick={handleShowUpdateForm}/>
-            <Stockcard onclick={handleShowUpdateForm}/>
-            <Stockcard onclick={handleShowUpdateForm}/>
-            <Stockcard onclick={handleShowUpdateForm}/>
-            <Stockcard onclick={handleShowUpdateForm}/>
-            <Stockcard onclick={handleShowUpdateForm}/>
-            <Stockcard onclick={handleShowUpdateForm}/>s
-          </div> {Showupdate &&
+        {Carddata ? (
+  <div className="card-stock-list">
+    {Carddata.map((s) => (
+      <Stockcard
+        key={s.product_id}
+        onclick={handleShowUpdateForm}
+        product_id={s.product_id}
+        product_name={s.product_name}
+        CreatedAt={s.CreatedAt}
+        last_add_stock={s.last_add_stock}
+        last_stock={s.last_stock}
+        fullname={s.fullname}
+        user_id={s.user_id}
+        percentageRemain={s.percentageRemain}
+      />
+    ))}
+  </div>
+) : (
+  <div className="card-stock-list">
+    <p>Please No stock info is available</p>
+  </div>
+)}
+          {Showupdate &&
                              <div className="pop-background">
                               <div className="close-poup-container">
                                   <div className="icon-close" onClick={()=>setShowupdate(!Showupdate)}>
