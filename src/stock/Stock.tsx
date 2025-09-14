@@ -4,13 +4,34 @@ import "./stock.css"
 import {Stockcard} from "../component/stock-card/stockcard";
 import StockSheet from "../component/stock-card/stocksheet"
 import { RiCloseFill } from "react-icons/ri";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { StockCardResult } from "./stockservice";
+
+  export interface StockCard {
+      product_id: number,
+      product_name: string,
+      user_id: number,
+      fullname: string,
+      last_add_stock: number,
+      last_stock: number,
+      CreatedAt: string,
+      percentageRemain: number
+}
 export default function Stock() {
   const [Showupdate, setShowupdate] = useState<boolean>(false)
+  const [Carddata, setCarddata] =  useState<StockCard[]>([])
   const handleShowUpdateForm:React.MouseEventHandler<HTMLButtonElement> = (e)=>{
     e.preventDefault()
     setShowupdate(!Showupdate)
   }
+  useEffect(()=>{
+   try{
+
+   }catch(err){
+    console.error("Something went")
+    alert("Something went wrong")
+   }
+  },[])
   return (
     <div className="stock-main-conatiner animated-enter">
            <div className="account">
