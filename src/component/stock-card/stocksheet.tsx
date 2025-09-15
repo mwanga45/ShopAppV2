@@ -1,7 +1,65 @@
 import './stocksheet.css'
 import type { Stockprops } from '../../stock/Stock'
+import React, { useState } from 'react'
+import { StockUpdate } from '../../stock/stockservice'
+
+interface Stockupdate {
+    Method?: 'add' | 'Removed'
+    product_id?: number
+    total_stock?: number
+    Reasons?: string
+    product_category?: 'IN' | 'OUT'
+}
 export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,CreatedAt,last_add_stock,last_stock,fullname, product_category})=> {
-  
+ const [StockupdateData, seStockupdateData] = useState<Partial<Stockupdate>>({})
+ const [formValues, setFormValues] = useState<any>({})
+ const [isSubmitting, setIsSubmitting] = useState(false)
+
+ const handleOnchage:React.ChangeEventHandler<HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement> = (e)=>{
+  const {name , value } = e.target
+  setFormValues((prev:any)=> ({...prev,[name]: value}))
+ }
+
+ const handleSubmit = async()=>{
+  try{
+    setIsSubmitting(true)
+    const methodRaw = (formValues?.method || '').toString().toLowerCase()
+    const Method: Stockupdate['Method'] = methodRaw === 'add' ? 'add' : methodRaw === 'removed' ? 'Removed' : undefined
+
+    const addVal = Number(formValues?.add_stock || 0)
+    const deductVal = Number(formValues?.deduct || 0)
+
+    let total_stock: number | undefined = undefined
+    if (!isNaN(addVal) && addVal > 0) total_stock = addVal
+    if (!isNaN(deductVal) && deductVal > 0) total_stock = -deductVal
+
+    const product_category_move: Stockupdate['product_category'] = (formValues?.move_category || '').toString().toUpperCase() === 'OUT' ? 'OUT' : (formValues?.move_category || '').toString().toUpperCase() === 'IN' ? 'IN' : undefined
+
+    const payload: Stockupdate = {
+      product_id,
+      Method,
+      total_stock,
+      Reasons: formValues?.reasons,
+      product_category: product_category_move
+    }
+
+    seStockupdateData(payload)
+    if (!payload.product_id) throw new Error('Missing product id')
+    if (!payload.total_stock && payload.total_stock !== 0) throw new Error('Provide add or deduct amount')
+     console.log(payload)
+    const response = await StockUpdate(product_id, payload)
+    if ((response as any)?.data?.success === false) {
+      alert((response as any)?.data?.message || 'Failed to update stock')
+    } else {
+      alert('Stock updated successfully')
+    }
+  }catch(err){
+   alert('Failed to update stock')
+   console.error('Something went wrong', err)
+  } finally {
+    setIsSubmitting(false)
+  }
+ }
   return (
     <div className='stock-sheet-container'>
         <div className="stock-form-container">
@@ -9,35 +67,66 @@ export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,Created
                 <h2>Update Stock</h2>
                   <div className="update-input-container">
                     <label htmlFor="Pname">Productid</label>
-                    <input type="text" name='productname'id='Pname' value={product_id} readOnly/>
+                    <input type="text" name='product_id' id='Pname' value={product_id} readOnly style={{color:"black", fontSize:"18px" , fontWeight:"500"}}/>
                 </div>
                 <div className="update-input-container">
                     <label htmlFor="Pname">ProductName</label>
-                    <input type="text" name='productname'id='Pname' value={product_name} readOnly/>
+                    <input type="text" name='productname' id='Pname' value={product_name} readOnly style={{color:"black", fontSize:"18px" , fontWeight:"500"}}/>
                 </div>
                 <div className="update-input-container">
                     <label htmlFor="categ">Category</label>
-                    <input type="text" name='Category'id='Categ' value={product_category} readOnly/>
+                    <input type="text" name='category' id='Categ' value={product_category} readOnly style={{color:"black", fontSize:"18px" , fontWeight:"500"}}/>
                 </div>
-                 <div className="update-input-container">
-                    <label htmlFor="mt">Select Method</label>
-                    <input type="text" name='method'id='mt' value={product_category}/>
+              <div className="update-input-container">
+                    <label htmlFor="method">Method Select</label>
+                    <select name='method' id='method' onChange={handleOnchage} defaultValue="" style={{color:"black", fontSize:"18px" , fontWeight:"500"}}>
+                      <option value="" disabled>Select Update Option</option>
+                      <option value="add">Add</option>
+                      <option value="removed">Removed</option>
+                    </select>
                 </div>
-
+                {formValues?.method === 'add' ? (
                   <div className="update-input-container">
                     <label htmlFor="Add">Add-stock</label>
-                    <input type="number" name='Add-stock'id='Add'style={{color:"black", fontSize:"18px" , fontWeight:"500"}} />
-                </div>
+                    <input type="number" name='add_stock' id='Add' onChange={handleOnchage} placeholder={String(last_add_stock)} style={{color:"black", fontSize:"18px" , fontWeight:"500"}} />
+                  </div>
+                ) : formValues?.method === 'removed' ? (
                   <div className="update-input-container">
                     <label htmlFor="Remove">Deduct-stock</label>
-                    <input type="number" name='Deduct'id='Remove' style={{color:"black", fontSize:"18px" , fontWeight:"500"}}/>
+                    <input type="number" name='deduct' id='Remove' onChange={handleOnchage} placeholder={String(last_stock)} style={{color:"black", fontSize:"18px" , fontWeight:"500"}}/>
+                  </div>
+                ) : null}
+
+                {
+                  formValues?.method === 'add' ?(
+                  <div className="update-input-container">
+                    <label htmlFor="mv">Stock Move (IN/OUT)</label>
+                    <select name='move_category' id='mv' onChange={handleOnchage} defaultValue="IN" style={{color:"black", fontSize:"18px" , fontWeight:"500"}}>
+                      {/* <option value="" disabled>Select move</option> */}
+                      <option value="IN">IN</option>
+                      {/* <option value="OUT">OUT</option> */}
+                    </select>
                 </div>
+                  ):(
+                     <div className="update-input-container">
+                    <label htmlFor="mv">Stock Move (IN/OUT)</label>
+                    <select name='move_category' id='mv' onChange={handleOnchage} defaultValue="" style={{color:"black", fontSize:"18px" , fontWeight:"500"}}>
+                      <option value="" disabled>Select move</option>
+                      <option value="IN">IN</option>
+                      <option value="OUT">OUT</option>
+                    </select>
+                </div>
+                  )
+
+                }
+
+                <div className="text-area-stock">
                 <div className="update-input-container">
                     <label htmlFor="res">Reasons</label>
-                    <input type="number" name='reasons'id='res' style={{color:"black", fontSize:"18px" , fontWeight:"500"}}/>
+                    <textarea  name='reasons' id='res' onChange={handleOnchage} style={{color:"black", fontSize:"18px" , fontWeight:"500", background:"white", border:"none"}}/>
                 </div>
-                
-                <button name='update'>Update Stock</button>
+              </div>
+                <button name='update' onClick={handleSubmit} disabled={isSubmitting}>{isSubmitting ? 'Updating...' : 'Update Stock'}</button>
             </div>
         </div>
         <div className="stock-information-container">
