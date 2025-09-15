@@ -2,7 +2,7 @@ import { Accountbar } from "../component/account/Account"
 import { CiSearch } from "react-icons/ci";
 import "./stock.css"
 import {Stockcard} from "../component/stock-card/stockcard";
-import StockSheet from "../component/stock-card/stocksheet"
+import {Stocksheet} from "../component/stock-card/stocksheet"
 import { RiCloseFill } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import { StockCardResult } from "./stockservice";
@@ -16,6 +16,7 @@ import { StockCardResult } from "./stockservice";
       last_stock: number,
       CreatedAt: string,
       percentageRemain: number
+      product_category: string
 }
 export default function Stock() {
   const [Showupdate, setShowupdate] = useState<boolean>(false)
@@ -74,8 +75,7 @@ export default function Stock() {
         last_stock={s.last_stock}
         fullname={s.fullname}
         user_id={s.user_id}
-        percentageRemain={s.percentageRemain}
-      />
+        percentageRemain={s.percentageRemain}  product_category={s.product_category}  />
     ))}
   </div>
 ) : (
@@ -91,7 +91,7 @@ export default function Stock() {
                                   </div>
                               </div>
                               <div className="content-container-component">
-                                <StockSheet/>
+                                <Stocksheet/>
                               </div>
                           </div>
 

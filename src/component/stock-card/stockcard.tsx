@@ -6,7 +6,7 @@ interface CardProps {
   onclick?:React.MouseEventHandler<HTMLButtonElement>
 }
 type StockCardprops = CardProps & Stockprops
-export const Stockcard:React.FC<StockCardprops> =({onclick,product_id,product_name, user_id, fullname,last_add_stock,last_stock,CreatedAt,percentageRemain})=> {
+export const Stockcard:React.FC<StockCardprops> =({onclick,product_id,product_name, user_id, fullname,last_add_stock,last_stock,CreatedAt,percentageRemain,product_category})=> {
   const handleonclick:React.MouseEventHandler<HTMLButtonElement> = (e)=>{
     if(onclick){
      onclick(e) 

@@ -1,17 +1,22 @@
 import './stocksheet.css'
-export default function Stocksheet() {
+import type { Stockprops } from '../../stock/Stock'
+export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,CreatedAt,last_add_stock,last_stock,fullname, product_category})=> {
   return (
     <div className='stock-sheet-container'>
         <div className="stock-form-container">
             <div className="update-stock">
                 <h2>Update Stock</h2>
+                  <div className="update-input-container">
+                    <label htmlFor="Pname">Productid</label>
+                    <input type="text" name='productname'id='Pname' value={product_id} readOnly/>
+                </div>
                 <div className="update-input-container">
                     <label htmlFor="Pname">ProductName</label>
-                    <input type="text" name='productname'id='Pname'/>
+                    <input type="text" name='productname'id='Pname' value={product_name} readOnly/>
                 </div>
                   <div className="update-input-container">
                     <label htmlFor="categ">Category</label>
-                    <input type="text" name='Category'id='Categ' />
+                    <input type="text" name='Category'id='Categ' value={product_category} />
                 </div>
                   <div className="update-input-container">
                     <label htmlFor="Add">Add-stock</label>
@@ -28,23 +33,23 @@ export default function Stocksheet() {
                <h2>Stock Information</h2>
                <div className="stock-spec-info">
                 <label htmlFor="">Product-name</label>
-                <h2>Pallet starter</h2>
+                <h2>{product_name}</h2>
                </div>
                  <div className="stock-spec-info">
                 <label htmlFor="">Stock-remain</label>
-                <h2>500 bag</h2>
+                <h2>{last_stock}</h2>
                </div>
                  <div className="stock-spec-info">
                 <label htmlFor="">Last Update</label>
-                <h2>date</h2>
+                <h2>{CreatedAt.substring(0,11)}</h2>
                </div>
                  <div className="stock-spec-info">
                 <label htmlFor="">Person-update</label>
-                <h2>Eliamin Mwanga</h2>
+                <h2>{fullname}</h2>
                </div>
                  <div className="stock-spec-info">
                 <label htmlFor="">Date-Expected to End</label>
-                <h2>date</h2>
+                <h2>Depend</h2>
                </div>
         </div>
     </div>
