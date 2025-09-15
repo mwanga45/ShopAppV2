@@ -1,6 +1,7 @@
 import './stocksheet.css'
 import type { Stockprops } from '../../stock/Stock'
 export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,CreatedAt,last_add_stock,last_stock,fullname, product_category})=> {
+  
   return (
     <div className='stock-sheet-container'>
         <div className="stock-form-container">
@@ -14,18 +15,28 @@ export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,Created
                     <label htmlFor="Pname">ProductName</label>
                     <input type="text" name='productname'id='Pname' value={product_name} readOnly/>
                 </div>
-                  <div className="update-input-container">
+                <div className="update-input-container">
                     <label htmlFor="categ">Category</label>
-                    <input type="text" name='Category'id='Categ' value={product_category} />
+                    <input type="text" name='Category'id='Categ' value={product_category} readOnly/>
                 </div>
+                 <div className="update-input-container">
+                    <label htmlFor="mt">Select Method</label>
+                    <input type="text" name='method'id='mt' value={product_category}/>
+                </div>
+
                   <div className="update-input-container">
                     <label htmlFor="Add">Add-stock</label>
-                    <input type="text" name='Add-stock'id='Add' />
+                    <input type="number" name='Add-stock'id='Add'style={{color:"black", fontSize:"18px" , fontWeight:"500"}} />
                 </div>
                   <div className="update-input-container">
                     <label htmlFor="Remove">Deduct-stock</label>
-                    <input type="text" name='Deduct'id='Remove' />
+                    <input type="number" name='Deduct'id='Remove' style={{color:"black", fontSize:"18px" , fontWeight:"500"}}/>
                 </div>
+                <div className="update-input-container">
+                    <label htmlFor="res">Reasons</label>
+                    <input type="number" name='reasons'id='res' style={{color:"black", fontSize:"18px" , fontWeight:"500"}}/>
+                </div>
+                
                 <button name='update'>Update Stock</button>
             </div>
         </div>
@@ -39,9 +50,13 @@ export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,Created
                 <label htmlFor="">Stock-remain</label>
                 <h2>{last_stock}</h2>
                </div>
+                <div className="stock-spec-info">
+                <label htmlFor="">Stock-remain</label>
+                <h2>{last_add_stock}</h2>
+               </div>
                  <div className="stock-spec-info">
                 <label htmlFor="">Last Update</label>
-                <h2>{CreatedAt.substring(0,11)}</h2>
+                <h2>{CreatedAt.substring(0,10)}</h2>
                </div>
                  <div className="stock-spec-info">
                 <label htmlFor="">Person-update</label>

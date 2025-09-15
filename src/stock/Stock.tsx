@@ -21,6 +21,7 @@ import { StockCardResult } from "./stockservice";
 export default function Stock() {
   const [Showupdate, setShowupdate] = useState<boolean>(false)
   const [Carddata, setCarddata] =  useState<Stockprops[]>([])
+  const [selectedStock, setSelectedStock] = useState<Stockprops | null>(null)
   const handleShowUpdateForm:React.MouseEventHandler<HTMLButtonElement> = (e)=>{
     e.preventDefault()
     setShowupdate(!Showupdate)
@@ -67,7 +68,7 @@ export default function Stock() {
     {Carddata.map((s) => (
       <Stockcard
         key={s.product_id}
-        onclick={handleShowUpdateForm}
+        onclick={(e)=>{ handleShowUpdateForm(e); setSelectedStock(s); }}
         product_id={s.product_id}
         product_name={s.product_name}
         CreatedAt={s.CreatedAt}
@@ -83,7 +84,7 @@ export default function Stock() {
     <p>Please No stock info is available</p>
   </div>
 )}
-          {Showupdate &&
+          {Showupdate && selectedStock &&
                              <div className="pop-background">
                               <div className="close-poup-container">
                                   <div className="icon-close" onClick={()=>setShowupdate(!Showupdate)}>
@@ -91,7 +92,7 @@ export default function Stock() {
                                   </div>
                               </div>
                               <div className="content-container-component">
-                                <Stocksheet/>
+                                <Stocksheet {...selectedStock}/>
                               </div>
                           </div>
 
