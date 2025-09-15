@@ -24,10 +24,10 @@ export const Stockcard:React.FC<StockCardprops> =({onclick,product_id,product_na
           <p className="info-about">Remain Product</p>
           <p className="info-real">{last_stock}/{last_add_stock}</p>
           <p className="info-about">% Remain </p>
-          <p className="info-real">{percentageRemain}%</p>
+          <p className="info-real">{percentageRemain.toString().substring(0,3)}%</p>
         </div>
         <div className="stock-card-donut">
-            <SimpleDonutChart percentage={percentageRemain}/>
+            <SimpleDonutChart percentage={Number(percentageRemain.toString().substring(0,3))}/>
         </div>
       </div>
       <div className="stock-update">

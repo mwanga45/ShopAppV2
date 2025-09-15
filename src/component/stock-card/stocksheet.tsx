@@ -8,7 +8,7 @@ interface Stockupdate {
     product_id?: number
     total_stock?: number
     Reasons?: string
-    product_category?: 'IN' | 'OUT'
+    product_category?: string // Re-added product_category as string
 }
 export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,CreatedAt,last_add_stock,last_stock,fullname, product_category})=> {
  const [StockupdateData, seStockupdateData] = useState<Partial<Stockupdate>>({})
@@ -29,25 +29,26 @@ export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,Created
     const addVal = Number(formValues?.add_stock || 0)
     const deductVal = Number(formValues?.deduct || 0)
 
-    let total_stock: number | undefined = undefined
+    let total_stock: number = 0 // Initialize to 0
     if (!isNaN(addVal) && addVal > 0) total_stock = addVal
-    if (!isNaN(deductVal) && deductVal > 0) total_stock = -deductVal
+    if (!isNaN(deductVal) && deductVal > 0) total_stock = deductVal // Make it positive
 
-    const product_category_move: Stockupdate['product_category'] = (formValues?.move_category || '').toString().toUpperCase() === 'OUT' ? 'OUT' : (formValues?.move_category || '').toString().toUpperCase() === 'IN' ? 'IN' : undefined
+    // Remove product_category_move as it's not needed for UpdateStockDto's product_category
+    // The product_category from props should be used.
 
     const payload: Stockupdate = {
       product_id,
       Method,
       total_stock,
       Reasons: formValues?.reasons,
-      product_category: product_category_move
+      product_category: product_category // Use the prop directly
     }
 
     seStockupdateData(payload)
     if (!payload.product_id) throw new Error('Missing product id')
-    if (!payload.total_stock && payload.total_stock !== 0) throw new Error('Provide add or deduct amount')
-     console.log(payload)
-    const response = await StockUpdate(product_id, payload)
+    if (typeof payload.total_stock === 'undefined') throw new Error('Provide add or deduct amount') // Allow 0
+     console.log(payload,product_id)
+    const response = await StockUpdate( payload)
     if ((response as any)?.data?.success === false) {
       alert((response as any)?.data?.message || 'Failed to update stock')
     } else {
@@ -107,7 +108,7 @@ export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,Created
                       {/* <option value="OUT">OUT</option> */}
                     </select>
                 </div>
-                  ):(
+                  ):formValues?.method === 'removed'?(
                      <div className="update-input-container">
                     <label htmlFor="mv">Stock Move (IN/OUT)</label>
                     <select name='move_category' id='mv' onChange={handleOnchage} defaultValue="" style={{color:"black", fontSize:"18px" , fontWeight:"500"}}>
@@ -116,7 +117,7 @@ export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,Created
                       <option value="OUT">OUT</option>
                     </select>
                 </div>
-                  )
+                  ):null
 
                 }
 

@@ -1,8 +1,8 @@
 import { api } from "../global.api"
 
-export const StockUpdate = async(id:any,updatestock:any)=>{
+export const StockUpdate = async(updatestock:any)=>{
     try{
-    const response =  await api.patch(`/stock/${id}`,updatestock)
+    const response =  await api.patch("/stock/",updatestock)
     return response
     }catch(err){
       console.error("Failed to updatestock", err)
