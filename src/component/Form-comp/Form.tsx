@@ -57,8 +57,10 @@ export default function FormComp({ onClose, isOpen = true}: FormCompProps) {
         if (formData.Ws_price) payload.Ws_price = formData.Ws_price;
         if (formData.wpurchase_price) payload.wpurchase_price = formData.wpurchase_price;
       }
+      if(window.confirm("are sure  you want to registration")){
+        await productRegister(payload);
+      }
 
-      await productRegister(payload);
       alert('Product registered successfully!');
       handleClose();
     } catch (error: any) {
@@ -267,6 +269,61 @@ export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true}) =>{
   )
 }
 
+export const SalesRecForm = ()=>{
+  return(
+    <div className='form-main-container'>
+      <div className="icon-conyainer">
+        <ToastContainer/>
+          <div className="icon" onClick={handleClose}>
+            <RiCloseFill color="white" size={30} fontWeight={500}/>
+          </div>
+        </div>
+        <div className="frm-container">
+            <div className="form-title" style={{background:"#2A7B9B",display:"flex",columnGap:"10px"}}>
+               <Toggle onChange={handleChangeCategory}checked= {isDefault}/>
+              <p>{Hearder}</p>
+            </div>
+            <form className="main-form-content" onSubmit={handleSubmit}>
+                <div className="input-value">
+                    <label htmlFor="product-category">Category</label>
+                    <select name="product_category" id="product-category" value={StockData.product_id} onChange={handleChange}>
+                      <option value="">Please select Product category</option>
+                     {
+                      !isDefault ?(
+                      wproductInfo?(
+                       wproductInfo.map((p)=>(
+                        <option key={p.id} value={p.id}>{p.product_name}</option>
+                       ))
+                      ):(
+                        <option>No product in this category</option>
+                      )):(
+                        rproductInfo?(
+                          rproductInfo.map((p)=>(
+                            <option key={p.id} value={p.id}>{p.product_name}</option>
+                          ))
+                        ):(
+                          <option value="">No product yet in this category</option>
+                        )
+                      )
+                     }
+                    </select>
+                </div>
+                <div className="input-value">
+                    <label htmlFor="cat">Category</label>
+                    <input type="text" name="category" id="cat" value={StockData.product_category} onChange={handleChange} required  readOnly />
+                </div>
+                   <div className="input-value">
+                    <label htmlFor="stock">Stock Number</label>
+                    <input type="text" name="total_stock" id="stock" value={StockData.total_stock} onChange={handleChange} required />
+                </div>
+               <div className="btn-container">
+                  <Submitbtn buttonName="Create Stock" type="submit"/>
+               </div>
+            </form>
+        </div>
+    </div>
+  )
+}
 export const useFormClose = () => {
   const [isOpen, setIsOpen] = useState(true);
   
