@@ -14,12 +14,26 @@ import FormComp from "../component/Form-comp/Form";
 import { RiCloseFill } from "react-icons/ri";
 import { ListComp } from "../component/List-comp/Listcomp";
 import { StockRegForm } from "../component/Form-comp/Form";
-import  { useState } from "react";
+import  { useEffect, useState } from "react";
 import OtherAc from "../component/account/otherAc";
+import { GetuserList } from "./adminservice";
+
+interface AccountUserRespose {
+      id?: number,
+      CreatedAt?: string,
+      UpdateAt?:string,
+      fullname?: string,
+      email?: string,
+      phone_number?:string,
+      nida?:string,
+      role?: string,
+      isActive?: boolean
+}
 export  const AdminPanel = () =>{
     const [productShown, setproductShown] = useState<boolean>(false)
     const [Productlist, setProductlist] = useState<boolean>(false)
     const [showStockreg, setShowStockreg] = useState<boolean>(false)
+    const [Accountdetails, setAccountdetails] = useState<AccountUserRespose[]>([])
     const handleopenproductregForm=()=>{
         setproductShown(!productShown)
     }
@@ -53,7 +67,24 @@ export  const AdminPanel = () =>{
         }
     };
     
+   useEffect(()=>{
+    try{
+      const handlegetuserAccount=async()=>{
+        const response = await GetuserList()
+        setAccountdetails(response.data)
+        console.log(Accountdetails)
+        if(!response.data.success){
+            alert(response.data.message)
+        }
 
+      }
+      handlegetuserAccount()
+    }catch(err){
+        console.error(err)
+         alert(err)
+    }
+
+   })
     return(
         <motion.div 
             className="adminpanel-container"

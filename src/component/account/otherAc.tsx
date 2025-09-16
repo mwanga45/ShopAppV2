@@ -3,6 +3,9 @@ import { ImUserTie } from "react-icons/im";
 import { FaUserCheck } from "react-icons/fa";
 import { TbHandClick } from "react-icons/tb";
 import "./account.css";
+interface OtherAcType{
+    
+} 
 export default function OtherAc() {
   return (
     <div className='Ac-list-main-container'>

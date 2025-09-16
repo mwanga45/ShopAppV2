@@ -11,7 +11,8 @@ export const GetproductList= async() =>{
 }
 export const GetuserList  = async() =>{
     try{
-        const  response = await api.get("auth/user-list")
+       const  response = await api.get("auth/user-list")
+       return response
     }catch(err){
         console.error(err)
         throw err
