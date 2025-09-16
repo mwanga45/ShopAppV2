@@ -1,6 +1,6 @@
 .stock-card-container{
     width: 330px;
-    height:290px;
+    height:340px;
     border-radius: 40px;
     padding: 4px;
     background-color: rgb(236, 242, 247);
@@ -70,6 +70,7 @@
   align-items: center;
 }
 .stock-update{
+    margin-top: 42px;
     display: flex;
     align-items: flex-start;
     justify-content: center;

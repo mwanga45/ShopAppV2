@@ -6,7 +6,7 @@ interface CardProps {
   onclick?:React.MouseEventHandler<HTMLButtonElement>
 }
 type StockCardprops = CardProps & Stockprops
-export const Stockcard:React.FC<StockCardprops> =({onclick,product_id,product_name, user_id, fullname,last_add_stock,last_stock,CreatedAt,percentageRemain,product_category})=> {
+export const Stockcard:React.FC<StockCardprops> =({onclick,product_id,product_name, user_id, fullname,last_add_stock,last_stock,UpdateAt,percentageRemain,product_category})=> {
   const handleonclick:React.MouseEventHandler<HTMLButtonElement> = (e)=>{
     if(onclick){
      onclick(e) 
@@ -20,11 +20,13 @@ export const Stockcard:React.FC<StockCardprops> =({onclick,product_id,product_na
       <div className="stock-card-main">
         <div className="stock-card-info">
           <p className="info-about">Product-name</p>
-          <p className="info-real">{product_name}r</p>
+          <p className="info-real">{product_name}</p>
           <p className="info-about">Remain Product</p>
           <p className="info-real">{last_stock}/{last_add_stock}</p>
           <p className="info-about">% Remain </p>
-          <p className="info-real">{percentageRemain.toString().substring(0,3)}%</p>
+          <p className="info-real">{percentageRemain.toString().substring(0,4)}%</p>
+          <p className="info-about">Category</p>
+          <p className="info-real">{product_category}</p>
         </div>
         <div className="stock-card-donut">
             <SimpleDonutChart percentage={Number(percentageRemain.toString().substring(0,3))}/>

@@ -14,7 +14,7 @@ import { StockCardResult } from "./stockservice";
       fullname: string,
       last_add_stock: number,
       last_stock: number,
-      CreatedAt: string,
+      UpdateAt: string,
       percentageRemain: number
       product_category: string
 }
@@ -40,6 +40,8 @@ export default function Stock() {
    }
     }
     handlecardData()
+    const interval = setInterval(handlecardData,100)
+    return ()=>clearInterval(interval)
     console.log(Carddata)
   },[])
   return (
@@ -71,7 +73,7 @@ export default function Stock() {
         onclick={(e)=>{ handleShowUpdateForm(e); setSelectedStock(s); }}
         product_id={s.product_id}
         product_name={s.product_name}
-        CreatedAt={s.CreatedAt}
+        UpdateAt={s.UpdateAt}
         last_add_stock={s.last_add_stock}
         last_stock={s.last_stock}
         fullname={s.fullname}

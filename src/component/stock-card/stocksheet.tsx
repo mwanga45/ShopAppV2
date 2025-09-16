@@ -10,7 +10,7 @@ interface Stockupdate {
     Reasons?: string
     product_category?: string // Re-added product_category as string
 }
-export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,CreatedAt,last_add_stock,last_stock,fullname, product_category})=> {
+export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,UpdateAt,last_add_stock,last_stock,fullname, product_category})=> {
  const [StockupdateData, seStockupdateData] = useState<Partial<Stockupdate>>({})
  const [formValues, setFormValues] = useState<any>({})
  const [isSubmitting, setIsSubmitting] = useState(false)
@@ -29,26 +29,25 @@ export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,Created
     const addVal = Number(formValues?.add_stock || 0)
     const deductVal = Number(formValues?.deduct || 0)
 
-    let total_stock: number = 0 // Initialize to 0
+    let total_stock: number = 0 
     if (!isNaN(addVal) && addVal > 0) total_stock = addVal
-    if (!isNaN(deductVal) && deductVal > 0) total_stock = deductVal // Make it positive
+    if (!isNaN(deductVal) && deductVal > 0) total_stock = deductVal
 
-    // Remove product_category_move as it's not needed for UpdateStockDto's product_category
-    // The product_category from props should be used.
 
     const payload: Stockupdate = {
       product_id,
       Method,
       total_stock,
       Reasons: formValues?.reasons,
-      product_category: product_category // Use the prop directly
+      product_category: product_category 
     }
-
+    
     seStockupdateData(payload)
     if (!payload.product_id) throw new Error('Missing product id')
     if (typeof payload.total_stock === 'undefined') throw new Error('Provide add or deduct amount') // Allow 0
      console.log(payload,product_id)
     const response = await StockUpdate( payload)
+
     if ((response as any)?.data?.success === false) {
       alert((response as any)?.data?.message || 'Failed to update stock')
     } else {
@@ -103,9 +102,7 @@ export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,Created
                   <div className="update-input-container">
                     <label htmlFor="mv">Stock Move (IN/OUT)</label>
                     <select name='move_category' id='mv' onChange={handleOnchage} defaultValue="IN" style={{color:"black", fontSize:"18px" , fontWeight:"500"}}>
-                      {/* <option value="" disabled>Select move</option> */}
                       <option value="IN">IN</option>
-                      {/* <option value="OUT">OUT</option> */}
                     </select>
                 </div>
                   ):formValues?.method === 'removed'?(
@@ -146,7 +143,7 @@ export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,Created
                </div>
                  <div className="stock-spec-info">
                 <label htmlFor="">Last Update</label>
-                <h2>{CreatedAt.substring(0,10)}</h2>
+                <h2>{UpdateAt.substring(0,10)}</h2>
                </div>
                  <div className="stock-spec-info">
                 <label htmlFor="">Person-update</label>

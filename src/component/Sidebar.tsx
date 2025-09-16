@@ -5,7 +5,10 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { GrOverview } from "react-icons/gr";
 import { FaShoppingCart} from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+
 export const Sidebar = ()=>{
+  const nav = useNavigate()
   return(
     <div className="nav-container">
     <div className="logo-container">
