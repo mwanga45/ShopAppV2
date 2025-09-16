@@ -34,3 +34,51 @@
     color: grey;
     font-size: 15px;
 }
+.Ac-list-main-container{
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    height: 80px;
+    width: 250px;
+    justify-content: space-between;
+    column-gap: 5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:  40px;
+    height: 40px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+.button-view-more{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:  20px;
+    height: 70px;
+}
+.info-detailer{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width:  150px;
+    height: 70px;
+    color: black;
+    /* border: 2px solid green */
+
+
+}
+.info-detailer p{
+    /* border: 2px solid red; */
+    padding: 0;
+    margin: 0;
+}
+.username-info{
+    font-size: 15px;
+}
+.email-info{
+    font-size: 12.5px;
+}

@@ -15,6 +15,7 @@ import { RiCloseFill } from "react-icons/ri";
 import { ListComp } from "../component/List-comp/Listcomp";
 import { StockRegForm } from "../component/Form-comp/Form";
 import  { useState } from "react";
+import OtherAc from "../component/account/otherAc";
 export  const AdminPanel = () =>{
     const [productShown, setproductShown] = useState<boolean>(false)
     const [Productlist, setProductlist] = useState<boolean>(false)
@@ -106,6 +107,7 @@ export  const AdminPanel = () =>{
                 <motion.div className="admin-sales-summary-stock" variants={itemVariants}>
                     <Button buttonName="User-Register"/>
                     <div className="critical-stock-product">
+                        < OtherAc/>
                     </div>
                     <AnimatedCard details="Total salesToday" icon={FaWallet} money={25000}/>
                 </motion.div>
