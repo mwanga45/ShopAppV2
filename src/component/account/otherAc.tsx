@@ -1,12 +1,15 @@
-// import React from 'react'
+import React from 'react'
 import { ImUserTie } from "react-icons/im";
 import { FaUserCheck } from "react-icons/fa";
 import { TbHandClick } from "react-icons/tb";
 import "./account.css";
 interface OtherAcType{
-    
+    fullname?:string
+    email?:string
+    role?:string
+    isActive?:string
 } 
-export default function OtherAc() {
+export const  OtherAc:React.FC<OtherAcType> =({isActive,fullname,email,role})=> {
   return (
     <div className='Ac-list-main-container'>
         <div className="image-container">
