@@ -9,3 +9,12 @@ export const GetproductList= async() =>{
         throw err
     }
 }
+export const GetuserList  = async() =>{
+    try{
+        const  response = await api.get("auth/user-list")
+    }catch(err){
+        console.error(err)
+        throw err
+    }
+
+}
