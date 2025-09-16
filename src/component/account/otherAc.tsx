@@ -1,23 +1,41 @@
 import React from 'react'
 import { ImUserTie } from "react-icons/im";
 import { FaUserCheck } from "react-icons/fa";
+import { GrStatusUnknown } from "react-icons/gr";
 import { TbHandClick } from "react-icons/tb";
 import "./account.css";
 interface OtherAcType{
     fullname?:string
     email?:string
     role?:string
-    isActive?:string
+    isActive?:boolean
+    id?:number
 } 
-export const  OtherAc:React.FC<OtherAcType> =({isActive,fullname,email,role})=> {
+export const  OtherAc:React.FC<OtherAcType> =({isActive,fullname,email,role,id})=> {
   return (
-    <div className='Ac-list-main-container'>
+    <div className='Ac-list-main-container' >
         <div className="image-container">
-        <ImUserTie color="black" size={30}/>
+            {role==="admin"?(
+            isActive === true ?(
+                    <ImUserTie color="green" size={30} />
+                ):(
+                    <ImUserTie color="red" size={30} />
+                )
+            ):role === "user"?(
+                isActive === true ?(
+                    <FaUserCheck color="green" size={30}/>
+
+                ):(
+                   <FaUserCheck color="green" size={30}/>
+                )
+            ):(
+            <GrStatusUnknown color="black" size={30}/>
+            )
+            }
         </div>
         <div className="info-detailer">
-          <p className="username-info">Issa mwanga</p>
-          <p className="email-info">issamwanga02@gmail.com</p>
+          <p className="username-info">{fullname}</p>
+          <p className="email-info">{email}</p>
         </div>
         <div className="button-view-more">
             <  TbHandClick  color="black" size={20} />

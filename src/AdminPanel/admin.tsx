@@ -15,7 +15,7 @@ import { RiCloseFill } from "react-icons/ri";
 import { ListComp } from "../component/List-comp/Listcomp";
 import { StockRegForm } from "../component/Form-comp/Form";
 import  { useEffect, useState } from "react";
-import OtherAc from "../component/account/otherAc";
+import {OtherAc} from "../component/account/otherAc";
 import { GetuserList } from "./adminservice";
 
 interface AccountUserRespose {
@@ -138,7 +138,11 @@ export  const AdminPanel = () =>{
                 <motion.div className="admin-sales-summary-stock" variants={itemVariants}>
                     <Button buttonName="User-Register"/>
                     <div className="critical-stock-product">
-                        < OtherAc/>
+                        {Accountdetails.map((u)=>(
+                            < OtherAc key={u.id} fullname={u.fullname} email={u.email} isActive={u.isActive} role={u.role}/>
+                        ))
+
+                        }
                     </div>
                     <AnimatedCard details="Total salesToday" icon={FaWallet} money={25000}/>
                 </motion.div>
