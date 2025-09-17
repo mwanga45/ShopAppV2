@@ -455,16 +455,16 @@ export const productOfferCreate = ()=>{
                     <input type="text" name="product_name" id="pname"   required readOnly />
             </div>
                      <div className="input-value">
-                    <label htmlFor=""></label>
-                    <input type="text" name="" id=""   required readOnly />
+                    <label htmlFor="%">Percentage cuttoff</label>
+                    <input type="text" name="percentage" id="%"   required readOnly />
             </div>
                      <div className="input-value">
-                    <label htmlFor=""></label>
-                    <input type="text" name="" id=""   required readOnly />
+                    <label htmlFor="Amount">Amount</label>
+                    <input type="text" name="" id=""   required  />
             </div>
                      <div className="input-value">
-                    <label htmlFor=""></label>
-                    <input type="text" name="" id=""   required readOnly />
+                    <label htmlFor="pnum">Product Number/Litre</label>
+                    <input type="text" name="" id="pnum"   required placeholder="Enter product number start cutoff" />
             </div>
                <div className="btn-container">
                   <Submitbtn buttonName="Create" type="submit"/>
