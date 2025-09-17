@@ -2,7 +2,7 @@ import { GetproductList } from "../../AdminPanel/adminservice"
 import { PiDotsThreeCircle } from "react-icons/pi";
 import "./list.css"
 import { useEffect, useState} from "react"
-import { EditProdoct } from "../Form-comp/Form";
+import { EditProdoct, ProductOfferCreate } from "../Form-comp/Form";
 import { RiCloseFill } from "react-icons/ri";
 export interface ProductInfo{
     id:number,
@@ -140,7 +140,12 @@ export const ListComp = ()=>{
                         <p>Product Other Info</p>
                     </div>
                     <div className="container-product-info">
-                        
+                        <div className="cuttoff-details">
+
+                        </div>
+                        <div className="cutoff-product-form-container">
+                            < ProductOfferCreate />
+                        </div>
                     </div>
               </div>
             </div>

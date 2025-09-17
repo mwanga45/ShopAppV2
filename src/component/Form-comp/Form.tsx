@@ -446,12 +446,15 @@ export const SalesRecForm = ()=>{
   )
 }
 
-export const productOfferCreate = ()=>{
+export const ProductOfferCreate = ()=>{
    return(
     <div className="offer-create-main-container">
+      <div className="form-title" style={{background:"#eefaffff",display:"flex",columnGap:"10px", marginBottom:"12px"}}>
+              <p>Create Payment Cutoff</p>
+      </div>
       <form className="offer-form-container" >
            <div className="input-value">
-                    <label htmlFor="pname"></label>
+                    <label htmlFor="pname">Product-Name</label>
                     <input type="text" name="product_name" id="pname"   required readOnly />
             </div>
                      <div className="input-value">
