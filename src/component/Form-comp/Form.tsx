@@ -445,6 +445,34 @@ export const SalesRecForm = ()=>{
     </div>
   )
 }
+
+export const productOfferCreate = ()=>{
+   return(
+    <div className="offer-create-main-container">
+      <form className="offer-form-container" >
+           <div className="input-value">
+                    <label htmlFor="pname"></label>
+                    <input type="text" name="product_name" id="pname"   required readOnly />
+            </div>
+                     <div className="input-value">
+                    <label htmlFor=""></label>
+                    <input type="text" name="" id=""   required readOnly />
+            </div>
+                     <div className="input-value">
+                    <label htmlFor=""></label>
+                    <input type="text" name="" id=""   required readOnly />
+            </div>
+                     <div className="input-value">
+                    <label htmlFor=""></label>
+                    <input type="text" name="" id=""   required readOnly />
+            </div>
+               <div className="btn-container">
+                  <Submitbtn buttonName="Create" type="submit"/>
+               </div>
+      </form>
+    </div>
+   )
+}
 export const useFormClose = () => {
   const [isOpen, setIsOpen] = useState(true);
   
