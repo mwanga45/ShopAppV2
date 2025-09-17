@@ -2,6 +2,7 @@ import { GetproductList } from "../../AdminPanel/adminservice"
 import { PiDotsThreeCircle } from "react-icons/pi";
 import "./list.css"
 import { useEffect, useState} from "react"
+import { EditProdoct } from "../Form-comp/Form";
 export interface ProductInfo{
     id:number,
     UpdateAt: string,
@@ -76,20 +77,18 @@ export const ListComp = ()=>{
                         </table>
               </div>
               <div className="edit-product-main-container">
+              <div >
                 <div className="edit-container">
                     <div className="product-edit-info">
 
                     </div>
                     <div className="product-edit-form-container">
-
+                        <EditProdoct/>
                     </div>
-                    <div className="product-set-discount">
-                        
-                    </div>
-
                 </div>
 
               </div>
+            </div>
 
         </div>
     )
