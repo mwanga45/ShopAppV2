@@ -205,6 +205,11 @@
   font-weight:900;
   margin-left: 10px;
 }
+.container-product-info{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 
 @keyframes slideInFromTop {
   from {

@@ -90,3 +90,13 @@
 @media (max-width: 420px) {
   .animated-card { width: 100%; }
 }
+
+
+/* cutoff card component */
+.cutoff-card-component {
+  width: 250px;
+  height: 100px;
+  background-color: aliceblue;
+  border-radius: 3px;
+  
+}
