@@ -1,4 +1,5 @@
 import { GetproductList } from "../../AdminPanel/adminservice"
+import { PiDotsThreeCircle } from "react-icons/pi";
 import "./list.css"
 import { useEffect, useState} from "react"
 export interface ProductInfo{
@@ -55,7 +56,6 @@ export const ListComp = ()=>{
                                {product.length > 0 ?(
                                 product.map((p,index)=>(
                              <tr className="product-table-row" key={p.id}>
-                                {/* <td>{`P${(index + 1).toString().padStart(3, "0")}`}</td> */}
                                 <td>{`P${(index + 1).toString().padStart(3,'0')}`}</td>
                                 <td>{p.product_name}</td>
                                 <td>{p.product_category}</td>
@@ -63,8 +63,8 @@ export const ListComp = ()=>{
                                 <td>{p.wpurchase_price ?? p.rpurchase_price ?? 0}</td>
                                 <td>{p.wholesales_price ?? p.retailsales_price ?? 0}</td>
                                 <td>{p.user.fullname}</td>
-                                <td>{p.UpdateAt.substring(0,11)}</td>
-                                <td>Edit</td>
+                                <td>{p.UpdateAt.substring(0,10)}</td>
+                                <td><button className="Actin-btn"><PiDotsThreeCircle size={16}/></button></td>
                                </tr>
                                 ))
                                ):(
@@ -74,6 +74,21 @@ export const ListComp = ()=>{
                                )}
                             </tbody>
                         </table>
+              </div>
+              <div className="edit-product-main-container">
+                <div className="edit-container">
+                    <div className="product-edit-info">
+
+                    </div>
+                    <div className="product-edit-form-container">
+
+                    </div>
+                    <div className="product-set-discount">
+                        
+                    </div>
+
+                </div>
+
               </div>
 
         </div>

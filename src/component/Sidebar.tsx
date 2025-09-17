@@ -6,11 +6,11 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { GrOverview } from "react-icons/gr";
 import { FaShoppingCart} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom"; // Import useLocation
+import { useLocation } from "react-router-dom"; 
 
 export const Sidebar = ()=>{
   const Navigate = useNavigate()
-  const location = useLocation(); // Get current location
+  const location = useLocation(); 
 
   const isLinkActive = (path: string) => {
     return location.pathname === path;
