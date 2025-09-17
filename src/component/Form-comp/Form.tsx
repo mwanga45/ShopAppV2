@@ -18,10 +18,10 @@ interface FormCompProps {
   product_id?:string
   product_category?:string
   product_type?:string
-  Rs_price?:string,
-  Ws_price?:string,
-  wpurchase_price?:string,
-  rpurchase_price?:string
+  Rs_price?:string |null,
+  Ws_price?:string |null,
+  wpurchase_price?:string | null,
+  rpurchase_price?:string|null
 }
 
 export default function FormComp({ onClose, isOpen = true}: FormCompProps) {

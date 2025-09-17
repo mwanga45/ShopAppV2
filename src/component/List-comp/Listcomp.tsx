@@ -3,6 +3,7 @@ import { PiDotsThreeCircle } from "react-icons/pi";
 import "./list.css"
 import { useEffect, useState} from "react"
 import { EditProdoct } from "../Form-comp/Form";
+import { RiCloseFill } from "react-icons/ri";
 export interface ProductInfo{
     id:number,
     UpdateAt: string,
@@ -20,6 +21,15 @@ export interface ProductInfo{
 }
 export const ListComp = ()=>{
     const [product, setproduct] = useState<ProductInfo[]>([])
+    const [EditRow, setEditRow] =useState<ProductInfo|null>()
+    const [isClicked, setisClicked] = useState(false)
+    const handleselectedRow = (row:ProductInfo)=>{
+        setEditRow({...row})
+
+    }
+    const handleActionButton = ()=>{
+    setisClicked(!isClicked)
+    }
     useEffect(()=>{
     const fetchallproduct = async()=>{
         try{
@@ -67,7 +77,7 @@ export const ListComp = ()=>{
                                 <td>{p.wholesales_price ?? p.retailsales_price ?? 0}</td>
                                 <td>{p.user.fullname}</td>
                                 <td>{p.UpdateAt.substring(0,10)}</td>
-                                <td><button className="Actin-btn"><PiDotsThreeCircle size={16}/></button></td>
+                                <td><button className="Actin-btn" onClick={()=>{handleActionButton(); handleselectedRow(p)}}><PiDotsThreeCircle size={16}/></button></td>
                                </tr>
                                 ))
                                ):(
@@ -78,9 +88,18 @@ export const ListComp = ()=>{
                             </tbody>
                         </table>
               </div>
+                {
+                    isClicked &&
               <div className="edit-product-main-container">
+                <div className="close-poup-container" onClick={handleActionButton}>
+                    <div className="icon-close" >
+                        <RiCloseFill  size={30}/>
+                    </div>
+                    </div>
               <div >
-                <div className="edit-container">
+              
+             
+                 <div className="edit-container">
                     <div className="product-edit-info">
                         <div className="edit-title-product">
                             <p>Edited Product-details</p>
@@ -105,13 +124,14 @@ export const ListComp = ()=>{
                       </ul>
                     </div>
                     <div className="product-edit-form-container">
-                        <EditProdoct/>
+                        <EditProdoct product_name={EditRow?.product_name} product_id={String(EditRow?.id)} product_category={EditRow?.product_category} product_type={EditRow?.product_type} rpurchase_price={EditRow?.rpurchase_price} wpurchase_price={EditRow?.wpurchase_price} Rs_price={EditRow?.retailsales_price} Ws_price={EditRow?.wholesales_price} />
                     </div>
-                </div>
+                 </div>
+                
 
               </div>
             </div>
-
+}
         </div>
     )
 }
