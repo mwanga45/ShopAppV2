@@ -121,3 +121,31 @@
   font-size: larger;
   font-weight: 900;
 }
+
+.precentage-background{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(0, 68, 255);
+  border: 1px solid rgb(255, 59, 59);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  color: #f7fafc;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  cursor: pointer;
+}
+.precentage-background :hover{
+  scale: 1.1;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  transition: all ease 400ms;
+}
+.actualAmount-pnumber{
+  width: 100%;
+  height: auto;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: rgb(68, 68, 255);
+}

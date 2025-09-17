@@ -17,7 +17,7 @@ export const  CutoffCard:React.FC<CutoffCardprops> =({ProductNumber, productname
       <div className="product-name">
         <p>Pallet starter</p>
         <div className="precentage-background">
-            <p>5%</p>
+            <p style={{fontSize:"25px"}}>5%</p>
         </div>
       </div>
       <div className="actualAmount-pnumber">
