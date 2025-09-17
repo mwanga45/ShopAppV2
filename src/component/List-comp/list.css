@@ -124,6 +124,24 @@
     margin-left: 260px;
 
 }
+
+.Edit-title-container{
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+
+}
+.Edit-title-container p{
+  font-size: 40px;
+  font-weight: 900;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  display: inline-block;
+  -webkit-box-reflect: below 0 linear-gradient(transparent, rgba(255, 255, 255));
+}
 .edit-title-product {
   width: 400px;              
   margin: 20px auto;         

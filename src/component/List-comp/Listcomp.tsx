@@ -43,8 +43,6 @@ export const ListComp = ()=>{
     }
     fetchallproduct()   
     },[])
-    let money:number=66000
-    let money2:number = 62000
     return(
         <div className="product-list-container">
               <div className="product-list-title">
@@ -90,15 +88,16 @@ export const ListComp = ()=>{
               </div>
                 {
                     isClicked &&
-              <div className="edit-product-main-container">
+                    <div className="edit-product-main-container">
                 <div className="close-poup-container" onClick={handleActionButton}>
                     <div className="icon-close" >
                         <RiCloseFill  size={30}/>
                     </div>
                     </div>
               <div >
-              
-             
+                  <div className="Edit-title-container">
+                    <p>Welcome To Edit Page!</p>
+                  </div>
                  <div className="edit-container">
                     <div className="product-edit-info">
                         <div className="edit-title-product">
@@ -137,8 +136,12 @@ export const ListComp = ()=>{
                         <EditProdoct product_name={EditRow?.product_name} product_id={String(EditRow?.id)} product_category={EditRow?.product_category} product_type={EditRow?.product_type} rpurchase_price={EditRow?.rpurchase_price} wpurchase_price={EditRow?.wpurchase_price} Rs_price={EditRow?.retailsales_price} Ws_price={EditRow?.wholesales_price} />
                     </div>
                  </div>
-                
-
+                  <div className="Edit-title-container">
+                        <p>Product Other Info</p>
+                    </div>
+                    <div className="container-product-info">
+                        
+                    </div>
               </div>
             </div>
 }
