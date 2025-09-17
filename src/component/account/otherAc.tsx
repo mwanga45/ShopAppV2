@@ -29,7 +29,7 @@ export const  OtherAc:React.FC<OtherAcType> =({isActive,fullname,email,role,id})
                    <FaUserCheck color="green" size={30}/>
                 )
             ):(
-            <GrStatusUnknown color="black" size={30}/>
+            <GrStatusUnknown color="white" size={30}/>
             )
             }
         </div>
@@ -38,7 +38,7 @@ export const  OtherAc:React.FC<OtherAcType> =({isActive,fullname,email,role,id})
           <p className="email-info">{email}</p>
         </div>
         <div className="button-view-more">
-            <  TbHandClick  color="black" size={20} />
+            <  TbHandClick  color="white" size={20} />
         </div>
 
       

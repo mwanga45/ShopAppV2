@@ -17,7 +17,7 @@ import { StockCardResult } from "./stockservice";
       UpdateAt: string,
       percentageRemain: number
       product_category: string
-       requestFn?: () => void;
+      //  requestFn?: () => void;
 }
 export default function Stock() {
   const [Showupdate, setShowupdate] = useState<boolean>(false)
@@ -96,7 +96,7 @@ export default function Stock() {
                                   </div>
                               </div>
                               <div className="content-container-component">
-                                <Stocksheet {...selectedStock} requestFn={  handlecardData()}/>
+                                <Stocksheet {...selectedStock}/>
                               </div>
                           </div>
 

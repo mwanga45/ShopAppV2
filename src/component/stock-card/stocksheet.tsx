@@ -12,7 +12,7 @@ interface Stockupdate {
    
 
 }
-export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,UpdateAt,last_add_stock,last_stock,fullname, product_category,requestFn})=> {
+export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,UpdateAt,last_add_stock,last_stock,fullname, product_category})=> {
  const [StockupdateData, seStockupdateData] = useState<Partial<Stockupdate>>({})
  const [formValues, setFormValues] = useState<any>({})
  const [isSubmitting, setIsSubmitting] = useState(false)
@@ -23,7 +23,6 @@ export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,UpdateA
  }
 
  const handleSubmit = async()=>{
-  requestFn
   try{
     setIsSubmitting(true)
     const methodRaw = (formValues?.method || '').toString().toLowerCase()
