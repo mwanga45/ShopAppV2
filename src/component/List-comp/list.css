@@ -173,7 +173,7 @@
    align-items: flex-start;
    justify-content: center;
    flex-direction: column;
-   row-gap: 22px;
+   row-gap: 10px;
    
 }
 .edit-info{

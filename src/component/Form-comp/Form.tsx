@@ -152,7 +152,6 @@ export default function FormComp({ onClose, isOpen = true}: FormCompProps) {
 
 
 export  const EditProdoct:React.FC<FormCompProps>=({product_category,product_id,product_type,product_name,wpurchase_price,Ws_price, Rs_price, rpurchase_price})=> {
-  // const [close, setClose] = useState<boolean>(isOpen);
   const [formData, setFormData] = useState({
     product_name:product_name,
     product_category: product_category,
@@ -204,7 +203,7 @@ export  const EditProdoct:React.FC<FormCompProps>=({product_category,product_id,
   return (
         <div className="frm-container">
             <div className="form-title">
-              <p>Product-Update</p>
+              <p>{product_name}-Update</p>
             </div>
             <form className="main-form-content" onSubmit={handleSubmit}>
               <div className="input-value">

@@ -107,20 +107,30 @@ export const ListComp = ()=>{
                       <ul>
                         <div className="edit-info">
                             <li className="label-info">Product-Name</li>
-                            <li className="updated-info">Pallet Starter</li>
+                            <li className="updated-info" style={{color:"red"}}>{EditRow?.product_name}</li>
                         </div>
                         <div className="edit-info">
                             <li className="label-info">Product-Category</li>
-                            <li className="updated-info">Wholesales</li>
+                            <li className="updated-info" style={{color:"red"}}>{EditRow?.product_category}</li>
+                        </div>
+                        <div className="edit-info">
+                            <li className="label-info">Product-Type</li>
+                            <li className="updated-info" style={{color:"red"}}>{EditRow?.product_type}</li>
                         </div>
                          <div className="edit-info">
                             <li className="label-info">Purchase-Price</li>
-                            <li className="updated-info"  style={{color:"green"}}>{money2.toLocaleString()}.Tsh</li>
+                            <li className="updated-info"  style={{color:"green"}}>{EditRow?.product_category === "wholesales"?Number(EditRow.wpurchase_price).toLocaleString():Number(EditRow?.rpurchase_price).toLocaleString()}.Tsh</li>
                         </div>
                         <div className="edit-info">
                             <li className="label-info">selling-Price</li>
-                            <li className="updated-info" style={{color:"green"}}>{ money.toLocaleString()}.Tsh</li>
+                            <li className="updated-info" style={{color:"green"}}>{EditRow?.product_category === "wholesales"?Number(EditRow.wholesales_price).toLocaleString():Number(EditRow?.retailsales_price).toLocaleString()}Tsh</li>
                         </div>
+                        <div className="edit-info">
+                            <li className="label-info">Profit Per Each</li>
+                            <li className="updated-info" style={{color:"green"}}>{EditRow?.product_category === "wholesales"?(Number(EditRow.wholesales_price) - Number(EditRow.wpurchase_price)).toLocaleString():(Number(EditRow?.retailsales_price)-Number(EditRow?.rpurchase_price)).toLocaleString()}.Tsh</li>
+                        </div>
+
+
                       </ul>
                     </div>
                     <div className="product-edit-form-container">
