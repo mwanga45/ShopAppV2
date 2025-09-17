@@ -33,6 +33,8 @@ export const ListComp = ()=>{
     }
     fetchallproduct()   
     },[])
+    let money:number=66000
+    let money2:number = 62000
     return(
         <div className="product-list-container">
               <div className="product-list-title">
@@ -80,7 +82,27 @@ export const ListComp = ()=>{
               <div >
                 <div className="edit-container">
                     <div className="product-edit-info">
-
+                        <div className="edit-title-product">
+                            <p>Edited Product-details</p>
+                        </div>
+                      <ul>
+                        <div className="edit-info">
+                            <li className="label-info">Product-Name</li>
+                            <li className="updated-info">Pallet Starter</li>
+                        </div>
+                        <div className="edit-info">
+                            <li className="label-info">Product-Category</li>
+                            <li className="updated-info">Wholesales</li>
+                        </div>
+                         <div className="edit-info">
+                            <li className="label-info">Purchase-Price</li>
+                            <li className="updated-info"  style={{color:"green"}}>{money2.toLocaleString()}</li>
+                        </div>
+                        <div className="edit-info">
+                            <li className="label-info">selling-Price</li>
+                            <li className="updated-info" style={{color:"green"}}>{ money.toLocaleString()}</li>
+                        </div>
+                      </ul>
                     </div>
                     <div className="product-edit-form-container">
                         <EditProdoct/>

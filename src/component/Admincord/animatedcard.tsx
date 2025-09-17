@@ -4,15 +4,15 @@ import React, { useEffect, useMemo, useState } from "react";
 import './AnimatedCard.css';
 
 export interface AnimatedCardProps {
-  /** A React component (like an icon from react-icons) */
+
   icon: React.ElementType;
-  /** Small descriptive details under the money value */
+
   details: string;
-  /** Money value. Can be number or preformatted string */
+
   money: number | string;
-  /** Optional currency symbol to display after the value (default: none) */
+
   currency?: string;
-  /** Optional className to style from parent */
+
   className?: string;
 }
 
@@ -23,7 +23,7 @@ export const AnimatedCard: React.FC<AnimatedCardProps> = ({
   currency = '',
   className = ''
 }) => {
-  // Normalize numeric value if money is a number (for animation)
+
   const targetValue = useMemo(() => {
     return typeof money === 'number' ? money : Number(String(money).replace(/[^0-9.-]+/g, '')) || 0;
   }, [money]);
@@ -33,17 +33,17 @@ export const AnimatedCard: React.FC<AnimatedCardProps> = ({
   });
 
   useEffect(() => {
-    // If money is numeric, animate from 0 -> targetValue
+
     if (typeof money === 'number') {
       let start: number | null = null;
-      const duration = 900; // ms
+      const duration = 900; 
       const startValue = 0;
       const endValue = targetValue;
 
       const step = (timestamp: number) => {
         if (!start) start = timestamp;
         const progress = Math.min((timestamp - start) / duration, 1);
-        // easeOutCubic
+   
         const eased = 1 - Math.pow(1 - progress, 3);
         const current = startValue + (endValue - startValue) * eased;
         setDisplayValue(Number(current.toFixed(0)).toLocaleString());
@@ -53,7 +53,7 @@ export const AnimatedCard: React.FC<AnimatedCardProps> = ({
       const raf = requestAnimationFrame(step);
       return () => cancelAnimationFrame(raf);
     } else {
-      // If it's not numeric, show as-is
+  
       setDisplayValue(String(money));
     }
   }, [money, targetValue]);

@@ -101,87 +101,87 @@
   to { transform: scale(1); opacity: 1; }
 }
 
-/* OtherAc Component Styles */
+
 .Ac-list-main-container {
   display: flex;
   align-items: center;
-  border-radius: 12px; /* Smoother corners */
-  height: 90px; /* Slightly taller */
-  width: 280px; /* Wider */
-  padding: 0 15px; /* Add some padding */
+  border-radius: 12px; 
+  height: 90px; 
+  width: 280px; 
+  padding: 0 15px;
   justify-content: space-between;
-  column-gap: 10px; /* Increased gap */
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; /* Softer shadow */
-  background-color: #34495e; /* Darker, modern background */
-  color: #ecf0f1; /* Light text for contrast */
+  column-gap: 10px; 
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  background-color: #34495e; 
+  color: #ecf0f1; 
   cursor: pointer;
-  transition: all 0.3s ease-in-out; /* Smooth transitions */
-  animation: fadeIn 0.5s ease-out forwards; /* Apply fade-in animation */
+  transition: all 0.3s ease-in-out; 
+  animation: fadeIn 0.5s ease-out forwards; 
 }
 
 .Ac-list-main-container:hover {
-  transform: translateY(-5px) scale(1.02); /* Lift and slightly enlarge on hover */
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 20px; /* More prominent shadow on hover */
-  background-color: #2c3e50; /* Slightly darker on hover */
+  transform: translateY(-5px) scale(1.02); 
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 20px;
+  background-color: #2c3e50; 
 }
 
 .image-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 50px; /* Fixed width */
-  height: 50px; /* Fixed height */
-  border-radius: 8px; /* Square with rounded corners */
-  background-color: #ffffff; /* White background for icons */
+  min-width: 50px;
+  height: 50px; 
+  border-radius: 8px; 
+  background-color: #ffffff; 
   box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
-  color: #34495e; /* Icon color */
+  color: #34495e; 
 }
 
 .image-container svg {
-  font-size: 28px; /* Larger icons */
+  font-size: 28px;
 }
 
 .info-detailer {
-  flex-grow: 1; /* Allows it to take available space */
+  flex-grow: 1; 
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center vertically */
-  align-items: flex-start; /* Align text to the left */
+  justify-content: center; 
+  align-items: flex-start; 
   height: 100%;
-  padding-left: 10px; /* Padding for text */
+  padding-left: 10px; 
 }
 
 .info-detailer p {
-  margin: 2px 0; /* Reduced margin */
-  color: #ecf0f1; /* Light text color */
-  text-align: left; /* Ensure text aligns left */
+  margin: 2px 0; 
+  color: #ecf0f1; 
+  text-align: left; 
 }
 
 .username-info {
-  font-size: 16px; /* Slightly larger */
+  font-size: 16px; 
   font-weight: 600;
 }
 
 .email-info {
   font-size: 13px;
-  color: #bdc3c7; /* Slightly muted for less prominence */
+  color: #bdc3c7; 
 }
 
 .button-view-more {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 40px; /* Fixed width */
+  min-width: 40px; 
   height: 100%;
-  /* No background or specific style, just for icon placement */
+ 
 }
 
 .button-view-more svg {
-  color: #3498db; /* Blue color for the click icon */
-  font-size: 24px; /* Larger click icon */
+  color: #3498db; 
+  font-size: 24px;
   transition: transform 0.2s ease-in-out;
 }
 
 .Ac-list-main-container:hover .button-view-more svg {
-  transform: translateX(3px); /* Slide icon slightly on hover */
+  transform: translateX(3px); 
 }
