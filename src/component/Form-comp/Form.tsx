@@ -204,7 +204,7 @@ export  const EditProdoct:React.FC<FormCompProps>=({product_category,product_id,
   return (
         <div className="frm-container">
             <div className="form-title">
-              <p>Product-Register</p>
+              <p>Product-Update</p>
             </div>
             <form className="main-form-content" onSubmit={handleSubmit}>
               <div className="input-value">
