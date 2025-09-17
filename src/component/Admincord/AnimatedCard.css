@@ -149,3 +149,17 @@
   justify-content: space-around;
   color: rgb(68, 68, 255);
 }
+.offe-details-actual{
+  font-size: 16px;
+  font-weight: 800;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: rgb(3, 171, 3);
+
+
+}
+.offe-details-label{
+  font-size: 20px;
+  font-weight: 700;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+
+}

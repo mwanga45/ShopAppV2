@@ -22,12 +22,12 @@ export const  CutoffCard:React.FC<CutoffCardprops> =({ProductNumber, productname
       </div>
       <div className="actualAmount-pnumber">
         <div className="offer-detail">
-        <p>Offer Amount</p>
-        <p>1000</p>
+        <p className="offe-details-label">Offer Amount</p>
+        <p className="offe-details-actual">1000.sh</p>
         </div>
           <div className="offer-detail">
-          <p>Started from</p>
-           <p>10</p>
+          <p className="offe-details-label">Started from</p>
+           <p className="offe-details-actual">10</p>
           </div>
       </div>
     </div>
