@@ -94,9 +94,9 @@
 
 /* cutoff card component */
 .cutoff-card-component {
-  width: 250px;
-  height: 100px;
+  width: 350px;
+  height: 200px;
   background-color: aliceblue;
   border-radius: 3px;
-  
+
 }
