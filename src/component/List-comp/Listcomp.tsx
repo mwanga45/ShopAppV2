@@ -96,11 +96,11 @@ export const ListComp = ()=>{
                         </div>
                          <div className="edit-info">
                             <li className="label-info">Purchase-Price</li>
-                            <li className="updated-info"  style={{color:"green"}}>{money2.toLocaleString()}</li>
+                            <li className="updated-info"  style={{color:"green"}}>{money2.toLocaleString()}.Tsh</li>
                         </div>
                         <div className="edit-info">
                             <li className="label-info">selling-Price</li>
-                            <li className="updated-info" style={{color:"green"}}>{ money.toLocaleString()}</li>
+                            <li className="updated-info" style={{color:"green"}}>{ money.toLocaleString()}.Tsh</li>
                         </div>
                       </ul>
                     </div>

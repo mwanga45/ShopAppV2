@@ -14,6 +14,14 @@ interface FormCompProps {
   onClick?: () => void;
   onClose?: () => void;
   isOpen?: boolean;
+  product_name?:string
+  product_id?:string
+  product_category?:string
+  product_type?:string
+  Rs_price?:string,
+  Ws_price?:string,
+  wpurchase_price?:string,
+  rpurchase_price?:string
 }
 
 export default function FormComp({ onClose, isOpen = true}: FormCompProps) {
@@ -141,25 +149,20 @@ export default function FormComp({ onClose, isOpen = true}: FormCompProps) {
   )
 }
 
-export  const EditProdoct:React.FC<FormCompProps>=({ onClose, isOpen = true})=> {
-  const [close, setClose] = useState<boolean>(isOpen);
+
+
+export  const EditProdoct:React.FC<FormCompProps>=({product_category,product_id,product_type,product_name,wpurchase_price,Ws_price, Rs_price, rpurchase_price})=> {
+  // const [close, setClose] = useState<boolean>(isOpen);
   const [formData, setFormData] = useState({
-    product_name: '',
-    product_category: 'wholesales',
-    product_type: 'Solid',
-    Rs_price: '',
-    Ws_price: '',
-    wpurchase_price: '',
-    rpurchase_price:''
+    product_name:product_name,
+    product_category: product_category,
+    product_type: product_type,
+    Rs_price:Rs_price ,
+    Ws_price: Ws_price,
+    wpurchase_price: wpurchase_price,
+    rpurchase_price:rpurchase_price
 
   });
-
-  const handleClose = () => {
-    setClose(false);
-    if (onClose) {
-      onClose();
-    }
-  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -182,12 +185,12 @@ export  const EditProdoct:React.FC<FormCompProps>=({ onClose, isOpen = true})=> 
         if (formData.Ws_price) payload.Ws_price = formData.Ws_price;
         if (formData.wpurchase_price) payload.wpurchase_price = formData.wpurchase_price;
       }
-      if(window.confirm("are sure  you want to registration")){
+      if(window.confirm("Are sure you want to make this update")){
         await productRegister(payload);
       }
 
       alert('Product registered successfully!');
-      handleClose();
+
     } catch (error: any) {
       console.error("Error registering product:", error.response ? error.response.data : error.message);
       alert('Failed to register product: ' + (error.response?.data?.message || error.message));
@@ -252,7 +255,7 @@ export  const EditProdoct:React.FC<FormCompProps>=({ onClose, isOpen = true})=> 
                 }
               </div>
                <div className="btn-container">
-                  <Submitbtn buttonName="Create-product" type="submit"/>
+                  <Submitbtn buttonName="Update" type="submit"/>
                </div>
             </form>
         </div>
