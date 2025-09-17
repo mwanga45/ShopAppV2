@@ -17,6 +17,7 @@ import { StockCardResult } from "./stockservice";
       UpdateAt: string,
       percentageRemain: number
       product_category: string
+       requestFn?: () => void;
 }
 export default function Stock() {
   const [Showupdate, setShowupdate] = useState<boolean>(false)
@@ -40,10 +41,11 @@ export default function Stock() {
    }
     }
     handlecardData()
-    const interval = setInterval(handlecardData,100)
-    return ()=>clearInterval(interval)
-    console.log(Carddata)
   },[])
+  function handlecardData(): (() => void) | undefined {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <div className="stock-main-conatiner animated-enter">
            <div className="account">
@@ -94,7 +96,7 @@ export default function Stock() {
                                   </div>
                               </div>
                               <div className="content-container-component">
-                                <Stocksheet {...selectedStock}/>
+                                <Stocksheet {...selectedStock} requestFn={  handlecardData()}/>
                               </div>
                           </div>
 

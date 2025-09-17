@@ -71,8 +71,12 @@ export  const AdminPanel = () =>{
     try{
       const handlegetuserAccount=async()=>{
         const response = await GetuserList()
-        setAccountdetails(response.data)
-        console.log(Accountdetails)
+        if (Array.isArray(response.data.data)) {
+          setAccountdetails(response.data.data);
+        } else {
+          console.error("API response data is not an array:", response.data);
+          setAccountdetails([]); 
+        }
         if(!response.data.success){
             alert(response.data.message)
         }
@@ -84,7 +88,7 @@ export  const AdminPanel = () =>{
          alert(err)
     }
 
-   })
+   },[])
     return(
         <motion.div 
             className="adminpanel-container"
@@ -139,7 +143,7 @@ export  const AdminPanel = () =>{
                     <Button buttonName="User-Register"/>
                     <div className="critical-stock-product">
                         {Accountdetails.map((u)=>(
-                            < OtherAc key={u.id} fullname={u.fullname} email={u.email} isActive={u.isActive} role={u.role}/>
+                            u.id ? < OtherAc key={u.id} fullname={u.fullname} email={u.email} isActive={u.isActive} role={u.role}/> : null
                         ))
 
                         }

@@ -8,9 +8,11 @@ interface Stockupdate {
     product_id?: number
     total_stock?: number
     Reasons?: string
-    product_category?: string // Re-added product_category as string
+    product_category?: string
+   
+
 }
-export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,UpdateAt,last_add_stock,last_stock,fullname, product_category})=> {
+export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,UpdateAt,last_add_stock,last_stock,fullname, product_category,requestFn})=> {
  const [StockupdateData, seStockupdateData] = useState<Partial<Stockupdate>>({})
  const [formValues, setFormValues] = useState<any>({})
  const [isSubmitting, setIsSubmitting] = useState(false)
@@ -21,6 +23,7 @@ export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,UpdateA
  }
 
  const handleSubmit = async()=>{
+  requestFn
   try{
     setIsSubmitting(true)
     const methodRaw = (formValues?.method || '').toString().toLowerCase()
