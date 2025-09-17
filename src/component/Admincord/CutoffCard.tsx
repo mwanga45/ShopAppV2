@@ -1,6 +1,8 @@
 import type React from "react";
 import "./AnimatedCard.css"
 import { MdLocalOffer } from "react-icons/md";
+import { GiPayMoney } from "react-icons/gi";
+import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 interface CutoffCardprops{
     productname?:string
     percentagecutoff?:number
@@ -23,11 +25,11 @@ export const  CutoffCard:React.FC<CutoffCardprops> =({ProductNumber, productname
       <div className="actualAmount-pnumber">
         <div className="offer-detail">
         <p className="offe-details-label">Offer Amount</p>
-        <p className="offe-details-actual">1000.sh</p>
+        <p className="offe-details-actual">< GiPayMoney size={20}/>1000.sh</p>
         </div>
           <div className="offer-detail">
           <p className="offe-details-label">Started from</p>
-           <p className="offe-details-actual">10</p>
+           <p className="offe-details-actual"> <MdOutlineProductionQuantityLimits size={20}/>10</p>
           </div>
       </div>
     </div>
