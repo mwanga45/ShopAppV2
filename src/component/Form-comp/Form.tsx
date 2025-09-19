@@ -7,7 +7,7 @@ import { StockCreate } from "../../stock/stockservice";
 import {ProductInfo} from "./formservice"
 import  Toggle from "../button/toggle"
 import { toast, ToastContainer } from "react-toastify";
-// import { Updateproduct } from "../../AdminPanel/adminservice";
+import { Updateproduct } from "../../AdminPanel/adminservice";
 
 
 
@@ -179,7 +179,11 @@ export  const EditProdoct:React.FC<FormCompProps>=({product_category,product_id,
     )
     try{
       console.log(pId, payload)
-      // const response = Updateproduct(pId,payload)
+      const response =  await Updateproduct(pId,payload)
+      if(!response.data.success)[
+        alert(response.data.message)
+      ]
+      toast.success(response.data.message)
     }catch(err){
       console.error(err)
       throw err
@@ -191,6 +195,7 @@ export  const EditProdoct:React.FC<FormCompProps>=({product_category,product_id,
 
   return (
         <div className="frm-container">
+          <ToastContainer/>
             <div className="form-title">
               <p>{product_name}-Update</p>
             </div>
