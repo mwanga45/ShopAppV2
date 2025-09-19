@@ -1,0 +1,264 @@
+.dev-container {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: auto;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 16px;
+    color: #333;
+    padding: 24px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: slideInUp 0.6s ease-out;
+}
+
+.dev-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px 16px 0 0;
+}
+
+.dev-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 1px 8px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dev-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.dev-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    color: white;
+    font-size: 18px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.dev-title {
+    font-size: 20px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 700;
+    margin: 0;
+    color: #2d3748;
+    flex: 1;
+    text-align: center;
+}
+
+.dev-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 12px;
+    color: #667eea;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.dev-arrow:hover {
+    background: rgba(102, 126, 234, 0.2);
+    transform: rotate(15deg);
+}
+
+.dev-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.dev-metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.dev-metric:nth-child(1) { animation-delay: 0.1s; }
+.dev-metric:nth-child(2) { animation-delay: 0.2s; }
+.dev-metric:nth-child(3) { animation-delay: 0.3s; }
+.dev-metric:nth-child(4) { animation-delay: 0.4s; }
+
+.dev-metric:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: rgba(102, 126, 234, 0.3);
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.metric-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.metric-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4a5568;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.metric-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.metric-icon.positive {
+    background: rgba(72, 187, 120, 0.1);
+    color: #48bb78;
+}
+
+.metric-icon.neutral {
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+}
+
+.metric-icon.negative {
+    background: rgba(245, 101, 101, 0.1);
+    color: #f56565;
+}
+
+.metric-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2d3748;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.metric-value.deviation {
+    color: #e53e3e;
+}
+
+.metric-value.percentage {
+    color: #e53e3e;
+    font-size: 20px;
+}
+
+.dev-footer {
+    border-top: 1px solid rgba(226, 232, 240, 0.8);
+    padding-top: 20px;
+    animation: fadeInUp 0.6s ease-out 0.5s both;
+}
+
+.status-indicator {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.status-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: #e53e3e;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.status-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(226, 232, 240, 0.8);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.status-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #e53e3e 0%, #fc8181 100%);
+    border-radius: 3px;
+    transition: width 1s ease-in-out;
+    animation: fillBar 1.5s ease-out 0.8s both;
+}
+
+@keyframes fillBar {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 92%;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .dev-container {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+    }
+    
+    .dev-title {
+        font-size: 18px;
+    }
+    
+    .metric-value {
+        font-size: 16px;
+    }
+    
+    .metric-label {
+        font-size: 13px;
+    }
+}

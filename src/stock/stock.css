@@ -1,0 +1,134 @@
+.stock-main-conatiner{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: azure;
+}
+
+.animated-enter {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-100px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+.account{
+    width: 100%;
+    height: 15vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 12px;
+}
+.stock-header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+    animation: headerEntrance 1s ease-out;
+}
+
+.stpage-title {
+    font-size: 3rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 800;
+    color: #2d3748;
+    text-align: center;
+    margin: 0;
+    padding: 20px 40px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+    backdrop-filter: blur(15px);
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 8px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+.stpage-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+    animation: titleShimmer 4s infinite;
+    z-index: 1;
+}
+
+.stpage-title::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+    border-radius: 25px;
+    pointer-events: none;
+    z-index: 1;
+}
+.stock-content-main{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 60vh;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+}
+.filter-title{
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 600;
+}
+.filter-container{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.filter-by-category{
+    display: flex;
+    width: 50%;
+    column-gap: 15px;
+}
+.filter-by-category button{
+    background-color: aliceblue;
+    color: rgb(9, 9, 9);
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+}
+.filter-by-name{
+    /* border:2px solid red; */
+    background-color: aliceblue;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+    color: #222a38;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+
+}
+.filter-by-name input{
+    outline: hidden;
+    background-color: aliceblue;
+    color: #222a38;
+    height: 6vh;
+    border: none;   
+}
+.card-stock-list{
+    width: 100%;
+    min-height: 30vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    align-items: start;
+    justify-items: center;
+}

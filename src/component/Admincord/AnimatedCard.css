@@ -1,0 +1,166 @@
+.animated-card {
+  width: 240px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fafc 100%);
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.08);
+  overflow: hidden;
+  transform: translateY(8px);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  animation: cardEntrance 480ms cubic-bezier(.22,.98,.52,1) both;
+}
+
+.animated-card:hover {
+  transform: translateY(0) scale(1.02);
+  box-shadow: 0 14px 36px rgba(16, 24, 40, 0.14);
+}
+
+.card-top {
+  padding: 18px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.icon-wrapper {
+  width: 54px;
+  height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(16,185,129,0.08));
+  transition: transform 300ms ease;
+}
+
+.animated-card:hover .icon-wrapper {
+  transform: rotate(-6deg) scale(1.04);
+}
+
+.card-icon {
+  font-size: 22px;
+  opacity: 0.96;
+}
+
+.card-body {
+  padding: 16px 18px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.money-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.money-value {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1;
+  color: #0f172a;
+}
+
+.money-currency {
+  font-weight: 600;
+  font-size: 14px;
+  color: #475569;
+}
+
+.card-details {
+  font-size: 13px;
+  color: #64748b;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Small responsive tweak */
+@media (max-width: 420px) {
+  .animated-card { width: 100%; }
+}
+
+
+/* cutoff card component */
+.cutoff-card-component {
+  width: 350px;
+  height: 200px;
+  background-color: aliceblue;
+  border:3px solid rgb(206, 41, 167);
+  border-radius: 15px;
+
+
+}
+.cutoff-logo{
+  height: auto;
+  width: 100%;
+}
+.cutoff-card-component p{
+  margin: 0;
+  padding:0;
+}
+.product-name{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.product-name p{
+  font-size: larger;
+  font-weight: 900;
+}
+
+.precentage-background{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(0, 68, 255);
+  border: 1px solid rgb(255, 59, 59);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  color: #f7fafc;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  cursor: pointer;
+}
+.precentage-background :hover{
+  scale: 1.1;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  transition: all ease 400ms;
+}
+.actualAmount-pnumber{
+  width: 100%;
+  height: auto;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: rgb(68, 68, 255);
+}
+.offe-details-actual{
+  font-size: 16px;
+  font-weight: 800;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: rgb(3, 171, 3);
+
+
+}
+.offe-details-label{
+  font-size: 20px;
+  font-weight: 700;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+
+}

@@ -1,0 +1,67 @@
+.toggle {
+  --w: 40px; /* width */
+  --h: 22px; /* height */
+  --knob: 18px; /* knob diameter */
+  display: inline-block;
+  width: var(--w);
+  height: var(--h);
+  background: #e6e9ee;
+  border-radius: 999px;
+  position: relative;
+  cursor: pointer;
+  transition: background .18s ease, box-shadow .12s ease;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04);
+  vertical-align: middle;
+}
+
+/* visually hide the native checkbox but keep it accessible */
+.toggle-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* the knob */
+.toggle::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%);
+  width: var(--knob);
+  height: var(--knob);
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0,0,0,.18);
+  transition: left .18s cubic-bezier(.2,.9,.3,1), transform .12s;
+}
+
+/* checked state */
+.toggle-input:checked + .toggle{
+  background: #4ade80; /* green */
+}
+.toggle-input:checked + .toggle::after{
+  left: calc(100% - 3px - var(--knob));
+}
+
+/* focus ring for keyboard users */
+.toggle-input:focus + .toggle{
+  box-shadow: 0 0 0 4px rgba(66,153,225,0.18), inset 0 0 0 1px rgba(0,0,0,0.04);
+}
+
+/* tiny / extra-small modifiers */
+.toggle.tiny { --w: 32px; --h: 18px; --knob: 14px; }
+.toggle.xs   { --w: 28px; --h: 16px; --knob: 12px; }
+
+/* optional - disabled state */
+.toggle-input:disabled + .toggle{
+  opacity: 0.5;
+  cursor: not-allowed;
+}

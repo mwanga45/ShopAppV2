@@ -1,0 +1,164 @@
+.dbt-container {
+  width: 260px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 12px;
+  margin: 0;
+  background-color: white;
+  color: #333;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+
+}
+
+.dbt-title {
+  margin-bottom: 10px;
+}
+
+.dbt-head {
+  font-size: 1.05rem;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+.dbt-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.dbt-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.dbt-chart {
+  display: flex;
+  gap: 10px;
+  align-items: end;
+  height: 100px;
+  margin-top: auto;
+}
+
+.chart-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 5px;
+}
+
+.bar-label {
+  font-size: 0.7rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.bar-fill {
+  width: 100%;
+  background: linear-gradient(to top, #dc3545, #e74c3c);
+  border-radius: 4px 4px 0 0;
+  min-height: 16px;
+  transition: all 0.3s ease;
+}
+
+.chart-bar.current .bar-fill {
+  background: linear-gradient(to top, #28a745, #20c997);
+}
+
+.chart-bar.overdue .bar-fill {
+  background: linear-gradient(to top, #dc3545, #e74c3c);
+}
+.debtor-list{
+  max-height: 360px; 
+  overflow-y: auto;  
+  width: 100%;  
+  padding: 6px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+}
+.debtor-head{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center; 
+}
+.actl-head{
+  font-size: 15px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-style: italic;
+  margin: 0%;
+  padding: 0%;
+}
+
+.debtor-title{
+  width: 100%;
+  display: flex;
+  font-size: 15px;
+  justify-content: space-between;
+}
+.debtor-details{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  height: 38px;
+}
+.debtor-details:hover{
+  background-color: #28a745;
+  color: #e9ecef;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+  border-radius: 10px;
+  scale: 1.02;
+  transition: all ease-in 300ms;
+  padding-left: 3px;
+}
+.indicator-debtor{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.description{
+  font-weight: 600;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+.descr-color{
+  width: 80px;
+  height: 12px;
+  background-color: #ac2020;
+}
+.color-descr{
+  width: 80px;
+  height: 12px;
+  background-color: #58ac20;
+}
