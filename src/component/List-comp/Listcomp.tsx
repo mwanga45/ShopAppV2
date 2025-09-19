@@ -71,8 +71,7 @@ export const ListComp = ()=>{
                                 <th>Selling Price</th>
                                 <th>Registered by</th>
                                 <th>Last Updated</th>
-                                <th>Action</th>
-                                
+                                <th>Action</th>            
                                 </tr>
                             </thead>
 
