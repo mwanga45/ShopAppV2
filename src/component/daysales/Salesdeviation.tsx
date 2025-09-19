@@ -61,7 +61,6 @@ export const Salesdeviation = () => {
                     <span className="status-text">Below Target</span>
                     <div className="status-bar">
                         <div className="status-fill" style={{width: '92%'}}></div>
-                        
                     </div>
                 </div>
             </div>
