@@ -12,6 +12,7 @@ export const Salesdeviation = () => {
                 <div className="dev-arrow">
                     <FaArrowsSplitUpAndLeft />
                 </div>
+                
             </div>
             
             <div className="dev-content">
