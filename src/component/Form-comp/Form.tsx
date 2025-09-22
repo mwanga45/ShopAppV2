@@ -172,27 +172,21 @@ export  const EditProdoct:React.FC<FormCompProps>=({product_category,product_id,
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const pId = Number(formData.product_id)
-
     const  payload  = Object.fromEntries(
       Object.entries(formData).filter(([__,value])=> value?.trim() !== "" && value !=null)
     )
     try{
-      console.log(pId, payload)
-      const response =  await Updateproduct(pId,payload)
-      if(!response.data.success)[
-        alert(response.data.message)
-      ]
+      console.log(payload)
+      const response =  await Updateproduct(payload)
+      // if(!response.data.success)[
+      //   alert(response.data.message)
+      // ]
       toast.success(response.data.message)
     }catch(err){
       console.error(err)
       throw err
     }
   }
-  if (!close) {
-    return null;
-  }
-
   return (
         <div className="frm-container">
           <ToastContainer/>

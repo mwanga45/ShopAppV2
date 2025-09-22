@@ -19,16 +19,12 @@ export const GetuserList  = async() =>{
     }
 
 }
-export const Updateproduct  = async(product_id:number,updateObj:any )=>{
-    try{
-        const response = api.patch(`product/${product_id}`,{updateObj})
-        return response
-    }catch(err){
-        console.error(err)
-        throw err
-    }
-}
-
-function async(arg0: { product_id: any; }) {
-    throw new Error("Function not implemented.");
-}
+export const Updateproduct = async ( updateObj: any) => {
+  try {
+    const response = await api.post("/product/edit_prod", updateObj);
+    return response;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
