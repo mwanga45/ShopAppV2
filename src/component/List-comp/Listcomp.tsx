@@ -4,7 +4,7 @@ import "./list.css"
 import { useEffect, useState} from "react"
 import { EditProdoct, ProductOfferCreate } from "../Form-comp/Form";
 import { RiCloseFill } from "react-icons/ri";
-import CutoffCard from "../Admincord/CutoffCard";
+import {CutoffCard} from "../Admincord/CutoffCard";
 export interface ProductInfo{
     id:number,
     UpdateAt: string,
