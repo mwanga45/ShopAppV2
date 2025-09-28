@@ -1,50 +1,91 @@
 ﻿import React, { useState } from "react"
 import { Submitbtn } from "../button/Submitbtn"
+import { RegisterUser } from "../../AdminPanel/adminservice"
+import { AdminVerification } from "../../AdminPanel/adminservice"
+
 
 interface FormInterface {
-    firstname?:string,
-    secondname?:string,
-    password?:string,
-    email?:string,
-    role?:string,
-    phone_number?:string,
-    confirm_password?:string,
-    nida?:string
+    firstname?: string,
+    secondname?: string,
+    password?: string,
+    email?: string,
+    role?: string,
+    phone_number?: string,
+    confirm_password?: string,
+    nida?: string
 }
-export const FormRegUser:React.FC<FormInterface> = ({firstname, secondname, nida, password, confirm_password,phone_number,email,role}) => {
-    const [showAdminDetails, setShowAdminDetails] = useState<boolean>(false)
+export const FormRegUser: React.FC<FormInterface> = ({ firstname, secondname, nida, password, confirm_password, phone_number, email, role }) => {
+    const [showAdminDetails, setShowAdminDetails] = useState<boolean>(true)
     const [Verification, setVerification] = useState<FormInterface>({
-        email:email,
-        password:password,
-        role:role
+        email: email,
+        password: password,
+        role: role
     })
     const [UserInfo, setUserInfo] = useState<FormInterface>({
-        firstname:firstname,
-        secondname:secondname,
-        nida:nida,
-        confirm_password:confirm_password,
-        phone_number:phone_number,
-        role:Verification.role,
-        email:email,
-        password:password
+        firstname: firstname,
+        secondname: secondname,
+        nida: nida,
+        confirm_password: confirm_password,
+        phone_number: phone_number,
+        role: Verification.role,
+        email: email,
+        password: password
     })
     const handleOnchange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        const {name, value } = e.target
-        setVerification({...Verification, [name]: value})
-        setUserInfo({...UserInfo, [name]: value})
+        const { name, value } = e.target
+        setVerification({ ...Verification, [name]: value })
+        setUserInfo({ ...UserInfo, [name]: value })
+    }
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault()
+        // check password match
+        if (UserInfo.password !== UserInfo.confirm_password) {
+            alert("password do not match")
+            setUserInfo({ ...UserInfo, confirm_password: "", password: "" });
+            return;
+        }
+        const RegisterNew_user = async () => {
+            try {
+                const response = await RegisterUser(UserInfo)
+                if (!response?.data.success) {
+                    alert(response?.data.message)
+                    return
+                }
+                alert(response?.data.message)
+                setShowAdminDetails(!showAdminDetails)
+            } catch (err) {
+                console.error(err)
+                alert("Something went wrong")
+                throw err
+            }
+        }
+        RegisterNew_user()
     }
     const handleSubmitverificatiom = (e: React.FormEvent) => {
         e.preventDefault()
-        setShowAdminDetails(!showAdminDetails)
-    }
-    const handleSubmit =(e:React.FormEvent) =>{
-        e.preventDefault()
-        // check password match
-        if(UserInfo.password !== UserInfo.confirm_password){
-            alert("password do not match")  
-            setUserInfo({ ...UserInfo, confirm_password: "", password: "" });
-        }
+        const VerifyAdminAccount = async () => {
+            try {
+                const payload_dverify = {
+                    email: Verification.email,
+                    password: Verification.password,
+                }
+                const response = await AdminVerification(payload_dverify)
+                if (!response?.data.success) {
+                    alert(response.data.message)
+                    return
+                }
+                setVerification({ ...Verification, email: "", password: "" })
+                alert(response.data.message)
+                setShowAdminDetails(!showAdminDetails)
+            } catch (err) {
+                console.error("failed to verify admin", err)
+                throw err
+            }
             
+        }
+        VerifyAdminAccount()
+        
+
     }
     return (
         <div className="reg-user-container-form">

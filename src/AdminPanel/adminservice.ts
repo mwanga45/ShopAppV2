@@ -19,7 +19,16 @@ export const GetuserList  = async() =>{
     }
 
 }
-export const RegisterUser = async(data:{})=>{
+export  const AdminVerification = async(data:any)=>{
+    try{
+        const response = await api.post("auth/admin-verification", data)    
+        return response
+    }catch(err){
+        console.error("failed to verify admin", err) 
+        throw err
+    }
+}
+export const RegisterUser = async(data:any)=>{
     try{
         const response = await api.post("auth/register", data)
         return response
