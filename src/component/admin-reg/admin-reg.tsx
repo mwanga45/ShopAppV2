@@ -1,13 +1,15 @@
 import "./admin-reg.css"
 export const AdminReg = () => {
-  return (
-    <div className="admin-reg-container">
-        <h2>Admin Action</h2>
-        <div className="info-form-container">
-           <div className="info-bar">
-            
-           </div>
+    return (
+        <div className="admin-reg-container">
+            <div className="title-bar-reg">
+                <p className="reg-title">Admin Action</p>
+            </div>
+            <div className="info-form-container">
+                <div className="info-bar">
+
+                </div>
+            </div>
         </div>
-    </div>
-  )
+    )
 }
