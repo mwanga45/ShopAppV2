@@ -31,6 +31,7 @@ export const FormRegUser:React.FC<FormInterface> = ({firstname, secondname, nida
     const handleOnchange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value } = e.target
         setVerification({...Verification, [name]: value})
+        setUserInfo({...UserInfo, [name]: value})
     }
     const handleSubmitverificatiom = (e: React.FormEvent) => {
         e.preventDefault()
@@ -67,35 +68,35 @@ export const FormRegUser:React.FC<FormInterface> = ({firstname, secondname, nida
                         <div className="name-inputs-format">
                             <div className="user-input-container">
                                 <label htmlFor="fname">Firstname</label>
-                                <input type="text" id="fname" name="firstname" placeholder="Enter Firstname" required />
+                                <input type="text" id="fname" name="firstname" placeholder="Enter Firstname" required onChange={handleOnchange} value={UserInfo.firstname} />
                             </div>
                             <div className="user-input-container">
                                 <label htmlFor="sname">Secondname</label>
-                                <input type="text" id="sname" name="secondname" placeholder="Enter Second name" required />
+                                <input type="text" id="sname" name="secondname" placeholder="Enter Second name" required onChange={handleOnchange} value={UserInfo.secondname} />
                             </div>
                         </div>
                         <div className="user-input-container">
                             <label htmlFor="ademail">Email</label>
-                            <input type="email" id="ademail" name="email" placeholder="Enter Admin-email" required />
+                            <input type="email" id="ademail" name="email" placeholder="Enter Admin-email" required onChange={handleOnchange} value={UserInfo.email} />
                         </div>
                         <div className="name-inputs-format">
                             <div className="user-input-container">
                                 <label htmlFor="nd">Nida</label>
-                                <input type="text" id="nd" name="nida" placeholder="XXXXX-XXXX-XX-X" required />
+                                <input type="text" id="nd" name="nida" placeholder="XXXXX-XXXX-XX-X" required onChange={handleOnchange} value={UserInfo.nida} />
                             </div>
                             <div className="user-input-container">
                                 <label htmlFor="ph">Phone Number</label>
-                                <input type="text" id="ph" name="phone_number" placeholder="Enter Phone Number" required />
+                                <input type="text" id="ph" name="phone_number" placeholder="Enter Phone Number" required onChange={handleOnchange} value={UserInfo.phone_number} />
                             </div>
                         </div>
                         <div className="name-inputs-format">
                             <div className="user-input-container">
                                 <label htmlFor="pwr">Password</label>
-                                <input type="text" id="pwr" name="password" placeholder="Enter Password" required />
+                                <input type="text" id="pwr" name="password" placeholder="Enter Password" required onChange={handleOnchange} value={UserInfo.password} />
                             </div>
                             <div className="user-input-container">
                                 <label htmlFor="cpwr">Confirm-Password</label>
-                                <input type="pasword" id="ademail" name="ademail" placeholder="Enter Admin-email" required />
+                                <input type="pasword" id="ademail" name="ademail" placeholder="Enter Admin-email" required onChange={handleOnchange} value={UserInfo.confirm_password} />
                             </div>
                         </div>
                         <Submitbtn buttonName="Register" onclick={handleSubmit} />
