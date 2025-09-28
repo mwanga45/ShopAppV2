@@ -19,3 +19,12 @@ export const GetuserList  = async() =>{
     }
 
 }
+export const RegisterUser = async(data:{})=>{
+    try{
+        const response = await api.post("auth/register", data)
+        return response
+    }catch(err){    
+        console.error("failed to register user", err) 
+        throw err
+    }
+}

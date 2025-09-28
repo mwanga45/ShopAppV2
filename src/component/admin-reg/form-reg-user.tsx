@@ -42,7 +42,7 @@ export const FormRegUser:React.FC<FormInterface> = ({firstname, secondname, nida
         // check password match
         if(UserInfo.password !== UserInfo.confirm_password){
             alert("password do not match")  
-            setUserInfo({ ...UserInfo, confirm_password: "" });
+            setUserInfo({ ...UserInfo, confirm_password: "", password: "" });
         }
             
     }
