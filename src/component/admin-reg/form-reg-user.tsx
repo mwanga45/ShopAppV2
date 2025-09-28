@@ -39,6 +39,12 @@ export const FormRegUser:React.FC<FormInterface> = ({firstname, secondname, nida
     }
     const handleSubmit =(e:React.FormEvent) =>{
         e.preventDefault()
+        // check password match
+        if(UserInfo.password !== UserInfo.confirm_password){
+            alert("password do not match")  
+            setUserInfo({ ...UserInfo, confirm_password: "" });
+        }
+            
     }
     return (
         <div className="reg-user-container-form">
