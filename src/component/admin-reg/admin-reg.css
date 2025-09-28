@@ -1,6 +1,7 @@
 .admin-reg-container{
     display: flex;
     padding: 5px;
+    flex-direction: column;
     color: aliceblue;
     width: 80vw;
     height: auto;
@@ -12,11 +13,9 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    border: 2px solid white;
-    width: 100%;
+    align-items: center;
 }
 .reg-title{
-    width: 100%;
     padding: 0;
     margin: 0;
     height: auto;
@@ -24,10 +23,26 @@
     letter-spacing: 2px;
     font-weight: 800;
     font-style: italic;
-
 }
 .info-form-container{
   width: 100%;
   display:flex;
   justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.info-bar{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+
+}
+
+.list-reg-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
 }
