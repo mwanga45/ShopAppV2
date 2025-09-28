@@ -3,6 +3,7 @@ import { OtherAc } from "../account/otherAc"
 import { SummaryCard } from "../summaryCard/summarycard"
 import { FaUserShield } from "react-icons/fa"
 import { MdPerson } from "react-icons/md"
+import { FormRegUser } from "./form-reg-user"
 export const AdminReg = () => {
     return (
         <div className="admin-reg-container">
@@ -22,7 +23,7 @@ export const AdminReg = () => {
                         <OtherAc/>
                     </div>
                     <div className="user-reg-form">
-                      
+                        <FormRegUser/>
                     </div>
                 </div>
             </div>
