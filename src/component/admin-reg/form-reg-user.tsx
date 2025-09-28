@@ -20,11 +20,12 @@ export const FormRegUser = () => {
                         </div>
                         <div className="user-input-container">
                             <label htmlFor="role">Role </label>
-                            <select name="role" id="role"></select>
+                            <select name="role" id="role">
                                 <option value="admin">admin</option>
                                 <option value="user">user</option>
+                            </select>
                         </div>
-                      
+
                     </>
                 ) : (
                     <>
