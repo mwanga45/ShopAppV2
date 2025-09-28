@@ -1,0 +1,13 @@
+.admin-reg-container{
+    display: flex;
+    padding: 5px;
+    color: aliceblue;
+    width: 100%;
+    min-height: 100vh;
+    background-color: aliceblue;
+}
+.info-form-container{
+  width: 100%;
+  display:flex;
+  justify-content: space-evenly;
+}
