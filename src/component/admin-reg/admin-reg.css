@@ -53,11 +53,11 @@
     width: 100%;
     height: auto;
     padding: 10px;
-    background-color: rgb(33, 33, 33);
+    background-color: rgba(33, 33, 33, 0.575);
     border-radius: 5px;
 }
 form {
-   min-width: 440px;
+   min-width: 480px;
     width: 90%;
     margin: 3rem auto;
     padding: 2.75rem;
@@ -124,7 +124,10 @@ form {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
     color: #010701;
   }
-  
+  .name-inputs-format{
+    display: flex;
+    column-gap: 3px;
+  }
   .user-input-container input:hover,
   .user-input-container select:hover {
     border-color: #cbd5e0;

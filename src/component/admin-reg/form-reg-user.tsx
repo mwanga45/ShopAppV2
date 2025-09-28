@@ -1,60 +1,107 @@
 ﻿import React, { useState } from "react"
-export const FormRegUser = () => {
-    const [showAdminDetails, setShowAdminDetails] = useState<boolean>(true)
-    const handleSubmit = (e: React.FormEvent) => {
+import { Submitbtn } from "../button/Submitbtn"
+
+interface FormInterface {
+    firstname?:string,
+    secondname?:string,
+    password?:string,
+    email?:string,
+    role?:string,
+    phone_number?:string,
+    confirm_password?:string,
+    nida?:string
+}
+export const FormRegUser:React.FC<FormInterface> = ({firstname, secondname, nida, password, confirm_password,phone_number,email,role}) => {
+    const [showAdminDetails, setShowAdminDetails] = useState<boolean>(false)
+    const [Verification, setVerification] = useState<FormInterface>({
+        email:email,
+        password:password,
+        role:role
+    })
+    const [UserInfo, setUserInfo] = useState<FormInterface>({
+        firstname:firstname,
+        secondname:secondname,
+        nida:nida,
+        confirm_password:confirm_password,
+        phone_number:phone_number,
+        role:Verification.role,
+        email:email,
+        password:password
+    })
+    const handleOnchange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const {name, value } = e.target
+        setVerification({...Verification, [name]: value})
+    }
+    const handleSubmitverificatiom = (e: React.FormEvent) => {
         e.preventDefault()
         setShowAdminDetails(!showAdminDetails)
     }
+    const handleSubmit =(e:React.FormEvent) =>{
+        e.preventDefault()
+    }
     return (
         <div className="reg-user-container-form">
-            <form onSubmit={handleSubmit}>
+            <form >
                 {showAdminDetails ? (
                     <>
                         <div className="user-input-container">
                             <label htmlFor="ademail">Admin-email</label>
-                            <input type="email" id="ademail" name="ademail" placeholder="Enter Admin-email" required />
+                            <input type="email" id="ademail" name="ademail" placeholder="Enter Admin-email" onChange={handleOnchange} value={Verification.email} required />
                         </div>
                         <div className="user-input-container">
                             <label htmlFor="admin-paswrd">Admin password </label>
-                            <input type="password" name="password" placeholder="Admin password" />
+                            <input type="password" name="password" placeholder="Admin password" onChange={handleOnchange} value={Verification.password} />
                         </div>
                         <div className="user-input-container">
                             <label htmlFor="role">Role </label>
-                            <select name="role" id="role">
+                            <select name="role" id="role" value={Verification.role} onChange={handleOnchange} required>
                                 <option value="admin">admin</option>
                                 <option value="user">user</option>
                             </select>
                         </div>
+                        <Submitbtn buttonName="Proceed" onclick={handleSubmitverificatiom} />
 
                     </>
                 ) : (
                     <>
-                        <div className="user-input-container">
-                            <label htmlFor="fname">Firstname</label>
-                            <input type="text" id="fname" name="firstname" placeholder="Enter Firstname" required />
-                        </div>
-                        <div className="user-input-container">
-                            <label htmlFor="sname">Secondname</label>
-                            <input type="text" id="sname" name="secondname" placeholder="Enter Second name" required />
+                        <div className="name-inputs-format">
+                            <div className="user-input-container">
+                                <label htmlFor="fname">Firstname</label>
+                                <input type="text" id="fname" name="firstname" placeholder="Enter Firstname" required />
+                            </div>
+                            <div className="user-input-container">
+                                <label htmlFor="sname">Secondname</label>
+                                <input type="text" id="sname" name="secondname" placeholder="Enter Second name" required />
+                            </div>
                         </div>
                         <div className="user-input-container">
                             <label htmlFor="ademail">Email</label>
                             <input type="email" id="ademail" name="email" placeholder="Enter Admin-email" required />
                         </div>
-                        <div className="user-input-container">
-                            <label htmlFor="ph">Phone Number</label>
-                            <input type="text" id="ph" name="phonenumber" placeholder="Enter Phone Number" required />
+                        <div className="name-inputs-format">
+                            <div className="user-input-container">
+                                <label htmlFor="nd">Nida</label>
+                                <input type="text" id="nd" name="nida" placeholder="XXXXX-XXXX-XX-X" required />
+                            </div>
+                            <div className="user-input-container">
+                                <label htmlFor="ph">Phone Number</label>
+                                <input type="text" id="ph" name="phone_number" placeholder="Enter Phone Number" required />
+                            </div>
                         </div>
-                        <div className="user-input-container">
-                            <label htmlFor="pwr">Password</label>
-                            <input type="text" id="pwr" name="password" placeholder="Enter Password" required />
+                        <div className="name-inputs-format">
+                            <div className="user-input-container">
+                                <label htmlFor="pwr">Password</label>
+                                <input type="text" id="pwr" name="password" placeholder="Enter Password" required />
+                            </div>
+                            <div className="user-input-container">
+                                <label htmlFor="cpwr">Confirm-Password</label>
+                                <input type="pasword" id="ademail" name="ademail" placeholder="Enter Admin-email" required />
+                            </div>
                         </div>
-                        <div className="user-input-container">
-                            <label htmlFor="cpwr">Confirm-Password</label>
-                            <input type="pasword" id="ademail" name="ademail" placeholder="Enter Admin-email" required />
-                        </div>
+                        <Submitbtn buttonName="Register" onclick={handleSubmit} />
                     </>
                 )}
+
             </form>
         </div>
     )
