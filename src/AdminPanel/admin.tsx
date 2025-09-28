@@ -17,6 +17,7 @@ import { StockRegForm } from "../component/Form-comp/Form";
 import  { useEffect, useState } from "react";
 import {OtherAc} from "../component/account/otherAc";
 import { GetuserList } from "./adminservice";
+import { AdminReg } from "../component/admin-reg/admin-reg";
 
 interface AccountUserRespose {
       id?: number,
@@ -35,6 +36,9 @@ export  const AdminPanel = () =>{
     const [showStockreg, setShowStockreg] = useState<boolean>(false)
     const [register, setregister] = useState<boolean>(false)
     const [Accountdetails, setAccountdetails] = useState<AccountUserRespose[]>([])
+    const handleRegUser=()=>{
+        setregister(!register)
+    }
     const handleopenproductregForm=()=>{
         setproductShown(!productShown)
     }
@@ -141,7 +145,7 @@ export  const AdminPanel = () =>{
                     </div>
                 </motion.div>
                 <motion.div className="admin-sales-summary-stock" variants={itemVariants}>
-                    <Button buttonName="User-Register"/>
+                    <Button buttonName="User-Register" Onclick={handleRegUser}/ >
                     <div className="critical-stock-product">
                         {Accountdetails.map((u)=>(
                             u.id ? < OtherAc key={u.id} fullname={u.fullname} email={u.email} isActive={u.isActive} role={u.role}/> : null
@@ -182,7 +186,7 @@ export  const AdminPanel = () =>{
     {
         register && 
         <div className="product-reg-popup">
-            
+            <AdminReg/>
         </div>
 
     }
