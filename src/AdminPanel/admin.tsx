@@ -33,6 +33,7 @@ export  const AdminPanel = () =>{
     const [productShown, setproductShown] = useState<boolean>(false)
     const [Productlist, setProductlist] = useState<boolean>(false)
     const [showStockreg, setShowStockreg] = useState<boolean>(false)
+    const [register, setregister] = useState<boolean>(false)
     const [Accountdetails, setAccountdetails] = useState<AccountUserRespose[]>([])
     const handleopenproductregForm=()=>{
         setproductShown(!productShown)
@@ -178,5 +179,13 @@ export  const AdminPanel = () =>{
 
         </motion.div>
     )
+    {
+        register && 
+        <div className="product-reg-popup">
+            
+        </div>
+
+    }
+
 
 }
