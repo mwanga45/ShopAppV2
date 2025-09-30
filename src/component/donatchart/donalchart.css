@@ -1,7 +1,8 @@
 .donut-chart-container {
   width: 100%;
-  max-width: 300px;
+  max-width: 400px;
   height: 400px;
+  margin-right: 20px;
   background: transparent;
   border-radius: 15px;
   padding: 20px;
