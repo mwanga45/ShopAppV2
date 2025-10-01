@@ -3,7 +3,7 @@ import "./summarycard.css"
 interface SummaryCardProps {
    icon:React.ElementType
    SummaryTitle?:string,
-   SummaryActInfo?:string,
+   SummaryActInfo?:string | number,
    style?: React.CSSProperties;
 
 

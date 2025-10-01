@@ -41,7 +41,7 @@ export const RegisterUser = async(data:any)=>{
 
 export const Account_details  = async()=>{
     try{
-        const response = await api.get('auth.acc-info')
+        const response = await api.get('auth/acc_info')
         return response
 
     }catch(err){
