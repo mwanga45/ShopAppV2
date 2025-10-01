@@ -16,6 +16,7 @@ interface FormInterface {
 }
 export const FormRegUser: React.FC<FormInterface> = ({ firstname, secondname, nida, password, confirm_password, phone_number, email, role }) => {
     const [showAdminDetails, setShowAdminDetails] = useState<boolean>(true)
+    const [AdminId,setAdminId] = useState<any>({})
     const [Verification, setVerification] = useState<FormInterface>({
         email: email,
         password: password,
@@ -74,6 +75,8 @@ export const FormRegUser: React.FC<FormInterface> = ({ firstname, secondname, ni
                     alert(response.data.message)
                     return
                 }
+                setAdminId(response.data.data)
+                console.log(Verification)
                 setVerification({ ...Verification, email: "", password: "" })
                 alert(response.data.message)
                 setShowAdminDetails(!showAdminDetails)
