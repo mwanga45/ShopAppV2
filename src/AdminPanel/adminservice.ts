@@ -36,4 +36,16 @@ export const RegisterUser = async(data:any)=>{
         console.error("failed to register user", err) 
         throw err
     }
+
+}
+
+export const Account_details  = async()=>{
+    try{
+        const response = await api.get('auth.acc-info')
+        return response
+
+    }catch(err){
+        console.error(err)
+        throw err
+    }
 }
