@@ -103,6 +103,7 @@ export const FormRegUser: React.FC<FormInterface> = ({ firstname, secondname, ni
                         <div className="user-input-container">
                             <label htmlFor="role">Role </label>
                             <select name="role" id="role" value={Verification.role} onChange={handleOnchange} required>
+                                <option value="">Please select role of new user</option>
                                 <option value="admin">admin</option>
                                 <option value="user">user</option>
                             </select>
