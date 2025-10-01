@@ -16,7 +16,7 @@ interface FormInterface {
 }
 export const FormRegUser: React.FC<FormInterface> = ({ firstname, secondname, nida, password, confirm_password, phone_number, email, role }) => {
     const [showAdminDetails, setShowAdminDetails] = useState<boolean>(true)
-    const [AdminId,setAdminId] = useState<any>({})
+    const [AdminId,setAdminId] = useState<string | number | null>(null)
     const [Verification, setVerification] = useState<FormInterface>({
         email: email,
         password: password,
@@ -71,8 +71,9 @@ export const FormRegUser: React.FC<FormInterface> = ({ firstname, secondname, ni
                     password: Verification.password,
                 }
                 const response = await AdminVerification(payload_dverify)
-                if (!response?.data.success) {
-                    alert(response.data.message)
+                if (!response || response.status !== 200 || !response.data?.success) {
+                    const msg = response?.data?.message || "Admin verification failed"
+                    alert(msg)
                     return
                 }
                 setAdminId(response.data.data)
@@ -96,8 +97,8 @@ export const FormRegUser: React.FC<FormInterface> = ({ firstname, secondname, ni
                 {showAdminDetails ? (
                     <>
                         <div className="user-input-container">
-                            <label htmlFor="ademail">Admin-email</label>
-                            <input type="email" id="ademail" name="ademail" placeholder="Enter Admin-email" onChange={handleOnchange} value={Verification.email} required />
+                            <label htmlFor="adminEmail">Admin-email</label>
+                            <input type="email" id="adminEmail" name="email" placeholder="Enter Admin-email" onChange={handleOnchange} value={Verification.email} required />
                         </div>
                         <div className="user-input-container">
                             <label htmlFor="admin-paswrd">Admin password </label>
@@ -127,8 +128,8 @@ export const FormRegUser: React.FC<FormInterface> = ({ firstname, secondname, ni
                             </div>
                         </div>
                         <div className="user-input-container">
-                            <label htmlFor="ademail">Email</label>
-                            <input type="email" id="ademail" name="email" placeholder="Enter Admin-email" required onChange={handleOnchange} value={UserInfo.email} />
+                            <label htmlFor="userEmail">Email</label>
+                            <input type="email" id="userEmail" name="email" placeholder="Enter Email" required onChange={handleOnchange} value={UserInfo.email} />
                         </div>
                         <div className="name-inputs-format">
                             <div className="user-input-container">
@@ -143,11 +144,11 @@ export const FormRegUser: React.FC<FormInterface> = ({ firstname, secondname, ni
                         <div className="name-inputs-format">
                             <div className="user-input-container">
                                 <label htmlFor="pwr">Password</label>
-                                <input type="text" id="pwr" name="password" placeholder="Enter Password" required onChange={handleOnchange} value={UserInfo.password} />
+                                <input type="password" id="pwr" name="password" placeholder="Enter Password" required onChange={handleOnchange} value={UserInfo.password} />
                             </div>
                             <div className="user-input-container">
                                 <label htmlFor="cpwr">Confirm-Password</label>
-                                <input type="pasword" id="ademail" name="ademail" placeholder="Enter Admin-email" required onChange={handleOnchange} value={UserInfo.confirm_password} />
+                                <input type="password" id="cpwr" name="confirm_password" placeholder="Confirm Password" required onChange={handleOnchange} value={UserInfo.confirm_password} />
                             </div>
                         </div>
                         <Submitbtn buttonName="Register" onclick={handleSubmit} />

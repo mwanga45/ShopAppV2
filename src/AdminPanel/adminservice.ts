@@ -1,4 +1,5 @@
 import { api } from "../global.api";
+import axios from "axios";
 
 export const GetproductList= async() =>{
     try{
@@ -21,10 +22,13 @@ export const GetuserList  = async() =>{
 }
 export  const AdminVerification = async(data:any)=>{
     try{
-        const response = await api.post("auth/admin-verification", data)    
+        const response = await api.post("auth/admin-verification", data)
         return response
     }catch(err){
-        console.error("failed to verify admin", err) 
+        console.error("failed to verify admin", err)
+        if (axios.isAxiosError(err)) {
+            return err.response
+        }
         throw err
     }
 }
