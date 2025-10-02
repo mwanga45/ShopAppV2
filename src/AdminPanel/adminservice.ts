@@ -50,3 +50,12 @@ export const Account_details  = async()=>{
         throw err
     }
 }
+export const Update_Product = async()=>{
+    try{
+        const response =  await api.post('/product/update')
+        return response
+    }catch(err){
+      console.error(err)
+      throw err
+    }
+}
