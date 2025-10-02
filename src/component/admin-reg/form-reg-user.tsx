@@ -46,14 +46,16 @@ export const FormRegUser: React.FC<FormInterface> = ({ firstname, secondname, ni
             return;
         }
         const RegisterNew_user = async () => {
+            const {confirm_password,...payload_req} = UserInfo
+            console.log(payload_req)
             try {
-                const response = await RegisterUser(UserInfo)
+                const response = await RegisterUser(payload_req)
                 if (!response?.data.success) {
                     alert(response?.data.message)
                     return
                 }
                 alert(response?.data.message)
-                setShowAdminDetails(!showAdminDetails)
+                setShowAdminDetails(prev => !prev)
             } catch (err) {
                 console.error(err)
                 alert("Something went wrong")
@@ -77,10 +79,10 @@ export const FormRegUser: React.FC<FormInterface> = ({ firstname, secondname, ni
                     return
                 }
                 setAdminId(response.data.data)
-                console.log(Verification)
                 setVerification({ ...Verification, email: "", password: "" })
                 alert(response.data.message)
-                setShowAdminDetails(!showAdminDetails)
+                setShowAdminDetails(prev => !prev)
+
             } catch (err) {
                 console.error("failed to verify admin", err)
                 throw err
