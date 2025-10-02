@@ -18,7 +18,7 @@ export const SummaryCard:React.FC<SummaryCardProps> =({icon:Icon,SummaryActInfo,
                 <p className="summary-titlename">
                     {SummaryTitle}
                 </p>
-                <p className="summary-act-info">
+                <p className="summary-act-info" style={style}>
                     {SummaryActInfo}
                 </p>
             </div>

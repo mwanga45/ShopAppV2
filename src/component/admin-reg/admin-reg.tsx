@@ -19,7 +19,12 @@ export interface AccResponse {
 export interface RoleCountResponse {
   role?: string;           
   total?: number;          
-  activeCount?: number;    
+  activeCount?: number; 
+  inActiveCount?:number  
+  user?:{
+    total:number,
+    activeCount:number
+  } 
 }
  export const fetch_Acc = async()=>{
           try{
@@ -72,8 +77,8 @@ export const AdminReg = () => {
             <div className="info-form-container">
                 <div className="info-bar">
                   <SummaryCard icon={FaUserShield} SummaryTitle="Admin-Account" SummaryActInfo={rolecount?.total} style={{background:"#073093", color:"white"}}/>
-                  <SummaryCard icon={ MdPerson } SummaryTitle="User-Account-Active"SummaryActInfo={rolecount?.total} style={{background:"#0a6803ff", color:"white"}}/>
-                  <SummaryCard icon={ MdPerson } SummaryTitle="User-Account-InActive" SummaryActInfo={rolecount?.activeCount} style={{background:"#ba0606ff", color:"white"}}/>
+                  <SummaryCard icon={ MdPerson } SummaryTitle="User-Account-Active"SummaryActInfo={rolecount?.user?.total} style={{background:"#0a6803ff", color:"white"}}/>
+                  <SummaryCard icon={ MdPerson } SummaryTitle="User-Account-InActive" SummaryActInfo={rolecount?.inActiveCount} style={{background:"#ba0606ff", color:"white", fontWeight:"800"}}/>
                 </div>
 
                 <div className="list-reg-verification">
