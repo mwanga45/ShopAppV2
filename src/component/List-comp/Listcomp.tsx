@@ -2,7 +2,7 @@ import { GetproductList } from "../../AdminPanel/adminservice"
 import { PiDotsThreeCircle } from "react-icons/pi";
 import "./list.css"
 import { useEffect, useState} from "react"
-import { EditProdoct, ProductOfferCreate } from "../Form-comp/Form";
+import { EditProdoct, CreateDiscount } from "../Form-comp/Form";
 import { RiCloseFill } from "react-icons/ri";
 import {CutoffCard} from "../Admincord/CutoffCard";
 export interface ProductInfo{
@@ -145,7 +145,7 @@ export const ListComp = ()=>{
                            <CutoffCard/>
                         </div>
                         <div className="cutoff-product-form-container">
-                            < ProductOfferCreate />
+                            < CreateDiscount />
                         </div>
                     </div>
               </div>

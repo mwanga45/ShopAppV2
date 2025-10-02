@@ -457,10 +457,10 @@ export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true}) =>{
 //   )
 // }
 
-export const ProductOfferCreate = ()=>{
+export const CreateDiscount:React.FC<FormCompProps> = ()=>{
    return(
     <div className="offer-create-main-container">
-      <div className="form-title" style={{background:"#eefaffff",display:"flex",columnGap:"10px", marginBottom:"12px"}}>
+      <div className="form-title" style={{background:"#e6f8ffff",display:"flex",columnGap:"10px", marginBottom:"12px"}}>
               <p></p>
       </div>
       <form className="offer-form-container" >
