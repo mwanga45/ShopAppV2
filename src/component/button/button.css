@@ -14,7 +14,7 @@
   letter-spacing: 1px;
   min-width: 120px;
   width: 100%;
-  max-width: 200px;
+  min-width: 200px;
 }
 
 
