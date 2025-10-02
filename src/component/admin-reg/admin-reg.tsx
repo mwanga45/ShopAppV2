@@ -21,23 +21,37 @@ export interface RoleCountResponse {
   total?: number;          
   activeCount?: number;    
 }
-
-export const AdminReg = () => {
-    const [loading, setloading] = useState<boolean>(true)
-    const [Acc_info, setAcc_info] = useState<AccResponse[]>([])
-    const [rolecount , setrolecount] = useState<RoleCountResponse >()
-
-    useEffect(()=>{
-        const handleAcc_info = async()=>{
-            try{
+ export const fetch_Acc = async()=>{
+          try{
             const  response = await Account_details()
              if(!response.data.success){
                 alert(response.data.message)
                 return
              }
-             setAcc_info(response.data.data.return_user)
+             return{
+                user:response.data.data.return_user,
+                rolecount:response.data.data.ROleObj
+             }
+             
+            }catch(err){
+                console.error(err)
+                throw (err)
+            }
+        
+    }
+export const AdminReg = () => {
+    const [loading, setloading] = useState<boolean>(true)
+    const [Acc_info, setAcc_info] = useState<AccResponse[]>([])
+    const [rolecount , setrolecount] = useState<RoleCountResponse >()
+   
+    useEffect(()=>{
+         const handleAcc_info = async()=>{
+            try{
+             const data = await fetch_Acc()
+             
+             setAcc_info(data?.user)
 
-             setrolecount(response.data.data.ROleObj)
+             setrolecount(data?.rolecount)
              
             }catch(err){
                 console.error(err)

@@ -26,9 +26,7 @@ export  const AdminVerification = async(data:any)=>{
         return response
     }catch(err){
         console.error("failed to verify admin", err)
-        if (axios.isAxiosError(err)) {
-            return err.response
-        }
+        // Re-throw the error so it can be handled in the component
         throw err
     }
 }
@@ -38,9 +36,9 @@ export const RegisterUser = async(data:any)=>{
         return response
     }catch(err){    
         console.error("failed to register user", err) 
+        // Re-throw the error so it can be handled in the component
         throw err
     }
-
 }
 
 export const Account_details  = async()=>{

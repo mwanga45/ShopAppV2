@@ -2,6 +2,7 @@
 import { Submitbtn } from "../button/Submitbtn"
 import { RegisterUser } from "../../AdminPanel/adminservice"
 import { AdminVerification } from "../../AdminPanel/adminservice"
+import { fetch_Acc } from "./admin-reg"
 
 
 interface FormInterface {
@@ -16,7 +17,7 @@ interface FormInterface {
 }
 export const FormRegUser: React.FC<FormInterface> = ({ firstname, secondname, nida, password, confirm_password, phone_number, email, role }) => {
     const [showAdminDetails, setShowAdminDetails] = useState<boolean>(true)
-    const [AdminId,setAdminId] = useState<string | number | null>(null)
+    // const [AdminId,setAdminId] = useState<string | number | null>(null)
     const [Verification, setVerification] = useState<FormInterface>({
         email: email,
         password: password,
@@ -56,10 +57,24 @@ export const FormRegUser: React.FC<FormInterface> = ({ firstname, secondname, ni
                 }
                 alert(response?.data.message)
                 setShowAdminDetails(prev => !prev)
-            } catch (err) {
-                console.error(err)
-                alert("Something went wrong")
-                throw err
+                fetch_Acc()
+            } catch (err: any) {
+                console.error("Registration error:", err)
+                
+                // Handle different types of errors
+                if (err.response) {
+                    // Server responded with error status
+                    const errorMessage = err.response.data?.message || 
+                                       err.response.data?.error || 
+                                       `Server error: ${err.response.status}`
+                    alert(errorMessage)
+                } else if (err.request) {
+                    // Request was made but no response received
+                    alert("Network error: Unable to connect to server")
+                } else {
+                    // Something else happened
+                    alert("An unexpected error occurred")
+                }
             }
         }
         RegisterNew_user()
@@ -78,14 +93,28 @@ export const FormRegUser: React.FC<FormInterface> = ({ firstname, secondname, ni
                     alert(msg)
                     return
                 }
-                setAdminId(response.data.data)
+                // setAdminId(response.data.data)
                 setVerification({ ...Verification, email: "", password: "" })
                 alert(response.data.message)
                 setShowAdminDetails(prev => !prev)
 
-            } catch (err) {
+            } catch (err: any) {
                 console.error("failed to verify admin", err)
-                throw err
+                
+                // Handle different types of errors
+                if (err.response) {
+                    // Server responded with error status
+                    const errorMessage = err.response.data?.message || 
+                                       err.response.data?.error || 
+                                       `Server error: ${err.response.status}`
+                    alert(errorMessage)
+                } else if (err.request) {
+                    // Request was made but no response received
+                    alert("Network error: Unable to connect to server")
+                } else {
+                    // Something else happened
+                    alert("An unexpected error occurred")
+                }
             }
             
         }
