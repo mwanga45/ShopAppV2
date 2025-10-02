@@ -45,7 +45,7 @@ export interface RoleCountResponse {
         
     }
 export const AdminReg = () => {
-    const [loading, setloading] = useState<boolean>(true)
+    const [_, setloading] = useState<boolean>(true)
     const [Acc_info, setAcc_info] = useState<AccResponse[]>([])
     const [rolecount , setrolecount] = useState<RoleCountResponse >()
    

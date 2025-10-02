@@ -1,8 +1,9 @@
 .nav-container{
-   background: #2c3e50;
+   background-color:rgba(0, 0, 0, 0.9);
    width: 260px;
    height: 100vh;
    border-radius: 0;
+   border-right: 3px solid rgba(85, 4, 236, 0.972);
    color: white;
    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
    position: relative;
@@ -102,9 +103,9 @@
 }
 
 .active-nav-link {
-  background: #3498db; /* A vibrant blue for active state */
+  background: #3498db; 
   border-color: #3498db;
-  color: #ffffff; /* White text for contrast */
+  color: #ffffff;
   box-shadow: 0 4px 15px rgba(52, 152, 219, 0.5); /* Stronger shadow for active link */
   transform: scale(1.02); /* Slightly larger to emphasize */
 }

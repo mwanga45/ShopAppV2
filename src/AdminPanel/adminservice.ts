@@ -1,5 +1,4 @@
 import { api } from "../global.api";
-import axios from "axios";
 
 export const GetproductList= async() =>{
     try{
