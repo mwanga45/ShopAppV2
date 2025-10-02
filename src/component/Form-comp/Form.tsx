@@ -159,7 +159,8 @@ export  const EditProdoct:React.FC<FormCompProps>=({product_category,product_id,
     Rs_price:Rs_price ,
     Ws_price: Ws_price,
     wpurchase_price: wpurchase_price,
-    rpurchase_price:rpurchase_price
+    rpurchase_price:rpurchase_price,
+    id:product_id
 
   });
 
@@ -171,10 +172,17 @@ export  const EditProdoct:React.FC<FormCompProps>=({product_category,product_id,
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const payload: any = {
+      const payload:any = {
         product_name: formData.product_name,
         product_category: formData.product_category,
         product_type: formData.product_type,
+        Ws_price:formData.Ws_price,
+        wpurchase_price:formData.wpurchase_price,
+        Rs_price:formData.Rs_price,
+        rpurchase_price:formData.rpurchase_price,
+        id:product_id
+        
+
       };
 
       if (formData.product_category === "retailsales") {
