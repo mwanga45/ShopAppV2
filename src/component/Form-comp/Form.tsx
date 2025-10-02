@@ -3,6 +3,7 @@ import { RiCloseFill } from "react-icons/ri";
 import React, {useEffect, useState} from "react";
 import { Submitbtn } from "../button/Submitbtn";
 import { productRegister } from "./formservice";
+import { Update_Product } from "../../AdminPanel/adminservice";
 import { StockCreate } from "../../stock/stockservice";
 import {ProductInfo} from "./formservice"
 import  Toggle from "../button/toggle"
@@ -176,27 +177,29 @@ export  const EditProdoct:React.FC<FormCompProps>=({product_category,product_id,
         product_name: formData.product_name,
         product_category: formData.product_category,
         product_type: formData.product_type,
-        Ws_price:formData.Ws_price,
-        wpurchase_price:formData.wpurchase_price,
-        Rs_price:formData.Rs_price,
-        rpurchase_price:formData.rpurchase_price,
-        id:product_id
+        id: Number(product_id)
         
 
       };
 
       if (formData.product_category === "retailsales") {
-        if (formData.Rs_price) payload.Rs_price = formData.Rs_price;
-        if (formData.rpurchase_price) payload.rpurchase_price = formData.rpurchase_price;
+        if (formData.Rs_price != null && formData.Rs_price !== '') payload.Rs_price = String(formData.Rs_price);
+        if (formData.rpurchase_price != null && formData.rpurchase_price !== '') payload.rpurchase_price = String(formData.rpurchase_price);
       } else if (formData.product_category === "wholesales") {
-        if (formData.Ws_price) payload.Ws_price = formData.Ws_price;
-        if (formData.wpurchase_price) payload.wpurchase_price = formData.wpurchase_price;
+        if (formData.Ws_price != null && formData.Ws_price !== '') payload.Ws_price = String(formData.Ws_price);
+        if (formData.wpurchase_price != null && formData.wpurchase_price !== '') payload.wpurchase_price = String(formData.wpurchase_price);
       }
       if(window.confirm("Are sure you want to make this update")){
-        await productRegister(payload);
+        console.log(payload)
+         const reponse = await Update_Product(payload);
+         if(!reponse.data.success){
+          alert(reponse.data.message)
+          
+         }
+         alert(reponse.data.message)
       }
 
-      alert('Product registered successfully!');
+      
 
     } catch (error: any) {
       console.error("Error registering product:", error.response ? error.response.data : error.message);

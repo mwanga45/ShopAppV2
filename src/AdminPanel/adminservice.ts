@@ -25,7 +25,6 @@ export  const AdminVerification = async(data:any)=>{
         return response
     }catch(err){
         console.error("failed to verify admin", err)
-        // Re-throw the error so it can be handled in the component
         throw err
     }
 }
@@ -35,7 +34,7 @@ export const RegisterUser = async(data:any)=>{
         return response
     }catch(err){    
         console.error("failed to register user", err) 
-        // Re-throw the error so it can be handled in the component
+    
         throw err
     }
 }
@@ -50,9 +49,9 @@ export const Account_details  = async()=>{
         throw err
     }
 }
-export const Update_Product = async()=>{
+export const Update_Product = async(data:any)=>{
     try{
-        const response =  await api.post('/product/update')
+        const response =  await api.patch(`product/${data.id}`, data)
         return response
     }catch(err){
       console.error(err)
