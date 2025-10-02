@@ -23,6 +23,7 @@ interface FormCompProps {
   Ws_price?:string |null,
   wpurchase_price?:string | null,
   rpurchase_price?:string|null
+  pId?:number
 }
 
 export default function FormComp({ onClose, isOpen = true}: FormCompProps) {
@@ -457,28 +458,48 @@ export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true}) =>{
 //   )
 // }
 
-export const CreateDiscount:React.FC<FormCompProps> = ()=>{
+interface DiscInterface {
+  product_id?:number,
+  pnum?:string,
+  Amount?:string,
+  percentage?:string
+  product_name?:string
+}
+
+export const CreateDiscount:React.FC<FormCompProps> = ({product_name,pId})=>{
+  const [formData , setformdata] = useState <DiscInterface>({
+    product_id:pId,
+    percentage:"",
+    Amount:"",
+    pnum:"",
+    product_name:product_name
+
+  })
+  const HandleOnchage = (e:React.ChangeEvent<HTMLInputElement>)=>{
+    const {name, value} = e.target 
+   setformdata(prev => ({...prev, [name]:value}))
+  }
    return(
     <div className="offer-create-main-container">
       <div className="form-title" style={{background:"#e6f8ffff",display:"flex",columnGap:"10px", marginBottom:"12px"}}>
-              <p></p>
+              <p>{`Discount For ${formData.product_name}`}</p>
       </div>
       <form className="offer-form-container" >
            <div className="input-value">
                     <label htmlFor="pname">Product-Name</label>
-                    <input type="text" name="product_name" id="pname"   required readOnly />
+                    <input type="text" name="product_name" id="pname" onChange={HandleOnchage} value={formData.product_name}   required readOnly />
             </div>
                      <div className="input-value">
                     <label htmlFor="%">Percentage cuttoff</label>
-                    <input type="text" name="percentage" id="%"   required readOnly />
+                    <input type="text" name="percentage" id="%"  onChange={HandleOnchage} value={formData.percentage}  required readOnly />
             </div>
                      <div className="input-value">
                     <label htmlFor="Amount">Amount</label>
-                    <input type="text" name="" id=""   required  />
+                    <input type="text" name="" id=""  onChange={HandleOnchage} value={formData.Amount}  required  />
             </div>
                      <div className="input-value">
                     <label htmlFor="pnum">Product Number/Litre</label>
-                    <input type="text" name="" id="pnum"   required placeholder="Enter product number start cutoff" />
+                    <input type="text" name="" id="pnum"  onChange={HandleOnchage} value={formData.pnum}   required placeholder="Enter product number start cutoff" />
             </div>
                <div className="btn-container">
                   <Submitbtn buttonName="Create" type="submit"/>
