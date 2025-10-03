@@ -60,7 +60,8 @@ export const Update_Product = async(data:any)=>{
 }
 export const CreateDisCount = async(data:any) =>{
     try{
-    const  request =  await api.post("")
+    const  response =  await api.post('product/discount', data)
+    return response
 
     }catch(err){
         console.error(err)

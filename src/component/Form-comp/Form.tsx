@@ -4,10 +4,12 @@ import React, {useEffect, useState} from "react";
 import { Submitbtn } from "../button/Submitbtn";
 import { productRegister } from "./formservice";
 import { Update_Product } from "../../AdminPanel/adminservice";
+import { CreateDisCount } from "../../AdminPanel/adminservice";
 import { StockCreate } from "../../stock/stockservice";
 import {ProductInfo} from "./formservice"
 import  Toggle from "../button/toggle"
 import { toast, ToastContainer } from "react-toastify";
+
 
 
 
@@ -465,6 +467,7 @@ interface DiscInterface {
   percentage?:PerceInterface
   product_name?:string
   Ws_price?:string|null
+  UpdateFlag?:boolean
 }
 interface PerceInterface{
   perce:number
@@ -476,9 +479,7 @@ export const CreateDiscount:React.FC<FormCompProps> = ({product_name,pId,Ws_pric
     Amount:0,
     pnum:"",
     product_name:product_name,
-    Ws_price:Ws_price
-    
-
+    Ws_price:Ws_price,
   })
   const HandleOnchage = (e:React.ChangeEvent<HTMLInputElement>)=>{
     const {name, value} = e.target 
@@ -492,9 +493,52 @@ export const CreateDiscount:React.FC<FormCompProps> = ({product_name,pId,Ws_pric
       return update
     })
   }
-  const handleOnsubmit = (e:React.FormEvent) =>{
+  const handleOnsubmit = async(e:React.FormEvent) =>{
    e.preventDefault()
-   
+   const createPayload:DiscInterface ={
+   product_id:formData.product_id,
+   product_name:formData.product_name,
+   Ws_price:formData.Ws_price,
+   percentage:formData.percentage,
+   pnum:formData.pnum,
+   UpdateFlag:false
+
+   }
+   const UpdatePayload:DiscInterface ={
+   product_id:formData.product_id,
+   product_name:formData.product_name,
+   Ws_price:formData.Ws_price,
+   percentage:formData.percentage,
+   pnum:formData.pnum,
+   UpdateFlag:false
+
+   }
+   console.log(createPayload)
+   console.log(UpdatePayload)
+   try{
+    const response = await  CreateDisCount(createPayload)
+    if(!response.data.success){
+      alert(response.data.message)
+      return
+    }
+   if(response.data.confirm){
+   const userConfimation =window.confirm(response.data.message)
+   if(userConfimation){
+     const update_Disc = await CreateDisCount(UpdatePayload)
+     if(!update_Disc.data.success){
+        alert(response.data.message)
+        return
+     }
+     alert(response.data.message)
+   }
+   toast.success('Success cancel the process')
+   }
+
+   }catch(err){
+    console.error(err)
+    alert(err)
+   }
+
   }
    return(
     <div className="offer-create-main-container">
