@@ -498,8 +498,8 @@ export const CreateDiscount:React.FC<FormCompProps> = ({product_name,pId,Ws_pric
    const createPayload:DiscInterface ={
    product_id:formData.product_id,
    product_name:formData.product_name,
-   Ws_price:formData.Ws_price,
-   percentage:formData.percentage,
+   Amount:formData.Amount,
+   percentage:{perce:formData.percentage?.perce ?? 0},
    pnum:formData.pnum,
    UpdateFlag:false
 
@@ -507,10 +507,10 @@ export const CreateDiscount:React.FC<FormCompProps> = ({product_name,pId,Ws_pric
    const UpdatePayload:DiscInterface ={
    product_id:formData.product_id,
    product_name:formData.product_name,
-   Ws_price:formData.Ws_price,
-   percentage:formData.percentage,
+   Amount:formData.Amount,
+   percentage:{perce:formData.percentage?.perce ?? 0},
    pnum:formData.pnum,
-   UpdateFlag:false
+   UpdateFlag:true
 
    }
    console.log(createPayload)
