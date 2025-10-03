@@ -58,3 +58,12 @@ export const Update_Product = async(data:any)=>{
       throw err
     }
 }
+export const CreateDisCount = async(data:any) =>{
+    try{
+    const  request =  await api.post("")
+
+    }catch(err){
+        console.error(err)
+        throw err
+    }
+}

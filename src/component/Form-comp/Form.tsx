@@ -492,19 +492,23 @@ export const CreateDiscount:React.FC<FormCompProps> = ({product_name,pId,Ws_pric
       return update
     })
   }
+  const handleOnsubmit = (e:React.FormEvent) =>{
+   e.preventDefault()
+   
+  }
    return(
     <div className="offer-create-main-container">
       <div className="form-title" style={{background:"#e6f8ffff",display:"flex",columnGap:"10px", marginBottom:"12px"}}>
               <p>{`Discount For ${formData.product_name}`}</p>
       </div>
-      <form className="offer-form-container" >
+      <form className="offer-form-container" onSubmit={handleOnsubmit} >
            <div className="input-value">
                     <label htmlFor="pname">Product-Name</label>
                     <input type="text" name="product_name" id="pname" onChange={HandleOnchage} value={formData.product_name}   required readOnly />
             </div>
                      <div className="input-value">
                     <label htmlFor="%">Percentage cuttoff</label>
-                    <input type="text" name="percentage" id="%"  onChange={HandleOnchage} value={formData.percentage?.perce }  required readOnly />
+                    <input type="text" name="percentage" id="%"  onChange={HandleOnchage} value={formData.percentage?.perce.toFixed(2)}  required readOnly />
             </div>
                      <div className="input-value">
                     <label htmlFor="amount">Amount</label>
