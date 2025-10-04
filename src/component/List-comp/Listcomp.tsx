@@ -142,7 +142,7 @@ export const ListComp = ()=>{
                     </div>
                     <div className="container-product-info">
                         <div className="cuttoff-details">
-                           <CutoffCard/>
+                           <CutoffCard id = {String(EditRow?.id)}/>
                         </div>
                         <div className="cutoff-product-form-container">
                             < CreateDiscount product_name={EditRow?.product_name} pId={EditRow?.id} Ws_price={EditRow?.wholesales_price} />
