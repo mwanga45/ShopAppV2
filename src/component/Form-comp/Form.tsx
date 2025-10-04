@@ -413,6 +413,7 @@ export const SalesRecForm = ()=>{
     e.preventDefault()
   }
   return(
+    
     <div className='form-main-container' style={{backgroundColor:'azure'}}>
       <div className="icon-conyainer">
         <ToastContainer/>
@@ -420,6 +421,7 @@ export const SalesRecForm = ()=>{
             <RiCloseFill color="white" size={30} fontWeight={500} style={{color:'blue'}}/>
           </div>
         </div>
+        <div className="main-conatiner-sales">
         <div className="frm-container">
             <div className="form-title" >
                {/* <Toggle onChange={handleChangeCategory}checked= {isDefault}/> */}
@@ -469,6 +471,8 @@ export const SalesRecForm = ()=>{
                </div>
               </div>
             </form>
+          </div>
+          <div style={{backgroundColor:"black", width:"50%", height:"100vh"}}></div>
           </div>
         </div>
   )
