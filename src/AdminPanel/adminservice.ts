@@ -68,3 +68,13 @@ export const CreateDisCount = async(data:any) =>{
         throw err
     }
 }
+export  const  ReturnDisc = async()=>{
+    try{
+        const response = await api.get('product/Disc_result')
+        return response
+
+    }catch(err){
+        console.error(err)
+        throw err
+    }
+}
