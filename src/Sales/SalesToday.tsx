@@ -4,6 +4,7 @@ import { Search } from "../component/search/Search"
 import { DayResult } from "../component/daysales/Daysales"
 import { Daysale_list } from "../component/daysales/Daysales"
 import Form from "../component/Form-comp/Form"
+import { SalesRecForm } from "../component/Form-comp/Form"
 import { useState } from "react"
 
 export default function SalesToday() {
@@ -42,7 +43,7 @@ export default function SalesToday() {
          </div>
         {isFormOpen && (
           <div className="form-popup">
-            <Form onClose={handleCloseForm} isOpen={isFormOpen} />
+            <SalesRecForm  />
           </div>
         )}
     </div>

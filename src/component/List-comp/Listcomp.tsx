@@ -142,6 +142,9 @@ export const ListComp = ()=>{
                     </div>
                     <div className="container-product-info">
                         <div className="cuttoff-details">
+                            <div style={{width:'100%' , display:"flex", alignItems:"center", justifyContent:"center"}} >
+                                <h3>Product Discount Info</h3>
+                            </div>
                            <CutoffCard id = {String(EditRow?.id)}/>
                         </div>
                         <div className="cutoff-product-form-container">

@@ -405,61 +405,74 @@ export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true}) =>{
   )
 }
 
-// export const SalesRecForm = ()=>{
-//   return(
-//     <div className='form-main-container'>
-//       <div className="icon-conyainer">
-//         <ToastContainer/>
-//           <div className="icon" onClick={handleClose}>
-//             <RiCloseFill color="white" size={30} fontWeight={500}/>
-//           </div>
-//         </div>
-//         <div className="frm-container">
-//             <div className="form-title" style={{background:"#2A7B9B",display:"flex",columnGap:"10px"}}>
-//                <Toggle onChange={handleChangeCategory}checked= {isDefault}/>
-//               <p>{Hearder}</p>
-//             </div>
-//             <form className="main-form-content" onSubmit={handleSubmit}>
-//                 <div className="input-value">
-//                     <label htmlFor="product-category">Category</label>
-//                     <select name="product_category" id="product-category" value={StockData.product_id} onChange={handleChange}>
-//                       <option value="">Please select Product category</option>
-//                      {
-//                       !isDefault ?(
-//                       wproductInfo?(
-//                        wproductInfo.map((p)=>(
-//                         <option key={p.id} value={p.id}>{p.product_name}</option>
-//                        ))
-//                       ):(
-//                         <option>No product in this category</option>
-//                       )):(
-//                         rproductInfo?(
-//                           rproductInfo.map((p)=>(
-//                             <option key={p.id} value={p.id}>{p.product_name}</option>
-//                           ))
-//                         ):(
-//                           <option value="">No product yet in this category</option>
-//                         )
-//                       )
-//                      }
-//                     </select>
-//                 </div>
-//                 <div className="input-value">
-//                     <label htmlFor="cat">Category</label>
-//                     <input type="text" name="category" id="cat" value={StockData.product_category} onChange={handleChange} required  readOnly />
-//                 </div>
-//                    <div className="input-value">
-//                     <label htmlFor="stock">Stock Number</label>
-//                     <input type="text" name="total_stock" id="stock" value={StockData.total_stock} onChange={handleChange} required />
-//                 </div>
-//                <div className="btn-container">
-//                   <Submitbtn buttonName="Create Stock" type="submit"/>
-//                </div>
-//             </form>
-//         </div>
-//     </div>
-//   )
-// }
+export const SalesRecForm = ()=>{
+  const [isWhole, setWhole] =  useState<boolean>(false)
+  const [wholesales, setWholesales] = useState([])
+  const [retailsales, setretailsales] = useState([])
+   const handleOnsubmit =(e:React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault()
+  }
+  return(
+    <div className='form-main-container' style={{backgroundColor:'azure'}}>
+      <div className="icon-conyainer">
+        <ToastContainer/>
+          <div className="icon" >
+            <RiCloseFill color="white" size={30} fontWeight={500} style={{color:'blue'}}/>
+          </div>
+        </div>
+        <div className="frm-container">
+            <div className="form-title" >
+               {/* <Toggle onChange={handleChangeCategory}checked= {isDefault}/> */}
+              <p>Whole sales Record</p>
+            </div>
+            <form className="main-form-content" onSubmit={handleOnsubmit}>
+            <div className="form-container-decoration">
+                <div className="input-value">
+                    <label htmlFor="product-category">Product</label>
+                    <select name="product_category" id="product-category" value="" >
+                      <option value="">Select product</option>
+                     {
+                      !isWhole ?(
+                      wholesales?(
+                       wholesales.map((p)=>(
+                        <option key="" value=""></option>
+                       ))
+                      ):(
+                        <option>No product exist</option>
+                      )):(
+                        retailsales?(
+                          retailsales.map((p)=>(
+                            <option key="" value=""></option>
+                          ))
+                        ):(
+                          <option value="">No product exist</option>
+                        )
+                      )
+                     }
+                    </select>
+                </div>
+                <div className="input-value">
+                    <label htmlFor="cat">Category</label>
+                    <input type="text" name="category" id="cat" value=""  required  readOnly />
+                </div>
+                   <div className="input-value">
+                    <label htmlFor="stock">Stock Number</label>
+                    <input type="text" name="total_stock" id="stock" value=""  required />
+                </div>
+                    <div className="input-value">
+                    <label htmlFor="pA">Product Amount </label>
+                    <input type="text" name="pAmount" id="pA" value=""  required />
+                </div>
+               <div className="btn-container">
+                  <p>Discount reach range</p>
+                  <Submitbtn buttonName="Submit sales" type="submit"/>
+               </div>
+              </div>
+            </form>
+          </div>
+        </div>
+  )
+}
 
 interface DiscInterface {
   product_id?:number,
