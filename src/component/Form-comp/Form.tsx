@@ -13,6 +13,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 
 
+
 interface FormCompProps {
   onClick?: () => void;
   onClose?: () => void;
@@ -467,7 +468,18 @@ interface DiscInterface {
   percentage?:PerceInterface
   product_name?:string
   Ws_price?:string|null
-  UpdateFlag?:boolean
+  UpdateFlag?:boolean,
+  perc?:number
+}
+interface Disc_requestInterface {
+  product_id?:number,
+  pnum?:number,
+  Amount?:number,
+  percentage?:PerceInterface
+  product_name?:string
+  Ws_price?:string|null
+  UpdateFlag?:boolean,
+  perc?:number
 }
 interface PerceInterface{
   perce:number
@@ -493,55 +505,55 @@ export const CreateDiscount:React.FC<FormCompProps> = ({product_name,pId,Ws_pric
       return update
     })
   }
-  const handleOnsubmit = async(e:React.FormEvent) =>{
-   e.preventDefault()
-   const createPayload:DiscInterface ={
-   product_id:formData.product_id,
-   product_name:formData.product_name,
-   Amount:formData.Amount,
-   percentage:{perce:formData.percentage?.perce ?? 0},
-   pnum:formData.pnum,
-   UpdateFlag:false
+const handleOnsubmit = async(e:React.FormEvent) =>{
+  e.preventDefault()
+  const perc_Num = formData.percentage?.perce
 
-   }
-   const UpdatePayload:DiscInterface ={
-   product_id:formData.product_id,
-   product_name:formData.product_name,
-   Amount:formData.Amount,
-   percentage:{perce:formData.percentage?.perce ?? 0},
-   pnum:formData.pnum,
-   UpdateFlag:true
+  const createPayload:Disc_requestInterface = {
+    product_id: formData.product_id,
+    product_name: formData.product_name,
+    Amount: Number(formData.Amount),
+    perc: perc_Num,
+    pnum: Number(formData.pnum),
+    UpdateFlag: false
+  }
 
-   }
-   console.log(createPayload)
-   console.log(UpdatePayload)
-   try{
-    const response = await  CreateDisCount(createPayload)
-    if(!response.data.success){
-      alert(response.data.message)
+  const UpdatePayload:Disc_requestInterface = {
+    ...createPayload,
+    UpdateFlag: true
+  }
+
+  try {
+    const response = await CreateDisCount(createPayload)
+
+    // case: product discount already exists
+    if (response.data.confirm) {
+      const userConfirmation = window.confirm(response.data.message)
+      if (userConfirmation) {
+        const update_Disc = await CreateDisCount(UpdatePayload)
+        if (!update_Disc.data.success) {
+          alert(update_Disc.data.message)
+          return
+        }
+        alert(update_Disc.data.message)
+      } else {
+        toast.info("Update cancelled by user")
+      }
       return
     }
-   if(response.data.confirm){
-   const userConfimation =window.confirm(response.data.message)
-   if(userConfimation){
-     const update_Disc = await CreateDisCount(UpdatePayload)
-     if(!update_Disc.data.success){
-        alert(response.data.message)
-        return
-     }
-     alert(response.data.message)
-   }
-   toast.success('Success cancel the process')
-   }
 
-   }catch(err){
+    // case: fresh create or failed
+    alert(response.data.message)
+
+  } catch (err) {
     console.error(err)
-    alert(err)
-   }
-
+    alert("Something went wrong")
   }
+}
+
    return(
     <div className="offer-create-main-container">
+    
       <div className="form-title" style={{background:"#e6f8ffff",display:"flex",columnGap:"10px", marginBottom:"12px"}}>
               <p>{`Discount For ${formData.product_name}`}</p>
       </div>
@@ -565,7 +577,11 @@ export const CreateDiscount:React.FC<FormCompProps> = ({product_name,pId,Ws_pric
                <div className="btn-container">
                   <Submitbtn buttonName="Create" type="submit"/>
                </div>
+
       </form>
+      <div>
+      <ToastContainer/>
+      </div>
     </div>
    )
 }
