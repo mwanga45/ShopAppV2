@@ -213,8 +213,7 @@
 .card-conatiner-Disc{
   display: flex;
   height: 400px;
-  width: 500px;
-  background-color: #214aff;
+  min-width: 500px;
 
 }
 
