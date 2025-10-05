@@ -77,7 +77,7 @@ export  const  ReturnDisc = async()=>{
         throw err
     }
 } 
-export const specDisc = async (id:string)=>{
+export const specDisc = async (id?:string)=>{
     try{
       const  response = await api.get(`product/spec/${id}`)
       return response

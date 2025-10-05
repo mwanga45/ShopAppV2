@@ -210,6 +210,13 @@
   align-items: center;
   justify-content: space-around;
 }
+.card-conatiner-Disc{
+  display: flex;
+  height: 400px;
+  width: 500px;
+  background-color: #214aff;
+
+}
 
 @keyframes slideInFromTop {
   from {

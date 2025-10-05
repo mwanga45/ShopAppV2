@@ -5,6 +5,16 @@ import { useEffect, useState} from "react"
 import { EditProdoct, CreateDiscount } from "../Form-comp/Form";
 import { RiCloseFill } from "react-icons/ri";
 import {CutoffCard} from "../Admincord/CutoffCard";
+import { specDisc } from "../../AdminPanel/adminservice";
+export interface DiscountInfo {
+  UpdateAt?: string;
+  percentage?: string;
+  CashDiscount?: number;
+  start_from?: number;
+  product_name?: string; 
+  id:number
+  
+}
 export interface ProductInfo{
     id:number,
     UpdateAt: string,
@@ -23,14 +33,33 @@ export interface ProductInfo{
 export const ListComp = ()=>{
     const [product, setproduct] = useState<ProductInfo[]>([])
     const [EditRow, setEditRow] =useState<ProductInfo|null>()
+    const [DiscRec, setDiscRec] = useState<DiscountInfo[]>([])
     const [isClicked, setisClicked] = useState(false)
     const handleselectedRow = (row:ProductInfo)=>{
         setEditRow({...row})
-
     }
     const handleActionButton = ()=>{
-    setisClicked(!isClicked)
+      setisClicked(!isClicked)
     }
+    const handleDiscount = async(productId?: number)=>{
+    if(!productId){
+      return
+    }
+    const response = await specDisc(String(productId))
+    if(!response.data.success){
+      setDiscRec([{
+        product_name:EditRow?.product_name,
+        start_from:0,
+        percentage:"0",
+        CashDiscount:0,
+        id:0
+        
+      }])
+      return
+    }
+    setDiscRec(response.data.data)
+    }
+    
     useEffect(()=>{
     const fetchallproduct = async()=>{
         try{
@@ -44,6 +73,12 @@ export const ListComp = ()=>{
     }
     fetchallproduct()   
     },[])
+
+    useEffect(()=>{
+      if(EditRow?.id){
+        handleDiscount(EditRow.id)
+      }
+    },[EditRow?.id])
     return(
         <div className="product-list-container">
               <div className="product-list-title">
@@ -145,7 +180,14 @@ export const ListComp = ()=>{
                             <div style={{width:'100%' , display:"flex", alignItems:"center", justifyContent:"center"}} >
                                 <h3>Product Discount Info</h3>
                             </div>
-                           <CutoffCard id = {String(EditRow?.id)}/>
+                            <div className="card-conatiner-Disc">
+                            {
+                            DiscRec.map((item)=>(
+                                <CutoffCard key={item.id} id= {item.id} product_name={item.product_name} percentage={item.percentage} start_from={item.start_from} CashDiscount={item.start_from}/>
+                            ))
+                           }
+                            </div>
+                        
                         </div>
                         <div className="cutoff-product-form-container">
                             < CreateDiscount product_name={EditRow?.product_name} pId={EditRow?.id} Ws_price={EditRow?.wholesales_price} />
