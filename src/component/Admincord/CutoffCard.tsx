@@ -10,7 +10,7 @@ export interface DiscountInfo {
   percentage?: string;
   CashDiscount?: number;
   start_from?: number;
-  product_name?: string;
+  product_name?: string; 
   id:string
 }
 
@@ -31,7 +31,7 @@ if(!response.data.success){
   return
 }
 setDiscRec(response.data.data)
-
+console.log(DiscRec)
 }
 useEffect(()=>{
   handleDiscount()
