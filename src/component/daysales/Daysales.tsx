@@ -2,7 +2,7 @@ import { color } from "chart.js/helpers";
 import "./daysales.css"
 import { SiMoneygram } from "react-icons/si";
 import { useState, useEffect } from 'react';
-import { fetchWholeSales } from '../../Sales/service/sales.api';
+// import { fetchWholeSales } from '../../Sales/service/sales.api';
 
 interface ProductInfo {
   id: string;

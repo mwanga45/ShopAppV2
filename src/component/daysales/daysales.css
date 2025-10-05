@@ -51,6 +51,7 @@
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   animation: cardEntrance 0.8s ease-out;
+  
 }
 
 .dayresult-contaier::before {
@@ -62,7 +63,6 @@
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   animation: shimmer 3s infinite;
-  z-index: 1;
 }
 
 .dayresult-contaier::after {
@@ -75,7 +75,6 @@
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.1) 100%);
   border-radius: 20px;
   pointer-events: none;
-  z-index: 1;
 }
 
 @keyframes cardEntrance {
@@ -117,7 +116,6 @@
   margin: 0 0 8px 0;
   text-align: center;
   position: relative;
-  z-index: 2;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   animation: textGlow 2s ease-in-out infinite alternate;
 }
@@ -138,7 +136,6 @@
   margin: 0;
   text-align: center;
   position: relative;
-  z-index: 2;
   background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
   background-clip: text;
   -webkit-background-clip: text;

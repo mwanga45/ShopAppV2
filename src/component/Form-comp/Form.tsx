@@ -414,11 +414,11 @@ export const SalesRecForm = ()=>{
   }
   return(
     
-    <div className='form-main-container' style={{backgroundColor:'azure'}}>
+    <div className='form-main-container' >
       <div className="icon-conyainer">
         <ToastContainer/>
           <div className="icon" >
-            <RiCloseFill color="white" size={30} fontWeight={500} style={{color:'blue'}}/>
+            <RiCloseFill color="white" size={30} fontWeight={500} />
           </div>
         </div>
         <div className="main-conatiner-sales">
@@ -472,7 +472,7 @@ export const SalesRecForm = ()=>{
               </div>
             </form>
           </div>
-          <div style={{backgroundColor:"black", width:"50%", height:"100vh"}}></div>
+          <div className="SalesBord-dispaly"></div>
           </div>
         </div>
   )
