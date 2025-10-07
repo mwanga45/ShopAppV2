@@ -6,22 +6,29 @@ import { Daysale_list } from "../component/daysales/Daysales"
 import { SalesRecForm } from "../component/Form-comp/Form"
 import { useState } from "react"
 import { fetchProductsales } from "./service/sales.api"
-
-export interface Product {
-  id: number;
-  product_name: string;
-  product_category: 'wholesales' | 'retailsales';
-  product_type: string;
-  wholesales_price: string | null;
-  retailsales_price: string | null;
-  Total_stock: number | null;
-}
+import type { Product } from "../type.interface"
+import type { wProduct } from "../type.interface"
+import type { rProduct } from "../type.interface"
 
 export default function SalesToday() {
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false)
+  const [productsInfo, setrproductInfo] = useState<Product[]>([])
+  const [wholesales, setWholesales] = useState<wProduct[]>([])
+  const [retailsales, setretailsales] = useState<rProduct[]>([])
   
   const handleOpenForm = () => {
     setIsFormOpen(true)
+  }
+  const handleproductInfo = async()=>{
+    try{
+      const response =  await fetchProductsales()
+      if(!response.data.success){
+       
+      }
+    }catch(err){
+      console.error(err)
+      alert(err)
+    }
   }
   
   const handleCloseForm = () => {
