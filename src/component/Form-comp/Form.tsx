@@ -531,41 +531,41 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
 }) => {
   const [isWhole, setWhole] = useState<boolean>(false);
   const [salesResponseOne, setsalesResponseOne] = useState<SaleResponseOne>({
-    ProductId:0,
-    Selling_price:0,
-    Total_product:0
+    ProductId: 0,
+    Selling_price: 0,
+    Total_product: 0,
   });
-  const [displayInfo, setdisplayInfo] = useState<Product>()
+  const [displayInfo, setdisplayInfo] = useState<Product>();
   const [wholeprodinfo, setWholeprodinfo] = useState<wProduct[]>([]);
   const [retailprodinfo, setretailprodinfo] = useState<rProduct[]>([]);
 
   const handleOnsubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
-  const handleOnchangeSelect = (e:React.ChangeEvent<HTMLSelectElement>)=>{
-    const SelectedId =  Number(e.target.value)
-    const selectproductInfo = wholesales.find((p)=> {p.id === SelectedId})
-    if(selectproductInfo){
-    setdisplayInfo({
-     product_category:selectproductInfo.product_category,
-     Total_stock:selectproductInfo.Total_stock,
-     wholesales_price:selectproductInfo.wholesales_price,
-     product_type:selectproductInfo.product_type
-    })
-    }else{
-     setdisplayInfo({
-      product_category:'',
-      Total_stock:0,
-      wholesales_price:"",
-      product_type:"", 
-      Pnum:0    
-    })
+  const handleOnchangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const SelectedId = Number(e.target.value);
+    const selectproductInfo = wholesales.find((p) => p.id === SelectedId);
+    if (selectproductInfo) {
+      setdisplayInfo({
+        product_category: selectproductInfo.product_category,
+        Total_stock: selectproductInfo.Total_stock,
+        wholesales_price: selectproductInfo.wholesales_price,
+        product_type: selectproductInfo.product_type,
+      });
+    } else {
+      setdisplayInfo({
+        product_category: "",
+        Total_stock: 0,
+        wholesales_price: "",
+        product_type: "",
+        Pnum: 0,
+      });
     }
-  }
-  const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
-    const {name, value} = e.target
-    setdisplayInfo((prev)=>({...prev, [name]:value}))
-  }
+  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setdisplayInfo((prev) => ({ ...prev, [name]: value }));
+  };
   useEffect(() => {
     if (wholesales && wholesales.length > 0) {
       setWholeprodinfo(wholesales);
@@ -592,7 +592,12 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
             <div className="form-container-decoration">
               <div className="input-value">
                 <label htmlFor="product-category">Product</label>
-                <select name="product_category" id="product-category" value={salesResponseOne.ProductId} onChange={handleOnchangeSelect}>
+                <select
+                  name="product_category"
+                  id="product-category"
+                  value={salesResponseOne.ProductId}
+                  onChange={handleOnchangeSelect}
+                >
                   <option value="">Select product</option>
                   {wholeprodinfo.map((p) => (
                     <option key={p.id} value={p.id}>
@@ -608,13 +613,33 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
                   name="category"
                   id="cat"
                   value={displayInfo?.product_category}
+                  onChange={handleChange}
                   required
                   readOnly
                 />
               </div>
               <div className="input-value">
                 <label htmlFor="pT">Product Type </label>
-                <input type="text" name="pType" id="pT" value={displayInfo?.product_type} required readOnly />
+                <input
+                  type="text"
+                  name="pType"
+                  id="pT"
+                  value={displayInfo?.product_type}
+                  onChange={handleChange}
+                  required
+                  readOnly
+                />
+              </div>
+              <div className="input-value">
+                <label htmlFor="pc">Price</label>
+                <input
+                  type="text"
+                  name="price"
+                  id="pc"
+                  value={displayInfo?.wholesales_price ?? ""}
+                  onChange={handleChange}
+                  required
+                />
               </div>
               <div className="input-value">
                 <label htmlFor="Pnum">Number</label>
@@ -623,6 +648,7 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
                   name="pnum"
                   id="Pnum"
                   value={displayInfo?.Pnum}
+                  onChange={handleChange}
                   required
                 />
               </div>
