@@ -9,7 +9,9 @@ import { StockCreate } from "../../stock/stockservice";
 import {ProductInfo} from "./formservice"
 import  Toggle from "../button/toggle"
 import { toast, ToastContainer } from "react-toastify";
-
+import type { wProduct } from "../../type.interface";
+import type { rProduct } from "../../type.interface";
+import type { receiveProduct } from "../../type.interface";
 
 
 
@@ -405,10 +407,10 @@ export const StockRegForm:React.FC<StockFormprops> = ({onClose,isOpen=true}) =>{
   )
 }
 
-export const SalesRecForm = ()=>{
+export const SalesRecForm:React.FC<receiveProduct> = ({wholesales, retailsales})=>{
   const [isWhole, setWhole] =  useState<boolean>(false)
-  const [wholesales, setWholesales] = useState([])
-  const [retailsales, setretailsales] = useState([])
+  const [wholeprodinfo, setWholesales] = useState<wProduct[]>([])
+  const [retailprodinfo, setretailsales] = useState <rProduct []>([])
    const handleOnsubmit =(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
   }

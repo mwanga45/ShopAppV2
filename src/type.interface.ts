@@ -24,3 +24,7 @@ export interface rProduct {
   retailsales_price: string 
   Total_stock: number | null;
 }
+export interface receiveProduct{
+    wholesales:wProduct[];
+    retailsales:rProduct[]
+}

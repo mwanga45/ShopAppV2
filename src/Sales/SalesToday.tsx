@@ -4,17 +4,17 @@ import { Search } from "../component/search/Search"
 import { DayResult } from "../component/daysales/Daysales"
 import { Daysale_list } from "../component/daysales/Daysales"
 import { SalesRecForm } from "../component/Form-comp/Form"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { fetchProductsales } from "./service/sales.api"
-import type { Product } from "../type.interface"
+// import type { Product } from "../type.interface"
 import type { wProduct } from "../type.interface"
 import type { rProduct } from "../type.interface"
 
 export default function SalesToday() {
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false)
-  const [productsInfo, setrproductInfo] = useState<Product[]>([])
-  const [wholesales, setWholesales] = useState<wProduct[]>([])
-  const [retailsales, setretailsales] = useState<rProduct[]>([])
+  // const [productsInfo, setproductInfo] = useState<Product[]>([])
+  const [wholesaleprod, setWholesaleprod] = useState<wProduct[]>([])
+  const [retailsalesprod, setretailsaleprod] = useState<rProduct[]>([])
   
   const handleOpenForm = () => {
     setIsFormOpen(true)
@@ -23,8 +23,12 @@ export default function SalesToday() {
     try{
       const response =  await fetchProductsales()
       if(!response.data.success){
-       
+       alert(response.data.message)
+       return
       }
+      setretailsaleprod(response.data.data.retailsale)
+      setWholesaleprod(response.data.data.wholesale)
+      
     }catch(err){
       console.error(err)
       alert(err)
@@ -34,6 +38,9 @@ export default function SalesToday() {
   const handleCloseForm = () => {
     setIsFormOpen(false)
   }
+  useEffect(()=>{
+   handleproductInfo()
+  },[])
   return (
     <div className="Wh-Rtsales-container">
          <div className="salesbar">
@@ -60,7 +67,7 @@ export default function SalesToday() {
          </div>
         {isFormOpen && (
           <div className="form-popup">
-            <SalesRecForm  />
+            <SalesRecForm wholesales={wholesaleprod} retailsales={retailsalesprod}  />
           </div>
         )}
     </div>
