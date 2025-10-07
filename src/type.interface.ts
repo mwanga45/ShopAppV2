@@ -70,7 +70,7 @@ export interface StockFormprops {
   onClose?: () => void;
   isOpen?: boolean;
 }
-export interface productInfo {
+export interface productInfoprops {
   id: number;
   product_category: string;
   product_name: string;

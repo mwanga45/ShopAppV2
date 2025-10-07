@@ -15,6 +15,8 @@ import type { receiveProduct } from "../../type.interface";
 import type { DiscInterface } from "../../type.interface";
 import type { Disc_requestInterface } from "../../type.interface";
 import type { FormCompProps } from "../../type.interface";
+import type { StockFormprops } from "../../type.interface";
+import type { productInfoprops } from "../../type.interface";
 // import type { PerceInterface } from "../../type.interface";
 
 
@@ -373,22 +375,14 @@ export const EditProdoct: React.FC<FormCompProps> = ({
   );
 };
 
-interface StockFormprops {
-  onClose?: () => void;
-  isOpen?: boolean;
-}
-interface productInfo {
-  id: number;
-  product_category: string;
-  product_name: string;
-}
+
 export const StockRegForm: React.FC<StockFormprops> = ({
   onClose,
   isOpen = true,
 }) => {
   const [isopen, setidopen] = useState<boolean>(isOpen);
-  const [wproductInfo, setwproductInfo] = useState<productInfo[]>();
-  const [rproductInfo, setrproductInfo] = useState<productInfo[]>();
+  const [wproductInfo, setwproductInfo] = useState<productInfoprops[]>();
+  const [rproductInfo, setrproductInfo] = useState<productInfoprops[]>();
   const [Hearder, setHearder] = useState<String>("Wholesales-Stock-Reg");
   const [isDefault, setisDefault] = useState<boolean>(false);
   const handleClose = () => {
