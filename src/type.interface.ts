@@ -28,3 +28,26 @@ export interface receiveProduct{
     wholesales:wProduct[];
     retailsales:rProduct[]
 }
+export interface DiscInterface {
+  product_id?: number;
+  pnum?: string;
+  Amount?: number;
+  percentage?: PerceInterface;
+  product_name?: string;
+  Ws_price?: string | null;
+  UpdateFlag?: boolean;
+  perc?: number;
+}
+export interface Disc_requestInterface {
+  product_id?: number;
+  pnum?: number;
+  Amount?: number;
+  percentage?: PerceInterface;
+  product_name?: string;
+  Ws_price?: string | null;
+  UpdateFlag?: boolean;
+  perc?: number;
+}
+export interface PerceInterface {
+  perce: number;
+}
