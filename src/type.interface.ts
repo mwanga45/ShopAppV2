@@ -75,3 +75,8 @@ export interface productInfoprops {
   product_category: string;
   product_name: string;
 }
+export interface SaleResponseOne{
+    ProductId:number;
+    Selling_price:number;
+    Total_product:number;
+}

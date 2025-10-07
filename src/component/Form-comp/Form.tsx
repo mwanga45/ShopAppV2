@@ -530,11 +530,21 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
   retailsales,
 }) => {
   const [isWhole, setWhole] = useState<boolean>(false);
+  const [salesResponseOne, setsalesResponseOne ] = useState()
   const [wholeprodinfo, setWholeprodinfo] = useState<wProduct[]>([]);
   const [retailprodinfo, setretailprodinfo] = useState<rProduct[]>([]);
+  
   const handleOnsubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
+  useEffect(()=>{
+    if(wholesales && wholesales.length > 0){
+      setWholeprodinfo(wholesales)
+    }
+    if(retailsales && wholesales.length > 0){
+      setretailprodinfo(retailsales)
+    }
+  }, [wholesales,retailsales])
   return (
     <div className="form-main-container">
       <div className="icon-conyainer">
@@ -553,19 +563,13 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
             <div className="form-container-decoration">
               <div className="input-value">
                 <label htmlFor="product-category">Product</label>
-                <select name="product_category" id="product-category" value="">
+                <select name="product_category" id="product-category">
                   <option value="">Select product</option>
-                  {!isWhole ? (
-                    wholesales ? (
-                      wholesales.map((p) => <option key="" value=""></option>)
-                    ) : (
-                      <option>No product exist</option>
-                    )
-                  ) : retailsales ? (
-                    retailsales.map((p) => <option key="" value=""></option>)
-                  ) : (
-                    <option value="">No product exist</option>
-                  )}
+                  {
+                    wholeprodinfo.map((p) => (
+                      <option key={p.id} value={p.id}>{p.product_name}</option>
+                    ))
+                  }
                 </select>
               </div>
               <div className="input-value">
