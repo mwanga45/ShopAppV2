@@ -51,3 +51,27 @@ export interface Disc_requestInterface {
 export interface PerceInterface {
   perce: number;
 }
+
+export interface FormCompProps {
+  onClick?: () => void;
+  onClose?: () => void;
+  isOpen?: boolean;
+  product_name?: string;
+  product_id?: string;
+  product_category?: string;
+  product_type?: string;
+  Rs_price?: string | null;
+  Ws_price?: string | null;
+  wpurchase_price?: string | null;
+  rpurchase_price?: string | null;
+  pId?: number;
+}
+export interface StockFormprops {
+  onClose?: () => void;
+  isOpen?: boolean;
+}
+export interface productInfo {
+  id: number;
+  product_category: string;
+  product_name: string;
+}

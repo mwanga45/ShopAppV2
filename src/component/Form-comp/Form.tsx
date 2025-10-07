@@ -14,22 +14,10 @@ import type { rProduct } from "../../type.interface";
 import type { receiveProduct } from "../../type.interface";
 import type { DiscInterface } from "../../type.interface";
 import type { Disc_requestInterface } from "../../type.interface";
+import type { FormCompProps } from "../../type.interface";
 // import type { PerceInterface } from "../../type.interface";
 
-interface FormCompProps {
-  onClick?: () => void;
-  onClose?: () => void;
-  isOpen?: boolean;
-  product_name?: string;
-  product_id?: string;
-  product_category?: string;
-  product_type?: string;
-  Rs_price?: string | null;
-  Ws_price?: string | null;
-  wpurchase_price?: string | null;
-  rpurchase_price?: string | null;
-  pId?: number;
-}
+
 
 export default function FormComp({ onClose, isOpen = true }: FormCompProps) {
   const [close, setClose] = useState<boolean>(isOpen);
