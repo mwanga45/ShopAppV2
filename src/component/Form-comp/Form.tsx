@@ -10,6 +10,7 @@ import { ProductInfo } from "./formservice";
 import Toggle from "../button/toggle";
 import { toast, ToastContainer } from "react-toastify";
 import { salesRequestInfo } from "../../Sales/service/sales.api";
+import type { SalesSummaryResponse } from "../../type.interface";
 import type {
   wProduct,
   rProduct,
@@ -530,55 +531,84 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
   wholesales,
   retailsales,
 }) => {
-  const [isWhole, setWhole] = useState<boolean>(false);
+  const [isWhole, setWhole] = useState<boolean>(true);
   const [salesResponseOne, setsalesResponseOne] = useState<SaleResponseOne>({
     ProductId: 0,
     Selling_price: 0,
     Total_product: 0,
   });
   const [displayInfo, setdisplayInfo] = useState<Product>();
+  const [salesSummary, setSalesSummary] = useState<SalesSummaryResponse | null>(null);
   const [wholeprodinfo, setWholeprodinfo] = useState<wProduct[]>([]);
   const [retailprodinfo, setretailprodinfo] = useState<rProduct[]>([]);
 
   const handleOnsubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(displayInfo?.Total_stock === null || displayInfo?.wholesales_price === null || salesResponseOne.ProductId === null){
+    const price = isWhole ? displayInfo?.wholesales_price : (displayInfo as any)?.retailsales_price;
+    if(displayInfo?.Total_stock == null || price == null || salesResponseOne.ProductId == null){
       alert("make sure  all field have value")
       return
     }
     const sentpayload:any ={
-    productId:salesResponseOne.ProductId,
-    Selling_price:displayInfo?.wholesales_price,
-    Total_product:displayInfo?.Total_stock
+      ProductId:Number(salesResponseOne.ProductId),
+      Selling_price:Number(price),
+      Total_product:Number(displayInfo?.Total_stock)
     } 
   try{
-  const response = await salesRequestInfo (sentpayload)
-    
-  }catch(err){
-
+    const response = await salesRequestInfo (sentpayload)
+    console.log('Sales response:', response.data)
+    if(!(response as any)?.data){
+      alert('No data returned from server')
+      return
+    }
+    setSalesSummary(response.data as SalesSummaryResponse)
+    if((response as any)?.data?.success === false){
+      alert((response as any)?.data?.message || 'Request failed')
+      return
+    }
+  }catch(err:any){
+    console.error('Sales submit error:', err?.response?.data || err)
+    alert(err?.response?.data?.message || 'Failed to submit sales')
   }
   };
   const handleOnchangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setsalesResponseOne((prev)=>({...prev, ProductId:SelectedId}))
     const SelectedId = Number(e.target.value);
-    const selectproductInfo = wholesales.find((p) => p.id === SelectedId);
+    setsalesResponseOne((prev)=>({...prev, ProductId:SelectedId}))
+    const source = isWhole ? wholesales : retailsales;
+    const selectproductInfo = source.find((p) => p.id === SelectedId) as any;
     if (selectproductInfo) {
       setdisplayInfo({
         product_category: selectproductInfo.product_category,
         Total_stock: selectproductInfo.Total_stock,
-        wholesales_price: selectproductInfo.wholesales_price,
+        wholesales_price: isWhole ? selectproductInfo.wholesales_price : '',
+        retailsales_price: !isWhole ? selectproductInfo.retailsales_price : '',
         product_type: selectproductInfo.product_type,
-      });
+      } as any);
     } else {
       setdisplayInfo({
         product_category: "",
         Total_stock: 0,
         wholesales_price: "",
+        retailsales_price: "",
         product_type: "",
         Pnum: 0,
-      });
+      } as any);
     }
   };
+  useEffect(()=>{
+    if(!salesResponseOne.ProductId){
+      return
+    }
+    const source = isWhole ? wholesales : retailsales;
+    const selectproductInfo = source.find((p:any)=> p.id === salesResponseOne.ProductId) as any
+    if(selectproductInfo){
+      setdisplayInfo((prev:any)=> ({
+        ...prev,
+        wholesales_price: isWhole ? selectproductInfo.wholesales_price : '',
+        retailsales_price: !isWhole ? selectproductInfo.retailsales_price : ''
+      }))
+    }
+  },[isWhole])
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setdisplayInfo((prev) => ({ ...prev, [name]: value }));
@@ -587,7 +617,7 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
     if (wholesales && wholesales.length > 0) {
       setWholeprodinfo(wholesales);
     }
-    if (retailsales && wholesales.length > 0) {
+    if (retailsales && retailsales.length > 0) {
       setretailprodinfo(retailsales);
     }
   }, [wholesales, retailsales]);
@@ -601,9 +631,11 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
       </div>
       <div className="main-conatiner-sales">
         <div className="frm-container">
-          <div className="form-title">
-            {/* <Toggle onChange={handleChangeCategory}checked= {isDefault}/> */}
-            <p>Whole sales Record</p>
+          <div className="form-title" style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+            <p>{isWhole ? 'Whole sales Record' : 'Retail sales Record'}</p>
+            <button type="button" className="Actin-btn" onClick={()=> setWhole(prev=> !prev)}>
+              {isWhole ? 'Switch to Retail' : 'Switch to Wholesale'}
+            </button>
           </div>
           <form className="main-form-content" onSubmit={handleOnsubmit}>
             <div className="form-container-decoration">
@@ -616,7 +648,7 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
                   onChange={handleOnchangeSelect}
                 >
                   <option value="">Select product</option>
-                  {wholeprodinfo.map((p) => (
+                  {(isWhole ? wholeprodinfo : retailprodinfo).map((p) => (
                     <option key={p.id} value={p.id}>
                       {p.product_name}
                     </option>
@@ -651,9 +683,9 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
                 <label htmlFor="pc">Price</label>
                 <input
                   type="text"
-                  name="wholesales_price"
+                  name={isWhole ? "wholesales_price" : "retailsales_price"}
                   id="pc"
-                  value={displayInfo?.wholesales_price ?? ""}
+                  value={isWhole ? (displayInfo?.wholesales_price ?? "") : ((displayInfo as any)?.retailsales_price ?? "")}
                   onChange={handleChange}
                   required
                 />
@@ -676,7 +708,37 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
             </div>
           </form>
         </div>
-        <div className="SalesBord-dispaly"></div>
+        <div className="SalesBord-dispaly">
+          {salesSummary && (
+            <div className="sales-board-wrapper">
+              <div className="sales-card">
+                <h4>Stock Check</h4>
+                <p>Status: {salesSummary.data.stock_check.data.product_status}</p>
+                <p>Total stock: {salesSummary.data.stock_check.data.totalstock}</p>
+              </div>
+              <div className="sales-card">
+                <h4>Discount</h4>
+                {salesSummary.data.DiscontResult.data.filter_discont.map((d, idx)=> (
+                  <div key={idx} className="discount-row">
+                    <span>{Number(d.percentageDiscaunt).toFixed(2)}%</span>
+                    <span>Amount: {d.CashDiscount}</span>
+                    <span>Start from: {d.start_from}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="sales-card">
+                <h4>Deviation & Revenue</h4>
+                <p>Revenue: {salesSummary.data.CalculateDeviation.data.Revenue.toLocaleString()}</p>
+                <p>Expected Revenue: {salesSummary.data.CalculateDeviation.data.Expect_revenue.toLocaleString()}</p>
+                <p>Exp Profit/each: {salesSummary.data.CalculateDeviation.data.Exp_profit_pereach.toLocaleString()}</p>
+                <p>Expected Net Profit: {salesSummary.data.CalculateDeviation.data.Exp_Net_profit.toLocaleString()}</p>
+                <p>Net Profit: {salesSummary.data.CalculateDeviation.data.Net_profit.toLocaleString()}</p>
+                <p>Profit Deviation: {salesSummary.data.CalculateDeviation.data.Profit_deviation.toLocaleString()}</p>
+                <p>Deviation %: {salesSummary.data.CalculateDeviation.data.deviationFromMeanPercent.toFixed(2)}%</p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

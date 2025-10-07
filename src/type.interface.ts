@@ -81,3 +81,58 @@ export interface SaleResponseOne{
     Selling_price:number;
     Total_product:number;
 }
+
+export interface StockCheckData {
+  totalstock: number;
+  product_status: 'Enough' | 'Less' | string;
+}
+
+export interface StockCheckResponse {
+  message: string;
+  success: boolean;
+  data: StockCheckData;
+}
+
+export interface DiscountItem {
+  percentageDiscaunt: string;
+  CashDiscount: number;
+  start_from: number;
+}
+
+export interface DiscountData {
+  filter_discont: DiscountItem[];
+}
+
+export interface DiscountResponse {
+  message: string;
+  success: boolean;
+  data: DiscountData;
+}
+
+export interface DeviationData {
+  Revenue: number;
+  deviationFromMeanPercent: number;
+  Expect_revenue: number;
+  Exp_profit_pereach: number;
+  Exp_Net_profit: number;
+  Net_profit: number;
+  Profit_deviation: number;
+}
+
+export interface DeviationResponse {
+  message: string;
+  success: boolean;
+  data: DeviationData;
+}
+
+export interface SalesSummaryData {
+  stock_check: StockCheckResponse;
+  DiscontResult: DiscountResponse;
+  CalculateDeviation: DeviationResponse;
+}
+
+export interface SalesSummaryResponse {
+  message: string;
+  success: boolean;
+  data: SalesSummaryData;
+}
