@@ -542,19 +542,24 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
   const handleOnsubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
-  const handleOnchangeSelect = (e:React.ChangeEvent<HTMLSelectElement>){
+  const handleOnchangeSelect = (e:React.ChangeEvent<HTMLSelectElement>)=>{
     const SelectedId =  Number(e.target.value)
     const selectproductInfo = wholesales.find((p)=> {p.id === SelectedId})
     if(selectproductInfo){
-     category:selectproductInfo.product_category
-     stock:selectproductInfo.product_type
-     wholesales_price: selectproductInfo.wholesales_price
-     type:selectproductInfo.product_type
+    setdisplayInfo({
+     product_category:selectproductInfo.product_category,
+     Total_stock:selectproductInfo.Total_stock,
+     wholesales_price:selectproductInfo.wholesales_price,
+     product_type:selectproductInfo.product_type
+    })
     }else{
-     category:""
-     stock:""
-     wholesales_price:""
-     type:""
+     setdisplayInfo({
+      product_category:'',
+      Total_stock:0,
+      wholesales_price:"",
+      product_type:"", 
+      Pnum:0    
+    })
     }
   }
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -587,7 +592,7 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
             <div className="form-container-decoration">
               <div className="input-value">
                 <label htmlFor="product-category">Product</label>
-                <select name="product_category" id="product-category" value={salesResponseOne.ProductId}>
+                <select name="product_category" id="product-category" value={salesResponseOne.ProductId} onChange={handleOnchangeSelect}>
                   <option value="">Select product</option>
                   {wholeprodinfo.map((p) => (
                     <option key={p.id} value={p.id}>
@@ -602,24 +607,24 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
                   type="text"
                   name="category"
                   id="cat"
-                  value={}
+                  value={displayInfo?.product_category}
                   required
                   readOnly
                 />
               </div>
               <div className="input-value">
-                <label htmlFor="stock">Stock Number</label>
-                <input
-                  type="text"
-                  name="total_stock"
-                  id="stock"
-                  value=""
-                  required
-                />
+                <label htmlFor="pT">Product Type </label>
+                <input type="text" name="pType" id="pT" value={displayInfo?.product_type} required readOnly />
               </div>
               <div className="input-value">
-                <label htmlFor="pA">Product Amount </label>
-                <input type="text" name="pAmount" id="pA" value="" required />
+                <label htmlFor="Pnum">Number</label>
+                <input
+                  type="text"
+                  name="pnum"
+                  id="Pnum"
+                  value={displayInfo?.Pnum}
+                  required
+                />
               </div>
               <div className="btn-container">
                 <p>Discount reach range</p>
