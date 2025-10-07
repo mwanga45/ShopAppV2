@@ -9,17 +9,18 @@ import { StockCreate } from "../../stock/stockservice";
 import { ProductInfo } from "./formservice";
 import Toggle from "../button/toggle";
 import { toast, ToastContainer } from "react-toastify";
-import type { wProduct } from "../../type.interface";
-import type { rProduct } from "../../type.interface";
-import type { receiveProduct } from "../../type.interface";
-import type { DiscInterface } from "../../type.interface";
-import type { Disc_requestInterface } from "../../type.interface";
-import type { FormCompProps } from "../../type.interface";
-import type { StockFormprops } from "../../type.interface";
-import type { productInfoprops } from "../../type.interface";
-// import type { PerceInterface } from "../../type.interface";
-
-
+import type {
+  wProduct,
+  rProduct,
+  receiveProduct,
+  DiscInterface,
+  Disc_requestInterface,
+  FormCompProps,
+  StockFormprops,
+  productInfoprops,
+  SaleResponseOne,
+  Product,
+} from "../../type.interface";
 
 export default function FormComp({ onClose, isOpen = true }: FormCompProps) {
   const [close, setClose] = useState<boolean>(isOpen);
@@ -375,7 +376,6 @@ export const EditProdoct: React.FC<FormCompProps> = ({
   );
 };
 
-
 export const StockRegForm: React.FC<StockFormprops> = ({
   onClose,
   isOpen = true,
@@ -530,21 +530,45 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
   retailsales,
 }) => {
   const [isWhole, setWhole] = useState<boolean>(false);
-  const [salesResponseOne, setsalesResponseOne ] = useState()
+  const [salesResponseOne, setsalesResponseOne] = useState<SaleResponseOne>({
+    ProductId:0,
+    Selling_price:0,
+    Total_product:0
+  });
+  const [displayInfo, setdisplayInfo] = useState<Product>()
   const [wholeprodinfo, setWholeprodinfo] = useState<wProduct[]>([]);
   const [retailprodinfo, setretailprodinfo] = useState<rProduct[]>([]);
-  
+
   const handleOnsubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
-  useEffect(()=>{
-    if(wholesales && wholesales.length > 0){
-      setWholeprodinfo(wholesales)
+  const handleOnchangeSelect = (e:React.ChangeEvent<HTMLSelectElement>){
+    const SelectedId =  Number(e.target.value)
+    const selectproductInfo = wholesales.find((p)=> {p.id === SelectedId})
+    if(selectproductInfo){
+     category:selectproductInfo.product_category
+     stock:selectproductInfo.product_type
+     wholesales_price: selectproductInfo.wholesales_price
+     type:selectproductInfo.product_type
+    }else{
+     category:""
+     stock:""
+     wholesales_price:""
+     type:""
     }
-    if(retailsales && wholesales.length > 0){
-      setretailprodinfo(retailsales)
+  }
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+    const {name, value} = e.target
+    setdisplayInfo((prev)=>({...prev, [name]:value}))
+  }
+  useEffect(() => {
+    if (wholesales && wholesales.length > 0) {
+      setWholeprodinfo(wholesales);
     }
-  }, [wholesales,retailsales])
+    if (retailsales && wholesales.length > 0) {
+      setretailprodinfo(retailsales);
+    }
+  }, [wholesales, retailsales]);
   return (
     <div className="form-main-container">
       <div className="icon-conyainer">
@@ -563,13 +587,13 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
             <div className="form-container-decoration">
               <div className="input-value">
                 <label htmlFor="product-category">Product</label>
-                <select name="product_category" id="product-category">
+                <select name="product_category" id="product-category" value={salesResponseOne.ProductId}>
                   <option value="">Select product</option>
-                  {
-                    wholeprodinfo.map((p) => (
-                      <option key={p.id} value={p.id}>{p.product_name}</option>
-                    ))
-                  }
+                  {wholeprodinfo.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.product_name}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="input-value">
@@ -578,7 +602,7 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
                   type="text"
                   name="category"
                   id="cat"
-                  value=""
+                  value={}
                   required
                   readOnly
                 />
@@ -609,7 +633,6 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
     </div>
   );
 };
-
 
 export const CreateDiscount: React.FC<FormCompProps> = ({
   product_name,
