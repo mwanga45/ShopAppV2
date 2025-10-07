@@ -1,7 +1,7 @@
 import { api } from "../../global.api";
 
-export const fetchWholeSales = async () => {
-  const response = await api.get("/sales/wholesale"); // Assuming a /sales/wholesale endpoint
-  return response.data;
+export const fetchProductsales = async () => {
+  const response = await api.get('product/salesInfo')
+  return response
 };
 
