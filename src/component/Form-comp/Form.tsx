@@ -543,9 +543,16 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
   const [retailprodinfo, setretailprodinfo] = useState<rProduct[]>([]);
 
   const handleOnsubmit = async(e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()   
     const price = isWhole ? displayInfo?.wholesales_price : (displayInfo as any)?.retailsales_price;
-    if(displayInfo?.Total_stock == null || price == null || salesResponseOne.ProductId == null){
+    if(displayInfo?.Pnum == null || price == null || salesResponseOne.ProductId == null){
+      const sentpayload:any ={
+      ProductId:Number(salesResponseOne.ProductId),
+      Selling_price:Number(price),
+      Total_product:Number(displayInfo?.Pnum)
+      
+    } 
+      console.log(sentpayload)
       alert("make sure  all field have value")
       return
     }
@@ -554,6 +561,7 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
       Selling_price:Number(price),
       Total_product:Number(displayInfo?.Total_stock)
     } 
+    console.log(sentpayload)
   try{
     const response = await salesRequestInfo (sentpayload)
     console.log('Sales response:', response.data)
