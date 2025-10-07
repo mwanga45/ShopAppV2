@@ -9,6 +9,7 @@ import { StockCreate } from "../../stock/stockservice";
 import { ProductInfo } from "./formservice";
 import Toggle from "../button/toggle";
 import { toast, ToastContainer } from "react-toastify";
+import { salesRequestInfo } from "../../Sales/service/sales.api";
 import type {
   wProduct,
   rProduct,
@@ -539,10 +540,26 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
   const [wholeprodinfo, setWholeprodinfo] = useState<wProduct[]>([]);
   const [retailprodinfo, setretailprodinfo] = useState<rProduct[]>([]);
 
-  const handleOnsubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleOnsubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if(displayInfo?.Total_stock === null || displayInfo?.wholesales_price === null || salesResponseOne.ProductId === null){
+      alert("make sure  all field have value")
+      return
+    }
+    const sentpayload:any ={
+    productId:salesResponseOne.ProductId,
+    Selling_price:displayInfo?.wholesales_price,
+    Total_product:displayInfo?.Total_stock
+    } 
+  try{
+  const response = await salesRequestInfo (sentpayload)
+    
+  }catch(err){
+
+  }
   };
   const handleOnchangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setsalesResponseOne((prev)=>({...prev, ProductId:SelectedId}))
     const SelectedId = Number(e.target.value);
     const selectproductInfo = wholesales.find((p) => p.id === SelectedId);
     if (selectproductInfo) {
@@ -634,7 +651,7 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
                 <label htmlFor="pc">Price</label>
                 <input
                   type="text"
-                  name="price"
+                  name="wholesales_price"
                   id="pc"
                   value={displayInfo?.wholesales_price ?? ""}
                   onChange={handleChange}

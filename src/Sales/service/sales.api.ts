@@ -5,3 +5,7 @@ export const fetchProductsales = async () => {
   return response
 };
 
+export const salesRequestInfo = async (data:any) =>{
+  const response = await api.post('sales/salesInfo',data)
+  return response
+}
