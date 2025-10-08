@@ -838,13 +838,16 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
                   )}
                   %
                 </p>
+                <div className="submit-sales-container">
                 <Submitbtn buttonName="submit sales" onclick={handlemakesales}/>
                 <select name="paymentstatus" value={makesales?.paymentstatus} onChange={handleChange}>
                   <option value= "paid">Select payment style</option>
                   <option value="paid">paid</option>
                   <option value="pending">pending...</option>
                   <option value="partialpaid">partialpaid</option>
+                  <option value="debt">dept</option>
                 </select>
+                </div>
               </div>
             </div>
           )}
