@@ -10,7 +10,7 @@ import { ProductInfo } from "./formservice";
 import Toggle from "../button/toggle";
 import { toast, ToastContainer } from "react-toastify";
 import { salesRequestInfo } from "../../Sales/service/sales.api";
-import type { Salerequest,  SalesSummaryResponse } from "../../type.interface";
+import type { Salerequest, SalesSummaryResponse } from "../../type.interface";
 import type {
   wProduct,
   rProduct,
@@ -538,61 +538,75 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
     Total_product: 0,
   });
   const [displayInfo, setdisplayInfo] = useState<Product>();
-  const [salesSummary, setSalesSummary] = useState<SalesSummaryResponse | null>(null);
+  const [salesSummary, setSalesSummary] = useState<SalesSummaryResponse | null>(
+    null
+  );
   const [wholeprodinfo, setWholeprodinfo] = useState<wProduct[]>([]);
   const [retailprodinfo, setretailprodinfo] = useState<rProduct[]>([]);
-  const [makesales, setmakesales] = useState<Salerequest>()
+  const [makesales, setmakesales] = useState<Salerequest>();
 
-  const handleOnsubmit = async(e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()   
-    const price = isWhole ? displayInfo?.wholesales_price : (displayInfo as any)?.retailsales_price;
-    if(displayInfo?.Pnum == null || price == null || salesResponseOne.ProductId == null){
-      const sentpayload:any ={
-      ProductId:Number(salesResponseOne.ProductId),
-      Selling_price:Number(price),
-      Total_product:Number(displayInfo?.Pnum)
-      
-    } 
-      console.log(sentpayload)
-      alert("make sure  all field have value")
-      return
+  const handleOnsubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const price = isWhole
+      ? displayInfo?.wholesales_price
+      : (displayInfo as any)?.retailsales_price;
+    if (
+      displayInfo?.Pnum == null ||
+      price == null ||
+      salesResponseOne.ProductId == null
+    ) {
+      const sentpayload: any = {
+        ProductId: Number(salesResponseOne.ProductId),
+        Selling_price: Number(price),
+        Total_product: Number(displayInfo?.Pnum),
+      };
+      console.log(sentpayload);
+      alert("make sure  all field have value");
+      return;
     }
-    const sentpayload:any ={
-      ProductId:Number(salesResponseOne.ProductId),
-      Selling_price:Number(price),
-      Total_product:Number(displayInfo?.Pnum)
-    } 
-    console.log(sentpayload)
-  try{
-    const response = await salesRequestInfo (sentpayload)
-    console.log('Sales response:', response.data)
-    if(!(response as any)?.data){
-      alert('No data returned from server')
-      return
+
+    const sentpayload: any = {
+      ProductId: Number(salesResponseOne.ProductId),
+      Selling_price: Number(price),
+      Total_product: Number(displayInfo?.Pnum),
+    };
+    setmakesales((prev) => ({
+      ...prev,
+      ProductId: salesResponseOne.ProductId,
+      Total_pc_pkg_litre: Number(displayInfo.Pnum),
+    }));
+    console.log(sentpayload);
+    console.log(makesales);
+    try {
+      const response = await salesRequestInfo(sentpayload);
+      console.log("Sales response:", response.data);
+      if (!(response as any)?.data) {
+        alert("No data returned from server");
+        return;
+      }
+      setSalesSummary(response.data as SalesSummaryResponse);
+      if ((response as any)?.data?.success === false) {
+        alert((response as any)?.data?.message || "Request failed");
+        return;
+      }
+    } catch (err: any) {
+      console.error("Sales submit error:", err?.response?.data || err);
+      alert(err?.response?.data?.message || "Failed to submit sales");
     }
-    setSalesSummary(response.data as SalesSummaryResponse)
-    if((response as any)?.data?.success === false){
-      alert((response as any)?.data?.message || 'Request failed')
-      return
-    }
-  }catch(err:any){
-    console.error('Sales submit error:', err?.response?.data || err)
-    alert(err?.response?.data?.message || 'Failed to submit sales')
-  }
   };
   const handleOnchangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const SelectedId = Number(e.target.value);
-    setsalesResponseOne((prev)=>({...prev, ProductId:SelectedId}))
+    setsalesResponseOne((prev) => ({ ...prev, ProductId: SelectedId }));
     const source = isWhole ? wholesales : retailsales;
     const selectproductInfo = source.find((p) => p.id === SelectedId) as any;
     if (selectproductInfo) {
       setdisplayInfo({
         product_category: selectproductInfo.product_category,
         Total_stock: selectproductInfo.Total_stock,
-        wholesales_price: isWhole ? selectproductInfo.wholesales_price : '',
-        retailsales_price: !isWhole ? selectproductInfo.retailsales_price : '',
+        wholesales_price: isWhole ? selectproductInfo.wholesales_price : "",
+        retailsales_price: !isWhole ? selectproductInfo.retailsales_price : "",
         product_type: selectproductInfo.product_type,
-        Pnum:0
+        Pnum: 0,
       } as any);
     } else {
       setdisplayInfo({
@@ -605,23 +619,34 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
       } as any);
     }
   };
-  const handlemakesales = () =>{
-
-  }
-  useEffect(()=>{
-    if(!salesResponseOne.ProductId){
-      return
+  const handlemakesales = () => {
+    setmakesales((prev) => ({
+      ...prev,
+      Revenue: salesSummary?.data?.CalculateDeviation.data.Revenue ?? 0,
+      Expecte_profit:salesSummary?.data?.CalculateDeviation.data.Exp_Net_profit ?? 0,
+      Net_profit:salesSummary?.data?.CalculateDeviation.data.Net_profit ?? 0,
+      Percentage_deviation:salesSummary?.data?.CalculateDeviation.data.deviationFromMeanPercent ?? 0,
+      profit_deviation:salesSummary?.data?.CalculateDeviation.data.Profit_deviation ?? 0,
+      Stock_status:salesSummary?.data?.stock_check.data.product_status
+    }));
+  };
+  console.log(makesales)
+  useEffect(() => {
+    if (!salesResponseOne.ProductId) {
+      return;
     }
     const source = isWhole ? wholesales : retailsales;
-    const selectproductInfo = source.find((p:any)=> p.id === salesResponseOne.ProductId) as any
-    if(selectproductInfo){
-      setdisplayInfo((prev:any)=> ({
+    const selectproductInfo = source.find(
+      (p: any) => p.id === salesResponseOne.ProductId
+    ) as any;
+    if (selectproductInfo) {
+      setdisplayInfo((prev: any) => ({
         ...prev,
-        wholesales_price: isWhole ? selectproductInfo.wholesales_price : '',
-        retailsales_price: !isWhole ? selectproductInfo.retailsales_price : ''
-      }))
+        wholesales_price: isWhole ? selectproductInfo.wholesales_price : "",
+        retailsales_price: !isWhole ? selectproductInfo.retailsales_price : "",
+      }));
     }
-  },[isWhole])
+  }, [isWhole]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setdisplayInfo((prev) => ({ ...prev, [name]: value }));
@@ -644,10 +669,21 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
       </div>
       <div className="main-conatiner-sales">
         <div className="frm-container">
-          <div className="form-title" style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-            <p>{isWhole ? 'Whole sales Record' : 'Retail sales Record'}</p>
-            <button type="button" className="Actin-btn" onClick={()=> setWhole(prev=> !prev)}>
-              {isWhole ? 'Switch to Retail' : 'Switch to Wholesale'}
+          <div
+            className="form-title"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <p>{isWhole ? "Whole sales Record" : "Retail sales Record"}</p>
+            <button
+              type="button"
+              className="Actin-btn"
+              onClick={() => setWhole((prev) => !prev)}
+            >
+              {isWhole ? "Switch to Retail" : "Switch to Wholesale"}
             </button>
           </div>
           <form className="main-form-content" onSubmit={handleOnsubmit}>
@@ -698,7 +734,11 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
                   type="text"
                   name={isWhole ? "wholesales_price" : "retailsales_price"}
                   id="pc"
-                  value={isWhole ? (displayInfo?.wholesales_price ?? "") : ((displayInfo as any)?.retailsales_price ?? "")}
+                  value={
+                    isWhole
+                      ? displayInfo?.wholesales_price ?? ""
+                      : (displayInfo as any)?.retailsales_price ?? ""
+                  }
                   onChange={handleChange}
                   required
                 />
@@ -726,32 +766,64 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
             <div className="sales-board-wrapper">
               <div className="sales-card">
                 <h4>Stock Check</h4>
-                <p>Status: {salesSummary.data.stock_check.data.product_status}</p>
-                <p>Total stock: {salesSummary.data.stock_check.data.totalstock}</p>
+                <p>
+                  Status: {salesSummary.data.stock_check.data.product_status}
+                </p>
+                <p>
+                  Total stock: {salesSummary.data.stock_check.data.totalstock}
+                </p>
               </div>
               <div className="sales-card">
                 <h4>Discount</h4>
-                {salesSummary.data.DiscontResult?.data?.filter_discont?.length > 0 ? (
-                  salesSummary.data.DiscontResult.data.filter_discont.map((d, idx)=> (
-                    <div key={idx} className="discount-row">
-                      <span>{Number(d.percentageDiscaunt).toFixed(2)}%</span>
-                      <span>Amount: {d.CashDiscount}</span>
-                      <span>Start from: {d.start_from}</span>
-                    </div>
-                  ))
+                {salesSummary.data.DiscontResult?.data?.filter_discont?.length >
+                0 ? (
+                  salesSummary.data.DiscontResult.data.filter_discont.map(
+                    (d, idx) => (
+                      <div key={idx} className="discount-row">
+                        <span>{Number(d.percentageDiscaunt).toFixed(2)}%</span>
+                        <span>Amount: {d.CashDiscount}</span>
+                        <span>Start from: {d.start_from}</span>
+                      </div>
+                    )
+                  )
                 ) : (
                   <p>No discount available for this product</p>
                 )}
               </div>
               <div className="sales-card">
                 <h4>Deviation & Revenue</h4>
-                <p>Revenue: {salesSummary.data.CalculateDeviation.data.Revenue.toLocaleString()}</p>
-                <p>Expected Revenue: {salesSummary.data.CalculateDeviation.data.Expect_revenue.toLocaleString()}</p>
-                <p>Exp Profit/each: {salesSummary.data.CalculateDeviation.data.Exp_profit_pereach.toLocaleString()}</p>
-                <p>Expected Net Profit: {salesSummary.data.CalculateDeviation.data.Exp_Net_profit.toLocaleString()}</p>
-                <p>Net Profit: {salesSummary.data.CalculateDeviation.data.Net_profit.toLocaleString()}</p>
-                <p>Profit Deviation: {salesSummary.data.CalculateDeviation.data.Profit_deviation.toLocaleString()}</p>
-                <p>Deviation from profit %: {salesSummary.data.CalculateDeviation.data.deviationFromMeanPercent.toFixed(2)}%</p>
+                <p>
+                  Revenue:{" "}
+                  {salesSummary.data.CalculateDeviation.data.Revenue.toLocaleString()}
+                </p>
+                <p>
+                  Expected Revenue:{" "}
+                  {salesSummary.data.CalculateDeviation.data.Expect_revenue.toLocaleString()}
+                </p>
+                <p>
+                  Exp Profit/each:{" "}
+                  {salesSummary.data.CalculateDeviation.data.Exp_profit_pereach.toLocaleString()}
+                </p>
+                <p>
+                  Expected Net Profit:{" "}
+                  {salesSummary.data.CalculateDeviation.data.Exp_Net_profit.toLocaleString()}
+                </p>
+                <p>
+                  Net Profit:{" "}
+                  {salesSummary.data.CalculateDeviation.data.Net_profit.toLocaleString()}
+                </p>
+                <p>
+                  Profit Deviation:{" "}
+                  {salesSummary.data.CalculateDeviation.data.Profit_deviation.toLocaleString()}
+                </p>
+                <p>
+                  Deviation from profit %:{" "}
+                  {salesSummary.data.CalculateDeviation.data.deviationFromMeanPercent.toFixed(
+                    2
+                  )}
+                  %
+                </p>
+                <Submitbtn buttonName="submit sales" onclick={handlemakesales}/>
               </div>
             </div>
           )}

@@ -129,7 +129,7 @@ export interface SalesSummaryData {
   stock_check: StockCheckResponse;
   DiscontResult: DiscountResponse;
   CalculateDeviation: DeviationResponse;
-  productId?:number
+  
 }
 
 export interface SalesSummaryResponse {
@@ -159,9 +159,9 @@ export interface Salerequest {
   Net_profit?: number;
   Discount_percentage?: number;
   Percentage_deviation?: number;
-  Revenue?: number;
+  Revenue?: number | null;
   profit_deviation?: number;
-  Stock_status?: StockStatus;
+  Stock_status?: string;
   paymentstatus?: paymentstatus;
   override?: override;
 }
