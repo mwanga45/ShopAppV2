@@ -658,7 +658,7 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
       }));
     }
   }, [isWhole]);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setdisplayInfo((prev) => ({ ...prev, [name]: value }));
   };
@@ -835,6 +835,12 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
                   %
                 </p>
                 <Submitbtn buttonName="submit sales" onclick={handlemakesales}/>
+                <select name="Stock_status" value={makesales?.Stock_status} onChange={handleChange}>
+                  <option value= "paid">Select payment style</option>
+                  <option value="paid">paid</option>
+                  <option value="pending">pending...</option>
+                  <option value="partialpaid">partialpaid</option>
+                </select>
               </div>
             </div>
           )}
