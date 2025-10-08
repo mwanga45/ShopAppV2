@@ -162,6 +162,6 @@ export interface Salerequest {
   Revenue?: number | null;
   profit_deviation?: number;
   Stock_status?: string;
-  paymentstatus?: paymentstatus;
+  paymentstatus?: string;
   override?: override;
 }

@@ -637,11 +637,11 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
       Percentage_deviation:salesSummary?.data?.CalculateDeviation.data.deviationFromMeanPercent ?? 0,
       profit_deviation:salesSummary?.data?.CalculateDeviation.data.Profit_deviation ?? 0,
       Stock_status:salesSummary?.data?.stock_check.data.product_status,
-      Discount_percentage:percentageDiscount
-      
+      Discount_percentage:percentageDiscount, 
+      paymentstatus:prev?.paymentstatus
     }));
+    console.log(makesales) 
   };
-  console.log(makesales)
   useEffect(() => {
     if (!salesResponseOne.ProductId) {
       return;
@@ -660,7 +660,11 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
   }, [isWhole]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+    if(name ==='paymentstatus' ){
+      setmakesales((prev) =>({...prev,['paymentstatus']:value}))
+    }else{
     setdisplayInfo((prev) => ({ ...prev, [name]: value }));
+    }
   };
   useEffect(() => {
     if (wholesales && wholesales.length > 0) {
@@ -835,7 +839,7 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
                   %
                 </p>
                 <Submitbtn buttonName="submit sales" onclick={handlemakesales}/>
-                <select name="Stock_status" value={makesales?.Stock_status} onChange={handleChange}>
+                <select name="paymentstatus" value={makesales?.paymentstatus} onChange={handleChange}>
                   <option value= "paid">Select payment style</option>
                   <option value="paid">paid</option>
                   <option value="pending">pending...</option>
