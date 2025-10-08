@@ -620,6 +620,15 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
     }
   };
   const handlemakesales = () => {
+    let percentageDiscount  = ""
+    let DiscountInfo  = salesSummary?.data.DiscontResult?.data?.filter_discont
+    if(DiscountInfo){
+      if(DiscountInfo.length > 0){
+        DiscountInfo.map((item)=>{
+          percentageDiscount = item.percentageDiscaunt
+        })
+      }
+    }
     setmakesales((prev) => ({
       ...prev,
       Revenue: salesSummary?.data?.CalculateDeviation.data.Revenue ?? 0,
@@ -627,7 +636,9 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
       Net_profit:salesSummary?.data?.CalculateDeviation.data.Net_profit ?? 0,
       Percentage_deviation:salesSummary?.data?.CalculateDeviation.data.deviationFromMeanPercent ?? 0,
       profit_deviation:salesSummary?.data?.CalculateDeviation.data.Profit_deviation ?? 0,
-      Stock_status:salesSummary?.data?.stock_check.data.product_status
+      Stock_status:salesSummary?.data?.stock_check.data.product_status,
+      Discount_percentage:percentageDiscount
+      
     }));
   };
   console.log(makesales)

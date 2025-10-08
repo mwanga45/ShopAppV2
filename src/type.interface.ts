@@ -157,8 +157,8 @@ export interface Salerequest {
   ProductId?: number;
   Expecte_profit?: number;
   Net_profit?: number;
-  Discount_percentage?: number;
-  Percentage_deviation?: number;
+  Discount_percentage?: string;
+  Percentage_deviation?: number ;
   Revenue?: number | null;
   profit_deviation?: number;
   Stock_status?: string;
