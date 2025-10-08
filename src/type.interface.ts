@@ -136,3 +136,31 @@ export interface SalesSummaryResponse {
   success: boolean;
   data: SalesSummaryData;
 }
+export interface paymentstatus{
+    Paid:'paid',
+    Pending:'pending',
+    Parctial: 'partialpaid' 
+} 
+export interface StockStatus{
+  Enough:'Enough',
+  NotEnough:'NotEnough'
+
+}
+
+export interface override{
+  override: 'Override'
+  
+}
+export interface UpdateStockDto {
+  Total_pc_pkg_litre: number;
+  ProductId: number;
+  Expecte_profit: number;
+  Net_profit: number;
+  Discount_percentage?: number;
+  Percentage_deviation?: number;
+  Revenue: number;
+  profit_deviation: number;
+  Stock_status: StockStatus;
+  paymentstatus: paymentstatus;
+  override?: override;
+}
