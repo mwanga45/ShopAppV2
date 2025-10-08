@@ -559,7 +559,7 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
     const sentpayload:any ={
       ProductId:Number(salesResponseOne.ProductId),
       Selling_price:Number(price),
-      Total_product:Number(displayInfo?.Total_stock)
+      Total_product:Number(displayInfo?.Pnum)
     } 
     console.log(sentpayload)
   try{
@@ -591,6 +591,7 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
         wholesales_price: isWhole ? selectproductInfo.wholesales_price : '',
         retailsales_price: !isWhole ? selectproductInfo.retailsales_price : '',
         product_type: selectproductInfo.product_type,
+        Pnum:0
       } as any);
     } else {
       setdisplayInfo({
@@ -699,10 +700,10 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
                 />
               </div>
               <div className="input-value">
-                <label htmlFor="Pnum">Number</label>
+                <label htmlFor="Pnum">Product Number</label>
                 <input
                   type="text"
-                  name="pnum"
+                  name="Pnum"
                   id="Pnum"
                   value={displayInfo?.Pnum}
                   onChange={handleChange}
@@ -726,13 +727,17 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
               </div>
               <div className="sales-card">
                 <h4>Discount</h4>
-                {salesSummary.data.DiscontResult.data.filter_discont.map((d, idx)=> (
-                  <div key={idx} className="discount-row">
-                    <span>{Number(d.percentageDiscaunt).toFixed(2)}%</span>
-                    <span>Amount: {d.CashDiscount}</span>
-                    <span>Start from: {d.start_from}</span>
-                  </div>
-                ))}
+                {salesSummary.data.DiscontResult?.data?.filter_discont?.length > 0 ? (
+                  salesSummary.data.DiscontResult.data.filter_discont.map((d, idx)=> (
+                    <div key={idx} className="discount-row">
+                      <span>{Number(d.percentageDiscaunt).toFixed(2)}%</span>
+                      <span>Amount: {d.CashDiscount}</span>
+                      <span>Start from: {d.start_from}</span>
+                    </div>
+                  ))
+                ) : (
+                  <p>No discount available for this product</p>
+                )}
               </div>
               <div className="sales-card">
                 <h4>Deviation & Revenue</h4>
