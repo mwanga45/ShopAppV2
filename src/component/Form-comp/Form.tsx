@@ -747,7 +747,7 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
                 <p>Expected Net Profit: {salesSummary.data.CalculateDeviation.data.Exp_Net_profit.toLocaleString()}</p>
                 <p>Net Profit: {salesSummary.data.CalculateDeviation.data.Net_profit.toLocaleString()}</p>
                 <p>Profit Deviation: {salesSummary.data.CalculateDeviation.data.Profit_deviation.toLocaleString()}</p>
-                <p>Deviation %: {salesSummary.data.CalculateDeviation.data.deviationFromMeanPercent.toFixed(2)}%</p>
+                <p>Deviation from profit %: {salesSummary.data.CalculateDeviation.data.deviationFromMeanPercent.toFixed(2)}%</p>
               </div>
             </div>
           )}
