@@ -10,7 +10,7 @@ import { ProductInfo } from "./formservice";
 import Toggle from "../button/toggle";
 import { toast, ToastContainer } from "react-toastify";
 import { salesRequestInfo } from "../../Sales/service/sales.api";
-import type { SalesSummaryResponse } from "../../type.interface";
+import type { Salerequest,  SalesSummaryResponse } from "../../type.interface";
 import type {
   wProduct,
   rProduct,
@@ -541,6 +541,7 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
   const [salesSummary, setSalesSummary] = useState<SalesSummaryResponse | null>(null);
   const [wholeprodinfo, setWholeprodinfo] = useState<wProduct[]>([]);
   const [retailprodinfo, setretailprodinfo] = useState<rProduct[]>([]);
+  const [makesales, setmakesales] = useState<Salerequest>()
 
   const handleOnsubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()   
@@ -604,6 +605,9 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
       } as any);
     }
   };
+  const handlemakesales = () =>{
+
+  }
   useEffect(()=>{
     if(!salesResponseOne.ProductId){
       return

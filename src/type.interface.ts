@@ -129,6 +129,7 @@ export interface SalesSummaryData {
   stock_check: StockCheckResponse;
   DiscontResult: DiscountResponse;
   CalculateDeviation: DeviationResponse;
+  productId?:number
 }
 
 export interface SalesSummaryResponse {
@@ -151,16 +152,16 @@ export interface override{
   override: 'Override'
   
 }
-export interface UpdateStockDto {
-  Total_pc_pkg_litre: number;
-  ProductId: number;
-  Expecte_profit: number;
-  Net_profit: number;
+export interface Salerequest {
+  Total_pc_pkg_litre?: number;
+  ProductId?: number;
+  Expecte_profit?: number;
+  Net_profit?: number;
   Discount_percentage?: number;
   Percentage_deviation?: number;
-  Revenue: number;
-  profit_deviation: number;
-  Stock_status: StockStatus;
-  paymentstatus: paymentstatus;
+  Revenue?: number;
+  profit_deviation?: number;
+  Stock_status?: StockStatus;
+  paymentstatus?: paymentstatus;
   override?: override;
 }
