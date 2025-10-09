@@ -629,27 +629,29 @@ export const SalesRecForm: React.FC<receiveProduct & { onClose?: () => void }> =
     }
   };
   const handlemakesales = () => {
-    let percentageDiscount  = ""
-    let DiscountInfo  = salesSummary?.data.DiscontResult?.data?.filter_discont
-    if(DiscountInfo){
-      if(DiscountInfo.length > 0){
-        DiscountInfo.map((item)=>{
-          percentageDiscount = item.percentageDiscaunt
-        })
-      }
-    }
-    setmakesales((prev) => ({
-      ...prev,
+    // Derive discount percentage deterministically (use the last record if many)
+    const discountList = salesSummary?.data.DiscontResult?.data?.filter_discont || [];
+    const lastDiscount = discountList.length > 0 ? discountList[discountList.length - 1] : undefined;
+    const percentageDiscount = lastDiscount ? String(lastDiscount.percentageDiscaunt) : "";
+
+    // Build the next request object from current sources (no reliance on async state)
+    const nextSales: Salerequest = {
+      ProductId: Number(salesResponseOne.ProductId) || 0,
+      Total_pc_pkg_litre: Number(displayInfo?.Pnum) || 0,
       Revenue: salesSummary?.data?.CalculateDeviation.data.Revenue ?? 0,
-      Expecte_profit:salesSummary?.data?.CalculateDeviation.data.Exp_Net_profit ?? 0,
-      Net_profit:salesSummary?.data?.CalculateDeviation.data.Net_profit ?? 0,
-      Percentage_deviation:salesSummary?.data?.CalculateDeviation.data.deviationFromMeanPercent ?? 0,
-      profit_deviation:salesSummary?.data?.CalculateDeviation.data.Profit_deviation ?? 0,
-      Stock_status:salesSummary?.data?.stock_check.data.product_status,
-      Discount_percentage:percentageDiscount, 
-      paymentstatus:prev?.paymentstatus
-    }));
-    console.log(makesales) 
+      Expecte_profit: salesSummary?.data?.CalculateDeviation.data.Exp_Net_profit ?? 0,
+      Net_profit: salesSummary?.data?.CalculateDeviation.data.Net_profit ?? 0,
+      Percentage_deviation: salesSummary?.data?.CalculateDeviation.data.deviationFromMeanPercent ?? 0,
+      profit_deviation: salesSummary?.data?.CalculateDeviation.data.Profit_deviation ?? 0,
+      Stock_status: salesSummary?.data?.stock_check.data.product_status ?? "",
+      Discount_percentage: percentageDiscount,
+      paymentstatus: makesales?.paymentstatus || "paid",
+    };
+
+    setmakesales(nextSales);
+    console.log("Prepared sale payload:", nextSales);
+    // If you need to submit immediately, call your submit API here with nextSales
+    // await submitSales(nextSales)
   };
   useEffect(() => {
     if (!salesResponseOne.ProductId) {
