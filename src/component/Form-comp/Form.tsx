@@ -9,8 +9,12 @@ import { StockCreate } from "../../stock/stockservice";
 import { ProductInfo } from "./formservice";
 import Toggle from "../button/toggle";
 import { toast, ToastContainer } from "react-toastify";
-import { salesRequestInfo } from "../../Sales/service/sales.api";
+import {
+  salesRequestInfo,
+  makesalesrequest,
+} from "../../Sales/service/sales.api";
 import type { Salerequest, SalesSummaryResponse } from "../../type.interface";
+
 import type {
   wProduct,
   rProduct,
@@ -527,11 +531,9 @@ export const StockRegForm: React.FC<StockFormprops> = ({
   );
 };
 
-export const SalesRecForm: React.FC<receiveProduct & { onClose?: () => void }> = ({
-  wholesales,
-  retailsales,
-  onClose,
-}) => {
+export const SalesRecForm: React.FC<
+  receiveProduct & { onClose?: () => void }
+> = ({ wholesales, retailsales, onClose }) => {
   const [isWhole, setWhole] = useState<boolean>(true);
   const [close, setClose] = useState<boolean>(true);
 
@@ -628,27 +630,59 @@ export const SalesRecForm: React.FC<receiveProduct & { onClose?: () => void }> =
       } as any);
     }
   };
-  const handlemakesales = () => {
-    // Derive discount percentage deterministically (use the last record if many)
-    const discountList = salesSummary?.data.DiscontResult?.data?.filter_discont || [];
-    const lastDiscount = discountList.length > 0 ? discountList[discountList.length - 1] : undefined;
-    const percentageDiscount = lastDiscount ? String(lastDiscount.percentageDiscaunt) : "";
+  const handlemakesales = async () => {
+    const discountList =
+      salesSummary?.data.DiscontResult?.data?.filter_discont || [];
+    const lastDiscount =
+      discountList.length > 0
+        ? discountList[discountList.length - 1]
+        : undefined;
+    const percentageDiscount = lastDiscount
+      ? String(lastDiscount.percentageDiscaunt)
+      : "";
 
     const nextSales: Salerequest = {
       ProductId: Number(salesResponseOne.ProductId) || 0,
       Total_pc_pkg_litre: Number(displayInfo?.Pnum) || 0,
       Revenue: salesSummary?.data?.CalculateDeviation.data.Revenue ?? 0,
-      Expecte_profit: salesSummary?.data?.CalculateDeviation.data.Exp_Net_profit ?? 0,
+      Expecte_profit:
+        salesSummary?.data?.CalculateDeviation.data.Exp_Net_profit ?? 0,
       Net_profit: salesSummary?.data?.CalculateDeviation.data.Net_profit ?? 0,
-      Percentage_deviation: salesSummary?.data?.CalculateDeviation.data.deviationFromMeanPercent ?? 0,
-      profit_deviation: salesSummary?.data?.CalculateDeviation.data.Profit_deviation ?? 0,
+      Percentage_deviation:
+        salesSummary?.data?.CalculateDeviation.data.deviationFromMeanPercent ??
+        0,
+      profit_deviation:
+        salesSummary?.data?.CalculateDeviation.data.Profit_deviation ?? 0,
       Stock_status: salesSummary?.data?.stock_check.data.product_status ?? "",
-      Discount_percentage: percentageDiscount,
+      Discount_percentage: percentageDiscount || "0",
       paymentstatus: makesales?.paymentstatus || "paid",
     };
 
     setmakesales(nextSales);
     console.log("Prepared sale payload:", nextSales);
+    try {
+      const response = await makesalesrequest(makesales);
+      if (!response.data.success) {
+        alert(response.data.message);
+      }
+      alert(response.data.message);
+      setmakesales({
+        Total_pc_pkg_litre: 0,
+        ProductId: 0,
+        Expecte_profit: 0,
+        Net_profit: 0,
+        Discount_percentage: "0",
+        Percentage_deviation: 0,
+        Revenue: 0,
+        profit_deviation: 0,
+        Stock_status: "",
+        paymentstatus: "",
+      });
+      return;
+    } catch (err) {
+      console.error(err);
+      alert(err);
+    }
   };
   useEffect(() => {
     if (!salesResponseOne.ProductId) {
@@ -666,12 +700,14 @@ export const SalesRecForm: React.FC<receiveProduct & { onClose?: () => void }> =
       }));
     }
   }, [isWhole]);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    if(name ==='paymentstatus' ){
-      setmakesales((prev) =>({...prev,['paymentstatus']:value}))
-    }else{
-    setdisplayInfo((prev) => ({ ...prev, [name]: value }));
+    if (name === "paymentstatus") {
+      setmakesales((prev) => ({ ...prev, ["paymentstatus"]: value }));
+    } else {
+      setdisplayInfo((prev) => ({ ...prev, [name]: value }));
     }
   };
   useEffect(() => {
@@ -852,17 +888,29 @@ export const SalesRecForm: React.FC<receiveProduct & { onClose?: () => void }> =
                   %
                 </p>
                 <div className="submit-sales-container">
-                <Submitbtn buttonName="submit sales" onclick={handlemakesales}/>
-                 <div className="input-value">
-                <label htmlFor="product-category" style={{color:"white"}}>Choose saleing type</label>
-                <select name="paymentstatus" value={makesales?.paymentstatus} onChange={handleChange}>
-                  <option value= "paid">Select payment style</option>
-                  <option value="paid">paid</option>
-                  <option value="pending">pending...</option>
-                  <option value="partialpaid">partialpaid</option>
-                  <option value="debt">dept</option>
-                </select>
-                </div>
+                  <Submitbtn
+                    buttonName="submit sales"
+                    onclick={handlemakesales}
+                  />
+                  <div className="input-value">
+                    <label
+                      htmlFor="product-category"
+                      style={{ color: "white" }}
+                    >
+                      Choose saleing type
+                    </label>
+                    <select
+                      name="paymentstatus"
+                      value={makesales?.paymentstatus}
+                      onChange={handleChange}
+                    >
+                      <option value="paid">Select payment style</option>
+                      <option value="paid">paid</option>
+                      <option value="pending">pending...</option>
+                      <option value="partialpaid">partialpaid</option>
+                      <option value="debt">dept</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
