@@ -634,7 +634,6 @@ export const SalesRecForm: React.FC<receiveProduct & { onClose?: () => void }> =
     const lastDiscount = discountList.length > 0 ? discountList[discountList.length - 1] : undefined;
     const percentageDiscount = lastDiscount ? String(lastDiscount.percentageDiscaunt) : "";
 
-    // Build the next request object from current sources (no reliance on async state)
     const nextSales: Salerequest = {
       ProductId: Number(salesResponseOne.ProductId) || 0,
       Total_pc_pkg_litre: Number(displayInfo?.Pnum) || 0,
@@ -650,8 +649,6 @@ export const SalesRecForm: React.FC<receiveProduct & { onClose?: () => void }> =
 
     setmakesales(nextSales);
     console.log("Prepared sale payload:", nextSales);
-    // If you need to submit immediately, call your submit API here with nextSales
-    // await submitSales(nextSales)
   };
   useEffect(() => {
     if (!salesResponseOne.ProductId) {

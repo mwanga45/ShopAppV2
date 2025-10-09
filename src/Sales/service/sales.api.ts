@@ -9,3 +9,7 @@ export const salesRequestInfo = async (data:any) =>{
   const response = await api.post('sales/salesInfo',data)
   return response
 }
+export  const makesalesrequest = async (data:any) =>{
+  const response = await api.post('sales/createsales', data)
+  return response
+}
