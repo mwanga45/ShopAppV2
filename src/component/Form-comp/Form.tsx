@@ -527,11 +527,20 @@ export const StockRegForm: React.FC<StockFormprops> = ({
   );
 };
 
-export const SalesRecForm: React.FC<receiveProduct> = ({
+export const SalesRecForm: React.FC<receiveProduct & { onClose?: () => void }> = ({
   wholesales,
   retailsales,
+  onClose,
 }) => {
   const [isWhole, setWhole] = useState<boolean>(true);
+  const [close, setClose] = useState<boolean>(true);
+
+  const handleClose = () => {
+    setClose(false);
+    if (onClose) {
+      onClose();
+    }
+  };
   const [salesResponseOne, setsalesResponseOne] = useState<SaleResponseOne>({
     ProductId: 0,
     Selling_price: 0,
@@ -674,11 +683,16 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
       setretailprodinfo(retailsales);
     }
   }, [wholesales, retailsales]);
+
+  if (!close) {
+    return null;
+  }
+
   return (
     <div className="form-main-container">
       <div className="icon-conyainer">
         <ToastContainer />
-        <div className="icon">
+        <div className="icon" onClick={handleClose}>
           <RiCloseFill color="white" size={30} fontWeight={500} />
         </div>
       </div>
@@ -840,6 +854,8 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
                 </p>
                 <div className="submit-sales-container">
                 <Submitbtn buttonName="submit sales" onclick={handlemakesales}/>
+                 <div className="input-value">
+                <label htmlFor="product-category" style={{color:"white"}}>Choose saleing type</label>
                 <select name="paymentstatus" value={makesales?.paymentstatus} onChange={handleChange}>
                   <option value= "paid">Select payment style</option>
                   <option value="paid">paid</option>
@@ -847,6 +863,7 @@ export const SalesRecForm: React.FC<receiveProduct> = ({
                   <option value="partialpaid">partialpaid</option>
                   <option value="debt">dept</option>
                 </select>
+                </div>
                 </div>
               </div>
             </div>

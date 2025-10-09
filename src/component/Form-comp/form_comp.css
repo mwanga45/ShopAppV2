@@ -1,6 +1,11 @@
 .form-main-container{
-   width: 100%;
-   min-height: 100vh;
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   width: 100vw;
+   height: 100vh;
    background-color:rgba(0, 0, 0,0.7);
    display: flex;
    flex-direction: column;
@@ -8,7 +13,7 @@
    justify-content: flex-start;
    animation: fadeIn 0.5s ease-out;
    backdrop-filter: blur(8px);
-   z-index: 2;
+   z-index: 9999;
 }
 
 @keyframes fadeIn {
@@ -111,12 +116,19 @@ box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 
     justify-content: center;
     border-radius: 50%;
     cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
 }
 .icon:hover{
     background-color: red;
     border:2px solid white ;
-    transition: all ease-in 300ms;
+    transform: scale(1.1);
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.icon:active{
+    transform: scale(0.95);
+    background-color: darkred;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 .btn-container{
     display:"flex";
@@ -278,37 +290,137 @@ box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 
 .SalesBord-dispaly{
     display: flex;
     flex-direction: column;
-    background-color:#0b0f14;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     width: 55%;
-    min-height:500px;
-
+    min-height: 500px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
 .sales-board-wrapper{
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
   padding: 12px;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.sales-board-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sales-board-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sales-board-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.sales-board-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .sales-card{
-  background: #101820;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
-  padding: 12px;
-  color: #e8f1f2;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+  color: white;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
+
+.sales-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+}
+
 .submit-sales-container{
     display: flex;
     width: 100%;
     justify-content: space-evenly;
     align-items: center;
-    margin-top:50px;
+    margin-top: 20px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
 }
-.sales-card h4{margin: 0 0 8px 0; font-size: 16px; color: #8bd3dd}
-.sales-card p{margin: 4px 0}
-.discount-row{display: flex; gap: 12px; align-items: center; font-size: 14px;}
+
+.sales-card h4{
+  margin: 0 0 12px 0; 
+  font-size: 16px; 
+  color: white;
+  font-weight: 600;
+}
+
+.sales-card p{
+  margin: 6px 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border-left: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.discount-row{
+  display: flex; 
+  gap: 12px; 
+  align-items: center; 
+  font-size: 14px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  margin: 6px 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.discount-row:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(4px);
+}
+
+.submit-sales-container .input-value {
+  margin: 0;
+}
+
+.submit-sales-container select {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.submit-sales-container select:focus {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+.submit-sales-container select option {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+}
 
 /* Responsive design */
 @media (max-width: 768px) {

@@ -66,9 +66,11 @@ export default function SalesToday() {
             <Daysale_list/>
          </div>
         {isFormOpen && (
-          <div className="form-popup">
-            <SalesRecForm wholesales={wholesaleprod} retailsales={retailsalesprod}  />
-          </div>
+          <SalesRecForm 
+            wholesales={wholesaleprod} 
+            retailsales={retailsalesprod} 
+            onClose={handleCloseForm}
+          />
         )}
     </div>
   )
