@@ -28,7 +28,6 @@
     width: 100%;
     height: auto;
     display: flex;
-    border: 2px solid green;
     margin-left: 560px;
     padding: 10px;
     column-gap: 20px;
@@ -36,7 +35,7 @@
 .frm-container{
     width: 500px;
     min-height:500px;
-    background-color: rgb(237, 255, 249);
+    background-color: rgb(255, 255, 255);
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     display: flex;
     flex-direction: column;
@@ -60,9 +59,9 @@
 .form-container-decoration{
 width: 100%;
 height: auto;
-border-top:2px solid rgb(0, 125, 0) ;
 border-radius: 5%;
 background-color: #ffffff;
+border-top:2px solid #28a745;
 padding: 15px;
 box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
 }
@@ -85,7 +84,8 @@ box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 
     color: rgb(19, 19, 19);
     font-size: 24px;
     font-style: italic;font-weight: 700;
-    border-bottom: 1px solid blue;
+    border-bottom: 3px solid blue;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -293,10 +293,10 @@ box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
     width: 55%;
     min-height: 500px;
     border-radius: 15px;
+    border:2px solid #28a745;
     overflow: hidden;
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }

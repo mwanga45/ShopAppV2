@@ -657,11 +657,14 @@ export const SalesRecForm: React.FC<
       Discount_percentage: percentageDiscount || "0",
       paymentstatus: makesales?.paymentstatus || "paid",
     };
-
+    if( !nextSales.Total_pc_pkg_litre||nextSales.Total_pc_pkg_litre <= 0 ){
+      alert('Please make sure u enter  valid data')
+      return
+    }
     setmakesales(nextSales);
     console.log("Prepared sale payload:", nextSales);
     try {
-      const response = await makesalesrequest(makesales);
+      const response = await makesalesrequest(nextSales);
       if (!response.data.success) {
         alert(response.data.message);
       }
