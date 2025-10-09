@@ -663,6 +663,24 @@ export const SalesRecForm: React.FC<
     }
     setmakesales(nextSales);
     console.log("Prepared sale payload:", nextSales);
+     const confirm =window.confirm('Confirm  sales')
+     if(!confirm){
+            setmakesales({
+        Total_pc_pkg_litre: 0,
+        ProductId: 0,
+        Expecte_profit: 0,
+        Net_profit: 0,
+        Discount_percentage: "0",
+        Percentage_deviation: 0,
+        Revenue: 0,
+        profit_deviation: 0,
+        Stock_status: "",
+        paymentstatus: "",
+      });
+      alert('successfuly terminate  the process')
+      return;
+     }
+    
     try {
       const response = await makesalesrequest(nextSales);
       if (!response.data.success) {
