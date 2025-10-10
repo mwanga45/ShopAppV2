@@ -855,7 +855,7 @@ export const SalesRecForm: React.FC<
                   Status: {salesSummary.data.stock_check.data.product_status}
                 </p>
                 <p>
-                  Total stock: {salesSummary.data.stock_check.data.totalstock}
+                  Total stock: {salesSummary.data.stock_check.data.totalstock}.Pac
                 </p>
               </div>
               <div className="sales-card">
@@ -866,8 +866,8 @@ export const SalesRecForm: React.FC<
                     (d, idx) => (
                       <div key={idx} className="discount-row">
                         <span>{Number(d.percentageDiscaunt).toFixed(2)}%</span>
-                        <span>Amount: {d.CashDiscount}</span>
-                        <span>Start from: {d.start_from}</span>
+                        <span>Amount: {d.CashDiscount}.Tsh</span>
+                        <span>Start from: {d.start_from}.Pac</span>
                       </div>
                     )
                   )
@@ -879,23 +879,23 @@ export const SalesRecForm: React.FC<
                 <h4>Deviation & Revenue</h4>
                 <p>
                   Revenue:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Revenue.toLocaleString()}
+                  {salesSummary.data.CalculateDeviation.data.Revenue.toLocaleString()}.Tsh
                 </p>
                 <p>
                   Expected Revenue:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Expect_revenue.toLocaleString()}
+                  {salesSummary.data.CalculateDeviation.data.Expect_revenue.toLocaleString()}.Tsh
                 </p>
                 <p>
                   Exp Profit/each:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Exp_profit_pereach.toLocaleString()}
+                  {salesSummary.data.CalculateDeviation.data.Exp_profit_pereach.toLocaleString()}.Tsh
                 </p>
                 <p>
                   Expected Net Profit:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Exp_Net_profit.toLocaleString()}
+                  {salesSummary.data.CalculateDeviation.data.Exp_Net_profit.toLocaleString()}.Tsh
                 </p>
                 <p>
                   Net Profit:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Net_profit.toLocaleString()}
+                  {salesSummary.data.CalculateDeviation.data.Net_profit.toLocaleString()}.Tsh
                 </p>
                 <p>
                   Profit Deviation:{" "}
