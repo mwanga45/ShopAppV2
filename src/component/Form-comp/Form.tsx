@@ -657,15 +657,15 @@ export const SalesRecForm: React.FC<
       Discount_percentage: percentageDiscount || "0",
       paymentstatus: makesales?.paymentstatus || "paid",
     };
-    if( !nextSales.Total_pc_pkg_litre||nextSales.Total_pc_pkg_litre <= 0 ){
-      alert('Please make sure u enter  valid data')
-      return
+    if (!nextSales.Total_pc_pkg_litre || nextSales.Total_pc_pkg_litre <= 0) {
+      alert("Please make sure u enter  valid data");
+      return;
     }
     setmakesales(nextSales);
     console.log("Prepared sale payload:", nextSales);
-     const confirm =window.confirm('Confirm  sales')
-     if(!confirm){
-            setmakesales({
+    const confirm = window.confirm("Confirm  sales");
+    if (!confirm) {
+      setmakesales({
         Total_pc_pkg_litre: 0,
         ProductId: 0,
         Expecte_profit: 0,
@@ -677,10 +677,10 @@ export const SalesRecForm: React.FC<
         Stock_status: "",
         paymentstatus: "",
       });
-      alert('successfuly terminate  the process')
+      alert("successfuly terminate  the process");
       return;
-     }
-    
+    }
+
     try {
       const response = await makesalesrequest(nextSales);
       if (!response.data.success) {
@@ -855,7 +855,8 @@ export const SalesRecForm: React.FC<
                   Status: {salesSummary.data.stock_check.data.product_status}
                 </p>
                 <p>
-                  Total stock: {salesSummary.data.stock_check.data.totalstock}.Pac
+                  Total stock: {salesSummary.data.stock_check.data.totalstock}
+                  .Pac
                 </p>
               </div>
               <div className="sales-card">
@@ -879,23 +880,28 @@ export const SalesRecForm: React.FC<
                 <h4>Deviation & Revenue</h4>
                 <p>
                   Revenue:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Revenue.toLocaleString()}.Tsh
+                  {salesSummary.data.CalculateDeviation.data.Revenue.toLocaleString()}
+                  .Tsh
                 </p>
                 <p>
                   Expected Revenue:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Expect_revenue.toLocaleString()}.Tsh
+                  {salesSummary.data.CalculateDeviation.data.Expect_revenue.toLocaleString()}
+                  .Tsh
                 </p>
                 <p>
                   Exp Profit/each:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Exp_profit_pereach.toLocaleString()}.Tsh
+                  {salesSummary.data.CalculateDeviation.data.Exp_profit_pereach.toLocaleString()}
+                  .Tsh
                 </p>
                 <p>
                   Expected Net Profit:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Exp_Net_profit.toLocaleString()}.Tsh
+                  {salesSummary.data.CalculateDeviation.data.Exp_Net_profit.toLocaleString()}
+                  .Tsh
                 </p>
                 <p>
                   Net Profit:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Net_profit.toLocaleString()}.Tsh
+                  {salesSummary.data.CalculateDeviation.data.Net_profit.toLocaleString()}
+                  .Tsh
                 </p>
                 <p>
                   Profit Deviation:{" "}
