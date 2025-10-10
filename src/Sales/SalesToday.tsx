@@ -9,6 +9,7 @@ import { fetchProductsales } from "./service/sales.api"
 // import type { Product } from "../type.interface"
 import type { wProduct } from "../type.interface"
 import type { rProduct } from "../type.interface"
+import { ResultComp } from "../component/result/Resultcomp"
 
 export default function SalesToday() {
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false)
@@ -65,6 +66,7 @@ export default function SalesToday() {
          <div className="resultTb-container">
             <Daysale_list/>
          </div>
+            <ResultComp/>
         {isFormOpen && (
           <SalesRecForm 
             wholesales={wholesaleprod} 
