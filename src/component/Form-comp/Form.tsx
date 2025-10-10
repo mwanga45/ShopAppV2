@@ -658,7 +658,7 @@ export const SalesRecForm: React.FC<
       paymentstatus: makesales?.paymentstatus || "paid",
     };
     if (!nextSales.Total_pc_pkg_litre || nextSales.Total_pc_pkg_litre <= 0) {
-      alert("Please make sure u enter  valid data");
+      alert("Please make sure you enter  valid data");
       return;
     }
     setmakesales(nextSales);
@@ -677,7 +677,7 @@ export const SalesRecForm: React.FC<
         Stock_status: "",
         paymentstatus: "",
       });
-      alert("successfuly terminate  the process");
+      toast.success("successfuly terminate process");
       return;
     }
 
@@ -840,8 +840,7 @@ export const SalesRecForm: React.FC<
                 />
               </div>
               <div className="btn-container">
-                <p>Discount reach range</p>
-                <Submitbtn buttonName="Submit sales" type="submit" />
+                <Submitbtn buttonName="calculate sales" type="submit" />
               </div>
             </div>
           </form>
@@ -916,7 +915,7 @@ export const SalesRecForm: React.FC<
                 </p>
                 <div className="submit-sales-container">
                   <Submitbtn
-                    buttonName="submit sales"
+                    buttonName="Confirm sales"
                     onclick={handlemakesales}
                   />
                   <div className="input-value">
@@ -993,8 +992,6 @@ export const CreateDiscount: React.FC<FormCompProps> = ({
 
     try {
       const response = await CreateDisCount(createPayload);
-
-      // case: product discount already exists
       if (response.data.confirm) {
         const userConfirmation = window.confirm(response.data.message);
         if (userConfirmation) {
