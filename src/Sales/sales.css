@@ -141,19 +141,20 @@
 }
 
 .trigger-btn button{
-    width: 150px;
-    height: 50px;
+    min-width: 150px;
+    min-height: 60px;
     cursor: pointer;
     border-radius: 10px;
+    background-color: #3498db;
 }
 
 .trigger-btn button:hover{
-  scale: 1.2;
+  scale: 1.02;
   transition: all ease-in 300ms;
-  background: #34495e;
+  background: #4f769d;
   border-color: #3498db;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 .whole-retail-analysis{

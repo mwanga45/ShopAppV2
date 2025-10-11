@@ -12,6 +12,7 @@ import type { rProduct } from "../type.interface"
 
 
 
+
 export default function SalesToday() {
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false)
   const [Allrecord , setAllrecord] = useState<SalesSummaryResponsesales>()
@@ -20,10 +21,12 @@ export default function SalesToday() {
   const [retailsalesrecord, setretailsalesrecord] = useState<SalesRecord[]>([])
   const [wholesaleprod, setWholesaleprod] = useState<wProduct[]>([])
   const [retailsalesprod, setretailsaleprod] = useState<rProduct[]>([])
+  const [showsalesAnalysis, setshowsalesAnalysis] = useState<boolean>(false)
   
   const handleOpenForm = () => {
     setIsFormOpen(true)
   }
+
   const handleproductInfo = async()=>{
     try{
       const response =  await fetchProductsales()
@@ -39,7 +42,9 @@ export default function SalesToday() {
       alert(err)
     }
   }
-  
+  const handlesalesAnalysis = ()=>{
+    
+  }
   const handleCloseForm = () => {
     setIsFormOpen(false)
   }
