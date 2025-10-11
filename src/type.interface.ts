@@ -178,3 +178,26 @@ export interface FetchLastRec {
     product_name?: string;
   };
 }
+
+export interface SalesRecord {
+  product_id: number;
+  product_name: string;
+  product_category: string;
+  seller: string;
+  total_quantity: string;
+  total_revenue: string;
+  total_profit: string;
+}
+
+export interface SalesSummaryData {
+  Normalsaleswholereturn: SalesRecord[];
+  Normalsalesretailreturn: SalesRecord[];
+  Allcombined: SalesRecord[];
+  totalRevenue: number;
+  totalWholeRevenue: number;
+  totolRetailRevenue: number;
+}
+
+export interface SalesSummaryResponse {
+  data: SalesSummaryData;
+}

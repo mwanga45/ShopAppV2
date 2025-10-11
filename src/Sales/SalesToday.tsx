@@ -6,7 +6,7 @@ import { Daysale_list } from "../component/daysales/Daysales"
 import { SalesRecForm } from "../component/Form-comp/Form"
 import { useEffect, useState } from "react"
 import { fetchProductsales } from "./service/sales.api"
-// import type { Product } from "../type.interface"
+
 import type { wProduct } from "../type.interface"
 import type { rProduct } from "../type.interface"
 import { ResultComp } from "../component/result/Resultcomp"

@@ -13,3 +13,7 @@ export  const makesalesrequest = async (data:any) =>{
   const response = await api.post('sales/createsales', data)
   return response
 }
+export const fetchNormalsellrecord = async() =>{
+  const response = await api.get('sales/salesToday')
+  return response
+}
