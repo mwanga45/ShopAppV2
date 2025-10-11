@@ -4,7 +4,7 @@ import type React from "react";
 export const ResultComp:React.FC<FetchLastRec> = ({Revenue,Total_pc_pkg_litre,Net_profit, Expected_Profit,profit_deviation,product,percentage_deviation, percentage_discount, paymentstatus}) => {
   return (
     <div className="return-data-main-container">
-      <span className="return-data-title">Sales of Product </span>
+      <span className="return-data-title">Sales of Product {product.product_name} </span>
       <div className="returned-info-details">
         <div className="act-retured-data-container">
           <span className="act-return-label">Product_name</span>
