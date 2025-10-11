@@ -1,8 +1,8 @@
 import { color } from "chart.js/helpers";
-import "./daysales.css"
+import "./daysales.css";
 import { SiMoneygram } from "react-icons/si";
-import { useState, useEffect } from 'react';
-// import { fetchWholeSales } from '../../Sales/service/sales.api';
+import React, { useState, useEffect } from "react";
+import type {SalesSummaryDatasales } from "../../type.interface";
 
 interface ProductInfo {
   id: string;
@@ -22,11 +22,11 @@ interface SaleItem {
   product: ProductInfo;
 }
 
-type Result ={
-  title_name:string
-  total_value:string
-  color:any
-}
+type Result = {
+  title_name: string;
+  total_value: string;
+  color: any;
+};
 
 // Sample data for the table
 const salesData: SaleItem[] = [
@@ -92,66 +92,74 @@ const salesData: SaleItem[] = [
   },
 ];
 
-export const Daysales = ()=>{
-    return(
-      <div className="sales-container">
-        <p className="head">Day Revenue</p>
-        <p className="Amount"> <SiMoneygram color="black" size={20}/>2300000 Tsh</p>
-      </div>
-    ) 
-}
+export const Daysales = () => {
+  return (
+    <div className="sales-container">
+      <p className="head">Day Revenue</p>
+      <p className="Amount">
+        {" "}
+        <SiMoneygram color="black" size={20} />
+        2300000 Tsh
+      </p>
+    </div>
+  );
+};
 
-export const DayResult = ({title_name, total_value}:Result)=>{
-  return(
-    <div className="dayresult-contaier" style={{background:`${color}`}}>
+export const DayResult = ({ title_name, total_value }: Result) => {
+  return (
+    <div className="dayresult-contaier" style={{ background: `${color}` }}>
       <div>
         <p className="dayanalys">{title_name}</p>
       </div>
       <div>
-        <p className="total_value"><SiMoneygram/>{total_value}.Tsh</p>
+        <p className="total_value">
+          <SiMoneygram />
+          {total_value}.Tsh
+        </p>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export const Daysale_list = () =>{
+export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
+  Allcombined,
+  Normalsalesretailreturn,
+  Normalsaleswholereturn,
+
+}) => {
   const [sales, setSales] = useState<SaleItem[]>(salesData);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [category, setcategory] = useState('All')
 
-  useEffect(() => {
-    // const getSales = async () => {
-    //   try {
-    //     const data = await fetchWholeSales();
-    //     setSales(data);
-    //   } catch (err) {
-    //     setError("Failed to fetch sales data.");
-    //     console.error(err);
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
-
-    // getSales();
-  }, []);
+  useEffect(() => {}, []);
 
   if (loading) {
     return <div className="daylist-container">Loading sales data...</div>;
   }
 
   if (error) {
-    return <div className="daylist-container" style={{ color: 'red' }}>Error: {error}</div>;
+    return (
+      <div className="daylist-container" style={{ color: "red" }}>
+        Error: {error}
+      </div>
+    );
   }
 
-  return(
+  return (
     <div className="daylist-container">
       <div className="filter-list-container">
-        <div className="filterby"><p>All</p></div>
-        <div className="filterby"><p>Category</p></div>
-        <div className="filterby"><p>Type</p></div>
+        <div className="filterby">
+          <p>All</p>
+        </div>
+        <div className="filterby">
+          <p>Category</p>
+        </div>
+        <div className="filterby">
+          <p>Type</p>
+        </div>
       </div>
-      
+
       <div className="table-container">
         <table className="sales-table">
           <thead>
@@ -159,27 +167,96 @@ export const Daysale_list = () =>{
               <th>Product Name</th>
               <th>ID</th>
               <th>Category</th>
-              <th>Type</th>
+              <th>Revenue</th>
+              <th>Total profit</th>
               <th>PC</th>
-              <th>Total Generate</th>
-              <th>Profit Generated</th>
+              <th>Seller</th>
             </tr>
           </thead>
           <tbody>
-            {sales.map((item, index) => (
-              <tr key={item.id} className={`table-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
-                <td className="product-name">{item.product.product_name}</td>
-                <td className="product-id">{item.productId}</td>
-                <td className="product-category">{item.product.product_category}</td>
-                <td className="product-type">{item.product.product_type}</td>
-                <td className="product-pc">{item.Total_pc_pkg_litre}</td>
-                <td className="total-generate">{item.TotalGenerated} Tsh</td>
-                <td className="profit-generated">{item.TotalProfit} Tsh</td>
+            {category === "All" ? (
+              Allcombined && Allcombined.length > 0 ? (
+                Allcombined.map((item, index) => (
+                  <tr
+                    key={item.product_id}
+                    className={`table-row ${index % 2 === 0 ? "even" : "odd"}`}
+                  >
+                    <td className="product-name">{item.product_name}</td>
+                    <td className="product-id">{item.product_id}</td>
+                    <td className="product-category">
+                      {item.product_category}
+                    </td>
+                    <td className="product-type">{item.total_revenue}.Tsh</td>
+                    <td className="product-pc">{item.total_profit}.Tsh</td>
+                    <td className="total-generate">
+                      {item.total_quantity} Tsh
+                    </td>
+                    <td className="profit-generated">{item.seller}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr className="table-row">
+                  <td colSpan={7}>No Any Sales Today</td>
+                </tr>
+              )
+            ) : category === "retailsales" ? (
+              Normalsalesretailreturn && Normalsalesretailreturn.length > 0 ? (
+                Normalsalesretailreturn.map((item, index) => (
+                  <tr
+                    key={item.product_id}
+                    className={`table-row ${index % 2 === 0 ? "even" : "odd"}`}
+                  >
+                    <td className="product-name">{item.product_name}</td>
+                    <td className="product-id">{item.product_id}</td>
+                    <td className="product-category">
+                      {item.product_category}
+                    </td>
+                    <td className="product-type">{item.total_revenue}.Tsh</td>
+                    <td className="product-pc">{item.total_profit}.Tsh</td>
+                    <td className="total-generate">
+                      {item.total_quantity} Tsh
+                    </td>
+                    <td className="profit-generated">{item.seller}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr className="table-row">
+                  <td colSpan={7}>No any Retail Sales Today</td>
+                </tr>
+              )
+            ) : category === "wholesales" ? (
+              Normalsaleswholereturn && Normalsaleswholereturn.length > 0 ? (
+                Normalsaleswholereturn.map((item, index) => (
+                  <tr
+                    key={item.product_id}
+                    className={`table-row ${index % 2 === 0 ? "even" : "odd"}`}
+                  >
+                    <td className="product-name">{item.product_name}</td>
+                    <td className="product-id">{item.product_id}</td>
+                    <td className="product-category">
+                      {item.product_category}
+                    </td>
+                    <td className="product-type">{item.total_revenue}.Tsh</td>
+                    <td className="product-pc">{item.total_profit}.Tsh</td>
+                    <td className="total-generate">
+                      {item.total_quantity} 
+                    </td>
+                    <td className="profit-generated">{item.seller}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr className="table-row">
+                  <td colSpan={7}>No any Wholesale Sales Today</td>
+                </tr>
+              )
+            ) : (
+              <tr className="table-row">
+                <td colSpan={7}>Invalid Category Selected</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
     </div>
-  )
-}
+  );
+};

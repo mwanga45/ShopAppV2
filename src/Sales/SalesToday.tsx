@@ -5,8 +5,8 @@ import { DayResult } from "../component/daysales/Daysales"
 import { Daysale_list } from "../component/daysales/Daysales"
 import { SalesRecForm } from "../component/Form-comp/Form"
 import { useEffect, useState } from "react"
-import { fetchProductsales } from "./service/sales.api"
-
+import { fetchProductsales, fetchNormalsellrecord } from "./service/sales.api"
+import type { SalesRecord, SalesSummaryResponse } from '../type.interface'
 import type { wProduct } from "../type.interface"
 import type { rProduct } from "../type.interface"
 import { ResultComp } from "../component/result/Resultcomp"
@@ -14,7 +14,10 @@ import { ResultComp } from "../component/result/Resultcomp"
 
 export default function SalesToday() {
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false)
-  // const [productsInfo, setproductInfo] = useState<Product[]>([])
+  const [Allrecord , setAllrecord] = useState<SalesSummaryResponse>()
+  const [Allsales, setAllsales] = useState<SalesRecord[]>([])
+  const [wholesalerecord, setwholesalesrecord] = useState<SalesRecord[]>([])
+  const [retailsalesrecord, setretailsalesrecord] = useState<SalesRecord[]>([])
   const [wholesaleprod, setWholesaleprod] = useState<wProduct[]>([])
   const [retailsalesprod, setretailsaleprod] = useState<rProduct[]>([])
   
@@ -41,7 +44,15 @@ export default function SalesToday() {
     setIsFormOpen(false)
   }
   useEffect(()=>{
+   const handlereturnsalesdata = async()=>{
+    const response  = await fetchNormalsellrecord()
+    setAllrecord(response.data)
+    setAllsales(response.data.data.Allcombined)
+    setwholesalesrecord(response.data.data.Normalsaleswholereturn)
+    setretailsalesrecord(response.data.data.Normalsalesretailreturn)
+   }
    handleproductInfo()
+   handlereturnsalesdata()
   },[])
   return (
     <div className="Wh-Rtsales-container">
@@ -65,7 +76,7 @@ export default function SalesToday() {
            <DayResult title_name="Total generate" total_value="23000" color={"rgb(29, 137, 23);"}/>
        </div>
          <div className="resultTb-container">
-            <Daysale_list/>
+            <Daysale_list Allcombined={Allsales} Normalsalesretailreturn={retailsalesrecord} Normalsaleswholereturn={wholesalerecord} />
          </div>
               <ResultComp
                   Total_pc_pkg_litre={0}
