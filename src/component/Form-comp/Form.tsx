@@ -13,7 +13,7 @@ import {
   salesRequestInfo,
   makesalesrequest,
 } from "../../Sales/service/sales.api";
-import type { Salerequest, SalesSummaryResponse } from "../../type.interface";
+import type { FetchLastRec, Salerequest, SalesSummaryResponse } from "../../type.interface";
 
 import type {
   wProduct,
@@ -27,6 +27,7 @@ import type {
   SaleResponseOne,
   Product,
 } from "../../type.interface";
+import { ResultComp } from "../result/Resultcomp";
 
 export default function FormComp({ onClose, isOpen = true }: FormCompProps) {
   const [close, setClose] = useState<boolean>(isOpen);
@@ -555,6 +556,7 @@ export const SalesRecForm: React.FC<
   const [wholeprodinfo, setWholeprodinfo] = useState<wProduct[]>([]);
   const [retailprodinfo, setretailprodinfo] = useState<rProduct[]>([]);
   const [makesales, setmakesales] = useState<Salerequest>();
+  const [lastdata, setlastdata] = useState<FetchLastRec[]>()
 
   const handleOnsubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -686,7 +688,7 @@ export const SalesRecForm: React.FC<
       if (!response.data.success) {
         alert(response.data.message);
       }
-      alert(response.data.message);
+      ;
       setmakesales({
         Total_pc_pkg_litre: 0,
         ProductId: 0,
@@ -942,6 +944,11 @@ export const SalesRecForm: React.FC<
             </div>
           )}
         </div>
+       <div className="enter result returned">
+         <ResultComp Total_pc_pkg_litre={0} Revenue={0} Net_profit={0} Expected_Profit={0} profit_deviation={""} percentage_deviation={""} percentage_discount={""} paymentstatus={""} product={{
+            product_name: ""
+          }}/>
+       </div>
       </div>
     </div>
   );

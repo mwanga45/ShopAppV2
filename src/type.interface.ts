@@ -163,5 +163,18 @@ export interface Salerequest {
   profit_deviation?: number;
   Stock_status?: string;
   paymentstatus?: string;
-  // override?: override;
+  
+}
+export interface FetchLastRec {
+  Total_pc_pkg_litre: number;
+  Revenue: number;
+  Net_profit: number;
+  Expected_Profit: number;
+  profit_deviation: string;
+  percentage_deviation: string;
+  percentage_discount: string;
+  paymentstatus: string;
+  product: {
+    product_name: string;
+  };
 }
