@@ -1,8 +1,8 @@
 import "./sales.css"
 import { Accountbar } from "../component/account/Account"
 import { Search } from "../component/search/Search"
-import { DayResult } from "../component/daysales/Daysales"
-import { Daysale_list } from "../component/daysales/Daysales"
+import { Daysale_list,DayResult } from "../component/daysales/Daysales"
+import { AdminsalesAnaysis } from "../component/daysales/salesAnalysis"
 import { SalesRecForm } from "../component/Form-comp/Form"
 import { useEffect, useState } from "react"
 import { fetchProductsales, fetchNormalsellrecord } from "./service/sales.api"
@@ -91,6 +91,7 @@ export default function SalesToday() {
             onClose={handleCloseForm}
           />
         )}
+        <AdminsalesAnaysis/>
     </div>
   )
 }

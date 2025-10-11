@@ -1,7 +1,8 @@
-export const SalesAnaysis = ()=>{
+
+export const AdminsalesAnaysis = ()=>{
     return(
         <div>
-            
+
         </div>
     )
 }

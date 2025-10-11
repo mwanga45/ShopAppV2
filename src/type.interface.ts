@@ -199,6 +199,11 @@ export interface SalesSummaryDatasales {
   category?:string
 }
 
+export type Result = {
+  title_name: string;
+  total_value: number;
+  color: any;
+};
 export interface SalesSummaryResponsesales {
   data: SalesSummaryDatasales;
 }

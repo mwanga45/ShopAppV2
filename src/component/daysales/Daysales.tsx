@@ -2,31 +2,11 @@ import { color } from "chart.js/helpers";
 import "./daysales.css";
 import { SiMoneygram } from "react-icons/si";
 import React, { useState, useEffect } from "react";
-import type { SalesSummaryDatasales } from "../../type.interface";
+import type { Result,SalesSummaryDatasales } from "../../type.interface";
 
-interface ProductInfo {
-  id: string;
-  product_name: string;
-  product_category: string;
-  product_type: string;
-  purchase_price: string;
-  wholesales_price: string;
-}
 
-interface SaleItem {
-  id: string;
-  Total_pc_pkg_litre: string;
-  TotalGenerated: string;
-  TotalProfit: string;
-  productId: string;
-  product: ProductInfo;
-}
 
-type Result = {
-  title_name: string;
-  total_value: number;
-  color: any;
-};
+
 
 export const Daysales = () => {
   return (
@@ -62,8 +42,8 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
   Normalsalesretailreturn,
   Normalsaleswholereturn,
 }) => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, _] = useState<boolean>(false);
+  const [error, ] = useState<string | null>(null);
   const [category, setcategory] = useState<string>('All');
   const [isswicheropen, setswicheropen] = useState<boolean>(false);
 
