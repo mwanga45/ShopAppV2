@@ -64,8 +64,8 @@ export default function SalesToday() {
        </div>
        <div className="trigger-container">
         <div className="trigger-btn">
-            <button type="submit" name="Whole-sales" onClick={handleOpenForm}>Whole-sales</button>
-            <button type="submit" name="Retail-ssales">Retail-sales</button>
+            <button type="submit" name="Whole-sales" onClick={handleOpenForm}>Open sales record</button>
+            <button type="submit" name="Retail-ssales">Admin-sales-Analysis</button>
         </div>
         <div>
            <Search/>

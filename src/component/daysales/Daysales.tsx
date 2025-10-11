@@ -43,14 +43,14 @@ export const Daysales = () => {
 
 export const DayResult = ({ title_name, total_value }: Result) => {
   return (
-    <div className="dayresult-contaier" style={{ background: `${color}` }}>
+    <div className="dayresult-contaier" style={{ background: `${color}`, minWidth:'200px' }}>
       <div>
         <p className="dayanalys">{title_name}</p>
       </div>
       <div>
         <p className="total_value">
           <SiMoneygram />
-          {total_value}.Tsh
+          {total_value.toLocaleString()}.Tsh
         </p>
       </div>
     </div>
@@ -66,9 +66,7 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
   const [error, setError] = useState<string | null>(null);
   const [category, setcategory] = useState<string>('All');
   const [isswicheropen, setswicheropen] = useState<boolean>(false);
-  const [switcher, setswitcher] = useState({
-    selected: "All",
-  });
+
 
   useEffect(() => {
     const savedCategory =  localStorage.getItem('category')
