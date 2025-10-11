@@ -199,6 +199,6 @@ export interface SalesSummaryDatasales {
   category?:string
 }
 
-export interface SalesSummaryResponse {
-  data: SalesSummaryData;
+export interface SalesSummaryResponsesales {
+  data: SalesSummaryDatasales;
 }

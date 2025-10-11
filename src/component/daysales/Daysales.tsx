@@ -2,7 +2,7 @@ import { color } from "chart.js/helpers";
 import "./daysales.css";
 import { SiMoneygram } from "react-icons/si";
 import React, { useState, useEffect } from "react";
-import type {SalesSummaryDatasales } from "../../type.interface";
+import type { SalesSummaryDatasales } from "../../type.interface";
 
 interface ProductInfo {
   id: string;
@@ -24,73 +24,9 @@ interface SaleItem {
 
 type Result = {
   title_name: string;
-  total_value: string;
+  total_value: number;
   color: any;
 };
-
-// Sample data for the table
-const salesData: SaleItem[] = [
-  {
-    id: "sale_001",
-    Total_pc_pkg_litre: "15",
-    TotalGenerated: "2300000",
-    TotalProfit: "450000",
-    productId: "prod_001",
-    product: {
-      id: "prod_001",
-      product_name: "Palet Starter",
-      product_category: "Electronics",
-      product_type: "Premium",
-      purchase_price: "1850000",
-      wholesales_price: "2300000",
-    },
-  },
-  {
-    id: "sale_002",
-    Total_pc_pkg_litre: "8",
-    TotalGenerated: "1800000",
-    TotalProfit: "320000",
-    productId: "prod_002",
-    product: {
-      id: "prod_002",
-      product_name: "Basic Palet",
-      product_category: "Electronics",
-      product_type: "Standard",
-      purchase_price: "1480000",
-      wholesales_price: "1800000",
-    },
-  },
-  {
-    id: "sale_003",
-    Total_pc_pkg_litre: "12",
-    TotalGenerated: "3200000",
-    TotalProfit: "680000",
-    productId: "prod_003",
-    product: {
-      id: "prod_003",
-      product_name: "Premium Palet",
-      product_category: "Electronics",
-      product_type: "Premium",
-      purchase_price: "2520000",
-      wholesales_price: "3200000",
-    },
-  },
-  {
-    id: "sale_004",
-    Total_pc_pkg_litre: "5",
-    TotalGenerated: "4500000",
-    TotalProfit: "1200000",
-    productId: "prod_004",
-    product: {
-      id: "prod_004",
-      product_name: "Enterprise Palet",
-      product_category: "Electronics",
-      product_type: "Enterprise",
-      purchase_price: "3300000",
-      wholesales_price: "4500000",
-    },
-  },
-];
 
 export const Daysales = () => {
   return (
@@ -125,15 +61,32 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
   Allcombined,
   Normalsalesretailreturn,
   Normalsaleswholereturn,
-
 }) => {
-  const [sales, setSales] = useState<SaleItem[]>(salesData);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [category, setcategory] = useState('All')
+  const [category, setcategory] = useState<string>('All');
+  const [isswicheropen, setswicheropen] = useState<boolean>(false);
+  const [switcher, setswitcher] = useState({
+    selected: "All",
+  });
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const savedCategory =  localStorage.getItem('category')
+    if(savedCategory){
+      setcategory(savedCategory)
+    }
+  }, []);
+  const handleopen = ()=>{
+    setswicheropen(!isswicheropen)
+  }
 
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newcategory = e.target.value;
+    setcategory(newcategory);
+    localStorage.setItem('category', newcategory)
+    setswicheropen(!isswicheropen)
+    
+  };
   if (loading) {
     return <div className="daylist-container">Loading sales data...</div>;
   }
@@ -149,14 +102,23 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
   return (
     <div className="daylist-container">
       <div className="filter-list-container">
-        <div className="filterby">
+        <div className="filterby" onClick={()=> setcategory('All')}>
           <p>All</p>
         </div>
-        <div className="filterby">
-          <p>Category</p>
+        <div className="filterby"  onClick={handleopen}>
+          <p >Category</p>
         </div>
-        <div className="filterby">
-          <p>Type</p>
+        <div className="select-input-category-choose">
+          {isswicheropen && (
+            <select
+              name="category"
+              value={category}
+              onChange={handleChange}
+            >
+              <option value="wholesales">wholesales</option>
+              <option value="retailsales">retailsales</option>
+            </select>
+          )}
         </div>
       </div>
 
@@ -186,11 +148,13 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
                     <td className="product-category">
                       {item.product_category}
                     </td>
-                    <td className="product-type">{item.total_revenue}.Tsh</td>
-                    <td className="product-pc">{item.total_profit}.Tsh</td>
-                    <td className="total-generate">
-                      {item.total_quantity} Tsh
+                    <td className="product-type">
+                      {Number(item.total_revenue).toLocaleString()}.Tsh
                     </td>
+                    <td className="total-generate">
+                      {Number(item.total_profit).toLocaleString()}.Tsh
+                    </td>
+                    <td className="product-pc">{item.total_quantity}</td>
                     <td className="profit-generated">{item.seller}</td>
                   </tr>
                 ))
@@ -211,11 +175,13 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
                     <td className="product-category">
                       {item.product_category}
                     </td>
-                    <td className="product-type">{item.total_revenue}.Tsh</td>
-                    <td className="product-pc">{item.total_profit}.Tsh</td>
-                    <td className="total-generate">
-                      {item.total_quantity} Tsh
+                    <td className="product-type">
+                      {Number(item.total_revenue).toLocaleString()}.Tsh
                     </td>
+                    <td className="total-generate">
+                      {Number(item.total_profit).toLocaleString()}.Tsh
+                    </td>
+                    <td className="product-pc">{item.total_quantity}</td>
                     <td className="profit-generated">{item.seller}</td>
                   </tr>
                 ))
@@ -236,11 +202,13 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
                     <td className="product-category">
                       {item.product_category}
                     </td>
-                    <td className="product-type">{item.total_revenue}.Tsh</td>
-                    <td className="product-pc">{item.total_profit}.Tsh</td>
-                    <td className="total-generate">
-                      {item.total_quantity} 
+                    <td className="product-type">
+                      {Number(item.total_revenue).toLocaleString()}.Tsh
                     </td>
+                    <td className="total-generate">
+                      {Number(item.total_profit).toLocaleString()}.Tsh
+                    </td>
+                    <td className="product-pc">{item.total_quantity}</td>
                     <td className="profit-generated">{item.seller}</td>
                   </tr>
                 ))

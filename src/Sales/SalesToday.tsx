@@ -6,15 +6,15 @@ import { Daysale_list } from "../component/daysales/Daysales"
 import { SalesRecForm } from "../component/Form-comp/Form"
 import { useEffect, useState } from "react"
 import { fetchProductsales, fetchNormalsellrecord } from "./service/sales.api"
-import type { SalesRecord, SalesSummaryResponse } from '../type.interface'
+import type { SalesRecord, SalesSummaryResponsesales } from '../type.interface'
 import type { wProduct } from "../type.interface"
 import type { rProduct } from "../type.interface"
-import { ResultComp } from "../component/result/Resultcomp"
+
 
 
 export default function SalesToday() {
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false)
-  const [Allrecord , setAllrecord] = useState<SalesSummaryResponse>()
+  const [Allrecord , setAllrecord] = useState<SalesSummaryResponsesales>()
   const [Allsales, setAllsales] = useState<SalesRecord[]>([])
   const [wholesalerecord, setwholesalesrecord] = useState<SalesRecord[]>([])
   const [retailsalesrecord, setretailsalesrecord] = useState<SalesRecord[]>([])
@@ -72,25 +72,13 @@ export default function SalesToday() {
         </div>
        </div>
        <div className="whole-retail-analysis">
-           <DayResult title_name="Total sale" total_value="230000" color={"rgb(29, 137, 23);"}/>
-           <DayResult title_name="Total generate" total_value="23000" color={"rgb(29, 137, 23);"}/>
+           <DayResult title_name="Total Retailsales Revenue" total_value={Allrecord?.data.totolRetailRevenue ?? 0} color={"rgb(29, 137, 23);"}/>
+           <DayResult title_name="Total Revenue" total_value={Allrecord?.data.totalRevenue ?? 0} color={"rgb(29, 137, 23);"}/>
+           <DayResult title_name="Total Wholesales Revenue" total_value={Allrecord?.data.totalWholeRevenue?? 0} color={"rgb(29, 137, 23);"}/>
        </div>
          <div className="resultTb-container">
             <Daysale_list Allcombined={Allsales} Normalsalesretailreturn={retailsalesrecord} Normalsaleswholereturn={wholesalerecord} />
          </div>
-              <ResultComp
-                  Total_pc_pkg_litre={0}
-                  Revenue={0}
-                  Net_profit={0}
-                  Expected_Profit={0}
-                  profit_deviation={""}
-                  percentage_deviation={""}
-                  percentage_discount={""}
-                  paymentstatus={""}
-                  product={{
-                    product_name: "",
-                  }}
-                />
         {isFormOpen && (
           <SalesRecForm 
             wholesales={wholesaleprod} 

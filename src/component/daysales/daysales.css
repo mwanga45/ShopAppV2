@@ -64,6 +64,34 @@
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   animation: shimmer 3s infinite;
 }
+.select-input-category-choose select {
+  width: 180px;
+  padding: 8px 12px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.select-input-category-choose select:hover {
+  border-color: #007bff;
+}
+
+.select-input-category-choose select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+}
+
+.select-input-category-choose option {
+  color: #333;
+  background-color: #fff;
+}
+
 
 .dayresult-contaier::after {
   content: '';
