@@ -13,7 +13,11 @@ import {
   salesRequestInfo,
   makesalesrequest,
 } from "../../Sales/service/sales.api";
-import type { FetchLastRec, Salerequest, SalesSummaryResponse } from "../../type.interface";
+import type {
+  FetchLastRec,
+  Salerequest,
+  SalesSummaryResponse,
+} from "../../type.interface";
 
 import type {
   wProduct,
@@ -556,7 +560,7 @@ export const SalesRecForm: React.FC<
   const [wholeprodinfo, setWholeprodinfo] = useState<wProduct[]>([]);
   const [retailprodinfo, setretailprodinfo] = useState<rProduct[]>([]);
   const [makesales, setmakesales] = useState<Salerequest>();
-  const [lastdata, setlastdata] = useState<FetchLastRec[]>()
+  const [lastdata, setlastdata] = useState<FetchLastRec>();
 
   const handleOnsubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -664,6 +668,7 @@ export const SalesRecForm: React.FC<
       return;
     }
     setmakesales(nextSales);
+
     console.log("Prepared sale payload:", nextSales);
     const confirm = window.confirm("Confirm  sales");
     if (!confirm) {
@@ -688,7 +693,8 @@ export const SalesRecForm: React.FC<
       if (!response.data.success) {
         alert(response.data.message);
       }
-      ;
+          setlastdata(response.data.data)
+          console.log()
       setmakesales({
         Total_pc_pkg_litre: 0,
         ProductId: 0,
@@ -747,209 +753,226 @@ export const SalesRecForm: React.FC<
   }
 
   return (
-    <div className="form-main-container">
-      <div className="icon-conyainer">
-        <ToastContainer />
-        <div className="icon" onClick={handleClose}>
-          <RiCloseFill color="white" size={30} fontWeight={500} />
-        </div>
-      </div>
-      <div className="main-conatiner-sales">
-        <div className="frm-container">
-          <div
-            className="form-title"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <p>{isWhole ? "Whole sales Record" : "Retail sales Record"}</p>
-            <button
-              type="button"
-              className="Actin-btn"
-              onClick={() => setWhole((prev) => !prev)}
-            >
-              {isWhole ? "Switch to Retail" : "Switch to Wholesale"}
-            </button>
+    <div className="form-comp-container-above">
+      <div className="form-main-container">
+        <div className="icon-conyainer">
+          <ToastContainer />
+          <div className="icon" onClick={handleClose}>
+            <RiCloseFill color="white" size={30} fontWeight={500} />
           </div>
-          <form className="main-form-content" onSubmit={handleOnsubmit}>
-            <div className="form-container-decoration">
-              <div className="input-value">
-                <label htmlFor="product-category">Product</label>
-                <select
-                  name="product_category"
-                  id="product-category"
-                  value={salesResponseOne.ProductId}
-                  onChange={handleOnchangeSelect}
-                >
-                  <option value="">Select product</option>
-                  {(isWhole ? wholeprodinfo : retailprodinfo).map((p) => (
-                    <option key={p.id} value={p.id}>
-                      {p.product_name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="input-value">
-                <label htmlFor="cat">Category</label>
-                <input
-                  type="text"
-                  name="category"
-                  id="cat"
-                  value={displayInfo?.product_category}
-                  onChange={handleChange}
-                  required
-                  readOnly
-                />
-              </div>
-              <div className="input-value">
-                <label htmlFor="pT">Product Type </label>
-                <input
-                  type="text"
-                  name="pType"
-                  id="pT"
-                  value={displayInfo?.product_type}
-                  onChange={handleChange}
-                  required
-                  readOnly
-                />
-              </div>
-              <div className="input-value">
-                <label htmlFor="pc">Price</label>
-                <input
-                  type="text"
-                  name={isWhole ? "wholesales_price" : "retailsales_price"}
-                  id="pc"
-                  value={
-                    isWhole
-                      ? displayInfo?.wholesales_price ?? ""
-                      : (displayInfo as any)?.retailsales_price ?? ""
-                  }
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="input-value">
-                <label htmlFor="Pnum">Product Number</label>
-                <input
-                  type="text"
-                  name="Pnum"
-                  id="Pnum"
-                  value={displayInfo?.Pnum}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="btn-container">
-                <Submitbtn buttonName="calculate sales" type="submit" />
-              </div>
-            </div>
-          </form>
         </div>
-        <div className="SalesBord-dispaly">
-          {salesSummary && (
-            <div className="sales-board-wrapper">
-              <div className="sales-card">
-                <h4>Stock Check</h4>
-                <p>
-                  Status: {salesSummary.data.stock_check.data.product_status}
-                </p>
-                <p>
-                  Total stock: {salesSummary.data.stock_check.data.totalstock}
-                  .Pac
-                </p>
-              </div>
-              <div className="sales-card">
-                <h4>Discount</h4>
-                {salesSummary.data.DiscontResult?.data?.filter_discont?.length >
-                0 ? (
-                  salesSummary.data.DiscontResult.data.filter_discont.map(
-                    (d, idx) => (
-                      <div key={idx} className="discount-row">
-                        <span>{Number(d.percentageDiscaunt).toFixed(2)}%</span>
-                        <span>Amount: {d.CashDiscount}.Tsh</span>
-                        <span>Start from: {d.start_from}.Pac</span>
-                      </div>
-                    )
-                  )
-                ) : (
-                  <p>No discount available for this product</p>
-                )}
-              </div>
-              <div className="sales-card">
-                <h4>Deviation & Revenue</h4>
-                <p>
-                  Revenue:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Revenue.toLocaleString()}
-                  .Tsh
-                </p>
-                <p>
-                  Expected Revenue:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Expect_revenue.toLocaleString()}
-                  .Tsh
-                </p>
-                <p>
-                  Exp Profit/each:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Exp_profit_pereach.toLocaleString()}
-                  .Tsh
-                </p>
-                <p>
-                  Expected Net Profit:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Exp_Net_profit.toLocaleString()}
-                  .Tsh
-                </p>
-                <p>
-                  Net Profit:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Net_profit.toLocaleString()}
-                  .Tsh
-                </p>
-                <p>
-                  Profit Deviation:{" "}
-                  {salesSummary.data.CalculateDeviation.data.Profit_deviation.toLocaleString()}
-                </p>
-                <p>
-                  Deviation from profit %:{" "}
-                  {salesSummary.data.CalculateDeviation.data.deviationFromMeanPercent.toFixed(
-                    2
-                  )}
-                  %
-                </p>
-                <div className="submit-sales-container">
-                  <Submitbtn
-                    buttonName="Confirm sales"
-                    onclick={handlemakesales}
+        <div className="main-conatiner-sales">
+          <div className="frm-container">
+            <div
+              className="form-title"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <p>{isWhole ? "Whole sales Record" : "Retail sales Record"}</p>
+              <button
+                type="button"
+                className="Actin-btn"
+                onClick={() => setWhole((prev) => !prev)}
+              >
+                {isWhole ? "Switch to Retail" : "Switch to Wholesale"}
+              </button>
+            </div>
+            <form className="main-form-content" onSubmit={handleOnsubmit}>
+              <div className="form-container-decoration">
+                <div className="input-value">
+                  <label htmlFor="product-category">Product</label>
+                  <select
+                    name="product_category"
+                    id="product-category"
+                    value={salesResponseOne.ProductId}
+                    onChange={handleOnchangeSelect}
+                  >
+                    <option value="">Select product</option>
+                    {(isWhole ? wholeprodinfo : retailprodinfo).map((p) => (
+                      <option key={p.id} value={p.id}>
+                        {p.product_name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="input-value">
+                  <label htmlFor="cat">Category</label>
+                  <input
+                    type="text"
+                    name="category"
+                    id="cat"
+                    value={displayInfo?.product_category}
+                    onChange={handleChange}
+                    required
+                    readOnly
                   />
-                  <div className="input-value">
-                    <label
-                      htmlFor="product-category"
-                      style={{ color: "white" }}
-                    >
-                      Choose saleing type
-                    </label>
-                    <select
-                      name="paymentstatus"
-                      value={makesales?.paymentstatus}
-                      onChange={handleChange}
-                    >
-                      <option value="paid">Select payment style</option>
-                      <option value="paid">paid</option>
-                      <option value="pending">pending...</option>
-                      <option value="partialpaid">partialpaid</option>
-                      <option value="debt">dept</option>
-                    </select>
+                </div>
+                <div className="input-value">
+                  <label htmlFor="pT">Product Type </label>
+                  <input
+                    type="text"
+                    name="pType"
+                    id="pT"
+                    value={displayInfo?.product_type}
+                    onChange={handleChange}
+                    required
+                    readOnly
+                  />
+                </div>
+                <div className="input-value">
+                  <label htmlFor="pc">Price</label>
+                  <input
+                    type="text"
+                    name={isWhole ? "wholesales_price" : "retailsales_price"}
+                    id="pc"
+                    value={
+                      isWhole
+                        ? displayInfo?.wholesales_price ?? ""
+                        : (displayInfo as any)?.retailsales_price ?? ""
+                    }
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="input-value">
+                  <label htmlFor="Pnum">Product Number</label>
+                  <input
+                    type="text"
+                    name="Pnum"
+                    id="Pnum"
+                    value={displayInfo?.Pnum}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="btn-container">
+                  <Submitbtn buttonName="calculate sales" type="submit" />
+                </div>
+              </div>
+            </form>
+          </div>
+                <div className="enter result returned">
+        <ResultComp
+          Total_pc_pkg_litre={lastdata?.Total_pc_pkg_litre}
+          Revenue={lastdata?.Revenue}
+          Net_profit={lastdata?.Net_profit}
+          Expected_Profit={lastdata?.Expected_Profit}
+          profit_deviation={lastdata?.percentage_deviation}
+          percentage_deviation={lastdata?.percentage_deviation}
+          percentage_discount={lastdata?.percentage_discount}
+          paymentstatus={lastdata?.paymentstatus}
+          product={{
+            product_name: lastdata?.product.product_name,
+          }}
+        />
+      </div>
+          <div className="SalesBord-dispaly">
+            {salesSummary && (
+              <div className="sales-board-wrapper">
+                <div className="sales-card">
+                  <h4>Stock Check</h4>
+                  <p>
+                    Status: {salesSummary.data.stock_check.data.product_status}
+                  </p>
+                  <p>
+                    Total stock: {salesSummary.data.stock_check.data.totalstock}
+                    .Pac
+                  </p>
+                </div>
+                <div className="sales-card">
+                  <h4>Discount</h4>
+                  {salesSummary.data.DiscontResult?.data?.filter_discont
+                    ?.length > 0 ? (
+                    salesSummary.data.DiscontResult.data.filter_discont.map(
+                      (d, idx) => (
+                        <div key={idx} className="discount-row">
+                          <span>
+                            {Number(d.percentageDiscaunt).toFixed(2)}%
+                          </span>
+                          <span>Amount: {d.CashDiscount}.Tsh</span>
+                          <span>Start from: {d.start_from}.Pac</span>
+                        </div>
+                      )
+                    )
+                  ) : (
+                    <p>No discount available for this product</p>
+                  )}
+                </div>
+                <div className="sales-card">
+                  <h4>Deviation & Revenue</h4>
+                  <p>
+                    Revenue:{" "}
+                    {salesSummary.data.CalculateDeviation.data.Revenue.toLocaleString()}
+                    .Tsh
+                  </p>
+                  <p>
+                    Expected Revenue:{" "}
+                    {salesSummary.data.CalculateDeviation.data.Expect_revenue.toLocaleString()}
+                    .Tsh
+                  </p>
+                  <p>
+                    Exp Profit/each:{" "}
+                    {salesSummary.data.CalculateDeviation.data.Exp_profit_pereach.toLocaleString()}
+                    .Tsh
+                  </p>
+                  <p>
+                    Expected Net Profit:{" "}
+                    {salesSummary.data.CalculateDeviation.data.Exp_Net_profit.toLocaleString()}
+                    .Tsh
+                  </p>
+                  <p>
+                    Net Profit:{" "}
+                    {salesSummary.data.CalculateDeviation.data.Net_profit.toLocaleString()}
+                    .Tsh
+                  </p>
+                  <p>
+                    Profit Deviation:{" "}
+                    {salesSummary.data.CalculateDeviation.data.Profit_deviation.toLocaleString()}
+                  </p>
+                  <p>
+                    Deviation from profit %:{" "}
+                    {salesSummary.data.CalculateDeviation.data.deviationFromMeanPercent.toFixed(
+                      2
+                    )}
+                    %
+                  </p>
+                  <div className="submit-sales-container">
+                    <Submitbtn
+                      buttonName="Confirm sales"
+                      onclick={handlemakesales}
+                    />
+                    <div className="input-value">
+                      <label
+                        htmlFor="product-category"
+                        style={{ color: "white" }}
+                      >
+                        Choose saleing type
+                      </label>
+                      <select
+                        name="paymentstatus"
+                        value={makesales?.paymentstatus}
+                        onChange={handleChange}
+                      >
+                        <option value="paid">Select payment style</option>
+                        <option value="paid">paid</option>
+                        <option value="pending">pending...</option>
+                        <option value="partialpaid">partialpaid</option>
+                        <option value="debt">dept</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
-       <div className="enter result returned">
-         <ResultComp Total_pc_pkg_litre={0} Revenue={0} Net_profit={0} Expected_Profit={0} profit_deviation={""} percentage_deviation={""} percentage_discount={""} paymentstatus={""} product={{
-            product_name: ""
-          }}/>
-       </div>
       </div>
+      {
+        
+      }
     </div>
   );
 };

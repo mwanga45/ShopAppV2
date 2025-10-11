@@ -9,6 +9,7 @@ import { fetchProductsales } from "./service/sales.api"
 // import type { Product } from "../type.interface"
 import type { wProduct } from "../type.interface"
 import type { rProduct } from "../type.interface"
+import { ResultComp } from "../component/result/Resultcomp"
 
 
 export default function SalesToday() {
@@ -66,7 +67,19 @@ export default function SalesToday() {
          <div className="resultTb-container">
             <Daysale_list/>
          </div>
-           
+              <ResultComp
+                  Total_pc_pkg_litre={0}
+                  Revenue={0}
+                  Net_profit={0}
+                  Expected_Profit={0}
+                  profit_deviation={""}
+                  percentage_deviation={""}
+                  percentage_discount={""}
+                  paymentstatus={""}
+                  product={{
+                    product_name: "",
+                  }}
+                />
         {isFormOpen && (
           <SalesRecForm 
             wholesales={wholesaleprod} 

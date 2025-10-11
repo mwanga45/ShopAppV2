@@ -166,15 +166,15 @@ export interface Salerequest {
   
 }
 export interface FetchLastRec {
-  Total_pc_pkg_litre: number;
-  Revenue: number;
-  Net_profit: number;
-  Expected_Profit: number;
-  profit_deviation: string;
-  percentage_deviation: string;
-  percentage_discount: string;
-  paymentstatus: string;
+  Total_pc_pkg_litre?: number;
+  Revenue?: number;
+  Net_profit?: number;
+  Expected_Profit?: number;
+  profit_deviation?: string;
+  percentage_deviation?: string;
+  percentage_discount?: string;
+  paymentstatus?: string;
   product: {
-    product_name: string;
+    product_name?: string;
   };
 }

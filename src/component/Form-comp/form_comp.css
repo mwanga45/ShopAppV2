@@ -1,3 +1,9 @@
+.form-comp-container-above{
+  display: flex;
+  flex-direction: column;
+  min-height: 120vh;
+  width: 100vw;
+}
 .form-main-container{
    position: fixed;
    top: 0;
@@ -15,13 +21,15 @@
    backdrop-filter: blur(8px);
    z-index: 9999;
 }
-
 .enter-result-returned{
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 0;
+  left: 25vh;
   right: 0;
   bottom: 0;
+  height: auto;
+  width: auto;
+  padding: 5px;
 }
 @keyframes fadeIn {
    from {
