@@ -195,3 +195,32 @@
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
+.showninfo-roll{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.iron-rod{
+    width:90%;
+    height: 10px;
+    background-color: red;
+    border-radius: 20px;
+
+}
+.showninfo-main-info{
+    border: 2px solid black;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 90px;
+    width: 100%;
+}
+.showninfo-main-info span{
+    color: rgb(20, 20, 20);
+    font-size: 45px;
+    
+}
