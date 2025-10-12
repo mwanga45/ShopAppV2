@@ -8,6 +8,11 @@ export const AdminsalesAnaysis = () => {
           Overview of Your sales Performance today{" "}
         </span>
       </div>
+      <div className="product-sales-track-each">
+         <span>
+          
+         </span>
+      </div>
       <div className="salesdayasanalysis-container">
         <div className="sales-analysis-graph-container"></div>
         <div className="salasAnalysis-card-container">
@@ -25,7 +30,8 @@ export const AdminsalesAnaysis = () => {
         <div className="today-debtor-list"></div>
         <div className="order-list-total-deviation">
           <div className="title-orderlist-deviatian-container">
-            <span>Order Placement And Deviation </span>
+            <span  className="title-orderlist-deviatian-title">Order Placement And Deviation from Profit </span>
+            <span className="analysis-second-title">Overview deviation and Orderlist</span>
           </div>
           <div className="order-card-deviation"></div>
         </div>
