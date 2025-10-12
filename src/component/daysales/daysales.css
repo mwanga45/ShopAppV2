@@ -617,12 +617,14 @@
 .salesAnaysis-main-container{
   display: flex;
   align-items: flex-start;
-  padding:5px;
+  padding:10px;
   border: 3px solid green;
+  border-radius: 25px;
   height: auto;
   width:100% ;
   background-color: white;
   flex-direction: column;
+  
 }
 .salesAnalysis-title-container{
   min-width:500px ;
@@ -630,7 +632,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   border: 2px solid red;
   padding: 20px;
   top: 12px;
@@ -645,4 +647,27 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-style: italic;
   color: grey;
+}
+.salesdayasanalysis-container{
+  width: 100%;
+  height: auto;
+  border: 4px solid yellow;
+  margin-top:5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 15px;
+  padding: 10px;
+}
+.sales-analysis-graph-container{
+  border: 2px solid saddlebrown;
+  width: 49%;
+  min-height:25vh ;
+}
+.salasAnalysis-card-container{
+  border: 2px solid rgb(19, 35, 139);
+  width: 49%;
+  min-height:25vh;
+  display: flex;
+  flex-direction: column;
 }
