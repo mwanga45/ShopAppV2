@@ -1,5 +1,6 @@
 import "./daysales.css";
 import { SiWikibooks } from "react-icons/si";
+import { Reportcard } from "../card-report/report-card";
 export const AdminsalesAnaysis = () => {
   return (
     <div className="salesAnaysis-main-container">
@@ -18,12 +19,12 @@ export const AdminsalesAnaysis = () => {
         <div className="sales-analysis-graph-container"></div>
         <div className="salasAnalysis-card-container">
           <div className="business-card-comaparizone">
-            <div className="first-card-comparizone">stock-in</div>
-            <div className="second-card-comparizone">stock-out</div>
+            <div className="first-card-comparizone"><Reportcard/></div>
+            <div className="second-card-comparizone"><Reportcard/></div>
           </div>
           <div className="business-card-comaparizone">
-            <div className="first-card-comparizone">profi comparizone today</div>
-            <div className="second-card-comparizone">profit comparizone yesterday</div>
+            <div className="first-card-comparizone"><Reportcard/></div>
+            <div className="second-card-comparizone"><Reportcard/></div>
           </div>
         </div>
       </div>
