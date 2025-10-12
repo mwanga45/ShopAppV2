@@ -186,12 +186,12 @@
     font-weight: 600;
     color: grey;
     font-size: 15px;
-    
 }
 
 /* shown card info style */
 .shownInfo-card-container{
     min-height: 130px;
     min-width: 250px;
-    border: 2px solid blue;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
