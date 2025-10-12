@@ -10,7 +10,10 @@ export const AdminsalesAnaysis = () => {
         <div className="salasAnalysis-card-container"></div>
       </div>
       <div className="order-debt-record-deviation">
-          
+          <div className="today-debtor-list"></div>
+          <div className="order-list-total-deviation">
+            <div className="order-card-deviation"></div>
+          </div>
       </div>
     </div>
   );

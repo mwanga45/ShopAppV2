@@ -80,7 +80,7 @@ export default function Stock() {
         last_stock={s.last_stock}
         fullname={s.fullname}
         user_id={s.user_id}
-        percentageRemain={s.percentageRemain}  product_category={s.product_category}  />
+        percentageRemain={s.percentageRemain || 0}  product_category={s.product_category }  />
     ))}
   </div>
 ) : (

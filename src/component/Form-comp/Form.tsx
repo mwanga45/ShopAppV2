@@ -77,10 +77,13 @@ export default function FormComp({ onClose, isOpen = true }: FormCompProps) {
         if (formData.wpurchase_price)
           payload.wpurchase_price = formData.wpurchase_price;
       }
-      if (window.confirm("are sure  you want to registration")) {
-        await productRegister(payload);
+      const decison = window.confirm("are sure  you want to registration")
+      if(!decison){
+        toast.success("successfully terminate the process")
+        return
       }
-
+      await productRegister(payload)
+      
       alert("Product registered successfully!");
       handleClose();
     } catch (error: any) {
@@ -101,6 +104,7 @@ export default function FormComp({ onClose, isOpen = true }: FormCompProps) {
 
   return (
     <div className="form-main-container">
+      <ToastContainer/>
       <div className="icon-conyainer">
         <div className="icon" onClick={handleClose}>
           <RiCloseFill color="white" size={30} fontWeight={500} />

@@ -121,8 +121,9 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
                     key={item.product_id}
                     className={`table-row ${index % 2 === 0 ? "even" : "odd"}`}
                   >
+                    
                     <td className="product-name">{item.product_name}</td>
-                    <td className="product-id">{item.product_id}</td>
+                    <td className="product-id">p00{item.product_id}</td>
                     <td className="product-category">
                       {item.product_category}
                     </td>
@@ -132,7 +133,7 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
                     <td className="total-generate">
                       {Number(item.total_profit).toLocaleString()}.Tsh
                     </td>
-                    <td className="product-pc">{item.total_quantity}</td>
+                    <td className="product-pc">{Number(item.total_quantity).toFixed(2)}</td>
                     <td className="profit-generated">{item.seller}</td>
                   </tr>
                 ))
@@ -149,7 +150,7 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
                     className={`table-row ${index % 2 === 0 ? "even" : "odd"}`}
                   >
                     <td className="product-name">{item.product_name}</td>
-                    <td className="product-id">{item.product_id}</td>
+                    <td className="product-id">p00{item.product_id}</td>
                     <td className="product-category">
                       {item.product_category}
                     </td>
@@ -159,7 +160,7 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
                     <td className="total-generate">
                       {Number(item.total_profit).toLocaleString()}.Tsh
                     </td>
-                    <td className="product-pc">{item.total_quantity}</td>
+                    <td className="product-pc">{Number(item.total_quantity).toFixed(2)}</td>
                     <td className="profit-generated">{item.seller}</td>
                   </tr>
                 ))
@@ -176,7 +177,7 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
                     className={`table-row ${index % 2 === 0 ? "even" : "odd"}`}
                   >
                     <td className="product-name">{item.product_name}</td>
-                    <td className="product-id">{item.product_id}</td>
+                    <td className="product-id">p00{item.product_id}</td>
                     <td className="product-category">
                       {item.product_category}
                     </td>
@@ -186,7 +187,7 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
                     <td className="total-generate">
                       {Number(item.total_profit).toLocaleString()}.Tsh
                     </td>
-                    <td className="product-pc">{item.total_quantity}</td>
+                    <td className="product-pc">{Number(item.total_quantity).toFixed(2)}</td>
                     <td className="profit-generated">{item.seller}</td>
                   </tr>
                 ))
