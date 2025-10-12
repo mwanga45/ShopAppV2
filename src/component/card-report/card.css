@@ -188,3 +188,10 @@
     font-size: 15px;
     
 }
+
+/* shown card info style */
+.shownInfo-card-container{
+    min-height: 130px;
+    min-width: 250px;
+    border: 2px solid blue;
+}
