@@ -705,5 +705,14 @@
   font-weight: 700;
   font-size: 25px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  
+
+}
+.product-sales-track-each{
+  width: 100%;
+  height: auto;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border: 2px solid lightgreen;
 }
