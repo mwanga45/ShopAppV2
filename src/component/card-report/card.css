@@ -194,6 +194,7 @@
     min-width: 250px;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+     padding: 10px;
 }
 .showninfo-roll{
     width: 100%;
@@ -205,13 +206,12 @@
 }
 .iron-rod{
     width:90%;
-    height: 10px;
+    height: 8px;
     background-color: red;
     border-radius: 20px;
 
 }
 .showninfo-main-info{
-    border: 2px solid black;
     padding: 20px;
     display: flex;
     align-items: center;
@@ -222,5 +222,18 @@
 .showninfo-main-info span{
     color: rgb(20, 20, 20);
     font-size: 45px;
-    
+    font-weight: 700;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+.showinfo-description{
+    height: auto;
+    width: 100%;
+    padding:12px ;
+}
+.showinfo-description span{
+    color: rgb(97, 255, 5);
+    font-size: 15px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: italic;
 }
