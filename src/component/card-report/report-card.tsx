@@ -1,6 +1,8 @@
+import './card.css'
 export const Reportcard = ()=>{
+
     return(
-        <div className="report-card-conatiner">
+        <div className="report-card-container">
             <div>
                 <span></span>
             </div>

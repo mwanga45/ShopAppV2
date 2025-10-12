@@ -671,6 +671,7 @@
   flex-direction: column;
   justify-content: center;
   min-height: 250px;
+  padding: 12px;
 }
 .order-debt-record-deviation{
   width: 100%;
@@ -718,8 +719,8 @@
   border: 2px solid lightgreen;
 }
 .business-card-comaparizone{
- border: 2px solid green;
+ /* border: 2px solid green; */
  display: flex;
- justify-content: space-between;
+ column-gap: 10px;
 
 }
