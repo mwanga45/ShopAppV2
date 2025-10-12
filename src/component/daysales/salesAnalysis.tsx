@@ -37,7 +37,7 @@ export const AdminsalesAnaysis = () => {
             <span className="analysis-second-title">Overview deviation and Orderlist</span>
           </div>
           <div className="order-card-deviation">
-               <ShowinfoCard/>
+               <ShowinfoCard/>  <ShowinfoCard/>   <ShowinfoCard/>  <ShowinfoCard/> 
           </div>
         </div>
       </div>

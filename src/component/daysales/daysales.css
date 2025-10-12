@@ -696,11 +696,11 @@
 .order-card-deviation{
   width: 100%;
   height: auto;
-  border:2px solid #2d3748;
   padding: 12px;
   border-radius: 12px;
   display:flex ;
-  column-gap: 3px;
+  column-gap: 10px;
+  
 }
 .title-orderlist-deviatian-container{
   display: flex;
