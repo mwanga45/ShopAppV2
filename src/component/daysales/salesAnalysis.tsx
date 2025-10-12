@@ -1,9 +1,10 @@
+import './daysales.css'
 export const AdminsalesAnaysis = () => {
   return (
     <div className="salesAnaysis-main-container">
       <div className="salesAnalysis-title-container">
-        <span></span>
-        <span></span>
+        <span className='analysis-first-title'>Sales</span>
+        <span className='analysis-second-title'>Overview of Your sales Performance today </span>
       </div>
       <div className="salesdayasanalysis-container">
         <div className="sales-analysis-graph-container"></div>

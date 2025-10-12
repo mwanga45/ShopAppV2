@@ -612,3 +612,37 @@
   background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
   transform: scale(1.1);
 }
+/* daily salesanalysis style */
+
+.salesAnaysis-main-container{
+  display: flex;
+  align-items: flex-start;
+  padding:5px;
+  border: 3px solid green;
+  height: auto;
+  width:100% ;
+  background-color: white;
+  flex-direction: column;
+}
+.salesAnalysis-title-container{
+  min-width:500px ;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border: 2px solid red;
+  padding: 20px;
+  top: 12px;
+}
+.analysis-first-title{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: #333;
+}
+.analysis-second-title{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-style: italic;
+  color: grey;
+}

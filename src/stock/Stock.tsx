@@ -42,9 +42,9 @@ export default function Stock() {
     }
     handlecardData()
   },[])
-  function handlecardData(): (() => void) | undefined {
-    throw new Error("Function not implemented.");
-  }
+  // function handlecardData(): (() => void) | undefined {
+  //   throw new Error("Function not implemented.");
+  // }
 
   return (
     <div className="stock-main-conatiner animated-enter">
