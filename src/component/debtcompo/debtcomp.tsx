@@ -3,8 +3,8 @@ export const Debtcompo = () =>{
     return(
         <div>
             <div>
-                <span>Daily Debtor Summary List</span>
-                <span></span>
+                <span className='Dbt-compo-list-title'>Daily Debtor Summary List</span>
+                <span>Tracks today’s pending debts and unpaid balances from active sales.</span>
             </div>
 
         </div>
