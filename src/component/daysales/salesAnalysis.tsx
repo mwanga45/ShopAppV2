@@ -2,7 +2,8 @@ import "./daysales.css";
 import { SiWikibooks } from "react-icons/si";
 import { Reportcard } from "../card-report/report-card";
 import { ShowinfoCard } from "../card-report/shownInfo";
-import { Debtcompo } from "../debtcompo/debtcomp";
+// import { Debtcompo } from "../debtcompo/debtcomp"
+import { Debtcompo } from "../Debt/debtcomp";
 export const AdminsalesAnaysis = () => {
   return (
     <div className="salesAnaysis-main-container">
