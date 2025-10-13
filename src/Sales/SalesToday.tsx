@@ -21,6 +21,7 @@ export default function SalesToday() {
   const [retailsalesrecord, setretailsalesrecord] = useState<SalesRecord[]>([])
   const [wholesaleprod, setWholesaleprod] = useState<wProduct[]>([])
   const [retailsalesprod, setretailsaleprod] = useState<rProduct[]>([])
+  const [Pendingpaymentsales,setPendingpaymentsales] = useState<SalesRecord[]>([])
   const [showsalesAnalysis, setshowsalesAnalysis] = useState<boolean>(false)
   
   const handleOpenForm = () => {
@@ -55,6 +56,7 @@ export default function SalesToday() {
     setAllsales(response.data.data.Allcombined)
     setwholesalesrecord(response.data.data.Normalsaleswholereturn)
     setretailsalesrecord(response.data.data.Normalsalesretailreturn)
+    setPendingpaymentsales(response.data.data.AllcombinedPending)
    }
    handleproductInfo()
    handlereturnsalesdata()
@@ -86,7 +88,7 @@ export default function SalesToday() {
            <DayResult title_name="Total Wholesales Revenue" total_value={Allrecord?.data.totalWholeRevenue?? 0} color={"rgb(29, 137, 23);"}/>
        </div>
          <div className="resultTb-container">
-            <Daysale_list Allcombined={Allsales} Normalsalesretailreturn={retailsalesrecord} Normalsaleswholereturn={wholesalerecord} />
+            <Daysale_list Allcombined={Allsales} Normalsalesretailreturn={retailsalesrecord} Normalsaleswholereturn={wholesalerecord} Pendingsalesreturn={Pendingpaymentsales} />
          </div>
         {isFormOpen && (
           <SalesRecForm 

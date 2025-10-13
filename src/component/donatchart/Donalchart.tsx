@@ -19,7 +19,7 @@ export const DonalChart: React.FC = () => {
   const chartRef = useRef<ChartJS<"doughnut">>(null);
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
   const [ProductStockInfo, setProductStockInfo] = useState<Stockprops[]>([])
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [_, setIsTransitioning] = useState(false);
 
   
   const currentProduct = ProductStockInfo[currentProductIndex];

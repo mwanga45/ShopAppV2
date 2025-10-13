@@ -190,6 +190,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   margin-top: 20px;
+  padding: 5px;
   animation: slideInFromBottom 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

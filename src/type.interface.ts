@@ -188,11 +188,13 @@ export interface SalesRecord {
   total_quantity?: string;
   total_revenue?: string;
   total_profit?: string;
+  status?:string
 }
 
 export interface SalesSummaryDatasales {
   Normalsaleswholereturn?: SalesRecord[];
   Normalsalesretailreturn?: SalesRecord[];
+  Pendingsalesreturn?:SalesRecord[];
   Allcombined?: SalesRecord[];
   totalRevenue?: number;
   totalWholeRevenue?: number;

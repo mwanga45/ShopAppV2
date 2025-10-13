@@ -3,6 +3,7 @@ import "./daysales.css";
 import { SiMoneygram } from "react-icons/si";
 import React, { useState, useEffect } from "react";
 import type { Result,SalesSummaryDatasales } from "../../type.interface";
+// import { MdOutlineEditNote } from "react-icons/md";
 
 
 
@@ -41,6 +42,7 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
   Allcombined,
   Normalsalesretailreturn,
   Normalsaleswholereturn,
+  Pendingsalesreturn
 }) => {
   const [loading, _] = useState<boolean>(false);
   const [error, ] = useState<string | null>(null);
@@ -79,12 +81,16 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
 
   return (
     <div className="daylist-container">
+      <span style={{color:'gray', fontSize:"25px", fontWeight:"bold"}} >Filter by</span>
       <div className="filter-list-container">
         <div className="filterby" onClick={()=> setcategory('All')}>
           <p>All</p>
         </div>
         <div className="filterby"  onClick={handleopen}>
           <p >Category</p>
+        </div>
+            <div className="filterby" onClick={()=> setcategory('pending')}>
+          <p>Pending..</p>
         </div>
         <div className="select-input-category-choose">
           {isswicheropen && (
@@ -110,7 +116,7 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
               <th>Revenue</th>
               <th>Total profit</th>
               <th>PC</th>
-              <th>Seller</th>
+              <th>{category === 'pending'? "Paymentstatus":"seller"}</th>
             </tr>
           </thead>
           <tbody>
@@ -191,12 +197,39 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
                     <td className="profit-generated">{item.seller}</td>
                   </tr>
                 ))
-              ) : (
+              ):(
                 <tr className="table-row">
                   <td colSpan={7}>No any Wholesale Sales Today</td>
                 </tr>
               )
-            ) : (
+            ):category === "pending" ?(
+                Pendingsalesreturn && Pendingsalesreturn.length > 0 ?(
+                  Pendingsalesreturn.map((item, index) => (
+                    <tr
+                    key={item.product_id}
+                    className={`table-row ${index % 2 === 0 ? "even" : "odd"}`}
+                  >
+                    <td className="product-name">{item.product_name}</td>
+                    <td className="product-id">p00{item.product_id}</td>
+                    <td className="product-category">
+                      {item.product_category}
+                    </td>
+                    <td className="product-type">
+                      {Number(item.total_revenue).toLocaleString()}.Tsh
+                    </td>
+                    <td className="total-generate">
+                      {Number(item.total_profit).toLocaleString()}.Tsh
+                    </td>
+                    <td className="product-pc">{Number(item.total_quantity).toFixed(2)}</td>
+                    <td className="profit-generated">{item.status}</td>
+                  </tr>
+                  ))
+                ):(
+                   <tr className="table-row">
+                  <td >No Pending Payment  </td>
+                </tr>
+                )
+              ) : (
               <tr className="table-row">
                 <td colSpan={7}>Invalid Category Selected</td>
               </tr>
