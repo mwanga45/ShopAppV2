@@ -1,6 +1,17 @@
-.Dbt-compo-list-title{
+.Dbt-compo-list-title-container{
+    display: flex;
+    flex-direction: column;
+}
+.Dbt-compo-list-title1{
     font-size: 25px;
     font-weight: 700;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     
+}
+.Dbt-compo-list-title2{
+    font-size: 15px;
+    color: gray;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: italic;
+    font-weight: 600;
 }
