@@ -687,6 +687,7 @@
   width: 35%;
   min-height: 700px;
   border: 2px solid goldenrod;
+  padding: 5px;
 }
 .order-list-total-deviation{
   width: 75%;

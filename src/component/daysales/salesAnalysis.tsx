@@ -2,6 +2,7 @@ import "./daysales.css";
 import { SiWikibooks } from "react-icons/si";
 import { Reportcard } from "../card-report/report-card";
 import { ShowinfoCard } from "../card-report/shownInfo";
+import { Debtcompo } from "../debtcompo/debtcomp";
 export const AdminsalesAnaysis = () => {
   return (
     <div className="salesAnaysis-main-container">
@@ -30,7 +31,9 @@ export const AdminsalesAnaysis = () => {
         </div>
       </div>
       <div className="order-debt-record-deviation">
-        <div className="today-debtor-list"></div>
+        <div className="today-debtor-list">
+          <Debtcompo/>
+        </div>
         <div className="order-list-total-deviation">
           <div className="title-orderlist-deviatian-container">
             <span  className="title-orderlist-deviatian-title">Order Placement And Deviation from Profit </span>
