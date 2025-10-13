@@ -619,7 +619,6 @@
   display: flex;
   align-items: flex-start;
   padding:10px;
-  border: 3px solid green;
   border-radius: 25px;
   height: auto;
   width:100% ;
@@ -652,7 +651,6 @@
 .salesdayasanalysis-container{
   width: 100%;
   height: auto;
-  border: 4px solid yellow;
   margin-top:5px;
   display: flex;
   justify-content: center;
@@ -661,15 +659,15 @@
   padding: 10px;
 }
 .sales-analysis-graph-container{
-  border: 2px solid saddlebrown;
   width: 49%;
   min-height:250px;
+  background-color: #EBEBEB;
 }
 .salasAnalysis-card-container{
-  border: 2px solid rgb(19, 35, 139);
   width: 49%;
   display: flex;
   flex-direction: column;
+  row-gap: 8px;
   justify-content: center;
   min-height: 250px;
   padding: 12px;
@@ -677,7 +675,6 @@
 .order-debt-record-deviation{
   width: 100%;
   height: auto ;
-  border:2px solid #007bff ;
   margin-top: 12px;
   display: flex;
   column-gap: 10px;
@@ -686,13 +683,11 @@
 .today-debtor-list{
   width: 35%;
   min-height: 700px;
-  border: 2px solid goldenrod;
   padding: 5px;
 }
 .order-list-total-deviation{
   width: 75%;
   min-height: 700px;
-  border: 2px solid black;
   padding: 15px;
 }
 .order-card-deviation{
@@ -721,10 +716,9 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  border: 2px solid lightgreen;
+
 }
 .business-card-comaparizone{
- /* border: 2px solid green; */
  display: flex;
  column-gap: 10px;
 
