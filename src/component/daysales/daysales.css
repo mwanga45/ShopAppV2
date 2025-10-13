@@ -685,12 +685,12 @@
 }
 .today-debtor-list{
   width: 35%;
-  min-height: 500px;
+  min-height: 700px;
   border: 2px solid goldenrod;
 }
 .order-list-total-deviation{
   width: 75%;
-  min-height: 500px;
+  min-height: 700px;
   border: 2px solid black;
   padding: 15px;
 }
