@@ -1,4 +1,6 @@
 import "./debtcomp.css";
+import './CardDiscript.css'
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 export const Debtcompo = () => {
   return (
     <div>
@@ -19,3 +21,19 @@ export const Debtcompo = () => {
     </div>
   );
 };
+export const CardDiscription = ()=>{
+     return(
+        <div className="crd-dsc-cont">
+            <div>
+               <AiOutlineLoading3Quarters/>
+            </div>
+            <div>
+                <span>John Doe</span>
+                <span>240000</span>
+            </div>
+            <div>
+                <span>24-07-2026</span>
+            </div>
+        </div>
+     )
+}
