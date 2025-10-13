@@ -11,7 +11,7 @@
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px;
 }
 
-/* Header row */
+
 .ord-header {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
@@ -22,7 +22,7 @@
   text-align: center;
 }
 
-/* Each order row */
+
 .ord-row {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
@@ -38,7 +38,7 @@
   transform: scale(1.01);
 }
 
-/* Scrollable if many rows */
+
 .ord-list-scroll {
   max-height: 600px;
   overflow-y: auto;
