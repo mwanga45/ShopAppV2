@@ -6,7 +6,9 @@ export const Debtcompo = () =>{
                 <span className='Dbt-compo-list-title1'>Daily Debtor Summary List</span>
                 <span className='Dbt-compo-list-title2'>Tracks today’s pending debts and unpaid balances from active sales.</span>
             </div>
-
+            <div className="Dbt-compo-list-container">
+                
+            </div>
         </div>
     )
 }
