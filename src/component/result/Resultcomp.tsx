@@ -12,8 +12,9 @@ export const ResultComp: React.FC<FetchLastRec> = ({
   percentage_deviation,
   percentage_discount,
   paymentstatus,
+  Onclick
 }) => {
-  function handleClose(): void {}
+
 
   return (
     <div className="return-data-main-container">
@@ -21,7 +22,7 @@ export const ResultComp: React.FC<FetchLastRec> = ({
         <span className="return-data-title">
           Sales of Product {product.product_name}{" "}
         </span>
-        <div className="icon" onClick={handleClose}>
+        <div className="icon" onClick={Onclick}>
           <RiCloseFill color="white" size={30} fontWeight={500} />
         </div>
       </div>

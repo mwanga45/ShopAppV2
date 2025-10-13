@@ -177,6 +177,7 @@ export interface FetchLastRec {
   product: {
     product_name?: string;
   };
+  Onclick?:() => void
 }
 
 export interface SalesRecord {

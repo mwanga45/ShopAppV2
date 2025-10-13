@@ -568,6 +568,10 @@ export const SalesRecForm: React.FC<
   const [isdbfromOpen, setdbformOpen] = useState<boolean>(false);
   const [isreturned, setisreturned] = useState<boolean>(false);
   const [isSaleSummary, setisSaleSummary] = useState<boolean>(false);
+  
+  const handleCloseReturnedresult =()=>{
+    setisreturned(false)
+  }
   const handleOnsubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const price = isWhole
@@ -674,7 +678,6 @@ export const SalesRecForm: React.FC<
       return;
     }
     setmakesales(nextSales);
-    setisSaleSummary(false);
     setisreturned(true);
 
     console.log("Prepared sale payload:", nextSales);
@@ -758,7 +761,12 @@ export const SalesRecForm: React.FC<
       setretailprodinfo(retailsales);
     }
   }, [wholesales, retailsales]);
-
+  useEffect(()=> {
+   const timer = setInterval(()=>{
+    setisSaleSummary(false)
+   }, 200000)
+   return ()=> clearInterval(timer)
+  }, [isSaleSummary, ])
   if (!close) {
     return null;
   }
@@ -878,7 +886,7 @@ export const SalesRecForm: React.FC<
               </div>
             </form>
           </div>
-          {!isreturned && (
+          {isreturned && (
             <div className="enter-result-returned"> 
               <ResultComp
                 Total_pc_pkg_litre={lastdata?.Total_pc_pkg_litre}
@@ -892,6 +900,7 @@ export const SalesRecForm: React.FC<
                 product={{
                   product_name: lastdata?.product.product_name,
                 }}
+                Onclick={handleCloseReturnedresult}
               />
               </div>
             
