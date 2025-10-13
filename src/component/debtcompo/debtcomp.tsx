@@ -13,7 +13,9 @@ export const Debtcompo = () => {
         <span>Paid</span>
         <span>Partalpaid</span>
       </div>
-      <div className="Dbt-compo-list-container"></div>
+      <div className="Dbt-compo-list-container">
+        
+      </div>
     </div>
   );
 };
