@@ -1,5 +1,8 @@
+import './Ordercomp.css'
 export const OrderlistComp = ()=>{
     return(
-        <div></div>
+        <div className='Ord-list-main-container'>
+
+        </div>
     )
 }
