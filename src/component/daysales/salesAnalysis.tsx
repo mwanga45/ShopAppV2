@@ -4,6 +4,7 @@ import { Reportcard } from "../card-report/report-card";
 import { ShowinfoCard } from "../card-report/shownInfo";
 // import { Debtcompo } from "../debtcompo/debtcomp"
 import { Debtcompo } from "../Debt/debtcomp";
+import { OrderlistComp } from "../Ordercomp/orderlistComp";
 export const AdminsalesAnaysis = () => {
   return (
     <div className="salesAnaysis-main-container">
@@ -42,6 +43,9 @@ export const AdminsalesAnaysis = () => {
           </div>
           <div className="order-card-deviation">
                <ShowinfoCard/>  <ShowinfoCard/>   <ShowinfoCard/>  <ShowinfoCard/> 
+          </div>
+          <div className="order-list-part">
+             <OrderlistComp/> 
           </div>
         </div>
       </div>

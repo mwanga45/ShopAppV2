@@ -1,7 +1,7 @@
 .Ord-list-main-container{
-   padding: 5px;
+   padding: 8px;
    min-width: 600px;
    min-height:700px;
    background-color: #EBEBEB;
-
+   border-radius: 15px;
 }
