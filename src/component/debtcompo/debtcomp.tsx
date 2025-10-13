@@ -28,10 +28,10 @@ export const CardDiscription = ()=>{
                <AiOutlineLoading3Quarters size={25} color="green" fontSize={28} fontWeight={700}/>
             </div>
             <div className="crd-dsc-desc-info">
-                <span>John Doe</span>
-                <span>Remaining 240000Tsh</span>
+                <span className="crd-dcs-name">John Doe</span>
+                <span className="crd-dcs-amount">Remaining 240000Tsh</span>
             </div>
-            <div>
+            <div className="crd-dcs-date-container">
                 <span>24-07-2026</span>
             </div>
         </div>
