@@ -1,6 +1,7 @@
 .crd-dsc-cont{
     display: flex;
     justify-content: space-between;
+    row-gap: 3px;
     padding: 30px;
     align-items: center;
     border-radius: 15px;
@@ -50,4 +51,14 @@ font-size: 15px;
     font-weight: 700;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
+}
+.crd-dsc-icon-cont{
+    height: auto;
+    width: auto;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(220, 220, 220);
+    border-radius: 5px;
 }

@@ -24,7 +24,7 @@ export const Debtcompo = () => {
 export const CardDiscription = ()=>{
      return(
         <div className="crd-dsc-cont">
-            <div>
+            <div className="crd-dsc-icon-cont" >
                <AiOutlineLoading3Quarters size={25} color="green" fontSize={28} fontWeight={700}/>
             </div>
             <div className="crd-dsc-desc-info">
