@@ -16,15 +16,17 @@
     font-weight: 600;
 }
 .Dbt-compo-list-container{
-    display: flex;
-    flex-direction: column;
-    row-gap: 5px;
-    padding-top:10px;
-    margin-top: 10px;
-    min-width: 70px;
-    max-height: 600px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  padding-top: 10px;
+  margin-top: 10px;
+  min-width: 70px;
+  max-height: 600px;
+  overflow-y: auto; 
+  overflow-x: hidden; 
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+              rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }   
 .Dbt-compo-list-selection{
     margin-top: 10px;

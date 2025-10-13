@@ -22,6 +22,18 @@ export const Debtcompo = () => {
         <CardDiscription/>
         <CardDiscription/>
         <CardDiscription/>
+         <CardDiscription/>
+        <CardDiscription/>
+        <CardDiscription/>
+           <CardDiscription/>
+        <CardDiscription/>
+        <CardDiscription/>
+        <CardDiscription/>
+        <CardDiscription/>
+        <CardDiscription/>
+         <CardDiscription/>
+        <CardDiscription/>
+        <CardDiscription/>
       </div>
     </div>
   );
