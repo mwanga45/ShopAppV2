@@ -112,7 +112,7 @@ export const AdminPanel = () => {
             </motion.div>
             <motion.div className="admin-action-container" variants={itemVariants}>
                 <Button buttonName="Register Product" Onclick={handleopenproductregForm} />
-                <Button buttonName="Update-stock" Onclick={handleOpenList} />
+                <Button buttonName="Update-Product" Onclick={handleOpenList} />
                 <Button buttonName="Stock-register" Onclick={handleopenStockreg} />
             </motion.div>
             <motion.div className="business-other-info" variants={itemVariants}>

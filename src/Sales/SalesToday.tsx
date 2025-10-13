@@ -59,6 +59,10 @@ export default function SalesToday() {
    handleproductInfo()
    handlereturnsalesdata()
   },[])
+  useEffect(()=> {
+    document.body.style.overflow = isFormOpen ? 'hidden' :'auto'
+
+  }, [isFormOpen])
   return (
     <div className="Wh-Rtsales-container">
          <div className="salesbar">

@@ -565,7 +565,7 @@ export const SalesRecForm: React.FC<
   const [retailprodinfo, setretailprodinfo] = useState<rProduct[]>([]);
   const [makesales, setmakesales] = useState<Salerequest>();
   const [lastdata, setlastdata] = useState<FetchLastRec>();
-
+  const [isdbfromOpen,setdbformOpen ] = useState<boolean>(false)
   const handleOnsubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const price = isWhole
@@ -596,8 +596,6 @@ export const SalesRecForm: React.FC<
       ProductId: salesResponseOne.ProductId,
       Total_pc_pkg_litre: Number(displayInfo.Pnum),
     }));
-    console.log(sentpayload);
-    console.log(makesales);
     try {
       const response = await salesRequestInfo(sentpayload);
       console.log("Sales response:", response.data);
@@ -739,6 +737,7 @@ export const SalesRecForm: React.FC<
     const { name, value } = e.target;
     if (name === "paymentstatus") {
       setmakesales((prev) => ({ ...prev, ["paymentstatus"]: value }));
+      
     } else {
       setdisplayInfo((prev) => ({ ...prev, [name]: value }));
     }
@@ -765,6 +764,7 @@ export const SalesRecForm: React.FC<
             <RiCloseFill color="white" size={30} fontWeight={500} />
           </div>
         </div>
+      <div style={{display:'flex', alignItems:"center", justifyContent:"center"}} ><span style={{fontSize:'45px', color:"white", fontWeight:"bolder"}}>Sales record</span></div>
         <div className="main-conatiner-sales">
           <div className="frm-container">
             <div
@@ -859,7 +859,7 @@ export const SalesRecForm: React.FC<
             </form>
           </div>
                 <div className="enter result returned">
-        <ResultComp
+        {/* <ResultComp
           Total_pc_pkg_litre={lastdata?.Total_pc_pkg_litre}
           Revenue={lastdata?.Revenue}
           Net_profit={lastdata?.Net_profit}
@@ -871,7 +871,7 @@ export const SalesRecForm: React.FC<
           product={{
             product_name: lastdata?.product.product_name,
           }}
-        />
+        /> */}
       </div>
           <div className="SalesBord-dispaly">
             {salesSummary && (
@@ -953,7 +953,7 @@ export const SalesRecForm: React.FC<
                         htmlFor="product-category"
                         style={{ color: "white" }}
                       >
-                        Choose saleing type
+                        Choose payment style
                       </label>
                       <select
                         name="paymentstatus"
