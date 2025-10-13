@@ -16,6 +16,7 @@
     font-weight: 600;
 }
 .Dbt-compo-list-container{
+    padding-top:10px;
     margin-top: 10px;
     min-width: 70px;
     min-height: 600px;

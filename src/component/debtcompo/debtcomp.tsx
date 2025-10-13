@@ -16,7 +16,7 @@ export const Debtcompo = () => {
         <span>Partalpaid</span>
       </div>
       <div className="Dbt-compo-list-container">
-        
+        <CardDiscription/>
       </div>
     </div>
   );
@@ -25,11 +25,11 @@ export const CardDiscription = ()=>{
      return(
         <div className="crd-dsc-cont">
             <div>
-               <AiOutlineLoading3Quarters/>
+               <AiOutlineLoading3Quarters size={25} color="green" fontSize={28} fontWeight={700}/>
             </div>
-            <div>
+            <div className="crd-dsc-desc-info">
                 <span>John Doe</span>
-                <span>240000</span>
+                <span>Remaining 240000Tsh</span>
             </div>
             <div>
                 <span>24-07-2026</span>
