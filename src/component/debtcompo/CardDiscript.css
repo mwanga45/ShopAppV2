@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     row-gap: 3px;
-    padding: 30px;
+    padding: 20px;
     align-items: center;
     border-radius: 15px;
     min-height:40px;
@@ -37,7 +37,6 @@ font-size: 15px;
     width: auto;
     height: auto;
     padding: 5px;
-    background-color: #FF4D4D;
     border-radius: 12px;
 }
 .crd-dcs-date-container:hover{
@@ -47,7 +46,7 @@ font-size: 15px;
     cursor: pointer;
 }
 .crd-dcs-date-container span{
-    color: aliceblue;
+    color: rgb(255, 170, 127);
     font-weight: 700;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
