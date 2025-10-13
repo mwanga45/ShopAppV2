@@ -77,13 +77,13 @@ export default function FormComp({ onClose, isOpen = true }: FormCompProps) {
         if (formData.wpurchase_price)
           payload.wpurchase_price = formData.wpurchase_price;
       }
-      const decison = window.confirm("are sure  you want to registration")
-      if(!decison){
-        toast.success("successfully terminate the process")
-        return
+      const decison = window.confirm("are sure  you want to registration");
+      if (!decison) {
+        toast.success("successfully terminate the process");
+        return;
       }
-      await productRegister(payload)
-      
+      await productRegister(payload);
+
       alert("Product registered successfully!");
       handleClose();
     } catch (error: any) {
@@ -104,7 +104,7 @@ export default function FormComp({ onClose, isOpen = true }: FormCompProps) {
 
   return (
     <div className="form-main-container">
-      <ToastContainer/>
+      <ToastContainer />
       <div className="icon-conyainer">
         <div className="icon" onClick={handleClose}>
           <RiCloseFill color="white" size={30} fontWeight={500} />
@@ -565,7 +565,9 @@ export const SalesRecForm: React.FC<
   const [retailprodinfo, setretailprodinfo] = useState<rProduct[]>([]);
   const [makesales, setmakesales] = useState<Salerequest>();
   const [lastdata, setlastdata] = useState<FetchLastRec>();
-  const [isdbfromOpen,setdbformOpen ] = useState<boolean>(false)
+  const [isdbfromOpen, setdbformOpen] = useState<boolean>(false);
+  const [isreturned, setisreturned] = useState<boolean>(false);
+  const [isSaleSummary, setisSaleSummary] = useState<boolean>(false);
   const handleOnsubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const price = isWhole
@@ -608,6 +610,8 @@ export const SalesRecForm: React.FC<
         alert((response as any)?.data?.message || "Request failed");
         return;
       }
+      setisSaleSummary(true);
+      setisreturned(false);
     } catch (err: any) {
       console.error("Sales submit error:", err?.response?.data || err);
       alert(err?.response?.data?.message || "Failed to submit sales");
@@ -670,6 +674,8 @@ export const SalesRecForm: React.FC<
       return;
     }
     setmakesales(nextSales);
+    setisSaleSummary(false);
+    setisreturned(true);
 
     console.log("Prepared sale payload:", nextSales);
     const confirm = window.confirm("Confirm  sales");
@@ -695,8 +701,8 @@ export const SalesRecForm: React.FC<
       if (!response.data.success) {
         alert(response.data.message);
       }
-          setlastdata(response.data.data)
-          console.log()
+      setlastdata(response.data.data);
+      console.log();
       setmakesales({
         Total_pc_pkg_litre: 0,
         ProductId: 0,
@@ -736,8 +742,10 @@ export const SalesRecForm: React.FC<
   ) => {
     const { name, value } = e.target;
     if (name === "paymentstatus") {
+      if (value === "partialpaid" || value === "pending" || value === "debt") {
+        setdbformOpen(true);
+      }
       setmakesales((prev) => ({ ...prev, ["paymentstatus"]: value }));
-      
     } else {
       setdisplayInfo((prev) => ({ ...prev, [name]: value }));
     }
@@ -764,9 +772,21 @@ export const SalesRecForm: React.FC<
             <RiCloseFill color="white" size={30} fontWeight={500} />
           </div>
         </div>
-      <div style={{display:'flex', alignItems:"center", justifyContent:"center"}} ><span style={{fontSize:'45px', color:"white", fontWeight:"bolder"}}>Sales record</span></div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <span
+            style={{ fontSize: "45px", color: "white", fontWeight: "bolder" }}
+          >
+            Sales record
+          </span>
+        </div>
         <div className="main-conatiner-sales">
-          <div className="frm-container">
+          <div className="frm-container" style={{ height: "690px" }}>
             <div
               className="form-title"
               style={{
@@ -858,23 +878,27 @@ export const SalesRecForm: React.FC<
               </div>
             </form>
           </div>
-                <div className="enter result returned">
-        {/* <ResultComp
-          Total_pc_pkg_litre={lastdata?.Total_pc_pkg_litre}
-          Revenue={lastdata?.Revenue}
-          Net_profit={lastdata?.Net_profit}
-          Expected_Profit={lastdata?.Expected_Profit}
-          profit_deviation={lastdata?.percentage_deviation}
-          percentage_deviation={lastdata?.percentage_deviation}
-          percentage_discount={lastdata?.percentage_discount}
-          paymentstatus={lastdata?.paymentstatus}
-          product={{
-            product_name: lastdata?.product.product_name,
-          }}
-        /> */}
-      </div>
-          <div className="SalesBord-dispaly">
-            {salesSummary && (
+          {!isreturned && (
+            <div className="enter-result-returned"> 
+              <ResultComp
+                Total_pc_pkg_litre={lastdata?.Total_pc_pkg_litre}
+                Revenue={lastdata?.Revenue}
+                Net_profit={lastdata?.Net_profit}
+                Expected_Profit={lastdata?.Expected_Profit}
+                profit_deviation={lastdata?.percentage_deviation}
+                percentage_deviation={lastdata?.percentage_deviation}
+                percentage_discount={lastdata?.percentage_discount}
+                paymentstatus={lastdata?.paymentstatus}
+                product={{
+                  product_name: lastdata?.product.product_name,
+                }}
+              />
+              </div>
+            
+          )}
+
+          {isSaleSummary && salesSummary && (
+            <div className="SalesBord-dispaly">
               <div className="sales-board-wrapper">
                 <div className="sales-card">
                   <h4>Stock Check</h4>
@@ -970,13 +994,11 @@ export const SalesRecForm: React.FC<
                   </div>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
-      {
-        
-      }
+      {}
     </div>
   );
 };
