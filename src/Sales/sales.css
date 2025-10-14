@@ -47,12 +47,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100%;
     height: auto;
     padding: 90px;
     padding-left: 140px;
-    margin-left: 95px;
+    margin-left: 99px;
 
+}
+.AdminsalesAnalysis-container-arrange-close-btn{
+    width: 100%;
+    height: auto;
+    padding: 12px;
+    display: flex;
+    justify-content:flex-end ;
+    align-items: center;
 }
 @keyframes headerEntrance {
     from {
