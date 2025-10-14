@@ -633,7 +633,6 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  border: 2px solid red;
   padding: 20px;
   top: 12px;
 }
@@ -662,12 +661,13 @@
   width: 49%;
   min-height:250px;
   background-color: #EBEBEB;
+  border-radius: 10px;
 }
 .salasAnalysis-card-container{
   width: 49%;
   display: flex;
   flex-direction: column;
-  row-gap: 8px;
+  row-gap: 10px;
   justify-content: center;
   min-height: 250px;
   padding: 12px;
