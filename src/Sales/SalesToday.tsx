@@ -9,6 +9,7 @@ import { fetchProductsales, fetchNormalsellrecord } from "./service/sales.api"
 import type { SalesRecord, SalesSummaryResponsesales } from '../type.interface'
 import type { wProduct } from "../type.interface"
 import type { rProduct } from "../type.interface"
+import { RiCloseFill } from "react-icons/ri"
 
 
 
@@ -48,6 +49,9 @@ export default function SalesToday() {
   }
   const handleCloseForm = () => {
     setIsFormOpen(false)
+  }
+  const handleClose =()=>{
+    setshowsalesAnalysis(false)
   }
   useEffect(()=>{
    const handlereturnsalesdata = async()=>{
@@ -101,6 +105,9 @@ export default function SalesToday() {
         showsalesAnalysis &&
         <div className="AdminsalesAnalysis-container">
           <div className="AdminsalesAnalysis-container-arrange">
+                <div className="icon" onClick={handleClose}>
+                        <RiCloseFill color="white" size={30} fontWeight={500} />
+                      </div>
           <AdminsalesAnaysis/>
           </div>
         </div>
