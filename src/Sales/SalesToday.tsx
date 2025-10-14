@@ -44,7 +44,7 @@ export default function SalesToday() {
     }
   }
   const handlesalesAnalysis = ()=>{
-    
+    setshowsalesAnalysis(true)
   }
   const handleCloseForm = () => {
     setIsFormOpen(false)
@@ -76,7 +76,7 @@ export default function SalesToday() {
        <div className="trigger-container">
         <div className="trigger-btn">
             <button type="submit" name="Whole-sales" onClick={handleOpenForm}>Open sales record</button>
-            <button type="submit" name="Retail-ssales">Admin-sales-Analysis</button>
+            <button type="submit" name="Retail-ssales" onClick={handlesalesAnalysis}>Admin-sales-Analysis</button>
         </div>
         <div>
            <Search/>
@@ -97,7 +97,14 @@ export default function SalesToday() {
             onClose={handleCloseForm}
           />
         )}
-        <AdminsalesAnaysis/>
+        {
+        showsalesAnalysis &&
+        <div className="AdminsalesAnalysis-container">
+          <div className="AdminsalesAnalysis-container-arrange">
+          <AdminsalesAnaysis/>
+          </div>
+        </div>
+        }
     </div>
   )
 }
