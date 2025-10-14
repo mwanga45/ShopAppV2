@@ -703,6 +703,7 @@ export const SalesRecForm: React.FC<
       const response = await makesalesrequest(nextSales);
       if (!response.data.success) {
         alert(response.data.message);
+        return
       }
       setlastdata(response.data.data);
       console.log();
