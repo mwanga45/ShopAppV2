@@ -10,6 +10,7 @@ import { ProductInfo } from "./formservice";
 import Toggle from "../button/toggle";
 import { CreateDebtrecord } from "../../Sales/service/sales.api";
 import { toast, ToastContainer } from "react-toastify";
+
 import {
   salesRequestInfo,
   makesalesrequest,
@@ -682,13 +683,13 @@ export const SalesRecForm: React.FC<
     paymentstatus: makesales?.paymentstatus || "paid",
   };
 
-  // 2️⃣ Validate data
+
   if (!nextSales.Total_pc_pkg_litre || nextSales.Total_pc_pkg_litre <= 0) {
     alert("Please make sure you enter valid data");
     return;
   }
 
-  // 3️⃣ Handle DEBT / PARTIALPAID — skip normal sale entirely
+
   if (nextSales.paymentstatus === "debt" || nextSales.paymentstatus === "partialpaid") {
     const debtPayload = {
       ...debtorInfo,
@@ -710,12 +711,11 @@ const{Expecte_profit, ... finalnextdebt} = {
     
     const sentWithDebt = { ...finalnextdebt, ...finaldebtPayload };
     const {Pnum, ...finalsentdebt} = sentWithDebt as any
-    // console.log("here is debt info",finalsentbebt)
-
+    console.log(finalsentdebt)
     try {
       const response = await CreateDebtrecord(finalsentdebt);
       if (!response.data.success) {
-        alert("Failed to create debt record");
+        alert(response.data.message);
         return;
       }
 
@@ -736,7 +736,7 @@ const{Expecte_profit, ... finalnextdebt} = {
     return;
   }
 
-  // 4️⃣ Continue with normal sale ONLY if paymentstatus = "paid"
+
   const confirm = window.confirm("Confirm sales?");
   if (!confirm) {
     setmakesales({
@@ -777,6 +777,8 @@ const{Expecte_profit, ... finalnextdebt} = {
     });
 
     toast.success("Sales processed successfully");
+    setisreturned(true)
+
   } catch (err) {
     console.error(err);
     alert("Error: failed to submit sale");
