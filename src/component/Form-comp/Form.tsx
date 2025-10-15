@@ -745,9 +745,9 @@ export const SalesRecForm: React.FC<
   ) => {
     const { name, value } = e.target;
     if (name === "paymentstatus") {
-      if (value === "partialpaid" || value === "pending" || value === "debt") {
-        setdbformOpen(true);
-      }
+      // if (value === "partialpaid" || value === "pending" || value === "debt") {
+      //   setdbformOpen(true);
+      // }
       setmakesales((prev) => ({ ...prev, ["paymentstatus"]: value }));
     } else {
       setdisplayInfo((prev) => ({ ...prev, [name]: value }));
@@ -1019,101 +1019,66 @@ export const SalesRecForm: React.FC<
         </div>
         <div className="debt-frm-cfrm-container">
           <div className="frm-container">
-          <form className="main-form-content">
-            <div className="input-value">
-              <label htmlFor="ProductName">Product Name</label>
+            <form className="main-form-content">
+              <div className="input-value">
+                <label htmlFor="dbrName">Debtor Name</label>
+                <input
+                  type="text"
+                  name="debtor_name"
+                  id="dbrName"
+                  // value={formData.product_name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="input-value">
+                <label htmlFor="Phnumber">Phone_Number</label>
+                <input
+                  type="text"
+                  name="Phnumber"
+                  id="Phnumber"
+                  // value={formData.product_name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="input-value">
+                <label htmlFor="PM">Paid money</label>
+                <input
+                  type="text"
+                  name="Pmoney"
+                  id="PM"
+                  // value={formData.product_name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="input-value">
+              <label htmlFor="pydate">Payment date</label>
               <input
                 type="text"
-                name="product_name"
-                id="ProductName"
+                name="pydate"
+                id="pydate"
                 // value={formData.product_name}
                 onChange={handleChange}
                 required
               />
             </div>
-
-            <div className="two-column-inputs">
-              <div className="input-value">
-                <label htmlFor="product-category">Category</label>
-                <select
-                  name="product_category"
-                  id="product-category"
-                  // value={formData.product_category}
-                  onChange={handleChange}
-                >
-                  <option value="wholesales">Wholesales</option>
-                  <option value="retailsales">Retailsales</option>
-                </select>
-              </div>
-              <div className="input-value">
-                <label htmlFor="product-type">Type</label>
-                <select
-                  name="product_type"
-                  id="product-type"
-                  // value={formData.product_type}
-                  onChange={handleChange}
-                >
-                  <option value="Solid">Solid</option>
-                  <option value="Liquid">Liquid</option>
-                </select>
-              </div>
-              {/* {formData.product_category === "retailsales" && ( */}
-              <>
-                <div className="input-value">
-                  <label htmlFor="rs-price">Retail Price</label>
-                  <input
-                    type="text"
-                    name="Rs_price"
-                    id="rs-price"
-                    // value={formData.Rs_price || ""}
-                    onChange={handleChange}
-                    placeholder="e.g., 6000"
-                  />
-                </div>
-                <div className="input-value">
-                  <label htmlFor="Rpurchase-price">Retailpurchase Price</label>
-                  <input
-                    type="text"
-                    // value={formData.rpurchase_price || ""}
-                    name="rpurchase_price"
-                    id="purchase-price"
-                    onChange={handleChange}
-                    placeholder="e.g., 5000"
-                  />
-                </div>
-              </>
-              {/* )} */}
-              {/* {formData.product_category === "wholesales" && ( */}
-              <>
-                <div className="input-value">
-                  <label htmlFor="ws-price">Wholesale Price</label>
-                  <input
-                    type="text"
-                    name="Ws_price"
-                    id="ws-price"
-                    // value={formData.Ws_price || ""}
-                    onChange={handleChange}
-                    placeholder="e.g., 5500"
-                  />
-                </div>
-                <div className="input-value">
-                  <label htmlFor="Wpurchase-price">Wholepurchase Price</label>
-                  <input
-                    type="text"
-                    // value={formData.wpurchase_price || ""}
-                    name="wpurchase_price"
-                    id="purchase-price"
-                    onChange={handleChange}
-                    placeholder="e.g., 5000"
-                  />
-                </div>
-              </>
-              {/* )} */}
+            <div className="input-value">
+              <label htmlFor="loca">Debtor location</label>
+              <input
+                type="text"
+                name="location"
+                id="loca"
+                // value={formData.product_name}
+                onChange={handleChange}
+                required
+              />
             </div>
-            <div className="btn-container">
-              <Submitbtn buttonName="Update" type="submit" />
-            </div>
-          </form>
+              <div className="btn-container">
+                <Submitbtn buttonName="Update" type="submit" />
+              </div>
+            </form>
           </div>
         </div>
       </div>
