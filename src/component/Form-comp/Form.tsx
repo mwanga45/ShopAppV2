@@ -1053,6 +1053,8 @@ export const SalesRecForm: React.FC<
                   required
                 />
               </div>
+              {makesales?.paymentstatus === 'partialpaid' &&(
+           
               <div className="input-value">
                 <label htmlFor="PM">Paid money</label>
                 <input
@@ -1064,6 +1066,8 @@ export const SalesRecForm: React.FC<
                   required
                 />
               </div>
+              )
+              }
               <div className="two-column-inputs">
               <div className="input-value">
               <label htmlFor="pydate">Payment date</label>
