@@ -612,19 +612,7 @@ export const SalesRecForm: React.FC<
       ProductId: salesResponseOne.ProductId,
       Total_pc_pkg_litre: Number(displayInfo.Pnum),
     }));
-    let sentwithdebt:any
-    if(makesales?.paymentstatus === 'debt' || makesales?.paymentstatus === 'partialpaid'){
-    if(makesales?.paymentstatus === 'partialpaid'){
-      const validateprice = {
-   ...debtorInfo,
-   paidmoney: Number(debtorInfo?.paidmoney),
-    }
-};
-
-      sentwithdebt = {...sentpayload, ...debtorInfo}
-      console.log(sentwithdebt)
-      return
-    }
+    
     try {
       const response = await salesRequestInfo(sentpayload);
       console.log("Sales response:", response.data);
@@ -704,7 +692,24 @@ export const SalesRecForm: React.FC<
       return;
     }
     setmakesales(nextSales);
+        let sentwithdebt:any
+    if(nextSales.paymentstatus === 'debt' || nextSales.paymentstatus === 'partialpaid'){
 
+     const finalsentpayload = {
+  ...debtorInfo,
+  paidmoney: Number(debtorInfo?.paidmoney),
+};
+      sentwithdebt = {...nextSales, ...finalsentpayload}
+      console.log(sentwithdebt)
+      setdebtorInfo({
+        Debtor_name:"",
+        PaymentDateAt:debtorInfo?.PaymentDateAt,
+        paidmoney:debtorInfo?.paidmoney,
+        location:debtorInfo?.location,
+        Phone_number:debtorInfo?.Phone_number
+      })
+      return
+    }
     console.log("Prepared sale payload:", nextSales);
     const confirm = window.confirm("Confirm  sales");
     if (!confirm) {
@@ -723,7 +728,6 @@ export const SalesRecForm: React.FC<
       toast.success("successfuly terminate process");
       return;
     }
-
     try {
       const response = await makesalesrequest(nextSales);
       if (!response.data.success) {
@@ -1058,7 +1062,7 @@ export const SalesRecForm: React.FC<
             <div className="form-title">
             <span>Fill Debtor information</span>
             </div>
-            <form className="main-form-content" onSubmit={handleOnsubmit}>
+            <form className="main-form-content" onSubmit={handlemakesales}>
               <div className="input-value">
                 <label htmlFor="dbrName">Debtor Name</label>
                 <input
