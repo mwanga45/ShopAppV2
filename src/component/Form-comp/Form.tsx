@@ -612,8 +612,11 @@ export const SalesRecForm: React.FC<
       ProductId: salesResponseOne.ProductId,
       Total_pc_pkg_litre: Number(displayInfo.Pnum),
     }));
+    let sentwithdebt:any
     if(makesales?.paymentstatus === 'debt' || makesales?.paymentstatus === 'partialpaid'){
-      
+      sentwithdebt = {...sentpayload, ...debtorInfo}
+      console.log(sentwithdebt)
+      return
     }
     try {
       const response = await salesRequestInfo(sentpayload);
@@ -1048,7 +1051,7 @@ export const SalesRecForm: React.FC<
             <div className="form-title">
             <span>Fill Debtor information</span>
             </div>
-            <form className="main-form-content" onSubmit={handleDbtInfo}>
+            <form className="main-form-content" onSubmit={handleOnsubmit}>
               <div className="input-value">
                 <label htmlFor="dbrName">Debtor Name</label>
                 <input
