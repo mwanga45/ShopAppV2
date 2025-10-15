@@ -1019,6 +1019,11 @@ export const SalesRecForm: React.FC<
         </div>
         {isdbfromOpen &&
         <div className="debt-frm-cfrm-container">
+              <div className="icon-conyainer">
+        <div className="icon" onClick={handleClose}>
+          <RiCloseFill color="white" size={30} fontWeight={500} />
+        </div>
+      </div>
           <div className="frm-container">
             <form className="main-form-content">
               <div className="input-value">
@@ -1054,6 +1059,7 @@ export const SalesRecForm: React.FC<
                   required
                 />
               </div>
+              <div className="two-column-inputs">
               <div className="input-value">
               <label htmlFor="pydate">Payment date</label>
               <input
@@ -1066,15 +1072,16 @@ export const SalesRecForm: React.FC<
               />
             </div>
             <div className="input-value">
-              <label htmlFor="loca">Debtor location</label>
+              <label htmlFor="loca">locatio(Optional)</label>
               <input
-                type="text"
+                type="date"
                 name="location"
                 id="loca"
                 // value={formData.product_name}
                 onChange={handleChange}
                 required
               />
+            </div>
             </div>
               <div className="btn-container">
                 <Submitbtn buttonName="Update" type="submit" />
