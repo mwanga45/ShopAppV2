@@ -568,7 +568,9 @@ export const SalesRecForm: React.FC<
   const [isdbfromOpen, setdbformOpen] = useState<boolean>(false);
   const [isreturned, setisreturned] = useState<boolean>(false);
   const [isSaleSummary, setisSaleSummary] = useState<boolean>(false);
-
+  const handleDbfrmclose = ()=> {
+    setdbformOpen(false)
+  }
   const handleCloseReturnedresult = () => {
     setisreturned(false);
   };
@@ -1020,11 +1022,14 @@ export const SalesRecForm: React.FC<
         {isdbfromOpen &&
         <div className="debt-frm-cfrm-container">
               <div className="icon-conyainer">
-        <div className="icon" onClick={handleClose}>
+        <div className="icon" onClick={handleDbfrmclose}>
           <RiCloseFill color="white" size={30} fontWeight={500} />
         </div>
       </div>
           <div className="frm-container">
+            <div className="form-title">
+            <span>Fill Debtor information</span>
+            </div>
             <form className="main-form-content">
               <div className="input-value">
                 <label htmlFor="dbrName">Debtor Name</label>
@@ -1063,7 +1068,7 @@ export const SalesRecForm: React.FC<
               <div className="input-value">
               <label htmlFor="pydate">Payment date</label>
               <input
-                type="text"
+                type="date"
                 name="pydate"
                 id="pydate"
                 // value={formData.product_name}
@@ -1072,14 +1077,14 @@ export const SalesRecForm: React.FC<
               />
             </div>
             <div className="input-value">
-              <label htmlFor="loca">locatio(Optional)</label>
+              <label htmlFor="loca">location(Optional)</label>
               <input
-                type="date"
+                type="text"
                 name="location"
                 id="loca"
                 // value={formData.product_name}
                 onChange={handleChange}
-                required
+                placeholder="Moshi,mwanga, kiruru"
               />
             </div>
             </div>
