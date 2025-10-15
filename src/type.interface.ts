@@ -210,3 +210,12 @@ export type Result = {
 export interface SalesSummaryResponsesales {
   data: SalesSummaryDatasales;
 }
+
+export interface Debtinfo{
+  Debtor_name?:string
+  paidmoney?:number
+  Phone_number?:number
+  location?:string
+  PaymentDateAt?:Date
+
+}

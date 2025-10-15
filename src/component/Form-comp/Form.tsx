@@ -14,9 +14,10 @@ import {
   makesalesrequest,
 } from "../../Sales/service/sales.api";
 import type {
+  Debtinfo,
   FetchLastRec,
   Salerequest,
-  SalesSummaryResponse,
+  SalesSummaryResponse
 } from "../../type.interface";
 
 import type {
@@ -564,16 +565,23 @@ export const SalesRecForm: React.FC<
   const [wholeprodinfo, setWholeprodinfo] = useState<wProduct[]>([]);
   const [retailprodinfo, setretailprodinfo] = useState<rProduct[]>([]);
   const [makesales, setmakesales] = useState<Salerequest>();
+  const [debtorInfo, setdebtorInfo] = useState<Debtinfo>()
   const [lastdata, setlastdata] = useState<FetchLastRec>();
   const [isdbfromOpen, setdbformOpen] = useState<boolean>(false);
   const [isreturned, setisreturned] = useState<boolean>(false);
   const [isSaleSummary, setisSaleSummary] = useState<boolean>(false);
+
   const handleDbfrmclose = ()=> {
     setdbformOpen(false)
   }
   const handleCloseReturnedresult = () => {
     setisreturned(false);
   };
+  const handleDbtInfo = (e:React.FormEvent<HTMLFormElement>)=> {
+    e.preventDefault()
+    setdebtorInfo(debtorInfo)
+  
+  }
   const handleOnsubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const price = isWhole
@@ -604,6 +612,7 @@ export const SalesRecForm: React.FC<
       ProductId: salesResponseOne.ProductId,
       Total_pc_pkg_litre: Number(displayInfo.Pnum),
     }));
+    
     try {
       const response = await salesRequestInfo(sentpayload);
       console.log("Sales response:", response.data);
@@ -618,6 +627,9 @@ export const SalesRecForm: React.FC<
       }
       setisSaleSummary(true);
       setisreturned(false);
+      setmakesales({
+        paymentstatus:""
+      })
     } catch (err: any) {
       console.error("Sales submit error:", err?.response?.data || err);
       alert(err?.response?.data?.message || "Failed to submit sales");
@@ -754,6 +766,10 @@ export const SalesRecForm: React.FC<
     } else {
       setdisplayInfo((prev) => ({ ...prev, [name]: value }));
     }
+    setdebtorInfo((prev)=> ({
+      ...prev, [name]:value
+    }))
+    console.log(debtorInfo)
   };
   useEffect(() => {
     if (wholesales && wholesales.length > 0) {
@@ -1030,14 +1046,14 @@ export const SalesRecForm: React.FC<
             <div className="form-title">
             <span>Fill Debtor information</span>
             </div>
-            <form className="main-form-content">
+            <form className="main-form-content" onSubmit={handleDbtInfo}>
               <div className="input-value">
                 <label htmlFor="dbrName">Debtor Name</label>
                 <input
                   type="text"
-                  name="debtor_name"
+                  name="Debtor_name"
                   id="dbrName"
-                  // value={formData.product_name}
+                  value={debtorInfo?.Debtor_name}
                   onChange={handleChange}
                   required
                 />
@@ -1046,9 +1062,9 @@ export const SalesRecForm: React.FC<
                 <label htmlFor="Phnumber">Phone_Number</label>
                 <input
                   type="text"
-                  name="Phnumber"
+                  name="Phone_number"
                   id="Phnumber"
-                  // value={formData.product_name}
+                  value={debtorInfo?.Phone_number}
                   onChange={handleChange}
                   required
                 />
@@ -1059,9 +1075,9 @@ export const SalesRecForm: React.FC<
                 <label htmlFor="PM">Paid money</label>
                 <input
                   type="text"
-                  name="Pmoney"
+                  name="paidmoney"
                   id="PM"
-                  // value={formData.product_name}
+                  value={debtorInfo?.paidmoney}
                   onChange={handleChange}
                   required
                 />
@@ -1073,9 +1089,9 @@ export const SalesRecForm: React.FC<
               <label htmlFor="pydate">Payment date</label>
               <input
                 type="date"
-                name="pydate"
+                name="PaymentDateAt"
                 id="pydate"
-                // value={formData.product_name}
+                value={debtorInfo?.PaymentDateAt ? new Date(debtorInfo.PaymentDateAt).toISOString().split('T')[0] :"" }
                 onChange={handleChange}
                 required
               />
@@ -1086,14 +1102,14 @@ export const SalesRecForm: React.FC<
                 type="text"
                 name="location"
                 id="loca"
-                // value={formData.product_name}
+                value={debtorInfo?.location}
                 onChange={handleChange}
                 placeholder="Moshi,mwanga, kiruru"
               />
             </div>
             </div>
               <div className="btn-container">
-                <Submitbtn buttonName="Update" type="submit" />
+                <Submitbtn buttonName="Sumbit" type="submit" />
               </div>
             </form>
           </div>
