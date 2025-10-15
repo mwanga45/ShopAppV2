@@ -745,9 +745,9 @@ export const SalesRecForm: React.FC<
   ) => {
     const { name, value } = e.target;
     if (name === "paymentstatus") {
-      // if (value === "partialpaid" || value === "pending" || value === "debt") {
-      //   setdbformOpen(true);
-      // }
+      if (value === "partialpaid" || value === "debt") {
+        setdbformOpen(true);
+      }
       setmakesales((prev) => ({ ...prev, ["paymentstatus"]: value }));
     } else {
       setdisplayInfo((prev) => ({ ...prev, [name]: value }));
@@ -1017,6 +1017,7 @@ export const SalesRecForm: React.FC<
             </div>
           )}
         </div>
+        {isdbfromOpen &&
         <div className="debt-frm-cfrm-container">
           <div className="frm-container">
             <form className="main-form-content">
@@ -1080,8 +1081,11 @@ export const SalesRecForm: React.FC<
               </div>
             </form>
           </div>
+        
         </div>
+}
       </div>
+        
     </div>
   );
 };
