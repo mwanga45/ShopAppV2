@@ -612,7 +612,9 @@ export const SalesRecForm: React.FC<
       ProductId: salesResponseOne.ProductId,
       Total_pc_pkg_litre: Number(displayInfo.Pnum),
     }));
-    
+    if(makesales?.paymentstatus === 'debt' || makesales?.paymentstatus === 'partialpaid'){
+      
+    }
     try {
       const response = await salesRequestInfo(sentpayload);
       console.log("Sales response:", response.data);
