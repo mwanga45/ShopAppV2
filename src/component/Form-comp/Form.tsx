@@ -614,6 +614,13 @@ export const SalesRecForm: React.FC<
     }));
     let sentwithdebt:any
     if(makesales?.paymentstatus === 'debt' || makesales?.paymentstatus === 'partialpaid'){
+    if(makesales?.paymentstatus === 'partialpaid'){
+      const validateprice = {
+   ...debtorInfo,
+   paidmoney: Number(debtorInfo?.paidmoney),
+    }
+};
+
       sentwithdebt = {...sentpayload, ...debtorInfo}
       console.log(sentwithdebt)
       return
