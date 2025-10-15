@@ -8,6 +8,7 @@ import { CreateDisCount } from "../../AdminPanel/adminservice";
 import { StockCreate } from "../../stock/stockservice";
 import { ProductInfo } from "./formservice";
 import Toggle from "../button/toggle";
+import { CreateDebtrecord } from "../../Sales/service/sales.api";
 import { toast, ToastContainer } from "react-toastify";
 import {
   salesRequestInfo,
@@ -577,11 +578,7 @@ export const SalesRecForm: React.FC<
   const handleCloseReturnedresult = () => {
     setisreturned(false);
   };
-  const handleDbtInfo = (e:React.FormEvent<HTMLFormElement>)=> {
-    e.preventDefault()
-    setdebtorInfo(debtorInfo)
-  
-  }
+
   const handleOnsubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const price = isWhole
@@ -660,100 +657,132 @@ export const SalesRecForm: React.FC<
       } as any);
     }
   };
-  const handlemakesales = async () => {
-    const discountList =
-      salesSummary?.data.DiscontResult?.data?.filter_discont || [];
-    const lastDiscount =
-      discountList.length > 0
-        ? discountList[discountList.length - 1]
-        : undefined;
-    const percentageDiscount = lastDiscount
-      ? String(lastDiscount.percentageDiscaunt)
-      : "";
+  const handlemakesales = async (e:React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+  const discountList = salesSummary?.data.DiscontResult?.data?.filter_discont || [];
+  const lastDiscount =
+    discountList.length > 0 ? discountList[discountList.length - 1] : undefined;
 
-    const nextSales: Salerequest = {
-      ProductId: Number(salesResponseOne.ProductId) || 0,
-      Total_pc_pkg_litre: Number(displayInfo?.Pnum) || 0,
-      Revenue: salesSummary?.data?.CalculateDeviation.data.Revenue ?? 0,
-      Expecte_profit:
-        salesSummary?.data?.CalculateDeviation.data.Exp_Net_profit ?? 0,
-      Net_profit: salesSummary?.data?.CalculateDeviation.data.Net_profit ?? 0,
-      Percentage_deviation:
-        salesSummary?.data?.CalculateDeviation.data.deviationFromMeanPercent ??
-        0,
-      profit_deviation:
-        salesSummary?.data?.CalculateDeviation.data.Profit_deviation ?? 0,
-      Stock_status: salesSummary?.data?.stock_check.data.product_status ?? "",
-      Discount_percentage: percentageDiscount || "0",
-      paymentstatus: makesales?.paymentstatus || "paid",
+  const percentageDiscount = lastDiscount
+    ? String(lastDiscount.percentageDiscaunt)
+    : "0";
+
+  const nextSales: Salerequest = {
+    ProductId: Number(salesResponseOne.ProductId) || 0,
+    Total_pc_pkg_litre: Number(displayInfo?.Pnum) || 0,
+    Revenue: salesSummary?.data?.CalculateDeviation.data.Revenue ?? 0,
+    Expecte_profit: salesSummary?.data?.CalculateDeviation.data.Exp_Net_profit ?? 0,
+    Net_profit: salesSummary?.data?.CalculateDeviation.data.Net_profit ?? 0,
+    Percentage_deviation:
+      salesSummary?.data?.CalculateDeviation.data.deviationFromMeanPercent ?? 0,
+    profit_deviation:
+      salesSummary?.data?.CalculateDeviation.data.Profit_deviation ?? 0,
+    Stock_status: salesSummary?.data?.stock_check.data.product_status ?? "",
+    Discount_percentage: percentageDiscount,
+    paymentstatus: makesales?.paymentstatus || "paid",
+  };
+
+  // 2️⃣ Validate data
+  if (!nextSales.Total_pc_pkg_litre || nextSales.Total_pc_pkg_litre <= 0) {
+    alert("Please make sure you enter valid data");
+    return;
+  }
+
+  // 3️⃣ Handle DEBT / PARTIALPAID — skip normal sale entirely
+  if (nextSales.paymentstatus === "debt" || nextSales.paymentstatus === "partialpaid") {
+    const debtPayload = {
+      ...debtorInfo,
+      paidmoney: Number(debtorInfo?.paidmoney),
     };
-    if (!nextSales.Total_pc_pkg_litre || nextSales.Total_pc_pkg_litre <= 0) {
-      alert("Please make sure you enter  valid data");
-      return;
-    }
-    setmakesales(nextSales);
-        let sentwithdebt:any
-    if(nextSales.paymentstatus === 'debt' || nextSales.paymentstatus === 'partialpaid'){
+   const finaldebtPayload = {
+  Debtor_name:debtPayload.Debtor_name,
+  paidmoney:debtPayload.paidmoney,
+  Phone_number:debtPayload.Phone_number,
+  location:debtPayload.location,
+  PaymentDateAt:debtPayload.PaymentDateAt
+   }
 
-     const finalsentpayload = {
-  ...debtorInfo,
-  paidmoney: Number(debtorInfo?.paidmoney),
+const{Expecte_profit, ... finalnextdebt} = {
+  ...nextSales,
+  Expected_profit: nextSales.Expecte_profit, 
+  ...debtPayload,
 };
-      sentwithdebt = {...nextSales, ...finalsentpayload}
-      console.log(sentwithdebt)
-      setdebtorInfo({
-        Debtor_name:"",
-        PaymentDateAt:debtorInfo?.PaymentDateAt,
-        paidmoney:debtorInfo?.paidmoney,
-        location:debtorInfo?.location,
-        Phone_number:debtorInfo?.Phone_number
-      })
-      return
-    }
-    console.log("Prepared sale payload:", nextSales);
-    const confirm = window.confirm("Confirm  sales");
-    if (!confirm) {
-      setmakesales({
-        Total_pc_pkg_litre: 0,
-        ProductId: 0,
-        Expecte_profit: 0,
-        Net_profit: 0,
-        Discount_percentage: "0",
-        Percentage_deviation: 0,
-        Revenue: 0,
-        profit_deviation: 0,
-        Stock_status: "",
-        paymentstatus: "",
-      });
-      toast.success("successfuly terminate process");
-      return;
-    }
+    
+    const sentWithDebt = { ...finalnextdebt, ...finaldebtPayload };
+    const {Pnum, ...finalsentdebt} = sentWithDebt as any
+    // console.log("here is debt info",finalsentbebt)
+
     try {
-      const response = await makesalesrequest(nextSales);
+      const response = await CreateDebtrecord(finalsentdebt);
       if (!response.data.success) {
-        alert(response.data.message);
+        alert("Failed to create debt record");
         return;
       }
-      setlastdata(response.data.data);
-      console.log();
-      setmakesales({
-        Total_pc_pkg_litre: 0,
-        ProductId: 0,
-        Expecte_profit: 0,
-        Net_profit: 0,
-        Discount_percentage: "0",
-        Percentage_deviation: 0,
-        Revenue: 0,
-        profit_deviation: 0,
-        Stock_status: "",
-        paymentstatus: "",
+
+      toast.success("Debt record created successfully");
+
+      setdebtorInfo({
+        Debtor_name: "",
+        paidmoney: undefined,
+        location: "",
+        Phone_number: undefined,
+        PaymentDateAt: undefined,
       });
-      return;
     } catch (err) {
       console.error(err);
-      alert(err);
+      alert("Error: failed to create debt record");
     }
-  };
+
+    return;
+  }
+
+  // 4️⃣ Continue with normal sale ONLY if paymentstatus = "paid"
+  const confirm = window.confirm("Confirm sales?");
+  if (!confirm) {
+    setmakesales({
+      Total_pc_pkg_litre: 0,
+      ProductId: 0,
+      Expecte_profit: 0,
+      Net_profit: 0,
+      Discount_percentage: "0",
+      Percentage_deviation: 0,
+      Revenue: 0,
+      profit_deviation: 0,
+      Stock_status: "",
+      paymentstatus: "",
+    });
+    toast.success("Successfully terminated process");
+    return;
+  }
+
+  try {
+    const response = await makesalesrequest(nextSales);
+    if (!response.data.success) {
+      alert(response.data.message);
+      return;
+    }
+
+    setlastdata(response.data.data);
+    setmakesales({
+      Total_pc_pkg_litre: 0,
+      ProductId: 0,
+      Expecte_profit: 0,
+      Net_profit: 0,
+      Discount_percentage: "0",
+      Percentage_deviation: 0,
+      Revenue: 0,
+      profit_deviation: 0,
+      Stock_status: "",
+      paymentstatus: "",
+    });
+
+    toast.success("Sales processed successfully");
+  } catch (err) {
+    console.error(err);
+    alert("Error: failed to submit sale");
+  }
+};
+
   useEffect(() => {
     if (!salesResponseOne.ProductId) {
       return;
@@ -1062,7 +1091,7 @@ export const SalesRecForm: React.FC<
             <div className="form-title">
             <span>Fill Debtor information</span>
             </div>
-            <form className="main-form-content" onSubmit={handlemakesales}>
+            <form className="main-form-content" >
               <div className="input-value">
                 <label htmlFor="dbrName">Debtor Name</label>
                 <input
@@ -1125,7 +1154,7 @@ export const SalesRecForm: React.FC<
             </div>
             </div>
               <div className="btn-container">
-                <Submitbtn buttonName="Sumbit" type="submit" />
+                <Submitbtn buttonName="Sumbit" type="submit" onclick={handlemakesales}/>
               </div>
             </form>
           </div>

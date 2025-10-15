@@ -17,7 +17,7 @@ export const fetchNormalsellrecord = async() =>{
   const response = await api.get('sales/salesToday')
   return response
 }
-export const CreateDebtrecord = async() =>{
-  const response = await api.post('debt/create_Debt')
+export const CreateDebtrecord = async(data:any) =>{
+  const response = await api.post('debt/create_Debt', data)
   return response
 }
