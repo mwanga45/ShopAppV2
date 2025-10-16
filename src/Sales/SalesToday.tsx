@@ -6,10 +6,11 @@ import { AdminsalesAnaysis } from "../component/daysales/salesAnalysis";
 import { SalesRecForm } from "../component/Form-comp/Form";
 import { useEffect, useState } from "react";
 import { fetchProductsales, fetchNormalsellrecord } from "./service/sales.api";
-import type { SalesRecord, SalesSummaryResponsesales } from "../type.interface";
+import type { DebtRecord, SalesRecord, SalesSummaryResponsesales } from "../type.interface";
 import type { wProduct } from "../type.interface";
 import type { rProduct } from "../type.interface";
 import { RiCloseFill } from "react-icons/ri";
+import { Debtinfo } from "../central-api/central-api";
 
 export default function SalesToday() {
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
@@ -19,9 +20,8 @@ export default function SalesToday() {
   const [retailsalesrecord, setretailsalesrecord] = useState<SalesRecord[]>([]);
   const [wholesaleprod, setWholesaleprod] = useState<wProduct[]>([]);
   const [retailsalesprod, setretailsaleprod] = useState<rProduct[]>([]);
-  const [Pendingpaymentsales, setPendingpaymentsales] = useState<SalesRecord[]>(
-    []
-  );
+  const [Pendingpaymentsales, setPendingpaymentsales] = useState<SalesRecord[]>([]);
+  const [DebtInfo, setDebtInfo] = useState<DebtRecord[]>([])
   const [showsalesAnalysis, setshowsalesAnalysis] = useState<boolean>(false);
 
   const handleOpenForm = () => {
@@ -52,6 +52,11 @@ export default function SalesToday() {
     setshowsalesAnalysis(false);
   };
   useEffect(() => {
+    const handleDebtRec = async ()=>{
+      const response = await Debtinfo()
+      setDebtInfo(response.data.data)
+
+    }
     const handlereturnsalesdata = async () => {
       const response = await fetchNormalsellrecord();
       setAllrecord(response.data);
@@ -60,6 +65,7 @@ export default function SalesToday() {
       setretailsalesrecord(response.data.data.Normalsalesretailreturn);
       setPendingpaymentsales(response.data.data.AllcombinedPending);
     };
+    handleDebtRec()
     handleproductInfo();
     handlereturnsalesdata();
   }, []);
@@ -114,6 +120,8 @@ export default function SalesToday() {
           Normalsalesretailreturn={retailsalesrecord}
           Normalsaleswholereturn={wholesalerecord}
           Pendingsalesreturn={Pendingpaymentsales}
+          AllDebtRecord={DebtInfo}
+          
         />
       </div>
       {isFormOpen && (
