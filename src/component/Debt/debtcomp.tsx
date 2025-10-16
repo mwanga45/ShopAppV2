@@ -17,23 +17,6 @@ export const Debtcompo = () => {
       </div>
       <div className="Dbt-compo-list-container">
         <CardDiscription/>
-        <CardDiscription/>
-        <CardDiscription/>
-        <CardDiscription/>
-        <CardDiscription/>
-        <CardDiscription/>
-         <CardDiscription/>
-        <CardDiscription/>
-        <CardDiscription/>
-           <CardDiscription/>
-        <CardDiscription/>
-        <CardDiscription/>
-        <CardDiscription/>
-        <CardDiscription/>
-        <CardDiscription/>
-         <CardDiscription/>
-        <CardDiscription/>
-        <CardDiscription/>
       </div>
     </div>
   );

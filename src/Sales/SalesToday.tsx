@@ -11,6 +11,7 @@ import type { wProduct } from "../type.interface";
 import type { rProduct } from "../type.interface";
 import { RiCloseFill } from "react-icons/ri";
 import { Debtinfo } from "../central-api/central-api";
+import { Debtcompo } from "../component/Debt/debtcomp";
 
 export default function SalesToday() {
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
@@ -143,6 +144,10 @@ export default function SalesToday() {
           </div>
         </div>
       )}
+      <div>
+        <Debtcompo/>
+        
+      </div>
     </div>
   );
 }
