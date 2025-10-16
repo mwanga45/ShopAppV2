@@ -231,5 +231,31 @@ export interface DebtRecord {
   phone_number?: string;
   product_name?: string;
   updated_at?: string;          
-  createdat?: string;           
+  createdat?: string; 
+  deadlinedate?: string;          
+}
+
+export interface DebtResponse {
+    findUserDebtInfo?: DebtRecord[];
+    findtrack?: TrackRecord[];
+    PersonDebt?: DebtRecord[];
+  
+}
+
+export interface DebtRecord {
+  debt_id?: number;
+  total_quantity?: string;
+  total_revenue?: string;
+  payment_status?: string;
+  latest_paid_amount?: number;
+  debtor_name?: string;
+  phone_number?: string;
+  product_name?: string;
+  updated_at?: string;
+  createdat?: string;
+  
+}
+
+export interface TrackRecord {
+  t_paidmoney?: number;
 }

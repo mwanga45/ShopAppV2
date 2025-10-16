@@ -25,6 +25,9 @@ export default function SalesToday() {
   const [DebtInfo, setDebtInfo] = useState<DebtRecord[]>([])
   const [showsalesAnalysis, setshowsalesAnalysis] = useState<boolean>(false);
 
+  const handleDebtmoreifno = () => {
+    
+  } 
   const handleOpenForm = () => {
     setIsFormOpen(true);
   };
@@ -146,7 +149,7 @@ export default function SalesToday() {
       )}
       <div>
         <Debtcompo/>
-        
+
       </div>
     </div>
   );
