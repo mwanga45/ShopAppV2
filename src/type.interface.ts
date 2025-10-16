@@ -219,3 +219,16 @@ export interface Debtinfo{
   PaymentDateAt?:Date
 
 }
+
+export interface DebtRecord {
+  debt_id: number;
+  total_quantity: string;
+  total_revenue: string;
+  payment_status: string;
+  latest_paid_amount: number;
+  debtor_name: string;
+  phone_number: string;
+  product_name: string | null;
+  updated_at: string;          
+  createdat: string;           
+}
