@@ -122,14 +122,16 @@ export const Displayboard = () => {
             </div>
           </div>
           <div className="Action-container">
-            <button className="action-btn-debt">Edit</button>
+            <button className="action-btn-debt">Update</button>
             <button className="action-btn-debt">Add</button>
             <button className="action-btn-debt">Send Message</button>
           </div>
         </div>
         <div className="display-info-time">
           <div>
-            <LiaBusinessTimeSolid size={50} color="white"/>
+            <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
+            <span>Time countdown && Date</span><LiaBusinessTimeSolid size={50} color="white"/>
+            </div>
           </div>
           <div>
             <span>1:30:40:55</span>
