@@ -45,7 +45,7 @@ export const CardDiscription:React.FC<CardDiscriptionInterface> = ({name, date, 
                 <span className="crd-dcs-amount"><span>{title}</span> {amount}Tsh</span>
             </div>
             <div className="crd-dcs-date-container">
-                <span>{date}</span>
+                <span>{String(date).split('T')[0]}</span>
             </div>
         </div>
      )

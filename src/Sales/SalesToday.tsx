@@ -160,8 +160,7 @@ export default function SalesToday() {
         </div>
       )}
       <div>
-        <Debtcompo />
-
+        <Debtcompo PersonDebt={custdebtlist}/>
       </div>
     </div>
   );
