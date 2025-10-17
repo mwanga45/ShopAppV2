@@ -4,6 +4,7 @@ import type {
   CardDiscriptionInterface,
   DebtResponse,
 } from "../../type.interface";
+import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useState } from "react";
 export const Debtcompo: React.FC<DebtResponse> = ({
@@ -128,14 +129,14 @@ export const Displayboard = () => {
         </div>
         <div className="display-info-time">
           <div>
-            <span></span>
+            <LiaBusinessTimeSolid size={50} color="white"/>
           </div>
           <div>
             <span>1:30:40:55</span>
           </div>
           <div>
-            <span></span>
-            <span></span>
+            <span>From 12-10-2025</span>
+            <span>To End 24-10-2025</span>
           </div>
 
         </div>
