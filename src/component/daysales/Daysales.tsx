@@ -4,8 +4,6 @@ import { SiMoneygram } from "react-icons/si";
 import React, { useState, useEffect } from "react";
 import type { Result, SalesSummaryDatasales } from "../../type.interface";
 import { BsInfoCircleFill } from "react-icons/bs";
-// import { MdOutlineEditNote } from "react-icons/md";
-
 export const Daysales = () => {
   return (
     <div className="sales-container">
@@ -44,11 +42,17 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
   Normalsaleswholereturn,
   Pendingsalesreturn,
   AllDebtRecord,
+  Onclick
+
 }) => {
   const [loading, _] = useState<boolean>(false);
   const [error] = useState<string | null>(null);
   const [category, setcategory] = useState<string>("All");
   const [isswicheropen, setswicheropen] = useState<boolean>(false);
+ 
+
+
+
 
   useEffect(() => {
     const savedCategory = localStorage.getItem("category");
@@ -264,7 +268,7 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
                     <td className="product-id">p00{item.debt_id}</td>
                     <td className="product-name">{item.phone_number}</td>
                     <td className="product-category">{item.product_name}</td>
-                          <td className="product-pc">
+                    <td className="product-pc">
                       {Number(item.total_quantity).toFixed(2)}
                     </td>
                     <td className="product-type">
@@ -273,11 +277,23 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
                     <td className="total-generate">
                       {Number(item.latest_paid_amount).toLocaleString()}.Tsh
                     </td>
-              
+
                     <td className="profit-generated">{item.payment_status}</td>
-                    <td className="product-category">{String(item.createdat).split('T')[0]}</td>
-                    <td className="product-category">{String(item.updated_at).split('T')[0]}</td>
-                    <td className="product-pc"><span style={{cursor:'pointer'}}>{item.payment_status === "partialpaid" ?(<BsInfoCircleFill size={25} color="#00D4FF"/>):(<BsInfoCircleFill size={20} color="#ff0004ff"/>)}</span></td>
+                    <td className="product-category">
+                      {String(item.createdat).split("T")[0]}
+                    </td>
+                    <td className="product-category">
+                      {String(item.updated_at).split("T")[0]}
+                    </td>
+                    <td className="product-pc">
+                      <span style={{ cursor: "pointer" }} onClick={()=> Onclick(String(item.debt_id))}>
+                        {item.payment_status === "partialpaid" ? (
+                          <BsInfoCircleFill size={25} color="#00D4FF" />
+                        ) : (
+                          <BsInfoCircleFill size={20} color="#ff0004ff" />
+                        )}
+                      </span>
+                    </td>
                   </tr>
                 ))
               ) : (
@@ -293,6 +309,7 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
           </tbody>
         </table>
       </div>
+
     </div>
   );
 };

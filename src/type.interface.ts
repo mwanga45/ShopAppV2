@@ -201,6 +201,7 @@ export interface SalesSummaryDatasales {
   totalWholeRevenue?: number;
   totolRetailRevenue?: number;
   category?:string
+  Onclick:(id:string) => void
 }
 
 export type Result = {
@@ -258,4 +259,5 @@ export interface DebtRecord {
 
 export interface TrackRecord {
   t_paidmoney?: number;
+  updated_at?:string
 }

@@ -10,8 +10,9 @@ import type { DebtRecord, SalesRecord, SalesSummaryResponsesales } from "../type
 import type { wProduct } from "../type.interface";
 import type { rProduct } from "../type.interface";
 import { RiCloseFill } from "react-icons/ri";
-import { Debtinfo } from "../central-api/central-api";
+import { Debtinfo, DebtorInfo } from "../central-api/central-api";
 import { Debtcompo } from "../component/Debt/debtcomp";
+
 
 export default function SalesToday() {
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
@@ -25,9 +26,9 @@ export default function SalesToday() {
   const [DebtInfo, setDebtInfo] = useState<DebtRecord[]>([])
   const [showsalesAnalysis, setshowsalesAnalysis] = useState<boolean>(false);
 
-  const handleDebtmoreifno = () => {
-    
-  } 
+  const handleDebtmoreifno = async (id:string) => {
+    await DebtorInfo(id);
+  };
   const handleOpenForm = () => {
     setIsFormOpen(true);
   };
@@ -125,6 +126,7 @@ export default function SalesToday() {
           Normalsaleswholereturn={wholesalerecord}
           Pendingsalesreturn={Pendingpaymentsales}
           AllDebtRecord={DebtInfo}
+          Onclick={handleDebtmoreifno}
           
         />
       </div>
