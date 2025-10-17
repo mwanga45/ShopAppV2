@@ -244,3 +244,17 @@
     font-weight: 700;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
+
+.display-card-info-cont-close{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    padding: 90px;
+    padding-left: 140px;
+    margin-left: 99px;
+    
+
+}

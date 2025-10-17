@@ -7,6 +7,7 @@ import type {
 import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useState } from "react";
+import { RiCloseFill } from "react-icons/ri";
 export const Debtcompo: React.FC<DebtResponse> = ({
   findUserDebtInfo,
   findtrack,
@@ -50,6 +51,9 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
   id,
 }) => {
   const [openDispay, setDisplay] = useState<boolean>(true);
+  const handleClose =()=> {
+    setDisplay(false)
+  }
   return (
     <div className="crd-dsc-main-cont">
       <div className="crd-dsc-cont" key={id}>
@@ -73,8 +77,14 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
       </div>
       {openDispay && (
         <div className="display-card-info-main-cont">
+
           <div className="display-card-info-cont">
+             <div className="display-card-info-cont-close">
+               <div className="icon" onClick={handleClose}>
+                          <RiCloseFill color="white" size={30} fontWeight={500} />
+                        </div>
             <Displayboard />
+            </div>
           </div>
         </div>
       )}
