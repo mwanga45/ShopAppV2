@@ -157,6 +157,7 @@
     max-height: 400px;
     border: 2px solid red ;
     overflow-y: auto;
+    
 }
 .Paid-reach-suppose{
     width: auto;
@@ -165,8 +166,16 @@
     display: flex;
     flex-direction: column;
     row-gap: 15px;
+    padding: 5px;
 }
 .Paid-reach-suppose-cont{
     display: flex;
     flex-direction: column;
+}
+.Paid-reach-suppose-cont span:first-child{
+    color: #5d3232;
+    font-size: 17px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 700;
+
 }
