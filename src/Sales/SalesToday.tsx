@@ -25,9 +25,19 @@ export default function SalesToday() {
   const [Pendingpaymentsales, setPendingpaymentsales] = useState<SalesRecord[]>([]);
   const [DebtInfo, setDebtInfo] = useState<DebtRecord[]>([])
   const [showsalesAnalysis, setshowsalesAnalysis] = useState<boolean>(false);
+  const [custdebtlist, setcustdebtlist] = useState<DebtRecord[]>([])
 
   const handleDebtmoreifno = async (id:string) => {
-    await DebtorInfo(id);
+   try{
+    const response = await DebtorInfo(id);
+    setcustdebtlist(response.data.data.PersonDebt)
+
+   }catch(error){
+    console.error()
+    alert('something went wrong')
+   }
+   
+
   };
   const handleOpenForm = () => {
     setIsFormOpen(true);
@@ -150,7 +160,7 @@ export default function SalesToday() {
         </div>
       )}
       <div>
-        <Debtcompo/>
+        <Debtcompo />
 
       </div>
     </div>

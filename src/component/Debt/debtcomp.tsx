@@ -1,7 +1,8 @@
 import "./debtcomp.css";
 import './CardDiscript.css'
+import type { CardDiscriptionInterface, DebtResponse } from "../../type.interface";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-export const Debtcompo = () => {
+export const Debtcompo:React.FC<DebtResponse> = ({findUserDebtInfo, findtrack,PersonDebt}) => {
   return (
     <div>
       <div className="Dbt-compo-list-title-container">
@@ -16,23 +17,32 @@ export const Debtcompo = () => {
         <span>Partalpaid</span>
       </div>
       <div className="Dbt-compo-list-container">
+        {
+         PersonDebt && PersonDebt.length > 0 ?(
+
         <CardDiscription/>
+         ):(
+          <span>No debt available</span>
+         )
+         
+        }
+
       </div>
     </div>
   );
 };
-export const CardDiscription = ()=>{
+export const CardDiscription:React.FC<CardDiscriptionInterface> = ({name, date, amount, title})=>{
      return(
         <div className="crd-dsc-cont">
             <div className="crd-dsc-icon-cont" >
                <AiOutlineLoading3Quarters size={25} color="green" fontSize={28} fontWeight={700}/>
             </div>
             <div className="crd-dsc-desc-info">
-                <span className="crd-dcs-name">John Doe</span>
-                <span className="crd-dcs-amount">Remaining 240000Tsh</span>
+                <span className="crd-dcs-name">{name}</span>
+                <span className="crd-dcs-amount"><span>{title}</span> {amount}Tsh</span>
             </div>
             <div className="crd-dcs-date-container">
-                <span>24-07-2026</span>
+                <span>{date}</span>
             </div>
         </div>
      )

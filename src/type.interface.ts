@@ -261,3 +261,10 @@ export interface TrackRecord {
   t_paidmoney?: number;
   updated_at?:string
 }
+
+export interface CardDiscriptionInterface {
+  name?:string;
+  date?:string;
+  amount?:number;
+  title?:string
+}
