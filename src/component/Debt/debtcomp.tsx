@@ -126,7 +126,19 @@ export const Displayboard = () => {
             <button className="action-btn-debt">Send Message</button>
           </div>
         </div>
-        <div className=""></div>
+        <div className="display-info-time">
+          <div>
+            <span></span>
+          </div>
+          <div>
+            <span>1:30:40:55</span>
+          </div>
+          <div>
+            <span></span>
+            <span></span>
+          </div>
+
+        </div>
       </div>
     </div>
   );
