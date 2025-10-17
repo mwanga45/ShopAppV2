@@ -90,30 +90,34 @@ export const Displayboard = () => {
             <span> Mama Kifitiri Payment Series</span>
             <span>Product name: Pallet starter</span>
           </div>
-        </div>
-        <div className="time-Displayboard-info-countdown">
-          <div className="list-paid-series-container">
-            <div className="series-header">
-              <span>Date</span>
-              <span>Time</span>
-              <span>Paid Amout</span>
+          <div className="time-Displayboard-info-countdown">
+            <div className="list-paid-series-container">
+              <div className="series-header">
+                <span>Date</span>
+                <span>Time</span>
+                <span>Paid Amout</span>
+              </div>
+              <div className="series-list-payment-scroll">
+                <div className="series-list-payment">
+                  <span>12-12-2025</span>
+                  <span>05:06</span>
+                  <span>12,000</span>
+                </div>
+              </div>
             </div>
-            <div  className="series-list-payment-scroll">
-            <div className="series-list-payment">
-              <span>12-12-2025</span>
-              <span>05:06</span>
-              <span>12,000</span>
-            </div>
-            </div>
-          </div>
-          <div className="Paid-reach-suppose">
-            <div>
-            <span>Paiment Required</span>
-            <span>40,000</span>
-            </div>
-            <div>
-              <span>Already Piad</span>
-              <span>12,000</span>
+            <div className="Paid-reach-suppose">
+              <div>
+                <span>Paiment Required</span>
+                <span>40,000</span>
+              </div>
+              <div>
+                <span>Already Piad</span>
+                <span>12,000.Tsh</span>
+              </div>
+              <div>
+                <span>Total remain</span>
+                <span>28,000.Tsh</span>
+              </div>
             </div>
           </div>
         </div>
