@@ -120,6 +120,11 @@ export const Displayboard = () => {
               </div>
             </div>
           </div>
+               <div className="Action-container">
+              <button className="action-btn-debt">Edit</button>
+              <button className="action-btn-debt">Add</button>
+              <button className="action-btn-debt">Send Message</button>
+            </div>
         </div>
       </div>
     </div>
