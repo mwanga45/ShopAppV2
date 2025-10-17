@@ -55,11 +55,27 @@ export const CardDiscription:React.FC<CardDiscriptionInterface> = ({name, date, 
 
         <div className="display-card-info-main-cont">
           <div className="display-card-info-cont">
-
+                <Displayboard/>
           </div>
         </div>
         }
         </div>
 
      )
+}
+
+export const Displayboard =() => {
+  return(
+    <div className="Displayboard-main-container">
+         <div className="Displayboard-info-cont">
+            <div className="series-Displayboard-info-countdown">
+              <div className="series-title-container">
+                <span> Mama Kifitiri Payment Series</span>
+                <span>Product name: Pallet starter</span>
+              </div>
+            </div>
+            <div className="time-Displayboard-info-countdown"></div>
+         </div>
+    </div>
+  )
 }
