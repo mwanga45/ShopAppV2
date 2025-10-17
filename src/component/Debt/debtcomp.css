@@ -51,3 +51,15 @@
     transition: all ease-in 300ms;
     cursor: pointer;
 }
+.display-card-info-main-cont{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    flex: 1;
+    border: 2px solid red;
+    z-index: 2;
+}

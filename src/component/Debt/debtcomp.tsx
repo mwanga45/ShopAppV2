@@ -2,6 +2,7 @@ import "./debtcomp.css";
 import './CardDiscript.css'
 import type { CardDiscriptionInterface, DebtResponse } from "../../type.interface";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useState } from "react";
 export const Debtcompo:React.FC<DebtResponse> = ({findUserDebtInfo, findtrack,PersonDebt}) => {
   return (
     <div>
@@ -35,7 +36,9 @@ export const Debtcompo:React.FC<DebtResponse> = ({findUserDebtInfo, findtrack,Pe
   );
 };
 export const CardDiscription:React.FC<CardDiscriptionInterface> = ({name, date, amount, title, id})=>{
+  const [openDispay, setDisplay] = useState<boolean>(true)
      return(
+      <div  className="crd-dsc-main-cont">
         <div className="crd-dsc-cont" key={id}>
             <div className="crd-dsc-icon-cont" >
                <AiOutlineLoading3Quarters size={25} color="green" fontSize={28} fontWeight={700}/>
@@ -48,5 +51,15 @@ export const CardDiscription:React.FC<CardDiscriptionInterface> = ({name, date, 
                 <span>{String(date).split('T')[0]}</span>
             </div>
         </div>
+        { openDispay &&
+
+        <div className="display-card-info-main-cont">
+          <div className="display-card-info-cont">
+
+          </div>
+        </div>
+        }
+        </div>
+
      )
 }
