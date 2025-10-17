@@ -265,6 +265,7 @@ export interface TrackRecord {
 export interface CardDiscriptionInterface {
   name?:string;
   date?:string;
-  amount?:number;
-  title?:string
+  amount?:string;
+  title?:string;
+  id?:any
 }

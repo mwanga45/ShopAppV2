@@ -19,8 +19,11 @@ export const Debtcompo:React.FC<DebtResponse> = ({findUserDebtInfo, findtrack,Pe
       <div className="Dbt-compo-list-container">
         {
          PersonDebt && PersonDebt.length > 0 ?(
+          PersonDebt.map((item) => (
+            <CardDiscription name={item.debtor_name} date={item.deadlinedate} amount={Number(item.total_revenue).toLocaleString()} title="Remmaing"/>
 
-        <CardDiscription/>
+          ))
+
          ):(
           <span>No debt available</span>
          )
@@ -31,9 +34,9 @@ export const Debtcompo:React.FC<DebtResponse> = ({findUserDebtInfo, findtrack,Pe
     </div>
   );
 };
-export const CardDiscription:React.FC<CardDiscriptionInterface> = ({name, date, amount, title})=>{
+export const CardDiscription:React.FC<CardDiscriptionInterface> = ({name, date, amount, title, id})=>{
      return(
-        <div className="crd-dsc-cont">
+        <div className="crd-dsc-cont" key={id}>
             <div className="crd-dsc-icon-cont" >
                <AiOutlineLoading3Quarters size={25} color="green" fontSize={28} fontWeight={700}/>
             </div>
