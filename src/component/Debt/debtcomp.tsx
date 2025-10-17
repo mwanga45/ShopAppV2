@@ -106,15 +106,15 @@ export const Displayboard = () => {
               </div>
             </div>
             <div className="Paid-reach-suppose">
-              <div>
+              <div className="Paid-reach-suppose-cont">
                 <span>Paiment Required</span>
                 <span>40,000</span>
               </div>
-              <div>
+              <div className="Paid-reach-suppose-cont">
                 <span>Already Piad</span>
                 <span>12,000.Tsh</span>
               </div>
-              <div>
+              <div className="Paid-reach-suppose-cont">
                 <span>Total remain</span>
                 <span>28,000.Tsh</span>
               </div>
