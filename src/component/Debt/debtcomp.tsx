@@ -8,7 +8,7 @@ import type {
 } from "../../type.interface";
 import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
 export const Debtcompo: React.FC<DebtResponse> = ({
   findUserDebtInfo,
@@ -149,6 +149,37 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse  > = ({
   const totalRevenueNum = Number(total_revenue ?? 0);
   const alreadyPaid = Number(latest_paid_amount ?? 0);
   const remain = Math.max(totalRevenueNum - alreadyPaid, 0);
+    const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+  useEffect(()=>{
+    const time = new Date(deadlinedate ?? '').getTime()
+
+    setInterval(()=>{
+      const timer = new Date().getTime()
+      const different =time - timer
+ 
+      if (different <= 0) {
+        clearInterval(timer);
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return;
+      }
+      
+      const days  =  Math.floor(different / (1000 * 60 * 60 * 25))
+      const hours = Math.floor(different %(1000 * 60 * 60 * 25)/(1000 * 60 * 60 ))
+      const mins  = Math.floor(different %(1000 * 60 * 60 )/ (1000 * 60))
+      const sec   = Math.floor(different %(1000 * 60)/(1000))
+      setTimeLeft({
+        days:days,
+        minutes:mins,
+        hours:hours, 
+        seconds:sec
+      })
+    }, 1000)
+  }, [deadlinedate])
   
   return (
     <div className="Displayboard-main-container">
@@ -232,7 +263,7 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse  > = ({
           </div>
           <div style={{display:"flex", flexDirection:"column"}}>
             <span style={{fontSize:"25px"}}>CountDown</span>
-            <span>1:30:40:55</span>
+            <span>{timeLeft.days}:{timeLeft.hours}:{timeLeft.minutes}:{timeLeft.seconds}</span>
           </div>
           <div>
             <span>CreatedAt {String(createdat).split('T')[0]}</span>
