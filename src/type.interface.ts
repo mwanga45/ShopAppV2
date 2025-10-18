@@ -283,11 +283,13 @@ export interface DebtRecord {
   updated_at?: string;
   createdat?: string;
   deadlinedate?: string; 
+  tracks?:TrackRecord[];
   
 }
 
+
 export interface TrackRecord {
-  t_paidmoney?: number;
+  paidmoney?: number;
   updated_at?:string
 }
 

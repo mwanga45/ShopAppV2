@@ -90,7 +90,7 @@ export const Debtcompo: React.FC<DebtResponse> = ({
               total_revenue={selectedDebt.total_revenue}
               total_quantity={selectedDebt.total_quantity}
               product_name={selectedDebt.product_name}
-              findtrack={findtrack}
+              tracks={selectedDebt.tracks}
             />
           </div>
         </div>
@@ -144,7 +144,8 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse  > = ({
   total_revenue,
   total_quantity,
   product_name,
-  findtrack,
+  tracks
+
 }) => {
   const totalRevenueNum = Number(total_revenue ?? 0);
   const alreadyPaid = Number(latest_paid_amount ?? 0);
@@ -197,12 +198,12 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse  > = ({
                 <span>Paid Amout</span>
               </div>
               <div className="series-list-payment-scroll">
-                {findtrack && findtrack.length > 0 ? (
-                  findtrack.map((t, idx) => (
+                {tracks && tracks.length > 0 ? (
+                  tracks.map((t, idx) => (
                     <div className="series-list-payment" key={idx}>
                       <span>{String(t.updated_at).split("T")[0]}</span>
                       <span>{String(t.updated_at).split("T")[1]?.substring(0,5)}</span>
-                      <span>{Number(t.t_paidmoney).toLocaleString()}</span>
+                      <span>{Number(t.paidmoney).toLocaleString()}</span>
                     </div>
                   ))
                 ) : (
