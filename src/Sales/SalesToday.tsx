@@ -6,7 +6,7 @@ import { AdminsalesAnaysis } from "../component/daysales/salesAnalysis";
 import { SalesRecForm } from "../component/Form-comp/Form";
 import { useEffect, useState } from "react";
 import { fetchProductsales, fetchNormalsellrecord } from "./service/sales.api";
-import type { DebtRecord, SalesRecord, SalesSummaryResponsesales } from "../type.interface";
+import type { TrackRecord, DebtRecord, SalesRecord, SalesSummaryResponsesales } from "../type.interface";
 import type { wProduct } from "../type.interface";
 import type { rProduct } from "../type.interface";
 import { RiCloseFill } from "react-icons/ri";
@@ -26,11 +26,13 @@ export default function SalesToday() {
   const [DebtInfo, setDebtInfo] = useState<DebtRecord[]>([])
   const [showsalesAnalysis, setshowsalesAnalysis] = useState<boolean>(false);
   const [custdebtlist, setcustdebtlist] = useState<DebtRecord[]>([])
+  const [productTrack, setproductTrack]  =  useState<TrackRecord[]>([])
 
   const handleDebtmoreifno = async (id:string) => {
    try{
     const response = await DebtorInfo(id);
     setcustdebtlist(response.data.data.PersonDebt)
+    setproductTrack(response.data.data.findtrack)
 
    }catch(error){
     console.error()
@@ -160,7 +162,7 @@ export default function SalesToday() {
         </div>
       )}
       <div>
-        <Debtcompo PersonDebt={custdebtlist}/>
+        <Debtcompo PersonDebt={custdebtlist} findtrack={productTrack}/>
       </div>
     </div>
   );

@@ -2,17 +2,47 @@ import "./debtcomp.css";
 import "./CardDiscript.css";
 import type {
   CardDiscriptionInterface,
+  DebtRecord,
   DebtResponse,
+  TrackRecord,
 } from "../../type.interface";
 import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
 export const Debtcompo: React.FC<DebtResponse> = ({
   findUserDebtInfo,
   findtrack,
   PersonDebt,
 }) => {
+  const [selectedDebt, setSelectedDebt] = useState<DebtRecord | null>(null);
+  const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
+
+  const tracksForSelected = useMemo(() => {
+    if (!selectedDebt) return [] as { t_paidmoney: number; updated_at: string }[];
+    return findtrack || [];
+  }, [selectedDebt, findtrack]);
+
+  const handleOpenDetail = (record: any) => {
+    setSelectedDebt({
+      debt_id: record.debt_id,
+      debtor_name: record.debtor_name,
+      deadlinedate: record.deadlinedate,
+      phone_number: record.phone_number,
+      latest_paid_amount: record.latest_paid_amount,
+      createdat: record.createdat,
+      total_revenue: record.total_revenue,
+      total_quantity: record.total_quantity,
+      product_name: record.product_name,
+    });
+    setIsDetailOpen(true);
+  };
+
+  const handleCloseDetail = () => {
+    setIsDetailOpen(false);
+    setSelectedDebt(null);
+  };
+
   return (
     <div>
       <div className="Dbt-compo-list-title-container">
@@ -29,17 +59,42 @@ export const Debtcompo: React.FC<DebtResponse> = ({
       <div className="Dbt-compo-list-container">
         {PersonDebt && PersonDebt.length > 0 ? (
           PersonDebt.map((item) => (
-            <CardDiscription
-              name={item.debtor_name}
-              date={item.deadlinedate}
-              amount={Number(item.total_revenue).toLocaleString()}
-              title="Remmaing"
-            />
+            <div key={item.debt_id} onClick={() => handleOpenDetail(item)}>
+              <CardDiscription
+                id={item.debt_id}
+                name={item.debtor_name}
+                date={item.deadlinedate}
+                amount={Number(item.total_revenue).toLocaleString()}
+                title="Remaining"
+              />
+            </div>
           ))
         ) : (
           <span>No debt available</span>
         )}
       </div>
+
+      {isDetailOpen && selectedDebt && (
+        <div className="debt-overlay">
+          <div className="debt-modal">
+            <button className="debt-close" onClick={handleCloseDetail} aria-label="Close">
+              <RiCloseFill color="white" size={22} />
+            </button>
+            <Displayboard
+              debt_id={selectedDebt.debt_id}
+              debtor_name={selectedDebt.debtor_name}
+              deadlinedate={selectedDebt.deadlinedate}
+              phone_number={selectedDebt.phone_number}
+              latest_paid_amount={selectedDebt.latest_paid_amount}
+              createdat={selectedDebt.createdat}
+              total_revenue={selectedDebt.total_revenue}
+              total_quantity={selectedDebt.total_quantity}
+              product_name={selectedDebt.product_name}
+              findtrack={findtrack}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -51,9 +106,9 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
   id,
 }) => {
   const [openDispay, setDisplay] = useState<boolean>(true);
-  const handleClose =()=> {
-    setDisplay(false)
-  }
+  const handleClose = () => {
+    setDisplay(false);
+  };
   return (
     <div className="crd-dsc-main-cont">
       <div className="crd-dsc-cont" key={id}>
@@ -75,31 +130,33 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
           <span>{String(date).split("T")[0]}</span>
         </div>
       </div>
-      {openDispay && (
-        <div className="display-card-info-main-cont">
-
-          <div className="display-card-info-cont">
-             <div className="display-card-info-cont-close">
-               <div className="icon" onClick={handleClose}>
-                          <RiCloseFill color="white" size={30} fontWeight={500} />
-                        </div>
-            <Displayboard />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
-export const Displayboard = () => {
+export const Displayboard: React.FC<DebtRecord & DebtResponse  > = ({
+  debt_id,
+  debtor_name,
+  deadlinedate,
+  phone_number,
+  latest_paid_amount,
+  createdat,
+  total_revenue,
+  total_quantity,
+  product_name,
+  findtrack,
+}) => {
+  const totalRevenueNum = Number(total_revenue ?? 0);
+  const alreadyPaid = Number(latest_paid_amount ?? 0);
+  const remain = Math.max(totalRevenueNum - alreadyPaid, 0);
+  
   return (
     <div className="Displayboard-main-container">
       <div className="Displayboard-info-cont">
         <div className="series-Displayboard-info-countdown">
           <div className="series-title-container">
-            <span> Mama Kifitiri Payment Series</span>
-            <span>Product name: Pallet starter</span>
+            <span> {debtor_name} Payment Series</span>
+            <span>Product name: {product_name}</span>
           </div>
           <div className="time-Displayboard-info-countdown">
             <div className="list-paid-series-container">
@@ -109,25 +166,48 @@ export const Displayboard = () => {
                 <span>Paid Amout</span>
               </div>
               <div className="series-list-payment-scroll">
-                <div className="series-list-payment">
-                  <span>12-12-2025</span>
-                  <span>05:06</span>
-                  <span>12,000</span>
-                </div>
+                {findtrack && findtrack.length > 0 ? (
+                  findtrack.map((t, idx) => (
+                    <div className="series-list-payment" key={idx}>
+                      <span>{String(t.updated_at).split("T")[0]}</span>
+                      <span>{String(t.updated_at).split("T")[1]?.substring(0,5)}</span>
+                      <span>{Number(t.t_paidmoney).toLocaleString()}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="series-list-payment">
+                    <span>-</span>
+                    <span>-</span>
+                    <span>0</span>
+                  </div>
+                )}
               </div>
             </div>
             <div className="Paid-reach-suppose">
               <div className="Paid-reach-suppose-cont">
                 <span>Paiment Required</span>
-                <span>40,000</span>
+                <span>{totalRevenueNum.toLocaleString()}.Tsh</span>
               </div>
               <div className="Paid-reach-suppose-cont">
-                <span>Already Piad</span>
-                <span>12,000.Tsh</span>
+                <span>Already Paid</span>
+                <span>{alreadyPaid.toLocaleString()}.Tsh</span>
               </div>
               <div className="Paid-reach-suppose-cont">
                 <span>Total remain</span>
-                <span>28,000.Tsh</span>
+                <span>{remain.toLocaleString()}.Tsh</span>
+              </div>
+              <span>Other details</span>
+              <div className="Paid-reach-suppose-cont">
+                <span>total Quantity</span>
+                <span>{Number(total_quantity ?? 0)}pc</span>
+              </div>
+              <div className="Paid-reach-suppose-cont">
+                <span>latest paid amount</span>
+                <span>{alreadyPaid.toLocaleString()}.Tsh</span>
+              </div>
+              <div className="Paid-reach-suppose-cont">
+                <span>Debtor-Phone</span>
+                <span>{phone_number}</span>
               </div>
             </div>
           </div>
@@ -139,18 +219,25 @@ export const Displayboard = () => {
         </div>
         <div className="display-info-time">
           <div>
-            <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
-            <span>Time countdown && Date</span><LiaBusinessTimeSolid size={50} color="white"/>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <span>Time countdown && Date</span>
+              <LiaBusinessTimeSolid size={50} color="white" />
             </div>
           </div>
-          <div>
+          <div style={{display:"flex", flexDirection:"column"}}>
+            <span style={{fontSize:"25px"}}>CountDown</span>
             <span>1:30:40:55</span>
           </div>
           <div>
-            <span>From 12-10-2025</span>
-            <span>To End 24-10-2025</span>
+            <span>CreatedAt {String(createdat).split('T')[0]}</span>
+            <span>Exipere {String(deadlinedate).split('T')[0]}</span>
           </div>
-
         </div>
       </div>
     </div>
