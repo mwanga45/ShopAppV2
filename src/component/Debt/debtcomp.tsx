@@ -266,8 +266,8 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse  > = ({
             <span>{timeLeft.days}:{timeLeft.hours}:{timeLeft.minutes}:{timeLeft.seconds}</span>
           </div>
           <div>
-            <span>CreatedAt {String(createdat).split('T')[0]}</span>
-            <span>Exipere {String(deadlinedate).split('T')[0]}</span>
+            <span>CreatedAt:{String(createdat).split('T')[0]}</span>
+            <span>Deadline Date:{String(deadlinedate).split('T')[0]}</span>
           </div>
         </div>
       </div>
