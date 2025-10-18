@@ -23,6 +23,7 @@ export const Debtcompo: React.FC<DebtResponse> = ({
     return findtrack || [];
   }, [selectedDebt, findtrack]);
 
+
   const handleOpenDetail = (record: any) => {
     setSelectedDebt({
       debt_id: record.debt_id,
@@ -34,6 +35,7 @@ export const Debtcompo: React.FC<DebtResponse> = ({
       total_revenue: record.total_revenue,
       total_quantity: record.total_quantity,
       product_name: record.product_name,
+      tracks: record.tracks || [],
     });
     setIsDetailOpen(true);
   };
@@ -169,8 +171,8 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse  > = ({
         return;
       }
       
-      const days  =  Math.floor(different / (1000 * 60 * 60 * 25))
-      const hours = Math.floor(different %(1000 * 60 * 60 * 25)/(1000 * 60 * 60 ))
+      const days  =  Math.floor(different / (1000 * 60 * 60 * 24))
+      const hours = Math.floor(different %(1000 * 60 * 60 * 24)/(1000 * 60 * 60 ))
       const mins  = Math.floor(different %(1000 * 60 * 60 )/ (1000 * 60))
       const sec   = Math.floor(different %(1000 * 60)/(1000))
       setTimeLeft({
