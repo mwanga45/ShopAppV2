@@ -9,6 +9,7 @@ import { StockCreate } from "../../stock/stockservice";
 import { ProductInfo } from "./formservice";
 import Toggle from "../button/toggle";
 import { CreateDebtrecord } from "../../Sales/service/sales.api";
+import { customerInfo } from "../../central-api/central-api";
 import { toast, ToastContainer } from "react-toastify";
 
 import {
@@ -16,6 +17,7 @@ import {
   makesalesrequest,
 } from "../../Sales/service/sales.api";
 import type {
+  CustomerInfo,
   Debtinfo,
   FetchLastRec,
   Salerequest,
@@ -572,6 +574,8 @@ export const SalesRecForm: React.FC<
   const [isdbfromOpen, setdbformOpen] = useState<boolean>(false);
   const [isreturned, setisreturned] = useState<boolean>(false);
   const [isSaleSummary, setisSaleSummary] = useState<boolean>(false);
+  const [iscustomerexist, setiscustomerexist] = useState<boolean>(false)
+  const [customerdetails, setcustomerdetails] = useState<CustomerInfo[]>([])
 
   const handleDbfrmclose = ()=> {
     setdbformOpen(false)
@@ -579,6 +583,10 @@ export const SalesRecForm: React.FC<
   const handleCloseReturnedresult = () => {
     setisreturned(false);
   };
+  const handleCustomerDetails = async()=>{
+    const response = await customerInfo()
+    setcustomerdetails(response.data)
+  }
 
   const handleOnsubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -1094,16 +1102,22 @@ const{Expecte_profit, ... finalnextdebt} = {
             <span>Fill Debtor information</span>
             </div>
             <form className="main-form-content" >
-              <div className="input-value">
+              {iscustomerexist === true ?(
+                <>
+                 <div className="input-value">
                 <label htmlFor="dbrName">Debtor Name</label>
-                <input
-                  type="text"
-                  name="Debtor_name"
-                  id="dbrName"
-                  value={debtorInfo?.Debtor_name}
-                  onChange={handleChange}
-                  required
-                />
+                 <select>
+                  {
+                     customerdetails && customerdetails.length > 0 ? (
+                      customerdetails.map((item)=>(
+                        <option key={item.customer_name}>{item.customer_name}</option>
+                      ))
+
+                    ):(
+                      <option value="">No Any details</option>
+                    )
+                  }
+                 </select>
               </div>
               <div className="input-value">
                 <label htmlFor="Phnumber">Phone_Number</label>
@@ -1116,6 +1130,34 @@ const{Expecte_profit, ... finalnextdebt} = {
                   required
                 />
               </div>
+              </>
+              ):(
+                <>
+                 <div className="input-value">
+                <label htmlFor="dbrName">Debtor Name</label>
+                <input
+                  type="text"
+                  name="Debtor_name"
+                  id="dbrName"
+                  value={debtorInfo?.Debtor_name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+                <div className="input-value">
+                <label htmlFor="Phnumber">Phone_Number</label>
+                <input
+                  type="text"
+                  name="Phone_number"
+                  id="Phnumber"
+                  value={debtorInfo?.Phone_number}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              </>
+              )
+              }    
               {makesales?.paymentstatus === 'partialpaid' &&(
            
               <div className="input-value">

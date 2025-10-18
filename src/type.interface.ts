@@ -300,3 +300,8 @@ export interface CardDiscriptionInterface {
   title?:string;
   id?:any
 }
+export interface CustomerInfo {
+  Location?:string,
+  phone_number?:string,
+  customer_name?:string
+}
