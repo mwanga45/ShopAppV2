@@ -4,24 +4,24 @@ import type {
   CardDiscriptionInterface,
   DebtRecord,
   DebtResponse,
-  TrackRecord,
+  // TrackRecord,
 } from "../../type.interface";
 import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
 export const Debtcompo: React.FC<DebtResponse> = ({
-  findUserDebtInfo,
-  findtrack,
+  // findUserDebtInfo,
+  // findtrack,
   PersonDebt,
 }) => {
   const [selectedDebt, setSelectedDebt] = useState<DebtRecord | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
 
-  const tracksForSelected = useMemo(() => {
-    if (!selectedDebt) return [] as { t_paidmoney: number; updated_at: string }[];
-    return findtrack || [];
-  }, [selectedDebt, findtrack]);
+  // const tracksForSelected = useMemo(() => {
+  //   if (!selectedDebt) return [] as { t_paidmoney: number; updated_at: string }[];
+  //   return findtrack || [];
+  // }, [selectedDebt, findtrack]);
 
 
   const handleOpenDetail = (record: any) => {
@@ -107,10 +107,10 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
   title,
   id,
 }) => {
-  const [openDispay, setDisplay] = useState<boolean>(true);
-  const handleClose = () => {
-    setDisplay(false);
-  };
+  // const [openDispay, setDisplay] = useState<boolean>(true);
+  // const handleClose = () => {
+  //   setDisplay(false);
+  // };
   return (
     <div className="crd-dsc-main-cont">
       <div className="crd-dsc-cont" key={id}>
@@ -185,7 +185,7 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse  > = ({
   }, [deadlinedate])
   
   return (
-    <div className="Displayboard-main-container">
+    <div className="Displayboard-main-container" key={debt_id}>
       <div className="Displayboard-info-cont">
         <div className="series-Displayboard-info-countdown">
           <div className="series-title-container">
