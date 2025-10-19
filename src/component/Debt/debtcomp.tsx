@@ -10,14 +10,9 @@ import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
-export const Debtcompo: React.FC<DebtResponse> = ({
-  PersonDebt,
-}) => {
+export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt }) => {
   const [selectedDebt, setSelectedDebt] = useState<DebtRecord | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
-
-
-
 
   const handleOpenDetail = (record: any) => {
     setSelectedDebt({
@@ -74,27 +69,24 @@ export const Debtcompo: React.FC<DebtResponse> = ({
       {isDetailOpen && selectedDebt && (
         <div className="debt-overlay">
           <div className="debt-modal">
-            {/* <button className="debt-close" onClick={handleCloseDetail} aria-label="Close">
-              <RiCloseFill color="white" size={22} />
-            </button> */}
-                   <div className="AdminsalesAnalysis-container-arrange-close-btn">
+            <div className="AdminsalesAnalysis-container-arrange-close-btn">
               <div className="icon" onClick={handleCloseDetail}>
-                <RiCloseFill color="white" size={30} fontWeight={500} />
+                <RiCloseFill color="black" size={30} fontWeight={500} />
               </div>
             </div>
             <div className="dt-sispay-conatiner">
-            <Displayboard
-              debt_id={selectedDebt.debt_id}
-              debtor_name={selectedDebt.debtor_name}
-              deadlinedate={selectedDebt.deadlinedate}
-              phone_number={selectedDebt.phone_number}
-              latest_paid_amount={selectedDebt.latest_paid_amount}
-              createdat={selectedDebt.createdat}
-              total_revenue={selectedDebt.total_revenue}
-              total_quantity={selectedDebt.total_quantity}
-              product_name={selectedDebt.product_name}
-              tracks={selectedDebt.tracks}
-            />
+              <Displayboard
+                debt_id={selectedDebt.debt_id}
+                debtor_name={selectedDebt.debtor_name}
+                deadlinedate={selectedDebt.deadlinedate}
+                phone_number={selectedDebt.phone_number}
+                latest_paid_amount={selectedDebt.latest_paid_amount}
+                createdat={selectedDebt.createdat}
+                total_revenue={selectedDebt.total_revenue}
+                total_quantity={selectedDebt.total_quantity}
+                product_name={selectedDebt.product_name}
+                tracks={selectedDebt.tracks}
+              />
             </div>
           </div>
         </div>
@@ -134,7 +126,7 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
   );
 };
 
-export const Displayboard: React.FC<DebtRecord & DebtResponse  > = ({
+export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
   debt_id,
   debtor_name,
   deadlinedate,
@@ -144,44 +136,45 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse  > = ({
   total_revenue,
   total_quantity,
   product_name,
-  tracks
-
+  tracks,
 }) => {
   const totalRevenueNum = Number(total_revenue ?? 0);
   const alreadyPaid = Number(latest_paid_amount ?? 0);
   const remain = Math.max(totalRevenueNum - alreadyPaid, 0);
-    const [timeLeft, setTimeLeft] = useState({
+  const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0,
   });
-  useEffect(()=>{
-    const time = new Date(deadlinedate ?? '').getTime()
+  useEffect(() => {
+    const time = new Date(deadlinedate ?? "").getTime();
 
-    setInterval(()=>{
-      const timer = new Date().getTime()
-      const different =time - timer
- 
+    setInterval(() => {
+      const timer = new Date().getTime();
+      const different = time - timer;
+
       if (different <= 0) {
         clearInterval(timer);
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         return;
       }
-      
-      const days  =  Math.floor(different / (1000 * 60 * 60 * 24))
-      const hours = Math.floor(different %(1000 * 60 * 60 * 24)/(1000 * 60 * 60 ))
-      const mins  = Math.floor(different %(1000 * 60 * 60 )/ (1000 * 60))
-      const sec   = Math.floor(different %(1000 * 60)/(1000))
+
+      const days = Math.floor(different / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (different % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const mins = Math.floor((different % (1000 * 60 * 60)) / (1000 * 60));
+      const sec = Math.floor((different % (1000 * 60)) / 1000);
       setTimeLeft({
-        days:days,
-        minutes:mins,
-        hours:hours, 
-        seconds:sec
-      })
-    }, 1000)
-  }, [deadlinedate])
-  
+        days: days,
+        minutes: mins,
+        hours: hours,
+        seconds: sec,
+      });
+    }, 1000);
+  }, [deadlinedate]);
+
   return (
     <div className="Displayboard-main-container" key={debt_id}>
       <div className="Displayboard-info-cont">
@@ -202,7 +195,9 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse  > = ({
                   tracks.map((t, idx) => (
                     <div className="series-list-payment" key={idx}>
                       <span>{String(t.updated_at).split("T")[0]}</span>
-                      <span>{String(t.updated_at).split("T")[1]?.substring(0,5)}</span>
+                      <span>
+                        {String(t.updated_at).split("T")[1]?.substring(0, 5)}
+                      </span>
                       <span>{Number(t.paidmoney).toLocaleString()}</span>
                     </div>
                   ))
@@ -262,13 +257,16 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse  > = ({
               <LiaBusinessTimeSolid size={50} color="white" />
             </div>
           </div>
-          <div style={{display:"flex", flexDirection:"column"}}>
-            <span style={{fontSize:"25px"}}>CountDown</span>
-            <span>{timeLeft.days}:{timeLeft.hours}:{timeLeft.minutes}:{timeLeft.seconds}</span>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span style={{ fontSize: "25px" }}>CountDown</span>
+            <span>
+              {timeLeft.days}:{timeLeft.hours}:{timeLeft.minutes}:
+              {timeLeft.seconds}
+            </span>
           </div>
           <div>
-            <span>CreatedAt:{String(createdat).split('T')[0]}</span>
-            <span>Deadline Date:{String(deadlinedate).split('T')[0]}</span>
+            <span>CreatedAt:{String(createdat).split("T")[0]}</span>
+            <span>Deadline Date:{String(deadlinedate).split("T")[0]}</span>
           </div>
         </div>
       </div>

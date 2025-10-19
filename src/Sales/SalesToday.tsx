@@ -169,7 +169,7 @@ export default function SalesToday() {
           <div className="AdminsalesAnalysis-container-arrange">
             <div className="AdminsalesAnalysis-container-arrange-close-btn">
               <div className="icon" onClick={()=> setopenDebtComp(false)}>
-                <RiCloseFill color="white" size={30} fontWeight={500} />
+                <RiCloseFill color="black" size={30} fontWeight={500} />
               </div>
             </div>
             <Debtcompo PersonDebt={custdebtlist} findtrack={productTrack} />
