@@ -11,17 +11,12 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
 export const Debtcompo: React.FC<DebtResponse> = ({
-  // findUserDebtInfo,
-  // findtrack,
   PersonDebt,
 }) => {
   const [selectedDebt, setSelectedDebt] = useState<DebtRecord | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
 
-  // const tracksForSelected = useMemo(() => {
-  //   if (!selectedDebt) return [] as { t_paidmoney: number; updated_at: string }[];
-  //   return findtrack || [];
-  // }, [selectedDebt, findtrack]);
+
 
 
   const handleOpenDetail = (record: any) => {
@@ -79,9 +74,15 @@ export const Debtcompo: React.FC<DebtResponse> = ({
       {isDetailOpen && selectedDebt && (
         <div className="debt-overlay">
           <div className="debt-modal">
-            <button className="debt-close" onClick={handleCloseDetail} aria-label="Close">
+            {/* <button className="debt-close" onClick={handleCloseDetail} aria-label="Close">
               <RiCloseFill color="white" size={22} />
-            </button>
+            </button> */}
+                   <div className="AdminsalesAnalysis-container-arrange-close-btn">
+              <div className="icon" onClick={handleCloseDetail}>
+                <RiCloseFill color="white" size={30} fontWeight={500} />
+              </div>
+            </div>
+            <div className="dt-sispay-conatiner">
             <Displayboard
               debt_id={selectedDebt.debt_id}
               debtor_name={selectedDebt.debtor_name}
@@ -94,6 +95,7 @@ export const Debtcompo: React.FC<DebtResponse> = ({
               product_name={selectedDebt.product_name}
               tracks={selectedDebt.tracks}
             />
+            </div>
           </div>
         </div>
       )}
@@ -107,10 +109,6 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
   title,
   id,
 }) => {
-  // const [openDispay, setDisplay] = useState<boolean>(true);
-  // const handleClose = () => {
-  //   setDisplay(false);
-  // };
   return (
     <div className="crd-dsc-main-cont">
       <div className="crd-dsc-cont" key={id}>

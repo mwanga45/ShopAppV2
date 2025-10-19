@@ -230,6 +230,14 @@
     margin-left: 4px;
 
 }
+.dt-sispay-conatiner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+    border: 2px solid white;
+    margin-left: 25vw;
+}
 .Action-container{
     height: auto;
     padding: 15px;
