@@ -583,6 +583,10 @@ export const SalesRecForm: React.FC<
   const handleCloseReturnedresult = () => {
     setisreturned(false);
   };
+  const handleBdformoption = (e:React.MouseEvent<HTMLButtonElement>) =>{
+    e.preventDefault()
+    setiscustomerexist(!iscustomerexist)
+  }
   const handleCustomerDetails = async () => {
     const response = await customerInfo();
     setcustomerdetails(response.data.data);
@@ -1289,7 +1293,8 @@ export const SalesRecForm: React.FC<
                     buttonName="Sumbit"
                     type="submit"
                     onclick={handlemakesales}
-                  />
+                  /> 
+                  <button onClick={handleBdformoption}>{iscustomerexist === true? "customerexist":"not exist"}</button>
                 </div>
               </form>
             </div>
