@@ -216,7 +216,7 @@ export interface SalesSummaryResponsesales {
 export interface Debtinfo{
   Debtor_name?:string
   paidmoney?:number
-  Phone_number?:number
+  Phone_number?:string
   location?:string
   PaymentDateAt?:Date
 

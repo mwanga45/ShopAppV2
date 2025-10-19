@@ -55,7 +55,7 @@
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
 }
 .submit-btn-container{
-    padding: 10px 20px;
+  padding: 10px 20px;
   font-size: 14px;
   font-weight: 600;
   border: none;
@@ -69,7 +69,6 @@
   box-shadow: 0 4px 15px rgba(12, 26, 49, 0.3);
   letter-spacing: 1px;
   min-width: 120px;
-  width: 100%;
   max-width: 200px;
 }
 

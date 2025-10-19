@@ -713,31 +713,49 @@ export const SalesRecForm: React.FC<
       nextSales.paymentstatus === "debt" ||
       nextSales.paymentstatus === "partialpaid"
     ) {
+      // Validate required fields
+      if (!debtorInfo?.Debtor_name || !debtorInfo?.Phone_number) {
+        alert("Please fill in all required debtor information");
+        return;
+      }
+
       const debtPayload = {
         ...debtorInfo,
-        paidmoney: Number(debtorInfo?.paidmoney),
+        paidmoney: Number(debtorInfo?.paidmoney) || 0,
       };
+
+      // Create the final debt payload with correct field names and types
       const finaldebtPayload = {
         Debtor_name: debtPayload.Debtor_name,
         paidmoney: debtPayload.paidmoney,
-        Phone_number: debtPayload.Phone_number,
-        location: debtPayload.location,
+        Phone_number: String(debtorInfo.Phone_number), // Convert to string as required by backend
+        location: debtPayload.location || "",
         PaymentDateAt: debtPayload.PaymentDateAt,
       };
 
-      const { Expecte_profit, ...finalnextdebt } = {
-        ...nextSales,
-        Expected_profit: nextSales.Expecte_profit,
-        ...debtPayload,
+      // Create the sales data with correct field names
+      const salesData = {
+        Total_pc_pkg_litre: nextSales.Total_pc_pkg_litre,
+        ProductId: nextSales.ProductId,
+        Expected_profit: nextSales.Expecte_profit, // Fix field name
+        Net_profit: nextSales.Net_profit,
+        Discount_percentage: nextSales.Discount_percentage || "0",
+        Percentage_deviation: nextSales.Percentage_deviation || 0,
+        Revenue: nextSales.Revenue,
+        profit_deviation: nextSales.profit_deviation,
+        Stock_status: nextSales.Stock_status, // Fix field name
+        paymentstatus: nextSales.paymentstatus,
       };
 
-      const sentWithDebt = { ...finalnextdebt, ...finaldebtPayload };
-      const { Pnum, ...finalsentdebt } = sentWithDebt as any;
-      console.log(finalsentdebt);
+      const sentWithDebt = { ...salesData, ...finaldebtPayload };
+      console.log("Sending debt data:", sentWithDebt);
+      
       try {
-        const response = await CreateDebtrecord(finalsentdebt);
+        const response = await CreateDebtrecord(sentWithDebt);
+        console.log("Debt creation response:", response);
+        
         if (!response.data.success) {
-          alert(response.data.message);
+          alert(response.data.message || "Failed to create debt record");
           return;
         }
 
@@ -750,9 +768,9 @@ export const SalesRecForm: React.FC<
           Phone_number: undefined,
           PaymentDateAt: undefined,
         });
-      } catch (err) {
-        console.error(err);
-        alert("Error: failed to create debt record");
+      } catch (err: any) {
+        console.error("Debt creation error:", err);
+        alert("Error: failed to create debt record - " + (err.response?.data?.message || err.message));
       }
 
       return;
@@ -836,7 +854,7 @@ export const SalesRecForm: React.FC<
       // Update debtorInfo with the selected customer's details
       const updatedInfo = {
         Debtor_name: selectedCustomer.customer_name,
-        Phone_number: selectedCustomer.phone_number ? Number(selectedCustomer.phone_number) : undefined,
+        Phone_number: selectedCustomer.phone_number ? String(selectedCustomer.phone_number) : undefined,
         location: selectedCustomer.Location, // Use the correct field name from CustomerInfo interface
       };
       
@@ -1293,8 +1311,8 @@ export const SalesRecForm: React.FC<
                     buttonName="Sumbit"
                     type="submit"
                     onclick={handlemakesales}
-                  /> 
-                  <button onClick={handleBdformoption}>{iscustomerexist === true? "customerexist":"not exist"}</button>
+                  />
+                  <button onClick={handleBdformoption} className="toggle-customer-btn">{iscustomerexist === true? "Customer Exist":"New Customer"}</button>
                 </div>
               </form>
             </div>
