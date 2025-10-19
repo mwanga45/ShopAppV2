@@ -49,11 +49,6 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
   const [error] = useState<string | null>(null);
   const [category, setcategory] = useState<string>("All");
   const [isswicheropen, setswicheropen] = useState<boolean>(false);
-  const [isCategorySelected, setIsCategorySelected] = useState(false);
- 
-
-
-
 
   useEffect(() => {
     const savedCategory = localStorage.getItem("category");
@@ -61,17 +56,20 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
       setcategory(savedCategory);
     }
   }, []);
+
   const handleopen = () => {
     setswicheropen(!isswicheropen);
   };
 
+  const handleCategoryChange = (newCategory: string) => {
+    setcategory(newCategory);
+    localStorage.setItem("category", newCategory);
+    setswicheropen(false); // Close the dropdown when a category is selected
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newcategory = e.target.value;
-    setcategory(newcategory);
-    localStorage.setItem("category", newcategory);
-    setIsCategorySelected(true)
-    setswicheropen(!isswicheropen);
-
+    handleCategoryChange(newcategory);
   };
   if (loading) {
     return <div className="daylist-container">Loading sales data...</div>;
@@ -91,20 +89,20 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
         Filter by
       </span>
       <div className="filter-list-container">
-      <div
-  className={`filterby ${category === "All" ? "active-filter" : ""}`}
-  onClick={() => setcategory("All")}
->
-  <p>All</p>
-</div>
-        <div className={`filterby ${isswicheropen || isCategorySelected ? "active-filter" : ""}`} onClick={handleopen}>
+        <div
+          className={`filterby ${category === "All" ? "active-filter" : ""}`}
+          onClick={() => handleCategoryChange("All")}
+        >
+          <p>All</p>
+        </div>
+        <div className={`filterby ${isswicheropen || (category === "wholesales" || category === "retailsales") ? "active-filter" : ""}`} onClick={handleopen}>
           <p>Category</p>
         </div>
-        <div className={`filterby ${category === 'pending'? 'active-filter' :""}`} onClick={() => setcategory("pending")}>
+        <div className={`filterby ${category === 'pending' ? 'active-filter' : ""}`} onClick={() => handleCategoryChange("pending")}>
           <p>Pending..</p>
         </div>
-        <div className={`filterby ${category === 'debt' ? 'active-filter': ''}`} onClick={() => setcategory("debt")}>
-          <p>Veiw debt</p>
+        <div className={`filterby ${category === 'debt' ? 'active-filter' : ''}`} onClick={() => handleCategoryChange("debt")}>
+          <p>View debt</p>
         </div>
 
         <div className="select-input-category-choose">
