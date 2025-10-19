@@ -21,7 +21,7 @@ import type {
   Debtinfo,
   FetchLastRec,
   Salerequest,
-  SalesSummaryResponse
+  SalesSummaryResponse,
 } from "../../type.interface";
 
 import type {
@@ -569,24 +569,28 @@ export const SalesRecForm: React.FC<
   const [wholeprodinfo, setWholeprodinfo] = useState<wProduct[]>([]);
   const [retailprodinfo, setretailprodinfo] = useState<rProduct[]>([]);
   const [makesales, setmakesales] = useState<Salerequest>();
-  const [debtorInfo, setdebtorInfo] = useState<Debtinfo>()
+  const [debtorInfo, setdebtorInfo] = useState<Debtinfo>();
   const [lastdata, setlastdata] = useState<FetchLastRec>();
   const [isdbfromOpen, setdbformOpen] = useState<boolean>(false);
   const [isreturned, setisreturned] = useState<boolean>(false);
   const [isSaleSummary, setisSaleSummary] = useState<boolean>(false);
-  const [iscustomerexist, setiscustomerexist] = useState<boolean>(false)
-  const [customerdetails, setcustomerdetails] = useState<CustomerInfo[]>([])
+  const [iscustomerexist, setiscustomerexist] = useState<boolean>(true);
+  const [customerdetails, setcustomerdetails] = useState<CustomerInfo[]>([]);
 
-  const handleDbfrmclose = ()=> {
-    setdbformOpen(false)
-  }
+  const handleDbfrmclose = () => {
+    setdbformOpen(false);
+  };
   const handleCloseReturnedresult = () => {
     setisreturned(false);
   };
-  const handleCustomerDetails = async()=>{
-    const response = await customerInfo()
-    setcustomerdetails(response.data)
-  }
+  const handleCustomerDetails = async () => {
+    const response = await customerInfo();
+    setcustomerdetails(response.data.data);
+  };
+  useEffect(() => {
+    handleCustomerDetails();
+    console.log(customerdetails);
+  }, []);
 
   const handleOnsubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -618,7 +622,7 @@ export const SalesRecForm: React.FC<
       ProductId: salesResponseOne.ProductId,
       Total_pc_pkg_litre: Number(displayInfo.Pnum),
     }));
-    
+
     try {
       const response = await salesRequestInfo(sentpayload);
       console.log("Sales response:", response.data);
@@ -634,8 +638,8 @@ export const SalesRecForm: React.FC<
       setisSaleSummary(true);
       setisreturned(false);
       setmakesales({
-        paymentstatus:""
-      })
+        paymentstatus: "",
+      });
     } catch (err: any) {
       console.error("Sales submit error:", err?.response?.data || err);
       alert(err?.response?.data?.message || "Failed to submit sales");
@@ -666,132 +670,136 @@ export const SalesRecForm: React.FC<
       } as any);
     }
   };
-  const handlemakesales = async (e:React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-  const discountList = salesSummary?.data.DiscontResult?.data?.filter_discont || [];
-  const lastDiscount =
-    discountList.length > 0 ? discountList[discountList.length - 1] : undefined;
+  const handlemakesales = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const discountList =
+      salesSummary?.data.DiscontResult?.data?.filter_discont || [];
+    const lastDiscount =
+      discountList.length > 0
+        ? discountList[discountList.length - 1]
+        : undefined;
 
-  const percentageDiscount = lastDiscount
-    ? String(lastDiscount.percentageDiscaunt)
-    : "0";
+    const percentageDiscount = lastDiscount
+      ? String(lastDiscount.percentageDiscaunt)
+      : "0";
 
-  const nextSales: Salerequest = {
-    ProductId: Number(salesResponseOne.ProductId) || 0,
-    Total_pc_pkg_litre: Number(displayInfo?.Pnum) || 0,
-    Revenue: salesSummary?.data?.CalculateDeviation.data.Revenue ?? 0,
-    Expecte_profit: salesSummary?.data?.CalculateDeviation.data.Exp_Net_profit ?? 0,
-    Net_profit: salesSummary?.data?.CalculateDeviation.data.Net_profit ?? 0,
-    Percentage_deviation:
-      salesSummary?.data?.CalculateDeviation.data.deviationFromMeanPercent ?? 0,
-    profit_deviation:
-      salesSummary?.data?.CalculateDeviation.data.Profit_deviation ?? 0,
-    Stock_status: salesSummary?.data?.stock_check.data.product_status ?? "",
-    Discount_percentage: percentageDiscount,
-    paymentstatus: makesales?.paymentstatus || "paid",
-  };
-
-
-  if (!nextSales.Total_pc_pkg_litre || nextSales.Total_pc_pkg_litre <= 0) {
-    alert("Please make sure you enter valid data");
-    return;
-  }
-
-
-  if (nextSales.paymentstatus === "debt" || nextSales.paymentstatus === "partialpaid") {
-    const debtPayload = {
-      ...debtorInfo,
-      paidmoney: Number(debtorInfo?.paidmoney),
+    const nextSales: Salerequest = {
+      ProductId: Number(salesResponseOne.ProductId) || 0,
+      Total_pc_pkg_litre: Number(displayInfo?.Pnum) || 0,
+      Revenue: salesSummary?.data?.CalculateDeviation.data.Revenue ?? 0,
+      Expecte_profit:
+        salesSummary?.data?.CalculateDeviation.data.Exp_Net_profit ?? 0,
+      Net_profit: salesSummary?.data?.CalculateDeviation.data.Net_profit ?? 0,
+      Percentage_deviation:
+        salesSummary?.data?.CalculateDeviation.data.deviationFromMeanPercent ??
+        0,
+      profit_deviation:
+        salesSummary?.data?.CalculateDeviation.data.Profit_deviation ?? 0,
+      Stock_status: salesSummary?.data?.stock_check.data.product_status ?? "",
+      Discount_percentage: percentageDiscount,
+      paymentstatus: makesales?.paymentstatus || "paid",
     };
-   const finaldebtPayload = {
-  Debtor_name:debtPayload.Debtor_name,
-  paidmoney:debtPayload.paidmoney,
-  Phone_number:debtPayload.Phone_number,
-  location:debtPayload.location,
-  PaymentDateAt:debtPayload.PaymentDateAt
-   }
 
-const{Expecte_profit, ... finalnextdebt} = {
-  ...nextSales,
-  Expected_profit: nextSales.Expecte_profit, 
-  ...debtPayload,
-};
-    
-    const sentWithDebt = { ...finalnextdebt, ...finaldebtPayload };
-    const {Pnum, ...finalsentdebt} = sentWithDebt as any
-    console.log(finalsentdebt)
+    if (!nextSales.Total_pc_pkg_litre || nextSales.Total_pc_pkg_litre <= 0) {
+      alert("Please make sure you enter valid data");
+      return;
+    }
+
+    if (
+      nextSales.paymentstatus === "debt" ||
+      nextSales.paymentstatus === "partialpaid"
+    ) {
+      const debtPayload = {
+        ...debtorInfo,
+        paidmoney: Number(debtorInfo?.paidmoney),
+      };
+      const finaldebtPayload = {
+        Debtor_name: debtPayload.Debtor_name,
+        paidmoney: debtPayload.paidmoney,
+        Phone_number: debtPayload.Phone_number,
+        location: debtPayload.location,
+        PaymentDateAt: debtPayload.PaymentDateAt,
+      };
+
+      const { Expecte_profit, ...finalnextdebt } = {
+        ...nextSales,
+        Expected_profit: nextSales.Expecte_profit,
+        ...debtPayload,
+      };
+
+      const sentWithDebt = { ...finalnextdebt, ...finaldebtPayload };
+      const { Pnum, ...finalsentdebt } = sentWithDebt as any;
+      console.log(finalsentdebt);
+      try {
+        const response = await CreateDebtrecord(finalsentdebt);
+        if (!response.data.success) {
+          alert(response.data.message);
+          return;
+        }
+
+        toast.success("Debt record created successfully");
+
+        setdebtorInfo({
+          Debtor_name: "",
+          paidmoney: undefined,
+          location: "",
+          Phone_number: undefined,
+          PaymentDateAt: undefined,
+        });
+      } catch (err) {
+        console.error(err);
+        alert("Error: failed to create debt record");
+      }
+
+      return;
+    }
+
+    const confirm = window.confirm("Confirm sales?");
+    if (!confirm) {
+      setmakesales({
+        Total_pc_pkg_litre: 0,
+        ProductId: 0,
+        Expecte_profit: 0,
+        Net_profit: 0,
+        Discount_percentage: "0",
+        Percentage_deviation: 0,
+        Revenue: 0,
+        profit_deviation: 0,
+        Stock_status: "",
+        paymentstatus: "",
+      });
+      toast.success("Successfully terminated process");
+      return;
+    }
+
     try {
-      const response = await CreateDebtrecord(finalsentdebt);
+      const response = await makesalesrequest(nextSales);
       if (!response.data.success) {
         alert(response.data.message);
         return;
       }
 
-      toast.success("Debt record created successfully");
-
-      setdebtorInfo({
-        Debtor_name: "",
-        paidmoney: undefined,
-        location: "",
-        Phone_number: undefined,
-        PaymentDateAt: undefined,
+      setlastdata(response.data.data);
+      setmakesales({
+        Total_pc_pkg_litre: 0,
+        ProductId: 0,
+        Expecte_profit: 0,
+        Net_profit: 0,
+        Discount_percentage: "0",
+        Percentage_deviation: 0,
+        Revenue: 0,
+        profit_deviation: 0,
+        Stock_status: "",
+        paymentstatus: "",
       });
+
+      toast.success("Sales processed successfully");
+      setisreturned(true);
     } catch (err) {
       console.error(err);
-      alert("Error: failed to create debt record");
+      alert("Error: failed to submit sale");
     }
-
-    return;
-  }
-
-
-  const confirm = window.confirm("Confirm sales?");
-  if (!confirm) {
-    setmakesales({
-      Total_pc_pkg_litre: 0,
-      ProductId: 0,
-      Expecte_profit: 0,
-      Net_profit: 0,
-      Discount_percentage: "0",
-      Percentage_deviation: 0,
-      Revenue: 0,
-      profit_deviation: 0,
-      Stock_status: "",
-      paymentstatus: "",
-    });
-    toast.success("Successfully terminated process");
-    return;
-  }
-
-  try {
-    const response = await makesalesrequest(nextSales);
-    if (!response.data.success) {
-      alert(response.data.message);
-      return;
-    }
-
-    setlastdata(response.data.data);
-    setmakesales({
-      Total_pc_pkg_litre: 0,
-      ProductId: 0,
-      Expecte_profit: 0,
-      Net_profit: 0,
-      Discount_percentage: "0",
-      Percentage_deviation: 0,
-      Revenue: 0,
-      profit_deviation: 0,
-      Stock_status: "",
-      paymentstatus: "",
-    });
-
-    toast.success("Sales processed successfully");
-    setisreturned(true)
-
-  } catch (err) {
-    console.error(err);
-    alert("Error: failed to submit sale");
-  }
-};
+  };
 
   useEffect(() => {
     if (!salesResponseOne.ProductId) {
@@ -809,6 +817,36 @@ const{Expecte_profit, ... finalnextdebt} = {
       }));
     }
   }, [isWhole]);
+  const handleCustomerSelection = (selectedCustomerName: string) => {
+    console.log("Selected customer name:", selectedCustomerName);
+    console.log("Available customers:", customerdetails);
+    
+    // Find the selected customer from the customerdetails array
+    const selectedCustomer = customerdetails.find(
+      (customer) => customer.customer_name === selectedCustomerName
+    );
+    
+    console.log("Found customer:", selectedCustomer);
+    
+    if (selectedCustomer) {
+      // Update debtorInfo with the selected customer's details
+      const updatedInfo = {
+        Debtor_name: selectedCustomer.customer_name,
+        Phone_number: selectedCustomer.phone_number ? Number(selectedCustomer.phone_number) : undefined,
+        location: selectedCustomer.Location, // Use the correct field name from CustomerInfo interface
+      };
+      
+      setdebtorInfo((prev) => ({
+        ...prev,
+        ...updatedInfo,
+      }));
+      
+      console.log("Updated debtorInfo with:", updatedInfo);
+    } else {
+      console.log("Customer not found!");
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -817,14 +855,22 @@ const{Expecte_profit, ... finalnextdebt} = {
       if (value === "partialpaid" || value === "debt") {
         setdbformOpen(true);
       }
+      if(iscustomerexist){
+        setdebtorInfo((prev)=> ({...prev}))
+      }
       setmakesales((prev) => ({ ...prev, ["paymentstatus"]: value }));
+    } else if (name === "Debtor_name" && iscustomerexist) {
+      // Handle customer selection specifically when customer exists
+      handleCustomerSelection(value);
     } else {
+      // Handle all other fields including Debtor_name when customer doesn't exist
       setdisplayInfo((prev) => ({ ...prev, [name]: value }));
+      setdebtorInfo((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
     }
-    setdebtorInfo((prev)=> ({
-      ...prev, [name]:value
-    }))
-    console.log(debtorInfo)
+    console.log(debtorInfo);
   };
   useEffect(() => {
     if (wholesales && wholesales.length > 0) {
@@ -1090,123 +1136,166 @@ const{Expecte_profit, ... finalnextdebt} = {
             </div>
           )}
         </div>
-        {isdbfromOpen &&
-        <div className="debt-frm-cfrm-container">
-              <div className="icon-conyainer">
-        <div className="icon" onClick={handleDbfrmclose}>
-          <RiCloseFill color="white" size={30} fontWeight={500} />
-        </div>
-      </div>
-          <div className="frm-container">
-            <div className="form-title">
-            <span>Fill Debtor information</span>
+        {isdbfromOpen && (
+          <div className="debt-frm-cfrm-container">
+            <div className="icon-conyainer">
+              <div className="icon" onClick={handleDbfrmclose}>
+                <RiCloseFill color="white" size={30} fontWeight={500} />
+              </div>
             </div>
-            <form className="main-form-content" >
-              {iscustomerexist === true ?(
-                <>
-                 <div className="input-value">
-                <label htmlFor="dbrName">Debtor Name</label>
-                 <select>
-                  {
-                     customerdetails && customerdetails.length > 0 ? (
-                      customerdetails.map((item)=>(
-                        <option key={item.customer_name}>{item.customer_name}</option>
-                      ))
-
-                    ):(
-                      <option value="">No Any details</option>
-                    )
-                  }
-                 </select>
+            <div className="frm-container">
+              <div className="form-title">
+                <span>Fill Debtor information</span>
               </div>
-              <div className="input-value">
-                <label htmlFor="Phnumber">Phone_Number</label>
-                <input
-                  type="text"
-                  name="Phone_number"
-                  id="Phnumber"
-                  value={debtorInfo?.Phone_number}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              </>
-              ):(
-                <>
-                 <div className="input-value">
-                <label htmlFor="dbrName">Debtor Name</label>
-                <input
-                  type="text"
-                  name="Debtor_name"
-                  id="dbrName"
-                  value={debtorInfo?.Debtor_name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-                <div className="input-value">
-                <label htmlFor="Phnumber">Phone_Number</label>
-                <input
-                  type="text"
-                  name="Phone_number"
-                  id="Phnumber"
-                  value={debtorInfo?.Phone_number}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              </>
-              )
-              }    
-              {makesales?.paymentstatus === 'partialpaid' &&(
-           
-              <div className="input-value">
-                <label htmlFor="PM">Paid money</label>
-                <input
-                  type="text"
-                  name="paidmoney"
-                  id="PM"
-                  value={debtorInfo?.paidmoney}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              )
-              }
-              <div className="two-column-inputs">
-              <div className="input-value">
-              <label htmlFor="pydate">Payment date</label>
-              <input
-                type="date"
-                name="PaymentDateAt"
-                id="pydate"
-                value={debtorInfo?.PaymentDateAt ? new Date(debtorInfo.PaymentDateAt).toISOString().split('T')[0] :"" }
-                onChange={handleChange}
-                required
-              />
+              <form className="main-form-content">
+                {iscustomerexist === true? (
+                  <>
+                    <div className="input-value">
+                      <label htmlFor="dbrName">Debtor Name</label>
+                      <select
+                        name="Debtor_name"
+                        value={debtorInfo?.Debtor_name || ""}
+                        onChange={handleChange}
+                      >
+                        <option value="">Select customer_name</option>
+                        {customerdetails && customerdetails.length > 0 ? (
+                          customerdetails.map((item) => (
+                            <option
+                              key={item.Cid}
+                              value={item.customer_name}
+                            >
+                              {item.customer_name}
+                            </option>
+                          ))
+                        ) : (
+                          <option value="">No Any details</option>
+                        )}
+                      </select>
+                    </div>
+                    <div className="input-value">
+                      <label htmlFor="Phnumber">Phone_Number</label>
+                      <input
+                        type="text"
+                        name="Phone_number"
+                        id="Phnumber"
+                        value={debtorInfo?.Phone_number}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div className="two-column-inputs">
+                  <div className="input-value">
+                    <label htmlFor="pydate">Payment date</label>
+                    <input
+                      type="date"
+                      name="PaymentDateAt"
+                      id="pydate"
+                      value={
+                        debtorInfo?.PaymentDateAt
+                          ? new Date(debtorInfo.PaymentDateAt)
+                              .toISOString()
+                              .split("T")[0]
+                          : ""
+                      }
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="input-value">
+                    <label htmlFor="loca">location(Optional)</label>
+                    <input
+                      type="text"
+                      name="location"
+                      id="loca"
+                      value={debtorInfo?.location}
+                      onChange={handleChange}
+                      placeholder="Moshi,mwanga, kiruru"
+                    />
+                  </div>
+                </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="input-value">
+                      <label htmlFor="dbrName">Debtor Name</label>
+                      <input
+                        type="text"
+                        name="Debtor_name"
+                        id="dbrName"
+                        value={debtorInfo?.Debtor_name}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div className="input-value">
+                      <label htmlFor="Phnumber">Phone_Number</label>
+                      <input
+                        type="text"
+                        name="Phone_number"
+                        id="Phnumber"
+                        value={debtorInfo?.Phone_number}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                     <div className="two-column-inputs">
+                  <div className="input-value">
+                    <label htmlFor="pydate">Payment date</label>
+                    <input
+                      type="date"
+                      name="PaymentDateAt"
+                      id="pydate"
+                      value={
+                        debtorInfo?.PaymentDateAt
+                          ? new Date(debtorInfo.PaymentDateAt)
+                              .toISOString()
+                              .split("T")[0]
+                          : ""
+                      }
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="input-value">
+                    <label htmlFor="loca">location(Optional)</label>
+                    <input
+                      type="text"
+                      name="location"
+                      id="loca"
+                      value={debtorInfo?.location}
+                      onChange={handleChange}
+                      placeholder="Moshi,mwanga, kiruru"
+                    />
+                  </div>
+                </div>
+                  </>
+                )}
+                {makesales?.paymentstatus === "partialpaid" && (
+                  <div className="input-value">
+                    <label htmlFor="PM">Paid money</label>
+                    <input
+                      type="text"
+                      name="paidmoney"
+                      id="PM"
+                      value={debtorInfo?.paidmoney}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                )}
+               
+                <div className="btn-container">
+                  <Submitbtn
+                    buttonName="Sumbit"
+                    type="submit"
+                    onclick={handlemakesales}
+                  />
+                </div>
+              </form>
             </div>
-            <div className="input-value">
-              <label htmlFor="loca">location(Optional)</label>
-              <input
-                type="text"
-                name="location"
-                id="loca"
-                value={debtorInfo?.location}
-                onChange={handleChange}
-                placeholder="Moshi,mwanga, kiruru"
-              />
-            </div>
-            </div>
-              <div className="btn-container">
-                <Submitbtn buttonName="Sumbit" type="submit" onclick={handlemakesales}/>
-              </div>
-            </form>
           </div>
-        
-        </div>
-}
+        )}
       </div>
-        
     </div>
   );
 };

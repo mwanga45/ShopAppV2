@@ -303,5 +303,6 @@ export interface CardDiscriptionInterface {
 export interface CustomerInfo {
   Location?:string,
   phone_number?:string,
-  customer_name?:string
+  customer_name?:string,
+  Cid?:string
 }
