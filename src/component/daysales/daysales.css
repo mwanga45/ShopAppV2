@@ -733,3 +733,7 @@
   align-items: center;
 
 }
+.active-filter{
+  background-color: #007bff;
+  color: white;
+}

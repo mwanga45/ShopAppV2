@@ -49,6 +49,7 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
   const [error] = useState<string | null>(null);
   const [category, setcategory] = useState<string>("All");
   const [isswicheropen, setswicheropen] = useState<boolean>(false);
+  const [isCategorySelected, setIsCategorySelected] = useState(false);
  
 
 
@@ -68,7 +69,9 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
     const newcategory = e.target.value;
     setcategory(newcategory);
     localStorage.setItem("category", newcategory);
+    setIsCategorySelected(true)
     setswicheropen(!isswicheropen);
+
   };
   if (loading) {
     return <div className="daylist-container">Loading sales data...</div>;
@@ -88,16 +91,19 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
         Filter by
       </span>
       <div className="filter-list-container">
-        <div className="filterby" onClick={() => setcategory("All")}>
-          <p>All</p>
-        </div>
-        <div className="filterby" onClick={handleopen}>
+      <div
+  className={`filterby ${category === "All" ? "active-filter" : ""}`}
+  onClick={() => setcategory("All")}
+>
+  <p>All</p>
+</div>
+        <div className={`filterby ${isswicheropen || isCategorySelected ? "active-filter" : ""}`} onClick={handleopen}>
           <p>Category</p>
         </div>
-        <div className="filterby" onClick={() => setcategory("pending")}>
+        <div className={`filterby ${category === 'pending'? 'active-filter' :""}`} onClick={() => setcategory("pending")}>
           <p>Pending..</p>
         </div>
-        <div className="filterby" onClick={() => setcategory("debt")}>
+        <div className={`filterby ${category === 'debt' ? 'active-filter': ''}`} onClick={() => setcategory("debt")}>
           <p>Veiw debt</p>
         </div>
 
