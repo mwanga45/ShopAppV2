@@ -6,13 +6,17 @@ import { AdminsalesAnaysis } from "../component/daysales/salesAnalysis";
 import { SalesRecForm } from "../component/Form-comp/Form";
 import { useEffect, useState } from "react";
 import { fetchProductsales, fetchNormalsellrecord } from "./service/sales.api";
-import type { TrackRecord, DebtRecord, SalesRecord, SalesSummaryResponsesales } from "../type.interface";
+import type {
+  TrackRecord,
+  DebtRecord,
+  SalesRecord,
+  SalesSummaryResponsesales,
+} from "../type.interface";
 import type { wProduct } from "../type.interface";
 import type { rProduct } from "../type.interface";
 import { RiCloseFill } from "react-icons/ri";
 import { Debtinfo, DebtorInfo } from "../central-api/central-api";
 import { Debtcompo } from "../component/Debt/debtcomp";
-
 
 export default function SalesToday() {
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
@@ -22,24 +26,25 @@ export default function SalesToday() {
   const [retailsalesrecord, setretailsalesrecord] = useState<SalesRecord[]>([]);
   const [wholesaleprod, setWholesaleprod] = useState<wProduct[]>([]);
   const [retailsalesprod, setretailsaleprod] = useState<rProduct[]>([]);
-  const [Pendingpaymentsales, setPendingpaymentsales] = useState<SalesRecord[]>([]);
-  const [DebtInfo, setDebtInfo] = useState<DebtRecord[]>([])
+  const [Pendingpaymentsales, setPendingpaymentsales] = useState<SalesRecord[]>(
+    []
+  );
+  const [DebtInfo, setDebtInfo] = useState<DebtRecord[]>([]);
   const [showsalesAnalysis, setshowsalesAnalysis] = useState<boolean>(false);
-  const [custdebtlist, setcustdebtlist] = useState<DebtRecord[]>([])
-  const [productTrack, setproductTrack]  =  useState<TrackRecord[]>([])
+  const [custdebtlist, setcustdebtlist] = useState<DebtRecord[]>([]);
+  const [productTrack, setproductTrack] = useState<TrackRecord[]>([]);
+  const [openDebtComp, setopenDebtComp] = useState<boolean>(false);
 
-  const handleDebtmoreifno = async (id:string) => {
-   try{
-    const response = await DebtorInfo(id);
-    setcustdebtlist(response.data.data.PersonDebt)
-    setproductTrack(response.data.data.findtrack)
-
-   }catch(error){
-    console.error()
-    alert('something went wrong')
-   }
-   
-
+  const handleDebtmoreifno = async (id: string) => {
+    try {
+      const response = await DebtorInfo(id);
+      setcustdebtlist(response.data.data.PersonDebt);
+      setproductTrack(response.data.data.findtrack);
+      setopenDebtComp(true);
+    } catch (error) {
+      console.error();
+      alert("something went wrong");
+    }
   };
   const handleOpenForm = () => {
     setIsFormOpen(true);
@@ -69,11 +74,10 @@ export default function SalesToday() {
     setshowsalesAnalysis(false);
   };
   useEffect(() => {
-    const handleDebtRec = async ()=>{
-      const response = await Debtinfo()
-      setDebtInfo(response.data.data)
-
-    }
+    const handleDebtRec = async () => {
+      const response = await Debtinfo();
+      setDebtInfo(response.data.data);
+    };
     const handlereturnsalesdata = async () => {
       const response = await fetchNormalsellrecord();
       setAllrecord(response.data);
@@ -82,7 +86,7 @@ export default function SalesToday() {
       setretailsalesrecord(response.data.data.Normalsalesretailreturn);
       setPendingpaymentsales(response.data.data.AllcombinedPending);
     };
-    handleDebtRec()
+    handleDebtRec();
     handleproductInfo();
     handlereturnsalesdata();
   }, []);
@@ -139,7 +143,6 @@ export default function SalesToday() {
           Pendingsalesreturn={Pendingpaymentsales}
           AllDebtRecord={DebtInfo}
           Onclick={handleDebtmoreifno}
-          
         />
       </div>
       {isFormOpen && (
@@ -153,17 +156,26 @@ export default function SalesToday() {
         <div className="AdminsalesAnalysis-container">
           <div className="AdminsalesAnalysis-container-arrange">
             <div className="AdminsalesAnalysis-container-arrange-close-btn">
-            <div className="icon" onClick={handleClose}>
-              <RiCloseFill color="white" size={30} fontWeight={500} />
-            </div>
+              <div className="icon" onClick={handleClose}>
+                <RiCloseFill color="white" size={30} fontWeight={500} />
+              </div>
             </div>
             <AdminsalesAnaysis />
           </div>
         </div>
       )}
-      <div>
-        <Debtcompo PersonDebt={custdebtlist} findtrack={productTrack}/>
-      </div>
+      {openDebtComp && (
+        <div className="AdminsalesAnalysis-container">
+          <div className="AdminsalesAnalysis-container-arrange">
+            <div className="AdminsalesAnalysis-container-arrange-close-btn">
+              <div className="icon" onClick={handleClose}>
+                <RiCloseFill color="white" size={30} fontWeight={500} />
+              </div>
+            </div>
+            <Debtcompo PersonDebt={custdebtlist} findtrack={productTrack} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
