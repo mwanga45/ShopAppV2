@@ -10,6 +10,12 @@ import { FcDebt } from "react-icons/fc";
 import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { useEffect, useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
+import { CiLocationOn } from "react-icons/ci";
+import { FcProcess } from "react-icons/fc";
+import { FaExclamationTriangle } from "react-icons/fa";
+import { FaHourglassHalf } from "react-icons/fa";
+import { DebtorInfo } from "../../central-api/central-api";
+import { FiUser } from "react-icons/fi";
 export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt }) => {
   const [selectedDebt, setSelectedDebt] = useState<DebtRecord | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
@@ -36,60 +42,65 @@ export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt }) => {
   };
 
   return (
-    <div className="Dbt-compo-list-main-container">
-      <div className="Dbt-compo-list-title-container">
-        <span className="Dbt-compo-list-title1">Daily Debtor Summary List</span>
-        <span className="Dbt-compo-list-title2">
-          Tracks today’s pending debts and unpaid balances from active sales.
-        </span>
-      </div>
-      <div className="Dbt-compo-list-selection">
-        <span>All Debts</span>
-        <span>Paid</span>
-        <span>Partalpaid</span>
-      </div>
-      <div className="Dbt-compo-list-container">
-        {PersonDebt && PersonDebt.length > 0 ? (
-          PersonDebt.map((item) => (
-            <div key={item.debt_id} onClick={() => handleOpenDetail(item)}>
-              <CardDiscription
-                id={item.debt_id}
-                name={item.debtor_name}
-                date={item.deadlinedate}
-                amount={Number(item.total_revenue).toLocaleString()}
-                title="Remaining"
-              />
-            </div>
-          ))
-        ) : (
-          <span>No debt available</span>
-        )}
-      </div>
-      {isDetailOpen && selectedDebt && (
-        <div className="debt-overlay">
-          <div className="debt-modal">
-            <div className="AdminsalesAnalysis-container-arrange-close-btn">
-              <div className="icon" onClick={handleCloseDetail}>
-                <RiCloseFill color="black" size={30} fontWeight={500} />
+    <div className="Debtcompo-main-comp-comb">
+      <div className="Dbt-compo-list-main-container">
+        <div className="Dbt-compo-list-title-container">
+          <span className="Dbt-compo-list-title1">
+            Daily Debtor Summary List
+          </span>
+          <span className="Dbt-compo-list-title2">
+            Tracks today’s pending debts and unpaid balances from active sales.
+          </span>
+        </div>
+        <div className="Dbt-compo-list-selection">
+          <span>All Debts</span>
+          <span>Paid</span>
+          <span>Partalpaid</span>
+        </div>
+        <div className="Dbt-compo-list-container">
+          {PersonDebt && PersonDebt.length > 0 ? (
+            PersonDebt.map((item) => (
+              <div key={item.debt_id} onClick={() => handleOpenDetail(item)}>
+                <CardDiscription
+                  id={item.debt_id}
+                  name={item.debtor_name}
+                  date={item.deadlinedate}
+                  amount={Number(item.total_revenue).toLocaleString()}
+                  title="Remaining"
+                />
+              </div>
+            ))
+          ) : (
+            <span>No debt available</span>
+          )}
+        </div>
+        {isDetailOpen && selectedDebt && (
+          <div className="debt-overlay">
+            <div className="debt-modal">
+              <div className="AdminsalesAnalysis-container-arrange-close-btn">
+                <div className="icon" onClick={handleCloseDetail}>
+                  <RiCloseFill color="black" size={30} fontWeight={500} />
+                </div>
+              </div>
+              <div className="dt-sispay-conatiner">
+                <Displayboard
+                  debt_id={selectedDebt.debt_id}
+                  debtor_name={selectedDebt.debtor_name}
+                  deadlinedate={selectedDebt.deadlinedate}
+                  phone_number={selectedDebt.phone_number}
+                  latest_paid_amount={selectedDebt.latest_paid_amount}
+                  createdat={selectedDebt.createdat}
+                  total_revenue={selectedDebt.total_revenue}
+                  total_quantity={selectedDebt.total_quantity}
+                  product_name={selectedDebt.product_name}
+                  tracks={selectedDebt.tracks}
+                />
               </div>
             </div>
-            <div className="dt-sispay-conatiner">
-              <Displayboard
-                debt_id={selectedDebt.debt_id}
-                debtor_name={selectedDebt.debtor_name}
-                deadlinedate={selectedDebt.deadlinedate}
-                phone_number={selectedDebt.phone_number}
-                latest_paid_amount={selectedDebt.latest_paid_amount}
-                createdat={selectedDebt.createdat}
-                total_revenue={selectedDebt.total_revenue}
-                total_quantity={selectedDebt.total_quantity}
-                product_name={selectedDebt.product_name}
-                tracks={selectedDebt.tracks}
-              />
-            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
+      <DebtorOtherinfo />
     </div>
   );
 };
@@ -272,6 +283,52 @@ export const DebtorOtherinfo = () => {
     <div className="DebtorOtherinf-main-container">
       <div>
         <span className="Dbt-compo-list-title1">Debt record overall</span>
+      </div>
+      <div>
+        <div>
+          <div>
+            <span><FiUser /></span>
+            <div>
+              <span>name</span>
+              <span>Isak moshi</span>
+            </div>
+          </div>
+          <div>
+            <span><CiLocationOn/></span>
+            <div>
+              <span>location</span>
+              <span>Moshi kilimanjaro</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span><FcProcess/></span>
+          <div>
+            <span>Debt Number</span>
+            <span>5</span>
+          </div>
+        </div>
+        <div>
+          <span><FaExclamationTriangle color="yellow"/></span>
+          <div>
+            <span>Paid out of Date </span>
+            <span>2</span>
+          </div>
+        </div>
+        <div>
+          <span><FaHourglassHalf/></span>
+          <div>
+            <span>On ongoing debt</span>
+            <span>5</span>
+          </div>
+        </div>
+        <div>
+          <span></span>
+          <div>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -21,16 +21,30 @@
   box-shadow: none;
 }
 
-
+.Debtcompo-main-comp-comb{
+    display: flex;
+    width: 100%;
+    height: auto;
+    justify-content: space-evenly;
+    border: 1px solid red;
+    padding: 10px;
+}
 .DebtorOtherinf-main-container{
     display: flex;
     flex-direction: column;
     row-gap: 5px;
     max-width: 700px;
+    min-width: 600px;
     max-height:600px ;
     padding: 10px;
     border: 2px solid red;
 
+}
+.DebtorOtherinf-main-container div:first-child{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .Dbt-compo-list-main-container{
     max-width: 500px;
