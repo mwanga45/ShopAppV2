@@ -47,23 +47,6 @@ export const Debtcompo: React.FC<DebtResponse> = ({
     setSelectedDebt(null);
   };
 
-  useEffect(()=>{
-       const handleOpenDetail = (record: any) => {
-    setSelectedDebt({
-      debt_id: record.debt_id,
-      debtor_name: record.debtor_name,
-      deadlinedate: record.deadlinedate,
-      phone_number: record.phone_number,
-      latest_paid_amount: record.latest_paid_amount,
-      createdat: record.createdat,
-      total_revenue: record.total_revenue,
-      total_quantity: record.total_quantity,
-      product_name: record.product_name,
-      tracks: record.tracks || [],
-    });
-    setIsDetailOpen(false);
-  };
-  }, [])
   return (
     <div className="Debtcompo-main-comp-comb">
       <div className="Dbt-compo-list-main-container">
@@ -135,8 +118,10 @@ export const Debtcompo: React.FC<DebtResponse> = ({
           Phone_number={PersonOverallDebtRec?.Location?.Phone_number?? ""}
           Debtnumber={PersonOverallDebtRec?.Debtnumber ?? 0}
           countUnpaid={PersonOverallDebtRec?.countUnpaidMoney ?? 0}
-          CountPaidMoney={PersonOverallDebtRec?.countpaid ?? 0}
+          CountPaidMoney={PersonOverallDebtRec?.CountPaidMoney ?? 0}
           total_revenue={PersonOverallDebtRec?.total_revenue ?? 0}
+          PaidOutDate={PersonOverallDebtRec?.PaidOutDate ?? 0}
+          countUnpaidMoney={PersonOverallDebtRec?.countUnpaidMoney}
 
         />
       
@@ -322,11 +307,13 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
 export const DebtorOtherinfo: React.FC<DebtorOtherinfoProps> = ({
   Location,
   CountPaidMoney,
+  countUnpaidMoney,
   countUnpaid,
   total_revenue,
   Debtnumber,
   Debtor_name,
   Phone_number,
+  PaidOutDate
 }) => {
   return (
     <div className="DebtorOtherinf-main-container">
@@ -369,7 +356,7 @@ export const DebtorOtherinfo: React.FC<DebtorOtherinfoProps> = ({
           </span>
           <div className="icon-name-container">
             <span>Paid out of Date </span>
-            <span>2</span>
+            <span>{PaidOutDate}</span>
           </div>
         </div>
         <div>
@@ -387,17 +374,17 @@ export const DebtorOtherinfo: React.FC<DebtorOtherinfoProps> = ({
           </span>
           <div className="icon-name-container">
             <span>Phone number</span>
-            <span>{Phone_number}</span>
+            <span>+{Phone_number}</span>
           </div>
         </div>
         <div>
           <div className="icon-name-container">
             <span>Unpaid total</span>
-            <span>{countUnpaid}</span>
+            <span>{Number(countUnpaidMoney).toLocaleString()}</span>
           </div>
           <div className="icon-name-container">
             <span>Already Paid</span>
-            <span>{CountPaidMoney}</span>
+            <span>{Number(CountPaidMoney).toLocaleString()}</span>
           </div>
         </div>
       </div>

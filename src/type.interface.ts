@@ -234,6 +234,7 @@ export interface Debtinfo{
     Location?:string
     Debtor_name?:string
     Phone_number?:string
+    PaidOutDate?:number
 
 }
 export  interface PersonOverallDebtRec {
@@ -244,11 +245,11 @@ export  interface PersonOverallDebtRec {
     countUnpaidMoney?: number,
     total_revenue?: number
     Location?:{
-     Location:string 
-     Phone_number:string
+     Location?:string 
+     Phone_number?:string
     }
-    customer_name:string
-    PaidOutDate:number
+    customer_name?:string
+    PaidOutDate?:number
 }
 export interface DebtResponse {
     findUserDebtInfo?: DebtRecord[];
