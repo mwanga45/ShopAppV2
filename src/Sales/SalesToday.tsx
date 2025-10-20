@@ -169,6 +169,7 @@ export default function SalesToday() {
       )}
       {openDebtComp && (
         <div className="AdminsalesAnalysis-container">
+          <span>User Debt Analysis</span>
           <div className="AdminsalesAnalysis-container-arrange">
             <div className="AdminsalesAnalysis-container-arrange-close-btn">
               <div className="icon" onClick={()=> setopenDebtComp(false)}>

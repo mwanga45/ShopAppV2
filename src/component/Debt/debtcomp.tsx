@@ -117,7 +117,7 @@ export const Debtcompo: React.FC<DebtResponse> = ({
           Location={PersonOverallDebtRec?.Location?.Location ?? ""}
           Phone_number={PersonOverallDebtRec?.Location?.Phone_number?? ""}
           Debtnumber={PersonOverallDebtRec?.Debtnumber ?? 0}
-          countUnpaid={PersonOverallDebtRec?.countUnpaidMoney ?? 0}
+          countUnpaid={PersonOverallDebtRec?.countUnpaid ?? 0}
           CountPaidMoney={PersonOverallDebtRec?.CountPaidMoney ?? 0}
           total_revenue={PersonOverallDebtRec?.total_revenue ?? 0}
           PaidOutDate={PersonOverallDebtRec?.PaidOutDate ?? 0}
@@ -365,7 +365,7 @@ export const DebtorOtherinfo: React.FC<DebtorOtherinfoProps> = ({
           </span>
           <div className="icon-name-container">
             <span>On ongoing debt</span>
-            <span>5</span>
+            <span>{countUnpaid}</span>
           </div>
         </div>
         <div>
@@ -380,11 +380,11 @@ export const DebtorOtherinfo: React.FC<DebtorOtherinfoProps> = ({
         <div>
           <div className="icon-name-container">
             <span>Unpaid total</span>
-            <span>{Number(countUnpaidMoney).toLocaleString()}</span>
+            <span>{Number(countUnpaidMoney).toLocaleString()}.Tsh</span>
           </div>
           <div className="icon-name-container">
             <span>Already Paid</span>
-            <span>{Number(CountPaidMoney).toLocaleString()}</span>
+            <span>{Number(CountPaidMoney).toLocaleString()}.Tsh</span>
           </div>
         </div>
       </div>
