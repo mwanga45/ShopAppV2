@@ -14,6 +14,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { FcProcess } from "react-icons/fc";
 import { FaExclamationTriangle } from "react-icons/fa";
 import { FaHourglassHalf } from "react-icons/fa";
+import { FaPhone } from "react-icons/fa6";
 import { DebtorInfo } from "../../central-api/central-api";
 import { FiUser } from "react-icons/fi";
 export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt }) => {
@@ -284,49 +285,49 @@ export const DebtorOtherinfo = () => {
       <div>
         <span className="Dbt-compo-list-title1">Debt record overall</span>
       </div>
-      <div>
-        <div>
+      <div className="DebtorOtherinf-main-info">
+        <div  className="DebtorOtherinf-main-detail-comp">
           <div>
-            <span><FiUser /></span>
-            <div>
-              <span>name</span>
+            <span><FiUser color="green" size={25} /></span>
+            <div className="icon-name-container">
+              <span>Name</span>
               <span>Isak moshi</span>
             </div>
           </div>
           <div>
-            <span><CiLocationOn/></span>
-            <div>
-              <span>location</span>
+            <span><CiLocationOn color="blue" size={25}/></span>
+            <div className="icon-name-container">
+              <span>Location</span>
               <span>Moshi kilimanjaro</span>
             </div>
           </div>
         </div>
         <div>
-          <span><FcProcess/></span>
-          <div>
+          <span><FcProcess color="red" size={25}/></span>
+          <div className="icon-name-container">
             <span>Debt Number</span>
             <span>5</span>
           </div>
         </div>
         <div>
-          <span><FaExclamationTriangle color="yellow"/></span>
-          <div>
+          <span><FaExclamationTriangle color="#FCB045" size={25}/></span>
+          <div className="icon-name-container">
             <span>Paid out of Date </span>
             <span>2</span>
           </div>
         </div>
         <div>
-          <span><FaHourglassHalf/></span>
-          <div>
+          <span><FaHourglassHalf color="#FCB045" size={25}/></span>
+          <div className="icon-name-container">
             <span>On ongoing debt</span>
             <span>5</span>
           </div>
         </div>
         <div>
-          <span></span>
-          <div>
-            <span></span>
-            <span></span>
+          <span><FaPhone size={25} /></span>
+          <div className="icon-name-container">
+            <span>Phone number</span>
+            <span>0744010257</span>
           </div>
         </div>
       </div>

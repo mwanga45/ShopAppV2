@@ -26,8 +26,8 @@
     width: 100%;
     height: auto;
     justify-content: space-evenly;
-    border: 1px solid red;
     padding: 10px;
+    
 }
 .DebtorOtherinf-main-container{
     display: flex;
@@ -37,7 +37,9 @@
     min-width: 600px;
     max-height:600px ;
     padding: 10px;
-    border: 2px solid red;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    background-color: #f9f9f9;
+    border-radius: 22px;
 
 }
 .DebtorOtherinf-main-container div:first-child{
@@ -45,6 +47,48 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.DebtorOtherinf-main-info{
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    row-gap: 42px;
+
+}
+.DebtorOtherinf-main-info div{
+ display: flex;
+column-gap: 15px; 
+}
+.DebtorOtherinf-main-detail-comp{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+.DebtorOtherinf-main-detail-comp div{
+    display: flex;
+    column-gap: 5px;
+}
+
+.icon-name-container{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+.icon-name-container span:first-child{
+    font-size: 17px;
+    font-weight: 600;
+    color: #555;
+    
+}
+.icon-name-container span:last-child{
+    font-size: 22px;
+    color: #282828;
+    font-weight: 700;
+    margin-left: 22px;
 }
 .Dbt-compo-list-main-container{
     max-width: 500px;
