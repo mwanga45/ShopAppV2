@@ -111,20 +111,18 @@ export const Debtcompo: React.FC<DebtResponse> = ({
           </div>
         )}
       </div>
-      
-        <DebtorOtherinfo
-          Debtor_name={PersonOverallDebtRec?.customer_name?? ""}
-          Location={PersonOverallDebtRec?.Location?.Location ?? ""}
-          Phone_number={PersonOverallDebtRec?.Location?.Phone_number?? ""}
-          Debtnumber={PersonOverallDebtRec?.Debtnumber ?? 0}
-          countUnpaid={PersonOverallDebtRec?.countUnpaid ?? 0}
-          CountPaidMoney={PersonOverallDebtRec?.CountPaidMoney ?? 0}
-          total_revenue={PersonOverallDebtRec?.total_revenue ?? 0}
-          PaidOutDate={PersonOverallDebtRec?.PaidOutDate ?? 0}
-          countUnpaidMoney={PersonOverallDebtRec?.countUnpaidMoney}
 
-        />
-      
+      <DebtorOtherinfo
+        Debtor_name={PersonOverallDebtRec?.customer_name ?? ""}
+        Location={PersonOverallDebtRec?.Location?.Location ?? ""}
+        Phone_number={PersonOverallDebtRec?.Location?.Phone_number ?? ""}
+        Debtnumber={PersonOverallDebtRec?.Debtnumber ?? 0}
+        countUnpaid={PersonOverallDebtRec?.countUnpaid ?? 0}
+        CountPaidMoney={PersonOverallDebtRec?.CountPaidMoney ?? 0}
+        total_revenue={PersonOverallDebtRec?.total_revenue ?? 0}
+        PaidOutDate={PersonOverallDebtRec?.PaidOutDate ?? 0}
+        countUnpaidMoney={PersonOverallDebtRec?.countUnpaidMoney}
+      />
     </div>
   );
 };
@@ -172,6 +170,10 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
   const totalRevenueNum = Number(total_revenue ?? 0);
   const alreadyPaid = Number(latest_paid_amount ?? 0);
   const remain = Math.max(totalRevenueNum - alreadyPaid, 0);
+  const [smspayload, setsmspayload] = useState({
+    sms: "",
+    Phone_number: "",
+  });
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -205,7 +207,10 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
       });
     }, 1000);
   }, [deadlinedate]);
-
+  const handleOnchange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setsmspayload((prev) => ({ ...prev, [name]: value }));
+  };
   return (
     <div className="Displayboard-main-container" key={debt_id}>
       <div className="Displayboard-info-cont">
@@ -229,7 +234,7 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
                       <span>
                         {String(t.updated_at).split("T")[1]?.substring(0, 5)}
                       </span>
-                      <span>{Number(t.paidmoney).toLocaleString()}</span>
+                      <span>{Number(t.paidmoney).toLocaleString()}.Tsh</span>
                     </div>
                   ))
                 ) : (
@@ -300,6 +305,16 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
             <span>Deadline Date:{String(deadlinedate).split("T")[0]}</span>
           </div>
         </div>
+        {
+          <div>
+            <textarea
+              name="sms"
+              placeholder="Type message here"
+              value={smspayload.sms}
+              onChange={handleOnchange}
+            ></textarea>
+          </div>
+        }
       </div>
     </div>
   );
@@ -313,7 +328,7 @@ export const DebtorOtherinfo: React.FC<DebtorOtherinfoProps> = ({
   Debtnumber,
   Debtor_name,
   Phone_number,
-  PaidOutDate
+  PaidOutDate,
 }) => {
   return (
     <div className="DebtorOtherinf-main-container">
