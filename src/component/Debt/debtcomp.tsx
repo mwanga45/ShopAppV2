@@ -58,7 +58,7 @@ export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt }) => {
         <div className="Dbt-compo-list-selection">
           <span>All Debts</span>
           <span>Paid</span>
-          <span>Partalpaid</span>
+          <span>debts</span>
         </div>
         <div className="Dbt-compo-list-container">
           {PersonDebt && PersonDebt.length > 0 ? (
