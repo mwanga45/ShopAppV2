@@ -5,7 +5,7 @@ import type {
   DebtRecord,
   DebtResponse,
   // TrackRecord,\
-  DebtorOtherinfoProps
+  DebtorOtherinfoProps,
 } from "../../type.interface";
 import { FcDebt } from "react-icons/fc";
 import { LiaBusinessTimeSolid } from "react-icons/lia";
@@ -16,11 +16,13 @@ import { FcProcess } from "react-icons/fc";
 import { FaExclamationTriangle } from "react-icons/fa";
 import { FaHourglassHalf } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
-import { FaCheckCircle } from "react-icons/fa"; 
-
+import { FaCheckCircle } from "react-icons/fa";
 
 import { FiUser } from "react-icons/fi";
-export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt, PersonOverallDebtRec }) => {
+export const Debtcompo: React.FC<DebtResponse> = ({
+  PersonDebt,
+  PersonOverallDebtRec,
+}) => {
   const [selectedDebt, setSelectedDebt] = useState<DebtRecord | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
 
@@ -45,6 +47,23 @@ export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt, PersonOverallDeb
     setSelectedDebt(null);
   };
 
+  useEffect(()=>{
+       const handleOpenDetail = (record: any) => {
+    setSelectedDebt({
+      debt_id: record.debt_id,
+      debtor_name: record.debtor_name,
+      deadlinedate: record.deadlinedate,
+      phone_number: record.phone_number,
+      latest_paid_amount: record.latest_paid_amount,
+      createdat: record.createdat,
+      total_revenue: record.total_revenue,
+      total_quantity: record.total_quantity,
+      product_name: record.product_name,
+      tracks: record.tracks || [],
+    });
+    setIsDetailOpen(false);
+  };
+  }, [])
   return (
     <div className="Debtcompo-main-comp-comb">
       <div className="Dbt-compo-list-main-container">
@@ -71,7 +90,11 @@ export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt, PersonOverallDeb
                   date={item.deadlinedate}
                   amount={Number(item.total_revenue).toLocaleString()}
                   title="Remaining"
-                  Icon={item.payment_status === 'paid'?FaCheckCircle : FaHourglassHalf }
+                  Icon={
+                    item.payment_status === "paid"
+                      ? FaCheckCircle
+                      : FaHourglassHalf
+                  }
                 />
               </div>
             ))
@@ -105,7 +128,18 @@ export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt, PersonOverallDeb
           </div>
         )}
       </div>
-      <DebtorOtherinfo Debtor_name={selectedDebt?.debtor_name ?? ''} Location={selectedDebt?.payment_status ?? ''} Phone_number={selectedDebt?.phone_number ?? ""} Debtnumber={PersonOverallDebtRec?.Debtnumber ?? 0} countUnpaid={PersonOverallDebtRec?.countUnpaidMoney ?? 0} CountPaidMoney={PersonOverallDebtRec?.countpaid ?? 0} total_revenue={PersonOverallDebtRec?.total_revenue ?? 0} />
+      
+        <DebtorOtherinfo
+          Debtor_name={PersonOverallDebtRec?.customer_name?? ""}
+          Location={PersonOverallDebtRec?.Location?.Location ?? ""}
+          Phone_number={PersonOverallDebtRec?.Location?.Phone_number?? ""}
+          Debtnumber={PersonOverallDebtRec?.Debtnumber ?? 0}
+          countUnpaid={PersonOverallDebtRec?.countUnpaidMoney ?? 0}
+          CountPaidMoney={PersonOverallDebtRec?.countpaid ?? 0}
+          total_revenue={PersonOverallDebtRec?.total_revenue ?? 0}
+
+        />
+      
     </div>
   );
 };
@@ -115,8 +149,7 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
   amount,
   title,
   id,
-  Icon:Icon
-
+  Icon: Icon,
 }) => {
   return (
     <div className="crd-dsc-main-cont">
@@ -132,7 +165,7 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
         </div>
         <div className="crd-dcs-date-container">
           <span>{String(date).split("T")[0]}</span>
-          <span>{Icon && <Icon/>}</span>
+          <span>{Icon && <Icon />}</span>
         </div>
       </div>
     </div>
@@ -286,7 +319,15 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
     </div>
   );
 };
-export const DebtorOtherinfo:React.FC<DebtorOtherinfoProps> = ({Location, CountPaidMoney, countUnpaid, total_revenue,Debtnumber, Debtor_name,Phone_number}) => {
+export const DebtorOtherinfo: React.FC<DebtorOtherinfoProps> = ({
+  Location,
+  CountPaidMoney,
+  countUnpaid,
+  total_revenue,
+  Debtnumber,
+  Debtor_name,
+  Phone_number,
+}) => {
   return (
     <div className="DebtorOtherinf-main-container">
       <div>
@@ -350,11 +391,11 @@ export const DebtorOtherinfo:React.FC<DebtorOtherinfoProps> = ({Location, CountP
           </div>
         </div>
         <div>
-            <div className="icon-name-container">
+          <div className="icon-name-container">
             <span>Unpaid total</span>
             <span>{countUnpaid}</span>
           </div>
-             <div className="icon-name-container">
+          <div className="icon-name-container">
             <span>Already Paid</span>
             <span>{CountPaidMoney}</span>
           </div>
