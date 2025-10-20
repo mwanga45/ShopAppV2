@@ -1,3 +1,5 @@
+import type React from "react";
+
 export interface Product {
   id?: number;
   product_name?: string;
@@ -299,6 +301,7 @@ export interface CardDiscriptionInterface {
   amount?:string;
   title?:string;
   id?:any
+  Icon?:React.ElementType
 }
 export interface CustomerInfo {
   Location?:string,

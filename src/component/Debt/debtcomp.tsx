@@ -16,6 +16,8 @@ import { FaExclamationTriangle } from "react-icons/fa";
 import { FaHourglassHalf } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
 import { DebtorInfo } from "../../central-api/central-api";
+import { FaCheckCircle } from "react-icons/fa"; 
+import { AiOutlineCheckCircle } from "react-icons/ai"; 
 import { FiUser } from "react-icons/fi";
 export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt }) => {
   const [selectedDebt, setSelectedDebt] = useState<DebtRecord | null>(null);
@@ -68,6 +70,7 @@ export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt }) => {
                   date={item.deadlinedate}
                   amount={Number(item.total_revenue).toLocaleString()}
                   title="Remaining"
+                  Icon={item.payment_status === 'paid'?FaCheckCircle : FaHourglassHalf }
                 />
               </div>
             ))
@@ -111,6 +114,8 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
   amount,
   title,
   id,
+  Icon:Icon
+
 }) => {
   return (
     <div className="crd-dsc-main-cont">
@@ -126,6 +131,7 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
         </div>
         <div className="crd-dcs-date-container">
           <span>{String(date).split("T")[0]}</span>
+          <span>{Icon && <Icon/>}</span>
         </div>
       </div>
     </div>
