@@ -11,6 +11,7 @@ import type {
   DebtRecord,
   SalesRecord,
   SalesSummaryResponsesales,
+  PersonOverallDebtRec
 } from "../type.interface";
 import type { wProduct } from "../type.interface";
 import type { rProduct } from "../type.interface";
@@ -33,6 +34,7 @@ export default function SalesToday() {
   const [showsalesAnalysis, setshowsalesAnalysis] = useState<boolean>(false);
   const [custdebtlist, setcustdebtlist] = useState<DebtRecord[]>([]);
   const [productTrack, setproductTrack] = useState<TrackRecord[]>([]);
+  const [personDebtRec, setpersonDebtRec] = useState <PersonOverallDebtRec>()
   const [openDebtComp, setopenDebtComp] = useState<boolean>(false);
 
   const handleDebtmoreifno = async (id: string) => {
@@ -40,6 +42,7 @@ export default function SalesToday() {
       const response = await DebtorInfo(id);
       setcustdebtlist(response.data.data.PersonDebt);
       setproductTrack(response.data.data.findtrack);
+      setpersonDebtRec(response.data.data.PersonDebtinfo)
       setopenDebtComp(true);
     } catch (error) {
       console.error();
@@ -172,7 +175,7 @@ export default function SalesToday() {
                 <RiCloseFill color="black" size={30} fontWeight={500} />
               </div>
             </div>
-            <Debtcompo PersonDebt={custdebtlist} findtrack={productTrack} />
+            <Debtcompo PersonDebt={custdebtlist} findtrack={productTrack} PersonOverallDebtRec={personDebtRec} />
           </div>
         </div>
       )}

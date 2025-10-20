@@ -4,22 +4,23 @@ import type {
   CardDiscriptionInterface,
   DebtRecord,
   DebtResponse,
-  // TrackRecord,
+  // TrackRecord,\
+  DebtorOtherinfoProps
 } from "../../type.interface";
 import { FcDebt } from "react-icons/fc";
 import { LiaBusinessTimeSolid } from "react-icons/lia";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
 import { CiLocationOn } from "react-icons/ci";
 import { FcProcess } from "react-icons/fc";
 import { FaExclamationTriangle } from "react-icons/fa";
 import { FaHourglassHalf } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
-import { DebtorInfo } from "../../central-api/central-api";
 import { FaCheckCircle } from "react-icons/fa"; 
-import { AiOutlineCheckCircle } from "react-icons/ai"; 
+
+
 import { FiUser } from "react-icons/fi";
-export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt }) => {
+export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt, PersonOverallDebtRec }) => {
   const [selectedDebt, setSelectedDebt] = useState<DebtRecord | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
 
@@ -104,7 +105,7 @@ export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt }) => {
           </div>
         )}
       </div>
-      <DebtorOtherinfo />
+      <DebtorOtherinfo Debtor_name={selectedDebt?.debtor_name ?? ''} Location={selectedDebt?.payment_status ?? ''} Phone_number={selectedDebt?.phone_number ?? ""} Debtnumber={PersonOverallDebtRec?.Debtnumber ?? 0} countUnpaid={PersonOverallDebtRec?.countUnpaidMoney ?? 0} CountPaidMoney={PersonOverallDebtRec?.countpaid ?? 0} total_revenue={PersonOverallDebtRec?.total_revenue ?? 0} />
     </div>
   );
 };
@@ -285,7 +286,7 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
     </div>
   );
 };
-export const DebtorOtherinfo = () => {
+export const DebtorOtherinfo:React.FC<DebtorOtherinfoProps> = ({Location, CountPaidMoney, countUnpaid, total_revenue,Debtnumber, Debtor_name,Phone_number}) => {
   return (
     <div className="DebtorOtherinf-main-container">
       <div>
@@ -299,7 +300,7 @@ export const DebtorOtherinfo = () => {
             </span>
             <div className="icon-name-container">
               <span>Name</span>
-              <span>Isak moshi</span>
+              <span>{Debtor_name}</span>
             </div>
           </div>
           <div>
@@ -308,7 +309,7 @@ export const DebtorOtherinfo = () => {
             </span>
             <div className="icon-name-container">
               <span>Location</span>
-              <span>Moshi kilimanjaro</span>
+              <span>{Location}</span>
             </div>
           </div>
         </div>
@@ -318,7 +319,7 @@ export const DebtorOtherinfo = () => {
           </span>
           <div className="icon-name-container">
             <span>Debt Number</span>
-            <span>5</span>
+            <span>{Debtnumber}</span>
           </div>
         </div>
         <div>
@@ -345,17 +346,17 @@ export const DebtorOtherinfo = () => {
           </span>
           <div className="icon-name-container">
             <span>Phone number</span>
-            <span>0744010257</span>
+            <span>{Phone_number}</span>
           </div>
         </div>
         <div>
             <div className="icon-name-container">
             <span>Unpaid total</span>
-            <span>230000</span>
+            <span>{countUnpaid}</span>
           </div>
              <div className="icon-name-container">
             <span>Already Paid</span>
-            <span>1,200,000</span>
+            <span>{CountPaidMoney}</span>
           </div>
         </div>
       </div>

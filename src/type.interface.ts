@@ -265,13 +265,25 @@ export interface Debtinfo{
 // }
 
 
+ export interface DebtorOtherinfoProps {
+    Debtnumber?: number,
+    countUnpaid?: number,
+    countpaid?: number,
+    CountPaidMoney?:number,
+    countUnpaidMoney?: number,
+    total_revenue?: number
+    Location?:string
+    Debtor_name?:string
+    Phone_number?:string
+
+}
 export  interface PersonOverallDebtRec {
     Debtnumber?: number,
     countUnpaid?: number,
     countpaid?: number,
     CountPaidMoney?:number,
     countUnpaidMoney?: number,
-    total_revenue?: 192000
+    total_revenue?: number
 }
 export interface DebtResponse {
     findUserDebtInfo?: DebtRecord[];
