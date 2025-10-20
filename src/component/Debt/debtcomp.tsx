@@ -286,16 +286,20 @@ export const DebtorOtherinfo = () => {
         <span className="Dbt-compo-list-title1">Debt record overall</span>
       </div>
       <div className="DebtorOtherinf-main-info">
-        <div  className="DebtorOtherinf-main-detail-comp">
+        <div className="DebtorOtherinf-main-detail-comp">
           <div>
-            <span><FiUser color="green" size={25} /></span>
+            <span>
+              <FiUser color="green" size={25} />
+            </span>
             <div className="icon-name-container">
               <span>Name</span>
               <span>Isak moshi</span>
             </div>
           </div>
           <div>
-            <span><CiLocationOn color="blue" size={25}/></span>
+            <span>
+              <CiLocationOn color="blue" size={25} />
+            </span>
             <div className="icon-name-container">
               <span>Location</span>
               <span>Moshi kilimanjaro</span>
@@ -303,31 +307,49 @@ export const DebtorOtherinfo = () => {
           </div>
         </div>
         <div>
-          <span><FcProcess color="red" size={25}/></span>
+          <span>
+            <FcProcess color="red" size={25} />
+          </span>
           <div className="icon-name-container">
             <span>Debt Number</span>
             <span>5</span>
           </div>
         </div>
         <div>
-          <span><FaExclamationTriangle color="#FCB045" size={25}/></span>
+          <span>
+            <FaExclamationTriangle color="#FCB045" size={25} />
+          </span>
           <div className="icon-name-container">
             <span>Paid out of Date </span>
             <span>2</span>
           </div>
         </div>
         <div>
-          <span><FaHourglassHalf color="#FCB045" size={25}/></span>
+          <span>
+            <FaHourglassHalf color="#FCB045" size={25} />
+          </span>
           <div className="icon-name-container">
             <span>On ongoing debt</span>
             <span>5</span>
           </div>
         </div>
         <div>
-          <span><FaPhone size={25} /></span>
+          <span>
+            <FaPhone size={25} />
+          </span>
           <div className="icon-name-container">
             <span>Phone number</span>
             <span>0744010257</span>
+          </div>
+        </div>
+        <div>
+            <div className="icon-name-container">
+            <span>Unpaid total</span>
+            <span>230000</span>
+          </div>
+             <div className="icon-name-container">
+            <span>Already Paid</span>
+            <span>1,200,000</span>
           </div>
         </div>
       </div>
