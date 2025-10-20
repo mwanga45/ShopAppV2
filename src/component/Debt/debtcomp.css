@@ -22,7 +22,16 @@
 }
 
 
+.DebtorOtherinf-main-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    max-width: 700px;
+    max-height:600px ;
+    padding: 10px;
+    border: 2px solid red;
 
+}
 .Dbt-compo-list-main-container{
     max-width: 500px;
     min-width: 300px;

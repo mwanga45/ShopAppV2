@@ -65,7 +65,6 @@ export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt }) => {
           <span>No debt available</span>
         )}
       </div>
-
       {isDetailOpen && selectedDebt && (
         <div className="debt-overlay">
           <div className="debt-modal">
@@ -105,12 +104,7 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
     <div className="crd-dsc-main-cont">
       <div className="crd-dsc-cont" key={id}>
         <div className="crd-dsc-icon-cont">
-          <FcDebt
-            size={25}
-            color="green"
-            fontSize={28}
-            fontWeight={700}
-          />
+          <FcDebt size={25} color="green" fontSize={28} fontWeight={700} />
         </div>
         <div className="crd-dsc-desc-info">
           <span className="crd-dcs-name">{name}</span>
@@ -269,6 +263,15 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
             <span>Deadline Date:{String(deadlinedate).split("T")[0]}</span>
           </div>
         </div>
+      </div>
+    </div>
+  );
+};
+export const DebtorOtherinfo = () => {
+  return (
+    <div className="DebtorOtherinf-main-container">
+      <div>
+        <span className="Dbt-compo-list-title1">Debt record overall</span>
       </div>
     </div>
   );
