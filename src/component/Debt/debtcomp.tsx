@@ -6,8 +6,8 @@ import type {
   DebtResponse,
   // TrackRecord,
 } from "../../type.interface";
+import { FcDebt } from "react-icons/fc";
 import { LiaBusinessTimeSolid } from "react-icons/lia";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
 export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt }) => {
@@ -36,7 +36,7 @@ export const Debtcompo: React.FC<DebtResponse> = ({ PersonDebt }) => {
   };
 
   return (
-    <div>
+    <div className="Dbt-compo-list-main-container">
       <div className="Dbt-compo-list-title-container">
         <span className="Dbt-compo-list-title1">Daily Debtor Summary List</span>
         <span className="Dbt-compo-list-title2">
@@ -105,7 +105,7 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
     <div className="crd-dsc-main-cont">
       <div className="crd-dsc-cont" key={id}>
         <div className="crd-dsc-icon-cont">
-          <AiOutlineLoading3Quarters
+          <FcDebt
             size={25}
             color="green"
             fontSize={28}

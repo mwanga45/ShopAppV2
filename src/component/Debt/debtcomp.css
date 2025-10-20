@@ -23,11 +23,22 @@
 
 
 
-
+.Dbt-compo-list-main-container{
+    max-width: 500px;
+    min-width: 300px;
+    height: auto;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 10px;
+}
+.Dbt-compo-list-title-container{
+    display: flex;
+    flex-direction: column;
+}
 .Dbt-compo-list-title1{
     font-size: 25px;
     font-weight: 700;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
     
 }
 .Dbt-compo-list-title2{
@@ -179,7 +190,7 @@
 }
 .series-list-payment-scroll{
     width: auto;
-    max-height: 400px;
+    max-height: 350px;
     overflow-y: auto;
     
 }
