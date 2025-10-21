@@ -15,7 +15,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { FcProcess } from "react-icons/fc";
 import { FaExclamationTriangle } from "react-icons/fa";
 import { FaHourglassHalf } from "react-icons/fa";
-import { FaPhone, FaS } from "react-icons/fa6";
+import { FaPhone} from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
 import {SmsPopup} from '../sms-compo/sms-popup'
 
@@ -168,10 +168,6 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
   product_name,
   tracks,
 }) => {
-    const [smspayload, setsmspayload] = useState({
-    sms: "",
-    Phone_number: "",
-  });
   const [opensms , setopensms] = useState<boolean>(false)
   const totalRevenueNum = Number(total_revenue ?? 0);
   const alreadyPaid = Number(latest_paid_amount ?? 0);
@@ -212,10 +208,7 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
       });
     }, 1000);
   }, [deadlinedate]);
-  const handleOnchange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setsmspayload((prev) => ({ ...prev, [name]: value }));
-  };
+
   return (
     <div className="Displayboard-main-container" key={debt_id}>
       <div className="Displayboard-info-cont">
@@ -313,7 +306,7 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
         {opensms &&
 
           <div className="sms-container">
-            <SmsPopup isOpen={handleOpensms}  onClose={handleOpensms} Debtor_name={debtor_name ?? ''}/>
+            <SmsPopup isOpen={handleOpensms}  onClose={handleOpensms} Debtor_name={debtor_name ?? ''} Phone_number={phone_number}/>
           </div>
 
         }
