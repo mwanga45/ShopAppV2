@@ -15,9 +15,9 @@ import { CiLocationOn } from "react-icons/ci";
 import { FcProcess } from "react-icons/fc";
 import { FaExclamationTriangle } from "react-icons/fa";
 import { FaHourglassHalf } from "react-icons/fa";
-import { FaPhone} from "react-icons/fa6";
+import { FaPhone } from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
-import {SmsPopup} from '../sms-compo/sms-popup'
+import { SmsPopup } from "../sms-compo/sms-popup";
 
 import { FiUser } from "react-icons/fi";
 export const Debtcompo: React.FC<DebtResponse> = ({
@@ -168,13 +168,13 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
   product_name,
   tracks,
 }) => {
-  const [opensms , setopensms] = useState<boolean>(false)
+  const [opensms, setopensms] = useState<boolean>(false);
   const totalRevenueNum = Number(total_revenue ?? 0);
   const alreadyPaid = Number(latest_paid_amount ?? 0);
   const remain = Math.max(totalRevenueNum - alreadyPaid, 0);
-  const handleOpensms = () =>{
-    setopensms(!opensms)
-  }
+  const handleOpensms = () => {
+    setopensms(!opensms);
+  };
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -275,7 +275,9 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
           <div className="Action-container">
             <button className="action-btn-debt">Update</button>
             <button className="action-btn-debt">Add</button>
-            <button className="action-btn-debt" onClick={handleOpensms}>Send Message</button>
+            <button className="action-btn-debt" onClick={handleOpensms}>
+              Send Message
+            </button>
           </div>
         </div>
         <div className="display-info-time">
@@ -303,13 +305,16 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
             <span>Deadline Date:{String(deadlinedate).split("T")[0]}</span>
           </div>
         </div>
-        {opensms &&
-
+        {opensms && (
           <div className="sms-container">
-            <SmsPopup isOpen={handleOpensms}  onClose={handleOpensms} Debtor_name={debtor_name ?? ''} Phone_number={phone_number ?? ''}/>
+            <SmsPopup
+              isOpen={handleOpensms}
+              onClose={handleOpensms}
+              Debtor_name={debtor_name ?? ""}
+              Phone_number={phone_number ?? ""}
+            />
           </div>
-
-        }
+        )}
       </div>
     </div>
   );
@@ -395,6 +400,10 @@ export const DebtorOtherinfo: React.FC<DebtorOtherinfoProps> = ({
           <div className="icon-name-container">
             <span>Already Paid</span>
             <span>{Number(CountPaidMoney).toLocaleString()}.Tsh</span>
+          </div>
+          <div className="icon-name-container">
+            <span>Debt</span>
+            <span>{Number(total_revenue).toLocaleString()}.Tsh</span>
           </div>
         </div>
       </div>

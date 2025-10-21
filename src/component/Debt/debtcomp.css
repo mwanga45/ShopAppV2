@@ -348,7 +348,16 @@ column-gap: 15px;
     display: grid;
     grid-template-rows: repeat(3, 3fr);
 }
-
+.bottom-info-debt{
+    width: 100%;
+    height:  auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px;
+    border: 2px solid red;
+    
+}
 .display-info-time div:first-child{
     display: flex;
     align-items: flex-start;
