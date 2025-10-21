@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import "./sms-popup.css";
 import { IoClose } from "react-icons/io5";
 import { SendsmsTo } from "../../central-api/central-api";
-import { darken } from "@mui/material/styles";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 interface SmsPopupProps {
   isOpen: () => void;
@@ -39,26 +38,29 @@ export const SmsPopup: React.FC<SmsPopupProps> = ({
     const handleNormalizeNumber = (Phone_number:string)=>{
     
         if(Phone_number.startsWith('0')){
-          Phone_number = '255'+Phone_number
+          Phone_number = '255'+Phone_number.slice(1)
         }
         if(Phone_number.startsWith('+')){
-            Phone_number = Phone_number.slice(1)
+            Phone_number = Phone_number.slice(0)
         }
         return Phone_number
     }
     const Ph_num = handleNormalizeNumber(smspayload.Phone_number)
     const smsPayload = {
-        phone_number:Ph_num,
+        phone_number:Number(Ph_num),
         sms:smspayload.sms
     }
+    console.log(smsPayload)
      try{
         const response =  await SendsmsTo(smsPayload)
         if(!response.data.success){
             alert(response.data.message)
             return
         }
-        toast.success(response.data.message)
-         onClose();
+        toast.success(response.data.message,{
+            onClose
+        })
+        
 
      }catch(err){
         console.error(err)
@@ -70,6 +72,7 @@ export const SmsPopup: React.FC<SmsPopupProps> = ({
   return (
     <>
       <div className="sms-overlay" onClick={onClose} />
+      <ToastContainer/>
       <div className="sms-popup">
         <div className="sms-header">
           <div className="sms-header-content">
