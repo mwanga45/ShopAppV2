@@ -1475,20 +1475,27 @@ export const Editdebt: React.FC<DebtRecord> = ({
   product_name,
   total_quantity,
   latest_paid_amount,
-  Onclose
+  Onclose,
 }) => {
-  const [price, setprice] = useState('');
-  // const HandleOnchage = (e: React.ChangeEvent<HTMLInputElement>) => {
-  // const { name, value } = e.target
-  // setprice((prev) => ({...prev, [name]:value}))
+  const [price, setprice] = useState("");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // remove all commas first
+    let rawValue = e.target.value.replace(/,/g, "");
 
-  // }
+    // only allow numbers
+    if (!/^\d*$/.test(rawValue)) return;
+
+    // convert to number and back to localized string (money format)
+    const formatted = rawValue ? Number(rawValue).toLocaleString() : "";
+
+    setprice(formatted);
+  };
   return (
     <>
       <div className="debt-frm-cfrm-container">
-        <div className="icon-conyainer">
+        <div className="icon-conyainer" onClick={Onclose}>
           <div className="icon">
-            <RiCloseFill color="white" size={30} fontWeight={500} onClick={Onclose} />
+            <RiCloseFill color="white" size={30} fontWeight={500} />
           </div>
         </div>
         <div className="frm-container">
@@ -1513,13 +1520,13 @@ export const Editdebt: React.FC<DebtRecord> = ({
                 type="text"
                 name="percentage"
                 id="%"
-                value={latest_paid_amount}
+                value={Number(latest_paid_amount).toLocaleString()}
                 required
                 readOnly
               />
             </div>
             <div className="input-value">
-              <label htmlFor="amount">Amount</label>
+              <label htmlFor="amount">Total Quantity </label>
               <input
                 type="text"
                 name="Amount"
@@ -1532,12 +1539,11 @@ export const Editdebt: React.FC<DebtRecord> = ({
               <label htmlFor="price"> Add Price</label>
               <input
                 type="text"
-                name="price"
                 id="price"
-                onChange={(e) =>setprice(e.target.value)}
+                name="price"
                 value={price}
-                required
-                placeholder="Add price "
+                onChange={handleChange}
+                placeholder="Enter amount"
               />
             </div>
             <div className="btn-container">
