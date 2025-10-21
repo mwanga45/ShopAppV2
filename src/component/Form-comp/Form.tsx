@@ -8,7 +8,7 @@ import { CreateDisCount } from "../../AdminPanel/adminservice";
 import { StockCreate } from "../../stock/stockservice";
 import { ProductInfo } from "./formservice";
 import Toggle from "../button/toggle";
-import { CreateDebtrecord } from "../../Sales/service/sales.api";
+import { CreateDebtrecord,UpdateDebt } from "../../Sales/service/sales.api";
 import { customerInfo } from "../../central-api/central-api";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -1475,6 +1475,7 @@ export const Editdebt: React.FC<DebtRecord> = ({
   product_name,
   total_quantity,
   latest_paid_amount,
+  debt_id,
   Onclose,
 }) => {
   const [price, setprice] = useState("");
@@ -1483,7 +1484,21 @@ export const Editdebt: React.FC<DebtRecord> = ({
     if (!/^\d*$/.test(rawValue)) return;
     const formatted = rawValue ? Number(rawValue).toLocaleString() : "";
     setprice(formatted);
+    
   };
+
+  const updatepayload = {
+   paidmoney:Number(price.replace(/, /g, '')),
+   id:debt_id
+  }
+  
+
+  const handleUpdateDebt = async(e:React.MouseEvent<HTMLFormElement>) =>{
+
+    e.preventDefault()
+    // const  response = await UpdateDebt(updatepayload,debt_id )
+    console.log(updatepayload)
+  }
   return (
     <>
       <div className="debt-frm-cfrm-container">
@@ -1496,7 +1511,7 @@ export const Editdebt: React.FC<DebtRecord> = ({
           <div className="form-title">
             <span>Update Debt</span>
           </div>
-          <form className="main-form-content">
+          <form className="main-form-content" onClick={handleUpdateDebt}>
             <div className="input-value">
               <label htmlFor="pname">Product-Name</label>
               <input

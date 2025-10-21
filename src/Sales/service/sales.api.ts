@@ -24,4 +24,4 @@ export const CreateDebtrecord = async(data:any) =>{
 export const UpdateDebt = async(data:any, id:any) =>{
   const response = await api.patch(`debt/ ${id}`, data)
   return response
-}
+} 
