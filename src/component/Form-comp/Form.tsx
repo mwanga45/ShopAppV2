@@ -1502,7 +1502,7 @@ export const Editdebt: React.FC<DebtRecord> = ({
           <div className="form-title">
             <span>Update Debt</span>
           </div>
-          <form className="offer-form-container">
+          <form className="main-form-content">
             <div className="input-value">
               <label htmlFor="pname">Product-Name</label>
               <input
@@ -1514,26 +1514,28 @@ export const Editdebt: React.FC<DebtRecord> = ({
                 readOnly
               />
             </div>
-            <div className="input-value">
-              <label htmlFor="%">Already-Paid</label>
-              <input
-                type="text"
-                name="percentage"
-                id="%"
-                value={Number(latest_paid_amount).toLocaleString()}
-                required
-                readOnly
-              />
-            </div>
-            <div className="input-value">
-              <label htmlFor="amount">Total Quantity </label>
-              <input
-                type="text"
-                name="Amount"
-                id="amount"
-                value={total_quantity}
-                required
-              />
+            <div className="two-column-inputs">
+              <div className="input-value">
+                <label htmlFor="%">Already-Paid</label>
+                <input
+                  type="text"
+                  name="percentage"
+                  id="%"
+                  value={Number(latest_paid_amount).toLocaleString()}
+                  required
+                  readOnly
+                />
+              </div>
+              <div className="input-value">
+                <label htmlFor="amount">Total Quantity </label>
+                <input
+                  type="text"
+                  name="Amount"
+                  id="amount"
+                  value={total_quantity}
+                  required
+                />
+              </div>
             </div>
             <div className="input-value">
               <label htmlFor="price"> Add Price</label>
