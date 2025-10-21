@@ -6,7 +6,7 @@ interface SmsPopupProps {
   isOpen: () => void;
   onClose: () => void;
   Debtor_name?: string;
-  Phone_number?:string
+  Phone_number:string
 
 }
 
@@ -16,8 +16,7 @@ export const SmsPopup: React.FC<SmsPopupProps> = ({
   Debtor_name,
   Phone_number
 }) => {
-  const [message, setMessage] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+
   const [charCount, setCharCount] = useState(0);
   const maxChars = 160;
 
@@ -30,15 +29,11 @@ export const SmsPopup: React.FC<SmsPopupProps> = ({
     setsmspayload((prev) => ({ ...prev, [name]: value }));
   };
   useEffect(() => {
-    setCharCount(message.length);
-  }, [message]);
+    setCharCount(smspayload.sms.length);
+  }, [smspayload.sms]);
 
   const handleSend = () => {
-    if (message.trim() && phoneNumber.trim()) {
-      console.log("Sending SMS:", { phoneNumber, message });
-      // Add your SMS sending logic here
-      setMessage("");
-      setPhoneNumber("");
+    if (smspayload.sms.trim() && Phone_number.trim()) {
       onClose();
     }
   };
@@ -78,6 +73,7 @@ export const SmsPopup: React.FC<SmsPopupProps> = ({
             <input
               id="Phone_number"
               type="tel"
+              name="Phone_number"
               className="sms-input"
               placeholder="255....."
               value={smspayload.Phone_number}
@@ -91,9 +87,10 @@ export const SmsPopup: React.FC<SmsPopupProps> = ({
             </label>
             <textarea
               id="message"
+              name="sms"
               className="sms-textarea"
               placeholder="Type your message here..."
-              value={message}
+              value={smspayload.sms}
               onChange={handleOnchange}
               maxLength={maxChars}
               rows={5}
@@ -113,7 +110,7 @@ export const SmsPopup: React.FC<SmsPopupProps> = ({
           <button
             className="sms-button sms-button-primary"
             onClick={handleSend}
-            disabled={!message.trim() || !phoneNumber.trim()}
+            disabled={!smspayload.sms.trim() || !smspayload.Phone_number.trim()}
           >
             <svg
               width="18"

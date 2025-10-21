@@ -306,7 +306,7 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
         {opensms &&
 
           <div className="sms-container">
-            <SmsPopup isOpen={handleOpensms}  onClose={handleOpensms} Debtor_name={debtor_name ?? ''} Phone_number={phone_number}/>
+            <SmsPopup isOpen={handleOpensms}  onClose={handleOpensms} Debtor_name={debtor_name ?? ''} Phone_number={phone_number ?? ''}/>
           </div>
 
         }
