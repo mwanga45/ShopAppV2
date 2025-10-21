@@ -1488,7 +1488,7 @@ export const Editdebt: React.FC<DebtRecord> = ({
   };
 
   const updatepayload = {
-   paidmoney:Number(price.replace(/, /g, '')),
+  paidmoney: Number(price.replace(/,/g, '')),
    id:debt_id
   }
   
