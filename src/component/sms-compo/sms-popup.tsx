@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import "./sms-popup.css";
 import { IoClose } from "react-icons/io5";
+import { SendsmsTo } from "../../central-api/central-api";
+import { darken } from "@mui/material/styles";
+import { toast } from "react-toastify";
 
 interface SmsPopupProps {
   isOpen: () => void;
@@ -32,10 +35,34 @@ export const SmsPopup: React.FC<SmsPopupProps> = ({
     setCharCount(smspayload.sms.length);
   }, [smspayload.sms]);
 
-  const handleSend = () => {
-    if (smspayload.sms.trim() && Phone_number.trim()) {
-      onClose();
+  const handleSend = async() => {
+    const handleNormalizeNumber = (Phone_number:string)=>{
+    
+        if(Phone_number.startsWith('0')){
+          Phone_number = '255'+Phone_number
+        }
+        if(Phone_number.startsWith('+')){
+            Phone_number = Phone_number.slice(1)
+        }
+        return Phone_number
     }
+    const Ph_num = handleNormalizeNumber(smspayload.Phone_number)
+    const smsPayload = {
+        phone_number:Ph_num,
+        sms:smspayload.sms
+    }
+     try{
+        const response =  await SendsmsTo(smsPayload)
+        if(!response.data.success){
+            alert(response.data.message)
+            return
+        }
+        toast.success(response.data.message)
+         onClose();
+
+     }catch(err){
+        console.error(err)
+     }
   };
 
   if (!isOpen) return null;
