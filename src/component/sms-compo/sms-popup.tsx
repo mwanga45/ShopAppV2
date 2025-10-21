@@ -8,17 +8,15 @@ interface SmsPopupProps {
   isOpen: () => void;
   onClose: () => void;
   Debtor_name?: string;
-  Phone_number:string
-
+  Phone_number: string;
 }
 
 export const SmsPopup: React.FC<SmsPopupProps> = ({
   isOpen,
   onClose,
   Debtor_name,
-  Phone_number
+  Phone_number,
 }) => {
-
   const [charCount, setCharCount] = useState(0);
   const maxChars = 160;
 
@@ -26,7 +24,9 @@ export const SmsPopup: React.FC<SmsPopupProps> = ({
     sms: "",
     Phone_number: Phone_number,
   });
-  const handleOnchange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+  const handleOnchange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     const { name, value } = e.target;
     setsmspayload((prev) => ({ ...prev, [name]: value }));
   };
@@ -34,37 +34,34 @@ export const SmsPopup: React.FC<SmsPopupProps> = ({
     setCharCount(smspayload.sms.length);
   }, [smspayload.sms]);
 
-  const handleSend = async() => {
-    const handleNormalizeNumber = (Phone_number:string)=>{
-    
-        if(Phone_number.startsWith('0')){
-          Phone_number = '255'+Phone_number.slice(1)
-        }
-        if(Phone_number.startsWith('+')){
-            Phone_number = Phone_number.slice(0)
-        }
-        return Phone_number
-    }
-    const Ph_num = handleNormalizeNumber(smspayload.Phone_number)
+  const handleSend = async () => {
+    const handleNormalizeNumber = (Phone_number: string) => {
+      if (Phone_number.startsWith("0")) {
+        Phone_number = "255" + Phone_number.slice(1);
+      }
+      if (Phone_number.startsWith("+")) {
+        Phone_number = Phone_number.slice(0);
+      }
+      return Phone_number;
+    };
+    const Ph_num = handleNormalizeNumber(smspayload.Phone_number);
     const smsPayload = {
-        phone_number:Number(Ph_num),
-        sms:smspayload.sms
+      phone_number: Number(Ph_num),
+      sms: smspayload.sms,
+    };
+    console.log(smsPayload);
+    try {
+      const response = await SendsmsTo(smsPayload);
+      if (!response.data.success) {
+        alert(response.data.message);
+        return;
+      }
+      toast.success(response.data.message, {
+        onClose,
+      });
+    } catch (err) {
+      console.error(err);
     }
-    console.log(smsPayload)
-     try{
-        const response =  await SendsmsTo(smsPayload)
-        if(!response.data.success){
-            alert(response.data.message)
-            return
-        }
-        toast.success(response.data.message,{
-            onClose
-        })
-        
-
-     }catch(err){
-        console.error(err)
-     }
   };
 
   if (!isOpen) return null;
@@ -72,7 +69,7 @@ export const SmsPopup: React.FC<SmsPopupProps> = ({
   return (
     <>
       <div className="sms-overlay" onClick={onClose} />
-      <ToastContainer/>
+      <ToastContainer />
       <div className="sms-popup">
         <div className="sms-header">
           <div className="sms-header-content">

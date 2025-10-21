@@ -19,6 +19,7 @@ import {
 import type {
   CustomerInfo,
   Debtinfo,
+  DebtRecord,
   FetchLastRec,
   Salerequest,
   SalesSummaryResponse,
@@ -37,7 +38,6 @@ import type {
   Product,
 } from "../../type.interface";
 import { ResultComp } from "../result/Resultcomp";
-
 export default function FormComp({ onClose, isOpen = true }: FormCompProps) {
   const [close, setClose] = useState<boolean>(isOpen);
   const [formData, setFormData] = useState({
@@ -583,10 +583,10 @@ export const SalesRecForm: React.FC<
   const handleCloseReturnedresult = () => {
     setisreturned(false);
   };
-  const handleBdformoption = (e:React.MouseEvent<HTMLButtonElement>) =>{
-    e.preventDefault()
-    setiscustomerexist(!iscustomerexist)
-  }
+  const handleBdformoption = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setiscustomerexist(!iscustomerexist);
+  };
   const handleCustomerDetails = async () => {
     const response = await customerInfo();
     setcustomerdetails(response.data.data);
@@ -749,11 +749,11 @@ export const SalesRecForm: React.FC<
 
       const sentWithDebt = { ...salesData, ...finaldebtPayload };
       console.log("Sending debt data:", sentWithDebt);
-      
+
       try {
         const response = await CreateDebtrecord(sentWithDebt);
         console.log("Debt creation response:", response);
-        
+
         if (!response.data.success) {
           alert(response.data.message || "Failed to create debt record");
           return;
@@ -770,7 +770,10 @@ export const SalesRecForm: React.FC<
         });
       } catch (err: any) {
         console.error("Debt creation error:", err);
-        alert("Error: failed to create debt record - " + (err.response?.data?.message || err.message));
+        alert(
+          "Error: failed to create debt record - " +
+            (err.response?.data?.message || err.message)
+        );
       }
 
       return;
@@ -842,27 +845,29 @@ export const SalesRecForm: React.FC<
   const handleCustomerSelection = (selectedCustomerName: string) => {
     console.log("Selected customer name:", selectedCustomerName);
     console.log("Available customers:", customerdetails);
-    
+
     // Find the selected customer from the customerdetails array
     const selectedCustomer = customerdetails.find(
       (customer) => customer.customer_name === selectedCustomerName
     );
-    
+
     console.log("Found customer:", selectedCustomer);
-    
+
     if (selectedCustomer) {
       // Update debtorInfo with the selected customer's details
       const updatedInfo = {
         Debtor_name: selectedCustomer.customer_name,
-        Phone_number: selectedCustomer.phone_number ? String(selectedCustomer.phone_number) : undefined,
+        Phone_number: selectedCustomer.phone_number
+          ? String(selectedCustomer.phone_number)
+          : undefined,
         location: selectedCustomer.Location, // Use the correct field name from CustomerInfo interface
       };
-      
+
       setdebtorInfo((prev) => ({
         ...prev,
         ...updatedInfo,
       }));
-      
+
       console.log("Updated debtorInfo with:", updatedInfo);
     } else {
       console.log("Customer not found!");
@@ -877,8 +882,8 @@ export const SalesRecForm: React.FC<
       if (value === "partialpaid" || value === "debt") {
         setdbformOpen(true);
       }
-      if(iscustomerexist){
-        setdebtorInfo((prev)=> ({...prev}))
+      if (iscustomerexist) {
+        setdebtorInfo((prev) => ({ ...prev }));
       }
       setmakesales((prev) => ({ ...prev, ["paymentstatus"]: value }));
     } else if (name === "Debtor_name" && iscustomerexist) {
@@ -1170,7 +1175,7 @@ export const SalesRecForm: React.FC<
                 <span>Fill Debtor information</span>
               </div>
               <form className="main-form-content">
-                {iscustomerexist === true? (
+                {iscustomerexist === true ? (
                   <>
                     <div className="input-value">
                       <label htmlFor="dbrName">Debtor Name</label>
@@ -1182,10 +1187,7 @@ export const SalesRecForm: React.FC<
                         <option value="">Select customer_name</option>
                         {customerdetails && customerdetails.length > 0 ? (
                           customerdetails.map((item) => (
-                            <option
-                              key={item.Cid}
-                              value={item.customer_name}
-                            >
+                            <option key={item.Cid} value={item.customer_name}>
                               {item.customer_name}
                             </option>
                           ))
@@ -1206,35 +1208,35 @@ export const SalesRecForm: React.FC<
                       />
                     </div>
                     <div className="two-column-inputs">
-                  <div className="input-value">
-                    <label htmlFor="pydate">Payment date</label>
-                    <input
-                      type="date"
-                      name="PaymentDateAt"
-                      id="pydate"
-                      value={
-                        debtorInfo?.PaymentDateAt
-                          ? new Date(debtorInfo.PaymentDateAt)
-                              .toISOString()
-                              .split("T")[0]
-                          : ""
-                      }
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="input-value">
-                    <label htmlFor="loca">location(Optional)</label>
-                    <input
-                      type="text"
-                      name="location"
-                      id="loca"
-                      value={debtorInfo?.location}
-                      onChange={handleChange}
-                      placeholder="Moshi,mwanga, kiruru"
-                    />
-                  </div>
-                </div>
+                      <div className="input-value">
+                        <label htmlFor="pydate">Payment date</label>
+                        <input
+                          type="date"
+                          name="PaymentDateAt"
+                          id="pydate"
+                          value={
+                            debtorInfo?.PaymentDateAt
+                              ? new Date(debtorInfo.PaymentDateAt)
+                                  .toISOString()
+                                  .split("T")[0]
+                              : ""
+                          }
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+                      <div className="input-value">
+                        <label htmlFor="loca">location(Optional)</label>
+                        <input
+                          type="text"
+                          name="location"
+                          id="loca"
+                          value={debtorInfo?.location}
+                          onChange={handleChange}
+                          placeholder="Moshi,mwanga, kiruru"
+                        />
+                      </div>
+                    </div>
                   </>
                 ) : (
                   <>
@@ -1260,36 +1262,36 @@ export const SalesRecForm: React.FC<
                         required
                       />
                     </div>
-                     <div className="two-column-inputs">
-                  <div className="input-value">
-                    <label htmlFor="pydate">Payment date</label>
-                    <input
-                      type="date"
-                      name="PaymentDateAt"
-                      id="pydate"
-                      value={
-                        debtorInfo?.PaymentDateAt
-                          ? new Date(debtorInfo.PaymentDateAt)
-                              .toISOString()
-                              .split("T")[0]
-                          : ""
-                      }
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="input-value">
-                    <label htmlFor="loca">location(Optional)</label>
-                    <input
-                      type="text"
-                      name="location"
-                      id="loca"
-                      value={debtorInfo?.location}
-                      onChange={handleChange}
-                      placeholder="Moshi,mwanga, kiruru"
-                    />
-                  </div>
-                </div>
+                    <div className="two-column-inputs">
+                      <div className="input-value">
+                        <label htmlFor="pydate">Payment date</label>
+                        <input
+                          type="date"
+                          name="PaymentDateAt"
+                          id="pydate"
+                          value={
+                            debtorInfo?.PaymentDateAt
+                              ? new Date(debtorInfo.PaymentDateAt)
+                                  .toISOString()
+                                  .split("T")[0]
+                              : ""
+                          }
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+                      <div className="input-value">
+                        <label htmlFor="loca">location(Optional)</label>
+                        <input
+                          type="text"
+                          name="location"
+                          id="loca"
+                          value={debtorInfo?.location}
+                          onChange={handleChange}
+                          placeholder="Moshi,mwanga, kiruru"
+                        />
+                      </div>
+                    </div>
                   </>
                 )}
                 {makesales?.paymentstatus === "partialpaid" && (
@@ -1305,14 +1307,21 @@ export const SalesRecForm: React.FC<
                     />
                   </div>
                 )}
-               
+
                 <div className="btn-container">
                   <Submitbtn
                     buttonName="Sumbit"
                     type="submit"
                     onclick={handlemakesales}
                   />
-                  <button onClick={handleBdformoption} className="toggle-customer-btn">{iscustomerexist === true? "Customer Exist":"New Customer"}</button>
+                  <button
+                    onClick={handleBdformoption}
+                    className="toggle-customer-btn"
+                  >
+                    {iscustomerexist === true
+                      ? "Customer Exist"
+                      : "New Customer"}
+                  </button>
                 </div>
               </form>
             </div>
@@ -1460,6 +1469,83 @@ export const CreateDiscount: React.FC<FormCompProps> = ({
         <ToastContainer />
       </div>
     </div>
+  );
+};
+export const Editdebt: React.FC<DebtRecord> = ({
+  product_name,
+  total_quantity,
+  latest_paid_amount,
+}) => {
+  const [price, setprice] = useState("");
+  // const HandleOnchage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // const { name, value } = e.target
+  // setprice((prev) => ({...prev, [name]:value}))
+
+  // }
+  return (
+    <>
+      <div className="debt-frm-cfrm-container">
+        <div className="icon-conyainer">
+          <div className="icon">
+            <RiCloseFill color="white" size={30} fontWeight={500} />
+          </div>
+        </div>
+        <div className="frm-container">
+          <div className="form-title">
+            <span>Fill Debtor information</span>
+          </div>
+          <form className="offer-form-container">
+            <div className="input-value">
+              <label htmlFor="pname">Product-Name</label>
+              <input
+                type="text"
+                name="product_name"
+                id="pname"
+                value={product_name}
+                required
+                readOnly
+              />
+            </div>
+            <div className="input-value">
+              <label htmlFor="%">Already-Paid</label>
+              <input
+                type="text"
+                name="percentage"
+                id="%"
+                value={latest_paid_amount}
+                required
+                readOnly
+              />
+            </div>
+            <div className="input-value">
+              <label htmlFor="amount">Amount</label>
+              <input
+                type="text"
+                name="Amount"
+                id="amount"
+                value={total_quantity}
+                required
+              />
+            </div>
+            <div className="input-value">
+              <label htmlFor="price">Add price</label>
+              <input
+                type="text"
+                name="price"
+                id="price"
+                onChange={(e) => e.target.value}
+                value={price}
+                required
+                placeholder="Enter product number start cutoff"
+              />
+            </div>
+            <div className="btn-container">
+              <Submitbtn buttonName="Create" type="submit" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
   );
 };
 export const useFormClose = () => {

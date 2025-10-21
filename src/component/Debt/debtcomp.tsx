@@ -20,6 +20,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { SmsPopup } from "../sms-compo/sms-popup";
 
 import { FiUser } from "react-icons/fi";
+import { Editdebt } from "../Form-comp/Form";
 export const Debtcompo: React.FC<DebtResponse> = ({
   PersonDebt,
   PersonOverallDebtRec,
@@ -315,6 +316,11 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
             />
           </div>
         )}
+          {
+            <div className="sms-container">
+              <Editdebt/>
+            </div>
+          }
       </div>
     </div>
   );
