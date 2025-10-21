@@ -319,7 +319,7 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
         )}
           {OpenUpdate &&
             <div className="sms-container">
-              <Editdebt product_name={product_name} total_quantity={total_quantity} latest_paid_amount={alreadyPaid}/>
+              <Editdebt product_name={product_name} total_quantity={total_quantity} latest_paid_amount={alreadyPaid} Onclose={()=> setOpenUpdate(false)}/>
             </div>
           }
       </div>

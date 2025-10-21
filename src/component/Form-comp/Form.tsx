@@ -1475,6 +1475,7 @@ export const Editdebt: React.FC<DebtRecord> = ({
   product_name,
   total_quantity,
   latest_paid_amount,
+  Onclose
 }) => {
   const [price, setprice] = useState('');
   // const HandleOnchage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -1487,7 +1488,7 @@ export const Editdebt: React.FC<DebtRecord> = ({
       <div className="debt-frm-cfrm-container">
         <div className="icon-conyainer">
           <div className="icon">
-            <RiCloseFill color="white" size={30} fontWeight={500} />
+            <RiCloseFill color="white" size={30} fontWeight={500} onClick={Onclose} />
           </div>
         </div>
         <div className="frm-container">
