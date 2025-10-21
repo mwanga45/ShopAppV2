@@ -1,8 +1,8 @@
 .debt-overlay{
   position: fixed;
   inset: 0;
-  background: transparent; /* removed dark backdrop */
-  backdrop-filter: none;
+  background: transparent; 
+  backdrop-filter: blur(5px);
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
