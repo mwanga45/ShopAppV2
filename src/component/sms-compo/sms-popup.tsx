@@ -2,13 +2,15 @@
 
 import { useState, useEffect } from "react"
 import "./sms-popup.css"
+import { IoClose } from "react-icons/io5";
 
 interface SmsPopupProps {
-  isOpen: boolean
+  isOpen: () => void
   onClose: () => void
+  Debtor_name : string
 }
 
-export default function SmsPopup({ isOpen, onClose }: SmsPopupProps) {
+export const SmsPopup:React.FC<SmsPopupProps> =({ isOpen, onClose , Debtor_name}) =>{
   const [message, setMessage] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
   const [charCount, setCharCount] = useState(0)
@@ -41,13 +43,10 @@ export default function SmsPopup({ isOpen, onClose }: SmsPopupProps) {
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
               </svg>
             </div>
-            <h2 className="sms-title">Send SMS</h2>
+            <h2 className="sms-title">Send SMS to {Debtor_name}</h2>
           </div>
           <button className="sms-close" onClick={onClose} aria-label="Close">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
+            <IoClose color="red" />
           </button>
         </div>
 

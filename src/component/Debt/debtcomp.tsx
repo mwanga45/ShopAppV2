@@ -15,8 +15,9 @@ import { CiLocationOn } from "react-icons/ci";
 import { FcProcess } from "react-icons/fc";
 import { FaExclamationTriangle } from "react-icons/fa";
 import { FaHourglassHalf } from "react-icons/fa";
-import { FaPhone } from "react-icons/fa6";
+import { FaPhone, FaS } from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
+import {SmsPopup} from '../sms-compo/sms-popup'
 
 import { FiUser } from "react-icons/fi";
 export const Debtcompo: React.FC<DebtResponse> = ({
@@ -312,14 +313,7 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
         {opensms &&
 
           <div className="sms-container">
-            <div className="sms-main-container">
-            <textarea
-              name="sms"
-              placeholder="Type message here"
-              value={smspayload.sms}
-              onChange={handleOnchange}
-            ></textarea>
-            </div>
+            <SmsPopup isOpen={handleOpensms}  onClose={handleOpensms} Debtor_name={debtor_name ?? ''}/>
           </div>
 
         }
