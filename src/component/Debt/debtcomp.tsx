@@ -167,13 +167,17 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
   product_name,
   tracks,
 }) => {
-  const totalRevenueNum = Number(total_revenue ?? 0);
-  const alreadyPaid = Number(latest_paid_amount ?? 0);
-  const remain = Math.max(totalRevenueNum - alreadyPaid, 0);
-  const [smspayload, setsmspayload] = useState({
+    const [smspayload, setsmspayload] = useState({
     sms: "",
     Phone_number: "",
   });
+  const [opensms , setopensms] = useState<boolean>(false)
+  const totalRevenueNum = Number(total_revenue ?? 0);
+  const alreadyPaid = Number(latest_paid_amount ?? 0);
+  const remain = Math.max(totalRevenueNum - alreadyPaid, 0);
+  const handleOpensms = () =>{
+    setopensms(!opensms)
+  }
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -277,7 +281,7 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
           <div className="Action-container">
             <button className="action-btn-debt">Update</button>
             <button className="action-btn-debt">Add</button>
-            <button className="action-btn-debt">Send Message</button>
+            <button className="action-btn-debt" onClick={handleOpensms}>Send Message</button>
           </div>
         </div>
         <div className="display-info-time">
@@ -305,15 +309,19 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
             <span>Deadline Date:{String(deadlinedate).split("T")[0]}</span>
           </div>
         </div>
-        {
-          <div>
+        {opensms &&
+
+          <div className="sms-container">
+            <div className="sms-main-container">
             <textarea
               name="sms"
               placeholder="Type message here"
               value={smspayload.sms}
               onChange={handleOnchange}
             ></textarea>
+            </div>
           </div>
+
         }
       </div>
     </div>
