@@ -1489,19 +1489,30 @@ export const Editdebt: React.FC<DebtRecord> = ({
 
   const updatepayload = {
   paidmoney: Number(price.replace(/,/g, '')),
-   id:debt_id
+   
   }
   
 
-  const handleUpdateDebt = async(e:React.MouseEvent<HTMLFormElement>) =>{
+  const handleUpdateDebt = async(e:React.FormEvent<HTMLFormElement>) =>{
 
     e.preventDefault()
-    // const  response = await UpdateDebt(updatepayload,debt_id )
-    console.log(updatepayload)
+    try{
+    const  response = await UpdateDebt(updatepayload,debt_id )
+    if(!response.data.success){
+      alert(response.data.message)
+      return
+    }
+    toast.success(response.data.message)
+  }catch(error){
+    console.error(error)
+    alert(error)
+  }
+
   }
   return (
     <>
       <div className="debt-frm-cfrm-container">
+        <ToastContainer/>
         <div className="icon-conyainer" onClick={Onclose}>
           <div className="icon">
             <RiCloseFill color="white" size={30} fontWeight={500} />
@@ -1511,7 +1522,7 @@ export const Editdebt: React.FC<DebtRecord> = ({
           <div className="form-title">
             <span>Update Debt</span>
           </div>
-          <form className="main-form-content" onClick={handleUpdateDebt}>
+          <form className="main-form-content" onSubmit={handleUpdateDebt}>
             <div className="input-value">
               <label htmlFor="pname">Product-Name</label>
               <input
@@ -1558,7 +1569,7 @@ export const Editdebt: React.FC<DebtRecord> = ({
               />
             </div>
             <div className="btn-container">
-              <Submitbtn buttonName="Create" type="submit" />
+              <Submitbtn buttonName="Update Debt" type="submit" />
             </div>
           </form>
         </div>
