@@ -275,7 +275,7 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
             </div>
           </div>
           <div className="Action-container">
-            <button className="action-btn-debt">Update</button>
+            <button className="action-btn-debt" onClick={()=> setOpenUpdate(true)}>Update</button>
             <button className="action-btn-debt">Add</button>
             <button className="action-btn-debt" onClick={handleOpensms}>
               Send Message

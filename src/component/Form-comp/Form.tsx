@@ -1476,7 +1476,7 @@ export const Editdebt: React.FC<DebtRecord> = ({
   total_quantity,
   latest_paid_amount,
 }) => {
-  const [price, setprice] = useState("");
+  const [price, setprice] = useState('');
   // const HandleOnchage = (e: React.ChangeEvent<HTMLInputElement>) => {
   // const { name, value } = e.target
   // setprice((prev) => ({...prev, [name]:value}))
@@ -1533,10 +1533,10 @@ export const Editdebt: React.FC<DebtRecord> = ({
                 type="text"
                 name="price"
                 id="price"
-                onChange={(e) => e.target.value}
+                onChange={(e) =>setprice(e.target.value)}
                 value={price}
                 required
-                placeholder="Enter product number start cutoff"
+                placeholder="Add price "
               />
             </div>
             <div className="btn-container">

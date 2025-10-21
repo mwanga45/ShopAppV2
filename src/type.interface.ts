@@ -282,6 +282,7 @@ export interface TrackRecord {
   updated_at?:string
 }
 
+
 export interface CardDiscriptionInterface {
   name?:string;
   date?:string;
@@ -295,4 +296,7 @@ export interface CustomerInfo {
   phone_number?:string,
   customer_name?:string,
   Cid?:string
+}
+export interface UpdateDebt{
+  
 }
