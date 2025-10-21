@@ -1479,15 +1479,9 @@ export const Editdebt: React.FC<DebtRecord> = ({
 }) => {
   const [price, setprice] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // remove all commas first
     let rawValue = e.target.value.replace(/,/g, "");
-
-    // only allow numbers
     if (!/^\d*$/.test(rawValue)) return;
-
-    // convert to number and back to localized string (money format)
     const formatted = rawValue ? Number(rawValue).toLocaleString() : "";
-
     setprice(formatted);
   };
   return (
