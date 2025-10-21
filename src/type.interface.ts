@@ -272,6 +272,7 @@ export interface DebtRecord {
   createdat?: string;
   deadlinedate?: string; 
   tracks?:TrackRecord[];
+  Onclose?:() => void
   
 }
 

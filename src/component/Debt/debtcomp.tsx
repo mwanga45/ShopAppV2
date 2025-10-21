@@ -170,6 +170,7 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
   tracks,
 }) => {
   const [opensms, setopensms] = useState<boolean>(false);
+  const [OpenUpdate, setOpenUpdate] = useState<boolean>(false)
   const totalRevenueNum = Number(total_revenue ?? 0);
   const alreadyPaid = Number(latest_paid_amount ?? 0);
   const remain = Math.max(totalRevenueNum - alreadyPaid, 0);
@@ -316,9 +317,9 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
             />
           </div>
         )}
-          {
+          {OpenUpdate &&
             <div className="sms-container">
-              <Editdebt/>
+              <Editdebt product_name={product_name} total_quantity={total_quantity} latest_paid_amount={alreadyPaid}/>
             </div>
           }
       </div>

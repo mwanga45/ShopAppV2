@@ -1492,7 +1492,7 @@ export const Editdebt: React.FC<DebtRecord> = ({
         </div>
         <div className="frm-container">
           <div className="form-title">
-            <span>Fill Debtor information</span>
+            <span>Update Debt</span>
           </div>
           <form className="offer-form-container">
             <div className="input-value">
@@ -1528,7 +1528,7 @@ export const Editdebt: React.FC<DebtRecord> = ({
               />
             </div>
             <div className="input-value">
-              <label htmlFor="price">Add price</label>
+              <label htmlFor="price"> Add Price</label>
               <input
                 type="text"
                 name="price"
