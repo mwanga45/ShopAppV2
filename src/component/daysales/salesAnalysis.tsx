@@ -20,10 +20,11 @@ export const AdminsalesAnaysis = () => {
       </div>
       <div className="salesdayasanalysis-container">
         <div className="sales-analysis-graph-container">
-          <span>Profit made from day one</span>
+          <span  className="title-orderlist-deviatian-title">Profit made from day one</span>
           <GridDemo/>
         </div>
         <div className="salasAnalysis-card-container">
+          <span  className="title-orderlist-deviatian-title">Stock In & Out with Highest Profits</span>
           <div className="business-card-comaparizone">
             <div className="first-card-comparizone"><Reportcard/></div>
             <div className="second-card-comparizone"><Reportcard/></div>
