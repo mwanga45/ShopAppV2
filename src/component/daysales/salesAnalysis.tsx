@@ -5,6 +5,7 @@ import { ShowinfoCard } from "../card-report/shownInfo";
 // import { Debtcompo } from "../debtcompo/debtcomp"
 import { Debtcompo } from "../Debt/debtcomp";
 import { OrderlistComp } from "../Ordercomp/orderlistComp";
+import {GridDemo} from '../comparisonchart/profitchart'
 export const AdminsalesAnaysis = () => {
   return (
     <div className="salesAnaysis-main-container">
@@ -20,7 +21,9 @@ export const AdminsalesAnaysis = () => {
          </span>
       </div>
       <div className="salesdayasanalysis-container">
-        <div className="sales-analysis-graph-container"></div>
+        <div className="sales-analysis-graph-container">
+          <GridDemo/>
+        </div>
         <div className="salasAnalysis-card-container">
           <div className="business-card-comaparizone">
             <div className="first-card-comparizone"><Reportcard/></div>
@@ -34,7 +37,7 @@ export const AdminsalesAnaysis = () => {
       </div>
       <div className="order-debt-record-deviation">
         <div className="today-debtor-list">
-          <Debtcompo/>
+          {/* <Debtcompo/> */}
         </div>
         <div className="order-list-total-deviation">
           <div className="title-orderlist-deviatian-container">
