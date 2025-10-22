@@ -170,10 +170,10 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
   tracks,
 }) => {
   const [opensms, setopensms] = useState<boolean>(false);
-  const [OpenUpdate, setOpenUpdate] = useState<boolean>(false)
+  const [OpenUpdate, setOpenUpdate] = useState<boolean>(false);
   const totalRevenueNum = Number(total_revenue ?? 0);
   const alreadyPaid = Number(latest_paid_amount ?? 0);
-  const remain = Math.max(totalRevenueNum - alreadyPaid, 0);
+  const remain = Math.max(totalRevenueNum - alreadyPaid, 0)
   const handleOpensms = () => {
     setopensms(!opensms);
   };
@@ -232,7 +232,13 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
                     <div className="series-list-payment" key={idx}>
                       <span>{String(t.updated_at).split("T")[0]}</span>
                       <span>
-                        {String(t.updated_at).split("T")[1]?.substring(0, 5)}
+                        {t.updated_at
+                          ? new Date(t.updated_at).toLocaleTimeString("en-KE", {
+                              timeZone: "Africa/Nairobi",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })
+                          : ""}
                       </span>
                       <span>{Number(t.paidmoney).toLocaleString()}.Tsh</span>
                     </div>
@@ -275,7 +281,12 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
             </div>
           </div>
           <div className="Action-container">
-            <button className="action-btn-debt" onClick={()=> setOpenUpdate(true)}>Update</button>
+            <button
+              className="action-btn-debt"
+              onClick={() => setOpenUpdate(true)}
+            >
+              Update
+            </button>
             <button className="action-btn-debt">Add</button>
             <button className="action-btn-debt" onClick={handleOpensms}>
               Send Message
@@ -317,11 +328,17 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
             />
           </div>
         )}
-          {OpenUpdate &&
-            <div className="sms-container">
-              <Editdebt product_name={product_name} total_quantity={total_quantity} latest_paid_amount={alreadyPaid} Onclose={()=> setOpenUpdate(false)} debt_id={debt_id}/>
-            </div>
-          }
+        {OpenUpdate && (
+          <div className="sms-container">
+            <Editdebt
+              product_name={product_name}
+              total_quantity={total_quantity}
+              latest_paid_amount={alreadyPaid}
+              Onclose={() => setOpenUpdate(false)}
+              debt_id={debt_id}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -336,7 +353,6 @@ export const DebtorOtherinfo: React.FC<DebtorOtherinfoProps> = ({
   Debtor_name,
   Phone_number,
   PaidOutDate,
-
 }) => {
   return (
     <div className="DebtorOtherinf-main-container">
