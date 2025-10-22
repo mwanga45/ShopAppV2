@@ -290,6 +290,7 @@ export interface CardDiscriptionInterface {
   title?:string;
   id?:any
   Icon?:React.ElementType
+  color:string
 }
 export interface CustomerInfo {
   Location?:string,

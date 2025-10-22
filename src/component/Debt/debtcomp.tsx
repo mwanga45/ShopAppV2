@@ -18,7 +18,6 @@ import { FaHourglassHalf } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
 import { SmsPopup } from "../sms-compo/sms-popup";
-
 import { FiUser } from "react-icons/fi";
 import { Editdebt } from "../Form-comp/Form";
 export const Debtcompo: React.FC<DebtResponse> = ({
@@ -75,9 +74,10 @@ export const Debtcompo: React.FC<DebtResponse> = ({
                   date={item.deadlinedate}
                   amount={Number(item.total_revenue).toLocaleString()}
                   title="Remaining"
+                  color="green"
                   Icon={
                     item.payment_status === "paid"
-                      ? FaCheckCircle
+                      ? FaCheckCircle 
                       : FaHourglassHalf
                   }
                 />
@@ -135,6 +135,7 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
   title,
   id,
   Icon: Icon,
+  color
 }) => {
   return (
     <div className="crd-dsc-main-cont">
@@ -150,7 +151,7 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
         </div>
         <div className="crd-dcs-date-container">
           <span>{String(date).split("T")[0]}</span>
-          <span>{Icon && <Icon />}</span>
+          <span>{Icon && <Icon color ={color} />}</span>
         </div>
       </div>
     </div>

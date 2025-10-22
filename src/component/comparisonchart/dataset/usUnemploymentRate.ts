@@ -1,14 +1,10 @@
-/*
- * Source: https://fred.stlouisfed.org/series/UNRATE
- * Updated: Jun 6, 2025 7:46 AM CDT
- */
+
 
 import type{ AxisValueFormatterContext } from '@mui/x-charts/models';
 
 export const dateAxisFormatter = (value: Date, context: AxisValueFormatterContext<'time'>) =>
   value.toLocaleDateString(undefined, {
     month:
-      // eslint-disable-next-line no-nested-ternary
       context.location === 'tick' ? undefined : context.location === 'tooltip' ? 'long' : 'short',
     year: 'numeric',
   });
