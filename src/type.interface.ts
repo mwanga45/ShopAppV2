@@ -301,3 +301,16 @@ export interface CustomerInfo {
 export interface UpdateDebt{
   
 }
+export interface ICreateOrder {
+  product_name?: string;
+  client_name?: string;
+  client_phone?: string;
+  OrderDate?: string;
+  paidMoney?: number;
+  payamount?: number;
+  Quantity?: string;
+}
+
+export interface Oncloseform {
+  onclose?: ()=> void
+}

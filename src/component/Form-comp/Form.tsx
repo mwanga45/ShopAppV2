@@ -21,6 +21,8 @@ import type {
   Debtinfo,
   DebtRecord,
   FetchLastRec,
+  ICreateOrder,
+  Oncloseform,
   Salerequest,
   SalesSummaryResponse,
 } from "../../type.interface";
@@ -1577,17 +1579,18 @@ export const Editdebt: React.FC<DebtRecord> = ({
     </>
   );
 };
-export const PlaceOrder = () => {
-  const 
+export const PlaceOrder:React.FC<Oncloseform> = ({onclose}) => {
+  const [Orderpayload, setOrderpayload] = useState<ICreateOrder>()
   const handleChange = (e:React.ChangeEvent<HTMLTextAreaElement| HTMLInputElement | HTMLSelectElement>)=>{
     const {name, value} = e.target
+    setOrderpayload((prev)=> ({...prev, [name]:value}))
 
   }
   return(
      <>
       <div className="debt-frm-cfrm-container">
         <ToastContainer/>
-        <div className="icon-conyainer" onClick={Onclose}>
+        <div className="icon-conyainer" onClick={onclose}>
           <div className="icon">
             <RiCloseFill color="white" size={30} fontWeight={500} />
           </div>
@@ -1596,14 +1599,14 @@ export const PlaceOrder = () => {
           <div className="form-title">
             <span>Update Debt</span>
           </div>
-          <form className="main-form-content" onSubmit={handleUpdateDebt}>
+          <form className="main-form-content">
             <div className="input-value">
               <label htmlFor="pname">Product-Name</label>
               <input
                 type="text"
                 name="product_name"
                 id="pname"
-                value={product_name}
+                // value={product_name}
                 required
                 readOnly
               />
@@ -1615,7 +1618,7 @@ export const PlaceOrder = () => {
                   type="text"
                   name="percentage"
                   id="%"
-                  value={Number(latest_paid_amount).toLocaleString()}
+                  // value={Number(latest_paid_amount).toLocaleString()}
                   required
                   readOnly
                 />
@@ -1626,7 +1629,7 @@ export const PlaceOrder = () => {
                   type="text"
                   name="Amount"
                   id="amount"
-                  value={total_quantity}
+                  // value={total_quantity}
                   required
                 />
               </div>
@@ -1637,7 +1640,7 @@ export const PlaceOrder = () => {
                 type="text"
                 id="price"
                 name="price"
-                value={price}
+                // value={price}
                 onChange={handleChange}
                 placeholder="Enter amount"
               />
