@@ -5,7 +5,11 @@ import {Button} from "../component/button/Button"
 import { SummaryCard } from "../component/summaryCard/summarycard"
 import "./overview.css"
 import { Complinechart, BarCompChart } from "../component/comparisonchart/Complinechart"; 
+import { useState } from "react";
+
 export default function Overview() {
+  const [openOrder, setopenOrder] = useState<boolean>(false)
+  
   return (
     <div className='overview-container' >
       <div className="overview-Accountbar">
@@ -36,7 +40,7 @@ export default function Overview() {
               <Complinechart Pname="Pallet starter"/>
           </div>
         <div className="Barcomponet-container">
-            <BarCompChart Pname="Marsh"/> {/* Use BarCompChart */} 
+            <BarCompChart Pname="Marsh"/> 
         </div>
         </div>
        </div>

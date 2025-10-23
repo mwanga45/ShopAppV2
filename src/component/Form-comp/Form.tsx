@@ -1577,6 +1577,80 @@ export const Editdebt: React.FC<DebtRecord> = ({
     </>
   );
 };
+export const PlaceOrder = () => {
+  const 
+  const handleChange = (e:React.ChangeEvent<HTMLTextAreaElement| HTMLInputElement | HTMLSelectElement>)=>{
+    const {name, value} = e.target
+
+  }
+  return(
+     <>
+      <div className="debt-frm-cfrm-container">
+        <ToastContainer/>
+        <div className="icon-conyainer" onClick={Onclose}>
+          <div className="icon">
+            <RiCloseFill color="white" size={30} fontWeight={500} />
+          </div>
+        </div>
+        <div className="frm-container">
+          <div className="form-title">
+            <span>Update Debt</span>
+          </div>
+          <form className="main-form-content" onSubmit={handleUpdateDebt}>
+            <div className="input-value">
+              <label htmlFor="pname">Product-Name</label>
+              <input
+                type="text"
+                name="product_name"
+                id="pname"
+                value={product_name}
+                required
+                readOnly
+              />
+            </div>
+            <div className="two-column-inputs">
+              <div className="input-value">
+                <label htmlFor="%">Already-Paid</label>
+                <input
+                  type="text"
+                  name="percentage"
+                  id="%"
+                  value={Number(latest_paid_amount).toLocaleString()}
+                  required
+                  readOnly
+                />
+              </div>
+              <div className="input-value">
+                <label htmlFor="amount">Total Quantity </label>
+                <input
+                  type="text"
+                  name="Amount"
+                  id="amount"
+                  value={total_quantity}
+                  required
+                />
+              </div>
+            </div>
+            <div className="input-value">
+              <label htmlFor="price"> Add Price</label>
+              <input
+                type="text"
+                id="price"
+                name="price"
+                value={price}
+                onChange={handleChange}
+                placeholder="Enter amount"
+              />
+            </div>
+            <div className="btn-container">
+              <Submitbtn buttonName="Update Debt" type="submit" />
+            </div>
+          </form>
+        </div>
+      </div>
+     </>
+  ) 
+}
 export const useFormClose = () => {
   const [isOpen, setIsOpen] = useState(true);
 
