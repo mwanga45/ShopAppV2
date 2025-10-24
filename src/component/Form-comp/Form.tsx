@@ -1691,6 +1691,8 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
                 />
               </div>
             </div>
+              <div className="two-column-inputs">
+
             <div className="input-value">
               <label htmlFor="price">Paid Money</label>
               <input
@@ -1711,8 +1713,14 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
                 value={Orderpayload?.payamount}
                 onChange={handleChange}
                 placeholder="Enter amount he/she suppose to pay"
+                required
               />
             </div>
+            <div className="input-value">
+              <label htmlFor="date">Date receive Order</label>
+              <input type="date" name="date" value={Orderpayload?.OrderDate} onChange={handleChange} required />
+            </div>
+              </div>
             <div className="btn-container">
               <button
                 onClick={() => setiscustomerexist(!iscustomerexist)}
@@ -1728,7 +1736,7 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
               </button>
             </div>
             <div className="btn-container">
-              <Submitbtn buttonName="Update Debt" type="submit" />
+              <Submitbtn buttonName="Place Order" type="submit" />
             </div>
           </form>
         </div>
