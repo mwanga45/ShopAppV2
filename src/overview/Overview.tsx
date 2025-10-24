@@ -6,10 +6,11 @@ import { SummaryCard } from "../component/summaryCard/summarycard"
 import "./overview.css"
 import { Complinechart, BarCompChart } from "../component/comparisonchart/Complinechart"; 
 import { useState } from "react";
+import { PlaceOrder } from "../component/Form-comp/Form";
 
 export default function Overview() {
-  const [openOrder, setopenOrder] = useState<boolean>(false)
-  
+  const [openOrder, setopenOrder] = useState<boolean>(false) 
+
   return (
     <div className='overview-container' >
       <div className="overview-Accountbar">
@@ -20,7 +21,7 @@ export default function Overview() {
        </div>
        <div className="overView-info-container">
         <Button buttonName="Debtor" />
-        <Button buttonName="OrderList"/>
+        <Button buttonName="Order" Onclick={()=> setopenOrder(true)}/>
        </div>
        <div className="business-summary">
         <div className="category-summary">
@@ -44,6 +45,10 @@ export default function Overview() {
         </div>
         </div>
        </div>
+       {
+        openOrder &&
+        <PlaceOrder onclose={()=> setopenOrder(false)}/>
+       }
     </div>
   )
 }

@@ -1597,21 +1597,27 @@ export const PlaceOrder:React.FC<Oncloseform> = ({onclose}) => {
         </div>
         <div className="frm-container">
           <div className="form-title">
-            <span>Update Debt</span>
+            <span>Place Order</span>
           </div>
           <form className="main-form-content">
-            <div className="input-value">
+            {<>
+               <div className="input-value">
               <label htmlFor="pname">Product-Name</label>
               <input
                 type="text"
                 name="product_name"
                 id="pname"
-                // value={product_name}
                 required
                 readOnly
               />
             </div>
+            </>
+}
+
+            
+    
             <div className="two-column-inputs">
+
               <div className="input-value">
                 <label htmlFor="%">Already-Paid</label>
                 <input
