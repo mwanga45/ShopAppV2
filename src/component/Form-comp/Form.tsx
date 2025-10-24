@@ -8,7 +8,7 @@ import { CreateDisCount } from "../../AdminPanel/adminservice";
 import { StockCreate } from "../../stock/stockservice";
 import { ProductInfo } from "./formservice";
 import Toggle from "../button/toggle";
-import { CreateDebtrecord,UpdateDebt } from "../../Sales/service/sales.api";
+import { CreateDebtrecord, UpdateDebt } from "../../Sales/service/sales.api";
 import { customerInfo } from "../../central-api/central-api";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -1486,35 +1486,30 @@ export const Editdebt: React.FC<DebtRecord> = ({
     if (!/^\d*$/.test(rawValue)) return;
     const formatted = rawValue ? Number(rawValue).toLocaleString() : "";
     setprice(formatted);
-    
   };
 
   const updatepayload = {
-  paidmoney: Number(price.replace(/,/g, '')),
-   
-  }
-  
+    paidmoney: Number(price.replace(/,/g, "")),
+  };
 
-  const handleUpdateDebt = async(e:React.FormEvent<HTMLFormElement>) =>{
-
-    e.preventDefault()
-    try{
-    const  response = await UpdateDebt(updatepayload,debt_id )
-    if(!response.data.success){
-      alert(response.data.message)
-      return
+  const handleUpdateDebt = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await UpdateDebt(updatepayload, debt_id);
+      if (!response.data.success) {
+        alert(response.data.message);
+        return;
+      }
+      toast.success(response.data.message);
+    } catch (error) {
+      console.error(error);
+      alert(error);
     }
-    toast.success(response.data.message)
-  }catch(error){
-    console.error(error)
-    alert(error)
-  }
-
-  }
+  };
   return (
     <>
       <div className="debt-frm-cfrm-container">
-        <ToastContainer/>
+        <ToastContainer />
         <div className="icon-conyainer" onClick={Onclose}>
           <div className="icon">
             <RiCloseFill color="white" size={30} fontWeight={500} />
@@ -1579,17 +1574,29 @@ export const Editdebt: React.FC<DebtRecord> = ({
     </>
   );
 };
-export const PlaceOrder:React.FC<Oncloseform> = ({onclose}) => {
-  const [Orderpayload, setOrderpayload] = useState<ICreateOrder>()
-  const handleChange = (e:React.ChangeEvent<HTMLTextAreaElement| HTMLInputElement | HTMLSelectElement>)=>{
-    const {name, value} = e.target
-    setOrderpayload((prev)=> ({...prev, [name]:value}))
-
-  }
-  return(
-     <>
+export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
+  const [Orderpayload, setOrderpayload] = useState<ICreateOrder>();
+  const [iscustomerexist, setiscustomerexist] = useState<boolean>(false);
+  const [customerdetails, setcustomerdetails] = useState<CustomerInfo[]>([]);
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setOrderpayload((prev) => ({ ...prev, [name]: value }));
+  };
+  const handleCustomerDetails = async () => {
+    const response = await customerInfo();
+    setcustomerdetails(response.data.data);
+  };
+  useEffect(() => {
+    handleCustomerDetails();
+  }, []);
+  return (
+    <>
       <div className="debt-frm-cfrm-container">
-        <ToastContainer/>
+        <ToastContainer />
         <div className="icon-conyainer" onClick={onclose}>
           <div className="icon">
             <RiCloseFill color="white" size={30} fontWeight={500} />
@@ -1600,24 +1607,43 @@ export const PlaceOrder:React.FC<Oncloseform> = ({onclose}) => {
             <span>Place Order</span>
           </div>
           <form className="main-form-content">
-            {<>
-               <div className="input-value">
-              <label htmlFor="pname">Product-Name</label>
-              <input
-                type="text"
-                name="product_name"
-                id="pname"
-                required
-                readOnly
-              />
-            </div>
-            </>
-}
-
-            
-    
+            {iscustomerexist === true ? (
+              <>
+                <div className="input-value">
+                  <label htmlFor="pname">Customer Name</label>
+                  <input
+                    type="text"
+                    name="product_name"
+                    id="pname"
+                    required
+                    readOnly
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="input-value">
+                  <label htmlFor="dbrName">Debtor Name</label>
+                  <select
+                    name="Debtor_name"
+                    value={Orderpayload?.client_name}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select customer name</option>
+                    {customerdetails && customerdetails.length > 0 ? (
+                      customerdetails.map((item) => (
+                        <option key={item.Cid} value={item.customer_name}>
+                          {item.customer_name}
+                        </option>
+                      ))
+                    ) : (
+                      <option value="">No Any details</option>
+                    )}
+                  </select>
+                </div>
+              </>
+            )}
             <div className="two-column-inputs">
-
               <div className="input-value">
                 <label htmlFor="%">Already-Paid</label>
                 <input
@@ -1657,9 +1683,9 @@ export const PlaceOrder:React.FC<Oncloseform> = ({onclose}) => {
           </form>
         </div>
       </div>
-     </>
-  ) 
-}
+    </>
+  );
+};
 export const useFormClose = () => {
   const [isOpen, setIsOpen] = useState(true);
 
