@@ -1577,7 +1577,7 @@ export const Editdebt: React.FC<DebtRecord> = ({
 export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
   const [Orderpayload, setOrderpayload] = useState<ICreateOrder>();
   const [iscustomerexist, setiscustomerexist] = useState<boolean>(false);
-  const [isproductexist, setproductexist] = useState<boolean>(false)
+  const [isproductexist, setproductexist] = useState<boolean>(false);
   const [customerdetails, setcustomerdetails] = useState<CustomerInfo[]>([]);
   const handleChange = (
     e: React.ChangeEvent<
@@ -1645,8 +1645,7 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
               </>
             )}
             <div className="two-column-inputs">
-             {
-              isproductexist === true ? (
+              {isproductexist === true ? (
                 <div className="input-value">
                   <label htmlFor="dbrName">Debtor Name</label>
                   <select
@@ -1666,20 +1665,19 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
                     )}
                   </select>
                 </div>
-              ):(
-                 <div className="input-value">
-                <label htmlFor="%">Product_name</label>
-                <input
-                  type="text"
-                  name="percentage"
-                  id="%"
-                  value={Orderpayload?.product_name}
-                  required
-                  onChange={handleChange}
-                />
-              </div>
-              )
-             }
+              ) : (
+                <div className="input-value">
+                  <label htmlFor="%">Product_name</label>
+                  <input
+                    type="text"
+                    name="percentage"
+                    id="%"
+                    value={Orderpayload?.product_name}
+                    required
+                    onChange={handleChange}
+                  />
+                </div>
+              )}
 
               <div className="input-value">
                 <label htmlFor="amount">Total Quantity </label>
@@ -1704,7 +1702,7 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
                 placeholder="Enter amount he/she pay"
               />
             </div>
-                 <div className="input-value">
+            <div className="input-value">
               <label htmlFor="price">Pay money</label>
               <input
                 type="text"
@@ -1714,6 +1712,20 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
                 onChange={handleChange}
                 placeholder="Enter amount he/she suppose to pay"
               />
+            </div>
+            <div className="btn-container">
+              <button
+                onClick={() => setiscustomerexist(!iscustomerexist)}
+                className="toggle-customer-btn"
+              >
+                {iscustomerexist === true ? "Customer Exist" : "New Customer"}
+              </button>
+              <button
+                onClick={() => setproductexist(!isproductexist)}
+                className="toggle-customer-btn"
+              >
+                {isproductexist === false ? "Product Exist" : "New Product"}
+              </button>
             </div>
             <div className="btn-container">
               <Submitbtn buttonName="Update Debt" type="submit" />
