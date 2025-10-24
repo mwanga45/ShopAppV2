@@ -1577,6 +1577,7 @@ export const Editdebt: React.FC<DebtRecord> = ({
 export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
   const [Orderpayload, setOrderpayload] = useState<ICreateOrder>();
   const [iscustomerexist, setiscustomerexist] = useState<boolean>(false);
+  const [isproductexist, setproductexist] = useState<boolean>(false)
   const [customerdetails, setcustomerdetails] = useState<CustomerInfo[]>([]);
   const handleChange = (
     e: React.ChangeEvent<
@@ -1623,7 +1624,7 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
             ) : (
               <>
                 <div className="input-value">
-                  <label htmlFor="dbrName">Debtor Name</label>
+                  <label htmlFor="dbrName">customer Name</label>
                   <select
                     name="Debtor_name"
                     value={Orderpayload?.client_name}
@@ -1644,37 +1645,74 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
               </>
             )}
             <div className="two-column-inputs">
-              <div className="input-value">
-                <label htmlFor="%">Already-Paid</label>
+             {
+              isproductexist === true ? (
+                <div className="input-value">
+                  <label htmlFor="dbrName">Debtor Name</label>
+                  <select
+                    name="Debtor_name"
+                    value={Orderpayload?.product_name}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select customer name</option>
+                    {customerdetails && customerdetails.length > 0 ? (
+                      customerdetails.map((item) => (
+                        <option key={item.Cid} value={item.customer_name}>
+                          {item.customer_name}
+                        </option>
+                      ))
+                    ) : (
+                      <option value="">No Any details</option>
+                    )}
+                  </select>
+                </div>
+              ):(
+                 <div className="input-value">
+                <label htmlFor="%">Product_name</label>
                 <input
                   type="text"
                   name="percentage"
                   id="%"
-                  // value={Number(latest_paid_amount).toLocaleString()}
+                  value={Orderpayload?.product_name}
                   required
-                  readOnly
+                  onChange={handleChange}
                 />
               </div>
+              )
+             }
+
               <div className="input-value">
                 <label htmlFor="amount">Total Quantity </label>
                 <input
                   type="text"
                   name="Amount"
                   id="amount"
-                  // value={total_quantity}
+                  value={Orderpayload?.Quantity}
+                  onChange={handleChange}
                   required
                 />
               </div>
             </div>
             <div className="input-value">
-              <label htmlFor="price"> Add Price</label>
+              <label htmlFor="price">Paid Money</label>
               <input
                 type="text"
                 id="price"
                 name="price"
-                // value={price}
+                value={Orderpayload?.paidMoney}
                 onChange={handleChange}
-                placeholder="Enter amount"
+                placeholder="Enter amount he/she pay"
+              />
+            </div>
+                 <div className="input-value">
+              <label htmlFor="price">Pay money</label>
+              <input
+                type="text"
+                id="price"
+                name="price"
+                value={Orderpayload?.payamount}
+                onChange={handleChange}
+                placeholder="Enter amount he/she suppose to pay"
               />
             </div>
             <div className="btn-container">
