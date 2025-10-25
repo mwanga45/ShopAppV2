@@ -314,3 +314,11 @@ export interface ICreateOrder {
 export interface Oncloseform {
   onclose?: ()=> void
 }
+
+export interface ProductItem {
+  product_name?: string;
+  selling_price?: string;
+}
+export interface CombinedProductUNoN {
+  combinedResult?: ProductItem[]
+}

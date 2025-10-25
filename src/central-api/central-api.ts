@@ -18,3 +18,7 @@ export const  customerInfo = async() =>{
    const response = await api.post('sms/send-sms', data)
    return response
  }
+ export const CombinedProduct = async()=>{
+   const response = await api.get('order/bothproduct')
+   return response
+ }

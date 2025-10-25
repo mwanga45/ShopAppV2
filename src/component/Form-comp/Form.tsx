@@ -9,7 +9,7 @@ import { StockCreate } from "../../stock/stockservice";
 import { ProductInfo } from "./formservice";
 import Toggle from "../button/toggle";
 import { CreateDebtrecord, UpdateDebt } from "../../Sales/service/sales.api";
-import { customerInfo } from "../../central-api/central-api";
+import { CombinedProduct, customerInfo } from "../../central-api/central-api";
 import { toast, ToastContainer } from "react-toastify";
 
 import {
@@ -17,14 +17,16 @@ import {
   makesalesrequest,
 } from "../../Sales/service/sales.api";
 import type {
+  CombinedProductUNoN,
   CustomerInfo,
   Debtinfo,
   DebtRecord,
   FetchLastRec,
   ICreateOrder,
   Oncloseform,
+  ProductItem,
   Salerequest,
-  SalesSummaryResponse,
+  SalesSummaryResponse
 } from "../../type.interface";
 
 import type {
@@ -1579,6 +1581,8 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
   const [iscustomerexist, setiscustomerexist] = useState<boolean>(false);
   const [isproductexist, setproductexist] = useState<boolean>(false);
   const [customerdetails, setcustomerdetails] = useState<CustomerInfo[]>([]);
+  const [searchTerm, setsearchTerm]= useState('')
+  const [CombinedProductstate, setCombinedProductstate] = useState<ProductItem[]>([])
   const handleChange = (
     e: React.ChangeEvent<
       HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
@@ -1591,9 +1595,27 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
     const response = await customerInfo();
     setcustomerdetails(response.data.data);
   };
+  const handleCombinedProduct = async ()=> {
+    try{
+    const response = await CombinedProduct()
+    if(!response.data.success){
+      alert('failed  to load Product')
+      return 
+    }
+    setCombinedProductstate(response.data.data)
+  }catch(err){
+    console.error(err)
+    alert(err)
+    return
+  }
+  }
   useEffect(() => {
     handleCustomerDetails();
+    handleCombinedProduct()
   }, []);
+  const filtercombineproduct =  CombinedProductstate.map((product)=>{
+    product.product_name?.toLowerCase().includes(searchTerm.toLowerCase())
+  })
   return (
     <>
       <div className="debt-frm-cfrm-container">
