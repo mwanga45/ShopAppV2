@@ -26,7 +26,7 @@ import type {
   Oncloseform,
   ProductItem,
   Salerequest,
-  SalesSummaryResponse
+  SalesSummaryResponse,
 } from "../../type.interface";
 
 import type {
@@ -1581,8 +1581,8 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
   const [iscustomerexist, setiscustomerexist] = useState<boolean>(false);
   const [isproductexist, setproductexist] = useState<boolean>(false);
   const [customerdetails, setcustomerdetails] = useState<CustomerInfo[]>([]);
-  const [searchTerm, setsearchTerm]= useState('')
-  const [CombinedProductstate, setCombinedProductstate] = useState<ProductItem[]>([])
+  const [searchTerm, setsearchTerm] = useState("");
+  const [CombinedProductstate, setCombinedProductstate] = useState<ProductItem[]>([]);
   const handleChange = (
     e: React.ChangeEvent<
       HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
@@ -1595,27 +1595,27 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
     const response = await customerInfo();
     setcustomerdetails(response.data.data);
   };
-  const handleCombinedProduct = async ()=> {
-    try{
-    const response = await CombinedProduct()
-    if(!response.data.success){
-      alert('failed  to load Product')
-      return 
+  const handleCombinedProduct = async () => {
+    try {
+      const response = await CombinedProduct();
+      if (!response.data.success) {
+        alert("failed  to load Product");
+        return;
+      }
+      setCombinedProductstate(response.data.data);
+    } catch (err) {
+      console.error(err);
+      alert(err);
+      return;
     }
-    setCombinedProductstate(response.data.data)
-  }catch(err){
-    console.error(err)
-    alert(err)
-    return
-  }
-  }
+  };
   useEffect(() => {
     handleCustomerDetails();
-    handleCombinedProduct()
+    handleCombinedProduct();
   }, []);
-  const filtercombineproduct =  CombinedProductstate.map((product)=>{
-    product.product_name?.toLowerCase().includes(searchTerm.toLowerCase())
-  })
+const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
+  (item) => item.product_name?.toLowerCase().includes(searchTerm.toLowerCase())
+);
   return (
     <>
       <div className="debt-frm-cfrm-container">
@@ -1630,6 +1630,17 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
             <span>Place Order</span>
           </div>
           <form className="main-form-content">
+                     <div className="input-value">
+                  <label htmlFor="Phone_number">Search product_name</label>
+                  <input
+                    type="text"
+                    name="percentage"
+                    id="Phone_number"
+                    value={searchTerm}
+                    required
+                    onChange={(e)=> setsearchTerm(e.target.value)}
+                  />
+                </div>
             {iscustomerexist === true ? (
               <div className="two-column-inputs">
                 <div className="input-value">
@@ -1642,19 +1653,18 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
                     readOnly
                   />
                 </div>
-                    <div className="input-value">
-                    <label htmlFor="Phone_number">Phone Number</label>
-                    <input
-                      type="text"
-                      name="percentage"
-                      id="Phone_number"
-                      value={Orderpayload?.product_name}
-                      required
-                      onChange={handleChange}
-                    />
-                  </div>
-
-            </div>
+                <div className="input-value">
+                  <label htmlFor="Phone_number">Phone Number</label>
+                  <input
+                    type="text"
+                    name="percentage"
+                    id="Phone_number"
+                    value={Orderpayload?.product_name}
+                    required
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
             ) : (
               <div className="two-column-inputs">
                 <div className="input-value">
@@ -1676,41 +1686,48 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
                     )}
                   </select>
                 </div>
-                  <div className="input-value">
-                    <label htmlFor="Phone_number">Phone Number</label>
-                    <input
-                      type="text"
-                      name="percentage"
-                      id="Phone_number"
-                      value={Orderpayload?.product_name}
-                      required
-                      onChange={handleChange}
-                    />
-                  </div>
+                <div className="input-value">
+                  <label htmlFor="Phone_number">Phone Number</label>
+                  <input
+                    type="text"
+                    name="percentage"
+                    id="Phone_number"
+                    value={Orderpayload?.product_name}
+                    required
+                    onChange={handleChange}
+                  />
+                </div>
               </div>
             )}
             <div className="two-column-inputs">
               {isproductexist === true ? (
-                  <div className="input-value">
-                    <label htmlFor="dbrName">Product_Name</label>
-                    <select
-                      name="Debtor_name"
-                      value={Orderpayload?.product_name}
-                      onChange={handleChange}
-                    >
-                      <option value="">Select customer name</option>
-                      {customerdetails && customerdetails.length > 0 ? (
-                        customerdetails.map((item) => (
-                          <option key={item.Cid} value={item.customer_name}>
-                            {item.customer_name}
-                          </option>
-                        ))
-                      ) : (
-                        <option value="">No Any details</option>
-                      )}
-                    </select>
-                  </div>
+                <>
                 
+                <div className="input-value">
+                  <label htmlFor="productName">Product Name</label>
+                  <select
+                    id="productName"
+                    name="product_name"
+                    value={Orderpayload?.product_name || ""}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select product name</option>
+
+                    {filtercombineproduct && filtercombineproduct.length > 0 ? (
+                      filtercombineproduct.map((item) => (
+                        <option
+                          key={item.product_name}
+                          value={item.product_name}
+                        >
+                          {item.product_name}
+                        </option>
+                      ))
+                    ) : (
+                      <option value="">No product available</option>
+                    )}
+                  </select>
+                </div>
+                </>
               ) : (
                 <div className="input-value">
                   <label htmlFor="%">Product_name</label>
