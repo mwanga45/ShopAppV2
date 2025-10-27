@@ -1,7 +1,9 @@
 
 import { Pencil } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import styles from "./order-list.module.css"
+import { fetchOrders, fetchOrdersByDateRange } from "../../central-api/central-api"
+import { toast, ToastContainer } from "react-toastify"
 
 interface Order {
   id: string
@@ -9,52 +11,84 @@ interface Order {
   payMoney: number
   username: string
   productName: string
-  orderStatus: "pending" | "completed" | "cancelled" | "processing"
+  orderStatus: "pending" | "completed" | "cancelled" | "processing" | "Paid" | "Parctial" | "Pending"
   clientPhone: string
   clientName: string
   orderDate: string
 }
 
-const sampleOrders: Order[] = [
-  {
-    id: "1",
-    payMoney: 399.99,
-    paidMoney: 299.99,
-    username: "john_doe",
-    productName: "Wireless Headphones",
-    orderStatus: "completed",
-    clientPhone: "+1 234-567-8900",
-    clientName: "John Doe",
-    orderDate: "2025-01-15",
-  },
-  {
-    id: "2",
-    payMoney: 199.99,
-    paidMoney: 149.5,
-    username: "jane_smith",
-    productName: "Smart Watch",
-    orderStatus: "processing",
-    clientPhone: "+1 234-567-8901",
-    clientName: "Jane Smith",
-    orderDate: "2025-01-20",
-  },
-  {
-    id: "3",
-    payMoney: 89.99,
-    paidMoney: 89.99,
-    username: "bob_wilson",
-    productName: "Phone Case",
-    orderStatus: "pending",
-    clientPhone: "+1 234-567-8902",
-    clientName: "Bob Wilson",
-    orderDate: "2025-01-22",
-  },
-]
 
 export function OrdersTable() {
   const [editingId, setEditingId] = useState<string | null>(null)
-  const [orders, setOrders] = useState<Order[]>(sampleOrders)
+  const [orders, setOrders] = useState<Order[]>([])
   const [editForm, setEditForm] = useState<Order | null>(null)
+  const [loading, setLoading] = useState<boolean>(true)
+  const [startDate, setStartDate] = useState<string>("")
+  const [endDate, setEndDate] = useState<string>("")
+  const [filteredOrders, setFilteredOrders] = useState<Order[]>([])
+
+  // Fetch orders on component mount
+  useEffect(() => {
+    loadOrders()
+  }, [])
+
+  // Update filtered orders when orders or date range changes
+  useEffect(() => {
+    if (startDate && endDate) {
+      const filtered = orders.filter(order => {
+        const orderDate = new Date(order.orderDate)
+        const start = new Date(startDate)
+        const end = new Date(endDate)
+        return orderDate >= start && orderDate <= end
+      })
+      setFilteredOrders(filtered)
+    } else {
+      setFilteredOrders(orders)
+    }
+  }, [orders, startDate, endDate])
+
+  const loadOrders = async () => {
+    try {
+      setLoading(true)
+      const response = await fetchOrders()
+      if (response.data.success) {
+        setOrders(response.data.data)
+        setFilteredOrders(response.data.data)
+        toast.success("Orders loaded successfully")
+      } else {
+        toast.error(response.data.message || "Failed to load orders")
+      }
+    } catch (error: any) {
+      console.error("Error loading orders:", error)
+      toast.error("Error loading orders: " + (error.response?.data?.message || error.message))
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleDateRangeFilter = async () => {
+    if (!startDate || !endDate) {
+      toast.error("Please select both start and end dates")
+      return
+    }
+
+    try {
+      setLoading(true)
+      const response = await fetchOrdersByDateRange(startDate, endDate)
+      if (response.data.success) {
+        setOrders(response.data.data)
+        setFilteredOrders(response.data.data)
+        toast.success(`Found ${response.data.data.length} orders in date range`)
+      } else {
+        toast.error(response.data.message || "Failed to fetch orders")
+      }
+    } catch (error: any) {
+      console.error("Error fetching orders by date range:", error)
+      toast.error("Error fetching orders: " + (error.response?.data?.message || error.message))
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const handleEdit = (orderId: string) => {
     const orderToEdit = orders.find((order) => order.id === orderId)
@@ -87,20 +121,107 @@ export function OrdersTable() {
     const baseClass = styles.statusBadge
     switch (status) {
       case "completed":
+      case "Paid":
         return `${baseClass} ${styles.statusCompleted}`
       case "processing":
         return `${baseClass} ${styles.statusProcessing}`
       case "pending":
+      case "Pending":
         return `${baseClass} ${styles.statusPending}`
       case "cancelled":
         return `${baseClass} ${styles.statusCancelled}`
+      case "Parctial":
+        return `${baseClass} ${styles.statusProcessing}`
       default:
         return baseClass
     }
   }
 
+  const formatStatus = (status: Order["orderStatus"]) => {
+    switch (status) {
+      case "Paid":
+        return "Completed"
+      case "Parctial":
+        return "Partial"
+      case "Pending":
+        return "Pending"
+      default:
+        return status
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className={styles.tableContainer}>
+        <div style={{ textAlign: 'center', padding: '50px' }}>
+          <p>Loading orders...</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className={styles.tableContainer}>
+      <ToastContainer />
+      {/* Date Range Filter */}
+      <div style={{ 
+        display: 'flex', 
+        gap: '10px', 
+        marginBottom: '20px', 
+        padding: '15px',
+        backgroundColor: '#f8f9fa',
+        borderRadius: '8px',
+        alignItems: 'center'
+      }}>
+        <div>
+          <label style={{ marginRight: '5px', fontWeight: 'bold' }}>Start Date:</label>
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            style={{ padding: '5px', borderRadius: '4px', border: '1px solid #ccc' }}
+          />
+        </div>
+        <div>
+          <label style={{ marginRight: '5px', fontWeight: 'bold' }}>End Date:</label>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            style={{ padding: '5px', borderRadius: '4px', border: '1px solid #ccc' }}
+          />
+        </div>
+        <button
+          onClick={handleDateRangeFilter}
+          style={{
+            padding: '8px 16px',
+            backgroundColor: '#007bff',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer'
+          }}
+        >
+          Filter by Date
+        </button>
+        <button
+          onClick={loadOrders}
+          style={{
+            padding: '8px 16px',
+            backgroundColor: '#6c757d',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer'
+          }}
+        >
+          Load All Orders
+        </button>
+        <div style={{ marginLeft: 'auto', fontWeight: 'bold' }}>
+          Total Orders: {filteredOrders.length}
+        </div>
+      </div>
+
       <table className={styles.table}>
         <thead className={styles.tableHead}>
           <tr>
@@ -116,7 +237,7 @@ export function OrdersTable() {
           </tr>
         </thead>
         <tbody className={styles.tableBody}>
-          {orders.map((order) => (
+          {filteredOrders.map((order) => (
             <tr key={order.id} className={styles.tableRow}>
               <td className={`${styles.tableCell} ${styles.tableCellMuted}`}>
                 {editingId === order.id ? (
@@ -191,7 +312,7 @@ export function OrdersTable() {
                     <option value="cancelled">Cancelled</option>
                   </select>
                 ) : (
-                  <span className={getStatusClass(order.orderStatus)}>{order.orderStatus}</span>
+                  <span className={getStatusClass(order.orderStatus)}>{formatStatus(order.orderStatus)}</span>
                 )}
               </td>
               <td className={`${styles.tableCell} ${styles.tableCellMedium}`}>

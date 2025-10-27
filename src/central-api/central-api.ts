@@ -27,3 +27,13 @@ export const  customerInfo = async() =>{
    const response = await api.post('order/create', data)
    return response
  }
+
+ export const fetchOrders = async () => {
+   const response = await api.get('order/orders')
+   return response
+ }
+
+ export const fetchOrdersByDateRange = async (startDate: string, endDate: string) => {
+   const response = await api.post('order/orders/date-range', { startDate, endDate })
+   return response
+ }
