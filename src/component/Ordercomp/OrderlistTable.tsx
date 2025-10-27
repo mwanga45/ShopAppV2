@@ -1,7 +1,7 @@
 
 import { Pencil } from "lucide-react"
 import { useState } from "react"
-import styles from "./orders-table.module.css"
+import styles from "./order-list.module.css"
 
 interface Order {
   id: string

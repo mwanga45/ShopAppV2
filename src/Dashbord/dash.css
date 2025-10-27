@@ -55,26 +55,84 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 0%;
-     /* padding-left: 24px; */
+    padding: 0;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .sale-info{
     display: flex;
     flex-direction: column;
-    row-gap: 1px;
-    padding: 0%;
+    row-gap: 20px;
+    padding: 0;
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
 }
 
 .cardreport{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 6px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-gap: 20px;
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
+    flex: 1;
+    min-width: 0;
 }
 
-.cardreport > *:nth-child(3),
-.cardreport > *:nth-child(4) {
-    grid-column: span 1;
+.cardreport > *:nth-child(1),
+.cardreport > *:nth-child(2) {
+    grid-row: 1;
+}
+
+.cardreport > *:nth-child(3) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .main-firstlayor {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .cardreport {
+        max-width: 100%;
+        order: 1;
+    }
+    
+    .sale-info {
+        max-width: 100%;
+        order: 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .dash-container {
+        padding: 15px;
+    }
+    
+    .cardreport {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 15px;
+    }
+    
+    .cardreport > *:nth-child(1),
+    .cardreport > *:nth-child(2) {
+        grid-row: auto;
+    }
+    
+    .cardreport > *:nth-child(3) {
+        grid-column: 1;
+        grid-row: auto;
+    }
+    
+    .sale-info {
+        min-width: 100%;
+        max-width: 100%;
+    }
 }
