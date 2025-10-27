@@ -49,12 +49,13 @@ export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,UpdateA
     if (typeof payload.total_stock === 'undefined') throw new Error('Provide add or deduct amount') // Allow 0
      console.log(payload,product_id)
     const response = await StockUpdate( payload)
+    console.log(payload)
     console.log("userId", response.data.data)
 
     if ((response as any)?.data?.success === false) {
       alert((response as any)?.data?.message || 'Failed to update stock')
     } else {
-      alert('Stock updated successfully')
+      alert(response.data.message)
     }
   }catch(err){
    alert('Failed to update stock')

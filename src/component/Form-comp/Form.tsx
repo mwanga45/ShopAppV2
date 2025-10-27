@@ -1630,17 +1630,6 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
             <span>Place Order</span>
           </div>
           <form className="main-form-content">
-                     <div className="input-value">
-                  <label htmlFor="Phone_number">Search product_name</label>
-                  <input
-                    type="text"
-                    name="percentage"
-                    id="Phone_number"
-                    value={searchTerm}
-                    required
-                    onChange={(e)=> setsearchTerm(e.target.value)}
-                  />
-                </div>
             {iscustomerexist === true ? (
               <div className="two-column-inputs">
                 <div className="input-value">
