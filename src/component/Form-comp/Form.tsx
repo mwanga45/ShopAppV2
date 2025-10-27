@@ -1671,7 +1671,7 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
             onclose?.();
           },
         });
-        // Reset form
+
         setOrderpayload({});
         onclose?.();
       } else {
