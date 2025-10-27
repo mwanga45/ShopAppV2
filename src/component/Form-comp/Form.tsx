@@ -9,7 +9,7 @@ import { StockCreate } from "../../stock/stockservice";
 import { ProductInfo } from "./formservice";
 import Toggle from "../button/toggle";
 import { CreateDebtrecord, UpdateDebt } from "../../Sales/service/sales.api";
-import { CombinedProduct, customerInfo } from "../../central-api/central-api";
+import { CombinedProduct, customerInfo, CreateOrder } from "../../central-api/central-api";
 import { toast, ToastContainer } from "react-toastify";
 
 import {
@@ -17,7 +17,6 @@ import {
   makesalesrequest,
 } from "../../Sales/service/sales.api";
 import type {
-  CombinedProductUNoN,
   CustomerInfo,
   Debtinfo,
   DebtRecord,
@@ -1583,13 +1582,32 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
   const [customerdetails, setcustomerdetails] = useState<CustomerInfo[]>([]);
   const [searchTerm, setsearchTerm] = useState("");
   const [CombinedProductstate, setCombinedProductstate] = useState<ProductItem[]>([]);
+  const handleCustomerSelection = (selectedCustomerName: string) => {
+    const selectedCustomer = customerdetails.find(
+      (customer) => customer.customer_name === selectedCustomerName
+    );
+    
+    if (selectedCustomer) {
+      setOrderpayload((prev) => ({
+        ...prev,
+        client_name: selectedCustomer.customer_name,
+        client_phone: selectedCustomer.phone_number,
+      }));
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
     >
   ) => {
     const { name, value } = e.target;
-    setOrderpayload((prev) => ({ ...prev, [name]: value }));
+    
+    if (name === "client_name" && iscustomerexist) {
+      handleCustomerSelection(value);
+    } else {
+      setOrderpayload((prev) => ({ ...prev, [name]: value }));
+    }
   };
   const handleCustomerDetails = async () => {
     const response = await customerInfo();
@@ -1616,6 +1634,55 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
 const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
   (item) => item.product_name?.toLowerCase().includes(searchTerm.toLowerCase())
 );
+
+  const handleOrderSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validate required fields
+    if (!Orderpayload?.product_name || !Orderpayload?.client_name || !Orderpayload?.client_phone || 
+        !Orderpayload?.OrderDate || !Orderpayload?.payamount || !Orderpayload?.Quantity || !Orderpayload?.Orderstatus) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
+    try {
+      // Prepare the order data
+      const orderData = {
+        product_name: Orderpayload.product_name,
+        client_name: Orderpayload.client_name,
+        client_phone: Orderpayload.client_phone,
+        OrderDate: Orderpayload.OrderDate,
+        paidMoney: Number(Orderpayload.paidMoney) || 0,
+        payamount: Number(Orderpayload.payamount),
+        Quantity: Orderpayload.Quantity,
+        Phone_number: Orderpayload.client_phone, // Use client_phone as Phone_number
+        Orderstatus: Orderpayload.Orderstatus,
+        Order_Description: Orderpayload.Order_Description || ""
+      };
+
+      console.log("Sending order data:", orderData);
+      
+      const response = await CreateOrder(orderData);
+      console.log("Order creation response:", response);
+      
+      if (response.data.success) {
+        toast.success("Order created successfully!",{
+          onClose: () => {
+            onclose?.();
+          },
+        });
+        // Reset form
+        setOrderpayload({});
+        onclose?.();
+      } else {
+        toast.error(response.data.message || "Failed to create order");
+      }
+    } catch (error: any) {
+      console.error("Order creation error:", error);
+      toast.error("Error creating order: " + (error.response?.data?.message || error.message));
+    }
+  };
+
   return (
     <>
       <div className="debt-frm-cfrm-container">
@@ -1629,38 +1696,39 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
           <div className="form-title">
             <span>Place Order</span>
           </div>
-          <form className="main-form-content">
+          <form className="main-form-content" onSubmit={handleOrderSubmit}>
             {iscustomerexist === true ? (
               <div className="two-column-inputs">
                 <div className="input-value">
-                  <label htmlFor="pname">Customer Name</label>
+                  <label htmlFor="client_name">Customer Name</label>
                   <input
                     type="text"
-                    name="product_name"
-                    id="pname"
+                    name="client_name"
+                    id="client_name"
+                    value={Orderpayload?.client_name || ""}
                     required
                     readOnly
                   />
                 </div>
                 <div className="input-value">
-                  <label htmlFor="Phone_number">Phone Number</label>
+                  <label htmlFor="client_phone">Phone Number</label>
                   <input
                     type="text"
-                    name="percentage"
-                    id="Phone_number"
-                    value={Orderpayload?.product_name}
+                    name="client_phone"
+                    id="client_phone"
+                    value={Orderpayload?.client_phone || ""}
                     required
-                    onChange={handleChange}
+                    readOnly
                   />
                 </div>
               </div>
             ) : (
               <div className="two-column-inputs">
                 <div className="input-value">
-                  <label htmlFor="dbrName">customer Name</label>
+                  <label htmlFor="client_name">Customer Name</label>
                   <select
-                    name="Debtor_name"
-                    value={Orderpayload?.client_name}
+                    name="client_name"
+                    value={Orderpayload?.client_name || ""}
                     onChange={handleChange}
                   >
                     <option value="">Select customer name</option>
@@ -1676,12 +1744,12 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
                   </select>
                 </div>
                 <div className="input-value">
-                  <label htmlFor="Phone_number">Phone Number</label>
+                  <label htmlFor="client_phone">Phone Number</label>
                   <input
                     type="text"
-                    name="percentage"
-                    id="Phone_number"
-                    value={Orderpayload?.product_name}
+                    name="client_phone"
+                    id="client_phone"
+                    value={Orderpayload?.client_phone || ""}
                     required
                     onChange={handleChange}
                   />
@@ -1701,7 +1769,6 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
                     onChange={handleChange}
                   >
                     <option value="">Select product name</option>
-
                     {filtercombineproduct && filtercombineproduct.length > 0 ? (
                       filtercombineproduct.map((item) => (
                         <option
@@ -1719,12 +1786,12 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
                 </>
               ) : (
                 <div className="input-value">
-                  <label htmlFor="%">Product_name</label>
+                  <label htmlFor="product_name">Product Name</label>
                   <input
                     type="text"
-                    name="percentage"
-                    id="%"
-                    value={Orderpayload?.product_name}
+                    name="product_name"
+                    id="product_name"
+                    value={Orderpayload?.product_name || ""}
                     required
                     onChange={handleChange}
                   />
@@ -1732,12 +1799,12 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
               )}
 
               <div className="input-value">
-                <label htmlFor="amount">Total Quantity </label>
+                <label htmlFor="quantity">Total Quantity</label>
                 <input
                   type="text"
-                  name="Amount"
-                  id="amount"
-                  value={Orderpayload?.Quantity}
+                  name="Quantity"
+                  id="quantity"
+                  value={Orderpayload?.Quantity || ""}
                   onChange={handleChange}
                   required
                 />
@@ -1745,23 +1812,23 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
             </div>
             <div className="two-column-inputs">
               <div className="input-value">
-                <label htmlFor="price">Paid Money</label>
+                <label htmlFor="paidMoney">Paid Money</label>
                 <input
-                  type="text"
-                  id="price"
-                  name="price"
-                  value={Orderpayload?.paidMoney}
+                  type="number"
+                  id="paidMoney"
+                  name="paidMoney"
+                  value={Orderpayload?.paidMoney || ""}
                   onChange={handleChange}
                   placeholder="Enter amount he/she pay"
                 />
               </div>
               <div className="input-value">
-                <label htmlFor="price">Pay money</label>
+                <label htmlFor="payamount">Pay Amount</label>
                 <input
-                  type="text"
-                  id="price"
-                  name="price"
-                  value={Orderpayload?.payamount}
+                  type="number"
+                  id="payamount"
+                  name="payamount"
+                  value={Orderpayload?.payamount || ""}
                   onChange={handleChange}
                   placeholder="Enter amount he/she suppose to pay"
                   required
@@ -1769,13 +1836,41 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
               </div>
             </div>
             <div className="input-value">
-              <label htmlFor="date">Date receive Order</label>
+              <label htmlFor="orderDate">Order Date</label>
               <input
                 type="date"
-                name="date"
-                value={Orderpayload?.OrderDate}
+                name="OrderDate"
+                id="orderDate"
+                value={Orderpayload?.OrderDate || ""}
                 onChange={handleChange}
                 required
+              />
+            </div>
+            <div className="input-value">
+              <label htmlFor="orderStatus">Order Status</label>
+              <select
+                name="Orderstatus"
+                id="orderStatus"
+                value={Orderpayload?.Orderstatus || ""}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select order status</option>
+                <option value="fullpaid">Full Paid</option>
+                <option value="partialpaid">Partial Paid</option>
+                <option value="pending">Pending</option>
+                <option value="Partial">Partial</option>
+              </select>
+            </div>
+            <div className="input-value">
+              <label htmlFor="orderDescription">Order Description (Optional)</label>
+              <textarea
+                name="Order_Description"
+                id="orderDescription"
+                value={Orderpayload?.Order_Description || ""}
+                onChange={handleChange}
+                placeholder="Enter order description..."
+                rows={3}
               />
             </div>
             <div className="btn-container">
@@ -1793,7 +1888,7 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
               </button>
             </div>
             <div className="btn-container">
-              <Submitbtn buttonName="Place Order" type="submit" />
+              <Submitbtn buttonName="Place Order" type="submit" onclick={handleOrderSubmit} />
             </div>
           </form>
         </div>

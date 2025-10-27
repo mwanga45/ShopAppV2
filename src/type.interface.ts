@@ -309,6 +309,9 @@ export interface ICreateOrder {
   paidMoney?: number;
   payamount?: number;
   Quantity?: string;
+  Phone_number?: string;
+  Orderstatus?: string;
+  Order_Description?: string;
 }
 
 export interface Oncloseform {

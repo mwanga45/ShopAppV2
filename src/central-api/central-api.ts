@@ -22,3 +22,8 @@ export const  customerInfo = async() =>{
    const response = await api.get('order/bothproduct')
    return response
  }
+
+ export const CreateOrder = async (data: any) => {
+   const response = await api.post('order/create', data)
+   return response
+ }
