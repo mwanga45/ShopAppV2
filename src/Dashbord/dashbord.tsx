@@ -8,7 +8,10 @@ import { Daysales } from "../component/daysales/Daysales";
 import { Salesdeviation } from "../component/daysales/Salesdeviation";
 import { DonalChart } from "../component/donatchart/Donalchart";
 import { OrdersTable } from "../component/Ordercomp/OrderlistTable";
+import { PlaceOrder } from "../component/Form-comp/Form";
+import { useState } from "react";
 export const Dashboard = () =>{
+    const [openOrder, setopenOrder] = useState<boolean>(false) 
     return(
       <div className="dash-container">
         <div className="account-part">
@@ -28,6 +31,7 @@ export const Dashboard = () =>{
           <p className="title-desc">Welcome to ShopApp-V2</p>
           </div>
           <div className="export-data">
+            <Button buttonName="Make Order" Onclick={()=> setopenOrder(true)}/>
             <Button buttonName="export"/>
           </div>
         </div>
@@ -45,7 +49,10 @@ export const Dashboard = () =>{
             </div>
           </div>
         </div>
-      
+            {
+        openOrder &&
+        <PlaceOrder onclose={()=> setopenOrder(false)}/>
+       }
       </div>
     )
 } 
