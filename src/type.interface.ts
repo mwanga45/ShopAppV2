@@ -311,7 +311,7 @@ export interface ICreateOrder {
   Quantity?: string;
   Phone_number?: string;
   Orderstatus?: string;
-  Order_Description?: string;
+ 
 }
 
 export interface Oncloseform {

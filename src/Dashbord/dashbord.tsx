@@ -6,10 +6,7 @@ import { IoNotificationsCircleSharp } from "react-icons/io5";
 import { Accountbar } from "../component/account/Account"
 import { Daysales } from "../component/daysales/Daysales";
 import { Salesdeviation } from "../component/daysales/Salesdeviation";
-import { SimpleChart } from "../component/product/simplechart";
-import { Debtor } from "../component/Debtor/Debtor";
 import { DonalChart } from "../component/donatchart/Donalchart";
-import { OrderlistComp } from "../component/Ordercomp/orderlistComp";
 import { OrdersTable } from "../component/Ordercomp/OrderlistTable";
 export const Dashboard = () =>{
     return(
