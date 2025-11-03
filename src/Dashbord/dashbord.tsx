@@ -10,7 +10,25 @@ import { DonalChart } from "../component/donatchart/Donalchart";
 import { OrdersTable } from "../component/Ordercomp/OrderlistTable";
 import { PlaceOrder } from "../component/Form-comp/Form";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { DashboardResponseInfo } from "./dash.api";
+import { toast } from "react-toastify";
 export const Dashboard = () =>{
+  const Navigate = useNavigate()
+  const handleDashResponse= async()=>{
+    try{
+      const response  = await DashboardResponseInfo()
+      if(!response.data.success){
+      alert(response.data.message)
+      return
+      }
+      
+    }catch(err){
+     alert('Network Error')
+     Navigate('/')
+    }
+  }
+
     const [openOrder, setopenOrder] = useState<boolean>(false) 
     return(
       <div className="dash-container">

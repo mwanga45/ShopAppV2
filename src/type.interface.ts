@@ -325,3 +325,8 @@ export interface ProductItem {
 export interface CombinedProductUNoN {
   combinedResult?: ProductItem[]
 }
+    export interface mostSoldProductRetail {
+      product_name?:string,
+      total_quantity ?:string,
+      Revenue:string
+    }
