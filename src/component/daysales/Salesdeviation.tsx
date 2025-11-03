@@ -11,7 +11,7 @@ export const Salesdeviation:React.FC<DeviationResultCard> = ({TotalGenerated, Pe
                 <div className="dev-icon">
                     <FaChartLine />
                 </div>
-                <h3 className="dev-title">Sales Deviation</h3>
+                <h3 className="dev-title">Sales Deviation Analysis</h3>
                 <div className="dev-arrow">
                     <FaArrowsSplitUpAndLeft />
                 </div>
@@ -25,7 +25,7 @@ export const Salesdeviation:React.FC<DeviationResultCard> = ({TotalGenerated, Pe
                             <FaArrowUp />
                         </div>
                     </div>
-                    <div className="metric-value">{TotalGenerated}</div>
+                    <div className="metric-value">{Number(TotalGenerated).toLocaleString()}.Tsh</div>
                 </div>
                 
                 <div className="dev-metric">
@@ -35,7 +35,7 @@ export const Salesdeviation:React.FC<DeviationResultCard> = ({TotalGenerated, Pe
                             <FaChartLine />
                         </div>
                     </div>
-                    <div className="metric-value">{ExpectedRevenue}</div>
+                    <div className="metric-value">{Number(ExpectedRevenue).toLocaleString()}.Tsh</div>
                 </div>
                 
                 <div className="dev-metric">
@@ -45,7 +45,7 @@ export const Salesdeviation:React.FC<DeviationResultCard> = ({TotalGenerated, Pe
                             <FaArrowDown />
                         </div>
                     </div>
-                    <div className="metric-value deviation">{DeviationAmount}</div>
+                    <div className="metric-value deviation">{Number(DeviationAmount).toLocaleString()}.Tsh</div>
                 </div>
                 
                 <div className="dev-metric">
@@ -55,7 +55,7 @@ export const Salesdeviation:React.FC<DeviationResultCard> = ({TotalGenerated, Pe
                             <FaArrowDown />
                         </div>
                     </div>
-                    <div className="metric-value percentage">8%</div>
+                    <div className="metric-value percentage">{Number(PercentageDeviation).toFixed(1)}%</div>
                 </div>
             </div>
             
@@ -63,7 +63,7 @@ export const Salesdeviation:React.FC<DeviationResultCard> = ({TotalGenerated, Pe
                 <div className="status-indicator">
                     <span className="status-text">Below Target</span>
                     <div className="status-bar">
-                        <div className="status-fill" style={{width: '92%'}}></div>
+                        <div className="status-fill" style={{width: `${PercentageDeviation}`}}></div>
                     </div>
                 </div>
             </div>

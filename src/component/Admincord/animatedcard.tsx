@@ -68,7 +68,7 @@ export const AnimatedCard: React.FC<AnimatedCardProps> = ({
 
       <div className="card-body">
         <div className="money-row">
-          <span className="money-value">{displayValue}</span>
+          <span className="money-value">{displayValue}.Tsh</span>
           {currency ? <span className="money-currency">{currency}</span> : null}
         </div>
         <div className="card-details">{details}</div>

@@ -15,6 +15,10 @@ import { DashboardResponseInfo } from "./dash.api";
 import AnimatedCard from "../component/Admincord/animatedcard";
 export const Dashboard = () => {
   const [Cashmoney, setCashmoney] = useState<TodayRev>();
+  const [TotalGenerated, setTotalGenerated] = useState<number>()
+  const [Percentage_deviation, setPercentage_deviation] = useState<number>()
+  const [DeviateAmont, setDeviateAmount] = useState()
+  const [ExpectedRevenue, setExpectedRevenue] = useState()
   useEffect(() => {
     handleDashResponse();
   }, []);
@@ -26,6 +30,12 @@ export const Dashboard = () => {
         return;
       }
       setCashmoney(response.data.data.TodayRevenue[0]);
+      let Cash = response.data.data.TodayRevenue[0].generated_today
+      let Bank = response.data.data.TodayRevenue[0].bankRevenue
+     setTotalGenerated(Number(Cash) + Number(Bank))
+     setPercentage_deviation(response.data.data.Percentage_deviation)
+     setDeviateAmount(response.data.data.Deviation[0])
+     setExpectedRevenue(response.data.data.averageRevenue)
     } catch (err) {
       alert("Network Error");
     }
@@ -66,9 +76,9 @@ export const Dashboard = () => {
             <div className="cardreport">
                <AnimatedCard icon={GiTakeMyMoney} details={"cash money"} money={Number(Cashmoney?.generated_today)?? 0}/>
                 <AnimatedCard icon={GiPiggyBank} details={"Bank cash"} money={Number(Cashmoney?.bankRevenue)?? 0}/>
-                 <AnimatedCard icon={"symbol"} details={""} money={""}/>
+                 <AnimatedCard icon={"symbol"} details={"Total Generated Today"} money={TotalGenerated}/>
             </div>
-            <Salesdeviation />
+            <Salesdeviation TotalGenerated={TotalGenerated ?? 0} PercentageDeviation={Percentage_deviation}  DeviationAmount={DeviateAmont} ExpectedRevenue={ExpectedRevenue}/>
             <DonalChart />
           </div>
         </div>
