@@ -321,16 +321,24 @@ export interface ProductMonthResult{
   total_revenue?:string,
   total_quantity: string
 }
-export interface CardReport{
+export interface CardReportType{
   totalRevenue?:number
   averageRevenue?:number
-  mostSoldProduct?:ProductMonthResult[]
-
-
+  mostSoldProductWholesales?:ProductMonthResult[]
+  leastSoldProduct?:ProductMonthResult[]
+  leastSoldProductRetails?:ProductMonthResult[]
+  mostSoldProductRetail?:ProductMonthResult[]
+  combineResult?:number
+  TodayRevenue?:TodayRevenue
+  Percentage_deviation?:number
+  Deviation?:number
 }
 export interface TodayRev{
   generated_today?: string,
   bankRevenue?: string
 
+}
+export interface TodayRevenue {
+  TodayRevenue:TodayRev[]
 }
   

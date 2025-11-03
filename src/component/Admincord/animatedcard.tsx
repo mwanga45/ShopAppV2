@@ -9,7 +9,7 @@ export interface AnimatedCardProps {
 
   details: string;
 
-  money: number | string;
+  money: number | string | undefined;
 
   currency?: string;
 

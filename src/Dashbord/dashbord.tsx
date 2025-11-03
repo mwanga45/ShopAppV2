@@ -1,76 +1,79 @@
-import "./dash.css"
-import { Search } from "../component/search/Search"
-import {Button} from "../component/button/Button"
+import "./dash.css";
+import { Search } from "../component/search/Search";
+import { Button } from "../component/button/Button";
 import { CardReport } from "../component/card-report/card";
 import { IoNotificationsCircleSharp } from "react-icons/io5";
-import { Accountbar } from "../component/account/Account"
-import { Daysales } from "../component/daysales/Daysales";
+import { Accountbar } from "../component/account/Account";
 import { Salesdeviation } from "../component/daysales/Salesdeviation";
 import { DonalChart } from "../component/donatchart/Donalchart";
 import { OrdersTable } from "../component/Ordercomp/OrderlistTable";
 import { PlaceOrder } from "../component/Form-comp/Form";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { GiTakeMyMoney, GiPiggyBank } from "react-icons/gi";
+import type { CardReportType ,TodayRev } from "../type.interface";
 import { DashboardResponseInfo } from "./dash.api";
-import { toast } from "react-toastify";
-export const Dashboard = () =>{
-  const Navigate = useNavigate()
-  const handleDashResponse= async()=>{
-    try{
-      const response  = await DashboardResponseInfo()
-      if(!response.data.success){
-      alert(response.data.message)
-      return
+import AnimatedCard from "../component/Admincord/animatedcard";
+export const Dashboard = () => {
+  const [Cashmoney, setCashmoney] = useState<TodayRev>();
+  useEffect(() => {
+    handleDashResponse();
+  }, []);
+  const handleDashResponse = async () => {
+    try {
+      const response = await DashboardResponseInfo();
+      if (!response.data.success) {
+        alert(response.data.message);
+        return;
       }
-      
-    }catch(err){
-     alert('Network Error')
-     Navigate('/')
+      setCashmoney(response.data.data.TodayRevenue[0]);
+    } catch (err) {
+      alert("Network Error");
     }
-  }
+  };
 
-    const [openOrder, setopenOrder] = useState<boolean>(false) 
-    return(
-      <div className="dash-container">
-        <div className="account-part">
+  const [openOrder, setopenOrder] = useState<boolean>(false);
+  return (
+    <div className="dash-container">
+      <div className="account-part">
         <div className="dash-notification">
-          <IoNotificationsCircleSharp size={40} color="black"/>
+          <IoNotificationsCircleSharp size={40} color="black" />
         </div>
-          <div>
-            <Search/>
-          </div>
-          <div>
-            <Accountbar/>
-          </div>
+        <div>
+          <Search />
         </div>
-        <div className="title-part">
-          <div>
+        <div>
+          <Accountbar />
+        </div>
+      </div>
+      <div className="title-part">
+        <div>
           <p className="title">Dashboard</p>
           <p className="title-desc">Welcome to ShopApp-V2</p>
-          </div>
-          <div className="export-data">
-            <Button buttonName="Make Order" Onclick={()=> setopenOrder(true)}/>
-            <Button buttonName="export"/>
-          </div>
         </div>
-        <div className="main-dashboard">
-          <div className="main-firstlayor">
-            <div className="cardreport">
-            <CardReport/>
-            <CardReport/>
-             <OrdersTable/>
-            </div>
-            <div className="sale-info">
-            <Daysales/>
-            <Salesdeviation/>
-            <DonalChart/>
-            </div>
-          </div>
+        <div className="export-data">
+          <Button buttonName="Make Order" Onclick={() => setopenOrder(true)} />
+          <Button buttonName="export" />
         </div>
-            {
-        openOrder &&
-        <PlaceOrder onclose={()=> setopenOrder(false)}/>
-       }
       </div>
-    )
-} 
+      <div className="main-dashboard">
+        <div className="main-firstlayor">
+          <div className="cardreport">
+            <CardReport titleone="Fast selling product this Month" />
+            <CardReport titleone="Least selling product this Month" />
+            <OrdersTable />
+          </div>
+          <div className="sale-info">
+            <div className="cardreport">
+               <AnimatedCard icon={GiTakeMyMoney} details={"cash money"} money={Number(Cashmoney?.generated_today)?? 0}/>
+                <AnimatedCard icon={GiPiggyBank} details={"Bank cash"} money={Number(Cashmoney?.bankRevenue)?? 0}/>
+                 <AnimatedCard icon={"symbol"} details={""} money={""}/>
+            </div>
+            <Salesdeviation />
+            <DonalChart />
+          </div>
+        </div>
+      </div>
+      {openOrder && <PlaceOrder onclose={() => setopenOrder(false)} />}
+    </div>
+  );
+};

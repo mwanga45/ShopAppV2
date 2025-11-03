@@ -1,7 +1,8 @@
+import type { CardReportType } from "../../type.interface";
 import "./salesdeviation.css"
 import { FaArrowsSplitUpAndLeft, FaArrowUp, FaArrowDown, FaChartLine } from "react-icons/fa6";
 
-export const Salesdeviation = () => {
+export const Salesdeviation:React.FC<CardReportType> = ({totalRevenue, Deviation, Percentage_deviation,}) => {
     return (
         <div className="dev-container">
             <div className="dev-header">
