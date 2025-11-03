@@ -331,7 +331,7 @@ export interface CardReportType{
   combineResult?:number
   TodayRevenue?:TodayRevenue
   Percentage_deviation?:number
-  Deviation?:number
+  Deviation?:[]
 }
 export interface TodayRev{
   generated_today?: string,
@@ -341,4 +341,10 @@ export interface TodayRev{
 export interface TodayRevenue {
   TodayRevenue:TodayRev[]
 }
-  
+
+export interface DeviationResultCard{
+  ExpectedRevenue?:number
+  TotalGenerated?:number
+  PercentageDeviation?:number
+  DeviationAmount?:number
+}

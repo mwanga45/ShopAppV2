@@ -1,8 +1,10 @@
-import type { CardReportType } from "../../type.interface";
+import { useState } from "react";
+import type { DeviationResultCard } from "../../type.interface";
 import "./salesdeviation.css"
 import { FaArrowsSplitUpAndLeft, FaArrowUp, FaArrowDown, FaChartLine } from "react-icons/fa6";
 
-export const Salesdeviation:React.FC<CardReportType> = ({totalRevenue, Deviation, Percentage_deviation,}) => {
+export const Salesdeviation:React.FC<DeviationResultCard> = ({TotalGenerated, PercentageDeviation, DeviationAmount, ExpectedRevenue}) => {
+
     return (
         <div className="dev-container">
             <div className="dev-header">
@@ -23,7 +25,7 @@ export const Salesdeviation:React.FC<CardReportType> = ({totalRevenue, Deviation
                             <FaArrowUp />
                         </div>
                     </div>
-                    <div className="metric-value">2,300,000 Tsh</div>
+                    <div className="metric-value">{TotalGenerated}</div>
                 </div>
                 
                 <div className="dev-metric">
@@ -33,7 +35,7 @@ export const Salesdeviation:React.FC<CardReportType> = ({totalRevenue, Deviation
                             <FaChartLine />
                         </div>
                     </div>
-                    <div className="metric-value">2,500,000 Tsh</div>
+                    <div className="metric-value">{ExpectedRevenue}</div>
                 </div>
                 
                 <div className="dev-metric">
@@ -43,7 +45,7 @@ export const Salesdeviation:React.FC<CardReportType> = ({totalRevenue, Deviation
                             <FaArrowDown />
                         </div>
                     </div>
-                    <div className="metric-value deviation">200,000 Tsh</div>
+                    <div className="metric-value deviation">{DeviationAmount}</div>
                 </div>
                 
                 <div className="dev-metric">
