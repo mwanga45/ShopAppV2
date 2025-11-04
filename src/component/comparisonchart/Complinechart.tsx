@@ -12,10 +12,9 @@ import {
     Bar 
     
 } from "recharts"
-interface ChartPops {
-    Pname:string
-}
-export const Complinechart:React.FC<ChartPops> = ({Pname}) =>{
+import type { ChartPops } from "../../type.interface"
+
+export const Complinechart:React.FC<ChartPops> = ({title}) =>{
     const Thisweek = [
         {day:"Monday", Sales:23450},
         {day:"Tuesday", Sales:20400},
@@ -36,7 +35,7 @@ export const Complinechart:React.FC<ChartPops> = ({Pname}) =>{
 
     return (
         <div style={{display:"flex",flexDirection:"column"}}>
-            <h1 style={{color:"black",fontSize:"20px",fontWeight:"bold"}}>{Pname}</h1>
+            <h1 style={{color:"black",fontSize:"20px",fontWeight:"bold"}}>{title}</h1>
         <ResponsiveContainer width="100%" height={300}>
             <LineChart
                 data={Thisweek} // Use Thisweek data for the chart
@@ -59,7 +58,7 @@ export const Complinechart:React.FC<ChartPops> = ({Pname}) =>{
         </div>
     );
 }
-export const  BarCompChart:React.FC<ChartPops> = ({Pname})=>{
+export const  BarCompChart:React.FC<ChartPops> = ({title})=>{
         const Thisweek = [
         {day:"Monday", Sales:20450},
         {day:"Tuesday", Sales:10400},
@@ -89,7 +88,7 @@ export const  BarCompChart:React.FC<ChartPops> = ({Pname})=>{
 
     return (
         <div style={{display:"flex",flexDirection:"column"}}>
-            <h1 style={{color:"black",fontSize:"20px",fontWeight:"bold"}}>{Pname}</h1>
+            <h1 style={{color:"black",fontSize:"20px",fontWeight:"bold"}}>{title}</h1>
             <ResponsiveContainer width="100%" height={300}>
                 <BarChart
                     data={combinedData} // Use combined data for the chart

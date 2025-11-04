@@ -37,10 +37,10 @@ export default function Overview() {
         <h2 className="comarisons-title">Business Comparisons</h2>
         <div className="comparison-chart">
           <div className="Linecomponet-container">
-              <Complinechart Pname="Pallet starter"/>
+              <Complinechart title="Pallet starter"/>
           </div>
         <div className="Barcomponet-container">
-            <BarCompChart Pname="Marsh"/> 
+            <BarCompChart title="Marsh"/> 
         </div>
         </div>
        </div>
