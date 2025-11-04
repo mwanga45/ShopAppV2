@@ -10,7 +10,7 @@ import { OrdersTable } from "../component/Ordercomp/OrderlistTable";
 import { PlaceOrder } from "../component/Form-comp/Form";
 import { useEffect, useState } from "react";
 import { GiTakeMyMoney, GiPiggyBank } from "react-icons/gi";
-import type { CardReportType, TodayRev } from "../type.interface";
+import type { TodayRev } from "../type.interface";
 import { DashboardResponseInfo } from "./dash.api";
 import AnimatedCard from "../component/Admincord/animatedcard";
 import { GridDemo } from "../component/comparisonchart/profitchart";
@@ -30,15 +30,15 @@ export const Dashboard = () => {
         alert(response.data.message);
         return;
       }
-      setCashmoney(response.data.data.TodayRevenue[0]);
-      let Cash = response.data.data.TodayRevenue[0].generated_today;
-      let Bank = response.data.data.TodayRevenue[0].bankRevenue;
-      setTotalGenerated(response.data.data.combineResult);
-      setPercentage_deviation(response.data.data.Percentage_deviation);
-      setDeviateAmount(response.data.data.Deviation[0]);
+      setCashmoney(response.data.data.TodayRevenue[0] ?? 0);
+      setTotalGenerated(response.data.data.combineResult ?? 0);
+      setPercentage_deviation(response.data.data.Percentage_deviation ?? 100);
+      setDeviateAmount(response.data.data.Deviation[0] ?? response.data.data.averageRevenue );
       setExpectedRevenue(response.data.data.averageRevenue);
+      return
     } catch (err) {
       alert("Network Error");
+      
     }
   };
 

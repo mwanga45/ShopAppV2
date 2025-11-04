@@ -13,10 +13,10 @@ interface otherInfo {
   titleTwo?: string;
 }
 export const CardReport: React.FC<CardReportType & otherInfo> = ({
-  mostSoldProductRetail,
-  mostSoldProductWholesales,
-  leastSoldProduct,
-  leastSoldProductRetails,
+//   mostSoldProductRetail,
+//   mostSoldProductWholesales,
+//   leastSoldProduct,
+//   leastSoldProductRetails,
   titleTwo,
   titleone,
 }) => {
@@ -45,8 +45,8 @@ export const CardReport: React.FC<CardReportType & otherInfo> = ({
         </p>
         <div className="product-class">
           <ul>
-            <li className="prd-cls">%Productname Remain</li>
-            <li className="prd-cls">%Productname Remain</li>
+            <li className="prd-cls">Quantity sold for Retail</li>
+            <li className="prd-cls">Quantity Sold for Wholesales</li>
           </ul>
         </div>
       </div>
