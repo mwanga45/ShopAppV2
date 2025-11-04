@@ -16,7 +16,7 @@ import { ListComp } from "../component/List-comp/Listcomp";
 import { StockRegForm } from "../component/Form-comp/Form";
 import { useEffect, useState } from "react";
 import { OtherAc } from "../component/account/otherAc";
-import { GetuserList } from "./adminservice";
+import { BusinessWorthData, GetuserList } from "./adminservice";
 import { AdminReg } from "../component/admin-reg/admin-reg";
 
 interface AccountUserRespose {
@@ -36,6 +36,7 @@ export const AdminPanel = () => {
     const [showStockreg, setShowStockreg] = useState<boolean>(false)
     const [register, setregister] = useState<boolean>(false)
     const [Accountdetails, setAccountdetails] = useState<AccountUserRespose[]>([])
+    const [StockWorth, setStockWorth] = useState<number | null>()
     const handleRegUser = () => {
         setregister(!register)
     }
@@ -71,7 +72,19 @@ export const AdminPanel = () => {
             }
         }
     };
-
+   const handleBusinessWorth = async()=>{
+    try{
+        const response = await BusinessWorthData()
+        if(!response.data.success){
+            alert(response.data.message)
+            return
+        }
+        setStockWorth(response.data.data.StockWorth)
+        return
+    }catch(err){
+        alert(err)
+    }
+   }
     useEffect(() => {
         try {
             const handlegetuserAccount = async () => {
@@ -88,6 +101,7 @@ export const AdminPanel = () => {
 
             }
             handlegetuserAccount()
+            handleBusinessWorth()
         } catch (err) {
             console.error(err)
             alert(err)
@@ -153,7 +167,7 @@ export const AdminPanel = () => {
 
                         }
                     </div>
-                    <AnimatedCard details="Total salesToday" icon={FaWallet} money={25000} />
+                    <AnimatedCard details="Stock Worth" icon={FaWallet} money={StockWorth?? 0} />
                 </motion.div>
             </motion.div>
             {productShown &&

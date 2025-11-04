@@ -85,4 +85,15 @@ export const specDisc = async (id?:string)=>{
         console.error(err)
         throw err
     }
+    
+}
+export const BusinessWorthData = async()=>{
+    try{
+        const response = await api.get('profit-dev/networth')
+        return response
+
+    }catch(err){
+        console.log(err)
+        throw err
+    }
 }
