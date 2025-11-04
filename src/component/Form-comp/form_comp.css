@@ -121,8 +121,6 @@ box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    /* border: 2px solid white; */
-
 }
 
 .icon{

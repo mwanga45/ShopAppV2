@@ -961,10 +961,10 @@ export const SalesRecForm: React.FC<
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-between",
+                justifyContent: "center",
               }}
             >
-              <p>{isWhole ? "Whole sales Record" : "Retail sales Record"}</p>
+              <span>{isWhole ? "Whole sales Record" : "Retail sales Record"}</span>
             </div>
             <form className="main-form-content" onSubmit={handleOnsubmit}>
               <div className="form-container-decoration">
