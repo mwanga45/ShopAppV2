@@ -42,20 +42,20 @@ export const Salesdeviation:React.FC<DeviationResultCard> = ({TotalGenerated, Pe
                     <div className="metric-header">
                         <span className="metric-label">Deviation</span>
                         <div className="metric-icon negative">
-                            <FaArrowDown />
+                            {Number(DeviationAmount) < 0 ? <FaArrowUp color="green" />: <FaArrowDown/>}
                         </div>
                     </div>
-                    <div className="metric-value deviation">{Number(DeviationAmount).toLocaleString()}.Tsh</div>
+                    <div className="metric-value deviation">{Number(DeviationAmount) > 0 ? Number(DeviationAmount).toLocaleString() : <span style={{color:"green"}}>{(Number(DeviationAmount)* -1).toLocaleString()}.Tsh</span>}</div>
                 </div>
                 
                 <div className="dev-metric">
                     <div className="metric-header">
                         <span className="metric-label">Deviation Percentage</span>
                         <div className="metric-icon negative">
-                            <FaArrowDown />
-                        </div>
+                            {Number(PercentageDeviation)  > 0 ? <FaArrowDown /> :<FaArrowUp color="green"/>}
+                        </div> 
                     </div>
-                    <div className="metric-value percentage">{Number(PercentageDeviation).toFixed(1)}%</div>
+                    <div className="metric-value percentage">{Number(PercentageDeviation)< 0 ?<span style={{color:"green"}}>{(Number(PercentageDeviation) * -1).toFixed(1)}%</span> :Number(PercentageDeviation).toFixed(1)}</div>
                 </div>
             </div>
             
@@ -63,7 +63,7 @@ export const Salesdeviation:React.FC<DeviationResultCard> = ({TotalGenerated, Pe
                 <div className="status-indicator">
                     <span className="status-text">Below Target</span>
                     <div className="status-bar">
-                        <div className="status-fill" style={{width: `${PercentageDeviation}`}}></div>
+                        <div className="status-fill" style={{width: `${Number(PercentageDeviation)}`}}></div>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 .donut-chart-container {
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   height: 400px;
   margin-right: 20px;
   background: transparent;
@@ -8,6 +8,7 @@
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid #e9ecef;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;

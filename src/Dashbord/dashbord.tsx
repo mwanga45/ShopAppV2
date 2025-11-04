@@ -10,15 +10,16 @@ import { OrdersTable } from "../component/Ordercomp/OrderlistTable";
 import { PlaceOrder } from "../component/Form-comp/Form";
 import { useEffect, useState } from "react";
 import { GiTakeMyMoney, GiPiggyBank } from "react-icons/gi";
-import type { CardReportType ,TodayRev } from "../type.interface";
+import type { CardReportType, TodayRev } from "../type.interface";
 import { DashboardResponseInfo } from "./dash.api";
 import AnimatedCard from "../component/Admincord/animatedcard";
+import { GridDemo } from "../component/comparisonchart/profitchart";
 export const Dashboard = () => {
   const [Cashmoney, setCashmoney] = useState<TodayRev>();
-  const [TotalGenerated, setTotalGenerated] = useState<number>()
-  const [Percentage_deviation, setPercentage_deviation] = useState<number>()
-  const [DeviateAmont, setDeviateAmount] = useState()
-  const [ExpectedRevenue, setExpectedRevenue] = useState()
+  const [TotalGenerated, setTotalGenerated] = useState<number>();
+  const [Percentage_deviation, setPercentage_deviation] = useState<number>();
+  const [DeviateAmont, setDeviateAmount] = useState();
+  const [ExpectedRevenue, setExpectedRevenue] = useState();
   useEffect(() => {
     handleDashResponse();
   }, []);
@@ -30,12 +31,12 @@ export const Dashboard = () => {
         return;
       }
       setCashmoney(response.data.data.TodayRevenue[0]);
-      let Cash = response.data.data.TodayRevenue[0].generated_today
-      let Bank = response.data.data.TodayRevenue[0].bankRevenue
-     setTotalGenerated(Number(Cash) + Number(Bank))
-     setPercentage_deviation(response.data.data.Percentage_deviation)
-     setDeviateAmount(response.data.data.Deviation[0])
-     setExpectedRevenue(response.data.data.averageRevenue)
+      let Cash = response.data.data.TodayRevenue[0].generated_today;
+      let Bank = response.data.data.TodayRevenue[0].bankRevenue;
+      setTotalGenerated(response.data.data.combineResult);
+      setPercentage_deviation(response.data.data.Percentage_deviation);
+      setDeviateAmount(response.data.data.Deviation[0]);
+      setExpectedRevenue(response.data.data.averageRevenue);
     } catch (err) {
       alert("Network Error");
     }
@@ -71,14 +72,33 @@ export const Dashboard = () => {
             <CardReport titleone="Fast selling product this Month" />
             <CardReport titleone="Least selling product this Month" />
             <OrdersTable />
+            <GridDemo />
+            <GridDemo />
           </div>
           <div className="sale-info">
             <div className="cardreport">
-               <AnimatedCard icon={GiTakeMyMoney} details={"cash money"} money={Number(Cashmoney?.generated_today)?? 0}/>
-                <AnimatedCard icon={GiPiggyBank} details={"Bank cash"} money={Number(Cashmoney?.bankRevenue)?? 0}/>
-                 <AnimatedCard icon={"symbol"} details={"Total Generated Today"} money={TotalGenerated}/>
+              <AnimatedCard
+                icon={GiTakeMyMoney}
+                details={"cash money"}
+                money={Number(Cashmoney?.generated_today) ?? 0}
+              />
+              <AnimatedCard
+                icon={GiPiggyBank}
+                details={"Bank cash"}
+                money={Number(Cashmoney?.bankRevenue) ?? 0}
+              />
+              <AnimatedCard
+                icon={"symbol"}
+                details={"Total Generated Today"}
+                money={TotalGenerated}
+              />
             </div>
-            <Salesdeviation TotalGenerated={TotalGenerated ?? 0} PercentageDeviation={Percentage_deviation}  DeviationAmount={DeviateAmont} ExpectedRevenue={ExpectedRevenue}/>
+            <Salesdeviation
+              TotalGenerated={TotalGenerated ?? 0}
+              PercentageDeviation={Percentage_deviation}
+              DeviationAmount={DeviateAmont}
+              ExpectedRevenue={ExpectedRevenue}
+            />
             <DonalChart />
           </div>
         </div>
