@@ -965,13 +965,6 @@ export const SalesRecForm: React.FC<
               }}
             >
               <p>{isWhole ? "Whole sales Record" : "Retail sales Record"}</p>
-              <button
-                type="button"
-                className="Actin-btn"
-                onClick={() => setWhole((prev) => !prev)}
-              >
-                {isWhole ? "Switch to Retail" : "Switch to Wholesale"}
-              </button>
             </div>
             <form className="main-form-content" onSubmit={handleOnsubmit}>
               <div className="form-container-decoration">
@@ -1042,6 +1035,13 @@ export const SalesRecForm: React.FC<
                   />
                 </div>
                 <div className="btn-container">
+                      <button
+                type="button"
+                className="toggle-customer-btn"
+                onClick={() => setWhole((prev) => !prev)}
+              >
+                {isWhole ? "Switch to Retail" : "Switch to Wholesale"}
+              </button>
                   <Submitbtn buttonName="calculate sales" type="submit" />
                 </div>
               </div>

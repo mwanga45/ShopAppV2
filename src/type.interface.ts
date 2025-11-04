@@ -357,7 +357,6 @@ export interface DeviationResultCard{
 }
 
 export interface ChartPops {
-    title?:string
     Thisweek?:ChartData[]
     LastWeek?:ChartData[]
 }

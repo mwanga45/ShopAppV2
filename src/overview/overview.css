@@ -70,8 +70,9 @@
 .category-summary{
     display: flex;
     column-gap: 10px;
+    justify-content: space-evenly;
     width: 100%;
-    height: auto;
+    padding: 5px;
 }
 .category-summary > div, .totalprofit-summary > div {
   opacity: 0; /* Hide initially */

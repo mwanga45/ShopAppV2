@@ -13,8 +13,10 @@ import {
     
 } from "recharts"
 import type { ChartPops } from "../../type.interface"
-
-export const Complinechart:React.FC<ChartPops> = ({title, Thisweek, LastWeek}) =>{
+interface GraphTitle {
+    title?:string
+}
+export const Complinechart:React.FC<ChartPops & GraphTitle>  = ({title, Thisweek, LastWeek}) =>{
     // const Thisweek = [
     //     {day:"Monday", Sales:23450},
     //     {day:"Tuesday", Sales:20400},
@@ -31,13 +33,19 @@ export const Complinechart:React.FC<ChartPops> = ({title, Thisweek, LastWeek}) =
     //     {day:"Saturday", Sales:44400},
     //     {day:"Sunday", Sales:63510}    
     // ]
-
+        const combinedData = Thisweek && Thisweek.map((weekData) => {
+        const lastWeekMatch =LastWeek && LastWeek.find((lastWeekData) => lastWeekData.day === weekData.day);
+        return {
+            ...weekData,
+            LastWeekSalesProfit: lastWeekMatch ? lastWeekMatch.Revenue : 0, // Add LastWeekSalesProfit or default to 0
+        };
+    });
     return (
         <div style={{display:"flex",flexDirection:"column"}}>
             <h1 style={{color:"black",fontSize:"20px",fontWeight:"bold"}}>{title}</h1>
         <ResponsiveContainer width="100%" height={300}>
             <LineChart
-                data={Thisweek} // Use Thisweek data for the chart
+                data={combinedData} // Use Thisweek data for the chart
                 margin={{
                     top: 5,
                     right: 30,
@@ -47,7 +55,7 @@ export const Complinechart:React.FC<ChartPops> = ({title, Thisweek, LastWeek}) =
             >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="day" />
-                <YAxis />
+                 <YAxis dataKey={'Revenue'} />
                 <Tooltip />
                 <Legend />
                 <Line type="monotone" dataKey="Revenue" stroke="#8884d8" name="This Week" strokeWidth={3}/>
@@ -57,31 +65,15 @@ export const Complinechart:React.FC<ChartPops> = ({title, Thisweek, LastWeek}) =
         </div>
     );
 }
-export const  BarCompChart:React.FC<ChartPops> = ({title})=>{
-        const Thisweek = [
-        {day:"Monday", Sales:20450},
-        {day:"Tuesday", Sales:10400},
-        {day:"Wensday", Sales:20400},
-        {day:"Thursday", Sales:26700},
-        {day:"Friday", Sales:39400},
-    ]
-    const LastWeek = [
-        {day:"Monday", SalesProfit:10400},
-        {day:"Tuesday",SalesProfit:13400},
-        {day:"Wensday",SalesProfit:32400},
-        {day:"Thursday",SalesProfit:10400},
-        {day:"Friday", SalesProfit:20000},
-        {day:"Saturday",SalesProfit:14400},
-        {day:"Sunday", SalesProfit:13510}
-       
-    ]
+export const  BarCompChart:React.FC<ChartPops & GraphTitle > = ({title,LastWeek, Thisweek})=>{
+
 
     // Combine data for BarChart
-    const combinedData = Thisweek.map((weekData) => {
-        const lastWeekMatch = LastWeek.find((lastWeekData) => lastWeekData.day === weekData.day);
+    const combinedData = Thisweek && Thisweek.map((weekData) => {
+        const lastWeekMatch =LastWeek && LastWeek.find((lastWeekData) => lastWeekData.day === weekData.day);
         return {
             ...weekData,
-            LastWeekSalesProfit: lastWeekMatch ? lastWeekMatch.SalesProfit : 0, // Add LastWeekSalesProfit or default to 0
+            LastWeekSalesProfit: lastWeekMatch ? lastWeekMatch.Revenue : 0, // Add LastWeekSalesProfit or default to 0
         };
     });
 
@@ -90,7 +82,7 @@ export const  BarCompChart:React.FC<ChartPops> = ({title})=>{
             <h1 style={{color:"black",fontSize:"20px",fontWeight:"bold"}}>{title}</h1>
             <ResponsiveContainer width="100%" height={300}>
                 <BarChart
-                    data={combinedData} // Use combined data for the chart
+                    data={combinedData} 
                     margin={{
                         top: 5,
                         right: 30,
@@ -100,12 +92,12 @@ export const  BarCompChart:React.FC<ChartPops> = ({title})=>{
                 >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="day" />
-                    <YAxis />
+                    <YAxis dataKey={'Revenue'} />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="Sales" fill="#8884d8" name="This Week Sales" />
+                    <Bar dataKey="Revenue" fill="#2cc900ff" name="This Week Sales" />
                     {/* Removed data={LastWeek} and changed dataKey to LastWeekSalesProfit */}
-                    <Bar dataKey="LastWeekSalesProfit" fill="#82ca9d" name="Last Week Profit" />
+                    <Bar dataKey="LastWeekSalesProfit" fill="#2218d9ff" name="Last Week Profit" />
                 </BarChart>
             </ResponsiveContainer>
         </div>

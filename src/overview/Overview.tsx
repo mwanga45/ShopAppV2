@@ -5,12 +5,27 @@ import {Button} from "../component/button/Button"
 import { SummaryCard } from "../component/summaryCard/summarycard"
 import "./overview.css"
 import { Complinechart, BarCompChart } from "../component/comparisonchart/Complinechart"; 
-// import { useState } from "react";
+import { GraphInfomation } from "./overview.api";
+import { useEffect, useState } from "react";
+import type { ChartData} from "chart.js";
 
 
 export default function Overview() {
-
-
+  const[Thisweek, setThisweek] = useState<ChartData[] >([])
+  const [LastWeek, setLastWeek] = useState<ChartData[]>([])
+const handleGraphData = async()=>{
+  const response = await GraphInfomation()
+  if(!response.data.success){
+    alert(response.data.message)
+    return
+  }
+  setThisweek(response.data.data.Thisweek)
+  setLastWeek(response.data.data.Lastweek)
+  console.log("this week data", Thisweek)
+}
+useEffect(()=>{
+   handleGraphData()
+},[])
   return (
     <div className='overview-container' >
       <div className="overview-Accountbar">
@@ -37,10 +52,10 @@ export default function Overview() {
         <h2 className="comarisons-title">Business Comparisons</h2>
         <div className="comparison-chart">
           <div className="Linecomponet-container">
-              <Complinechart title="Pallet starter"/>
+              <Complinechart title="Wholesales Product Performance" LastWeek={LastWeek} Thisweek={Thisweek}/>
           </div>
         <div className="Barcomponet-container">
-            <BarCompChart title="Marsh"/> 
+            <BarCompChart title="Wholesales Product Perfomance" LastWeek={LastWeek} Thisweek={Thisweek}/> 
         </div>
         </div>
        </div>
