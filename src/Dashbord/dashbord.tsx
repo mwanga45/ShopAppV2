@@ -84,7 +84,7 @@ export const Dashboard = () => {
               />
               <AnimatedCard
                 icon={GiPiggyBank}
-                details={"Bank cash"}
+                details={"Bank money"}
                 money={Number(Cashmoney?.bankRevenue) ?? 0}
               />
               <AnimatedCard
