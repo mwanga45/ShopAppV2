@@ -37,6 +37,7 @@ export const AdminPanel = () => {
     const [register, setregister] = useState<boolean>(false)
     const [Accountdetails, setAccountdetails] = useState<AccountUserRespose[]>([])
     const [StockWorth, setStockWorth] = useState<number | null>()
+    const [CustomerDebt, setCustomerDebt] = useState<number|null>()
     const handleRegUser = () => {
         setregister(!register)
     }
@@ -80,6 +81,7 @@ export const AdminPanel = () => {
             return
         }
         setStockWorth(response.data.data.StockWorth)
+        setCustomerDebt(response.data.data.CustomerDebt)
         return
     }catch(err){
         alert(err)
@@ -133,7 +135,7 @@ export const AdminPanel = () => {
                 <motion.div className="admin-product-details-container" variants={itemVariants}>
                     <Button buttonName="Money Usage" />
                     <AnimatedCard details="Bank-dept" icon={FaPiggyBank} money={2300000} />
-                    <AnimatedCard details="Debt" icon={FcDebt} money={23000} />
+                    <AnimatedCard details="Debt" icon={FcDebt} money={CustomerDebt ?? 0} />
                     <AnimatedCard details="Business-Networth" icon={FaCoins} money={12000000} />
                 </motion.div>
                 <motion.div className="admin-report-analysis-container" variants={itemVariants}>
