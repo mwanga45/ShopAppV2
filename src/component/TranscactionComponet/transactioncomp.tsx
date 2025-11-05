@@ -1,7 +1,10 @@
 export const TransactionComp = ()=>{
     return(
-        <div>
-            
-        </div>
+        <div></div>
+    )
+}
+export const TransactionForm =()=>{
+    return(
+        <div></div>
     )
 }
