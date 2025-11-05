@@ -30,7 +30,7 @@ export const Dashboard = () => {
         alert(response.data.message);
         return;
       }
-      setCashmoney(response.data.data.TodayRevenue[0] ?? 0);
+      setCashmoney(response.data.data.TodayRevenue[0] ??0);
       setTotalGenerated(response.data.data.combineResult ?? 0);
       setPercentage_deviation(response.data.data.Percentage_deviation ?? 100);
       setDeviateAmount(response.data.data.Deviation[0] ?? response.data.data.averageRevenue );
