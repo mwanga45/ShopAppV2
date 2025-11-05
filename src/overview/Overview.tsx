@@ -7,12 +7,13 @@ import "./overview.css"
 import { Complinechart, BarCompChart } from "../component/comparisonchart/Complinechart"; 
 import { GraphInfomation } from "./overview.api";
 import { useEffect, useState } from "react";
-import type { ChartData} from "chart.js";
+import type { weekChartData } from "../type.interface";
+
 
 
 export default function Overview() {
-  const[Thisweek, setThisweek] = useState<ChartData[] >([])
-  const [LastWeek, setLastWeek] = useState<ChartData[]>([])
+  const[Thisweek, setThisweek] = useState<weekChartData[] >([])
+  const [LastWeek, setLastWeek] = useState<weekChartData[]>([])
 const handleGraphData = async()=>{
   const response = await GraphInfomation()
   if(!response.data.success){

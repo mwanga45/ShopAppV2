@@ -343,7 +343,7 @@ export interface TodayRevenue {
 }
 
 
-export interface ChartData {
+export interface weekChartData {
   Revenue?: number
   Quantity?: 40
   Date?: string
@@ -357,6 +357,6 @@ export interface DeviationResultCard{
 }
 
 export interface ChartPops {
-    Thisweek?:ChartData[]
-    LastWeek?:ChartData[]
+    Thisweek?:weekChartData[]
+    LastWeek?:weekChartData[]
 }
