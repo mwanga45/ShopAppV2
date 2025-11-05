@@ -83,4 +83,14 @@
   background-color: #e9eeff;
   border-radius: 12px;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+}
+.transactionHistory span{
+    color: grey;
+    font-size: 25px;
+    font-weight: 600;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
 }
