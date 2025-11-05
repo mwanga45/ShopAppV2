@@ -28,6 +28,9 @@ export const TransactionComp: React.FC = () => {
             <div className={styles.transactionHistory}>
               <span>Transaction History</span>
             </div>
+            <div className={styles.transactionInfoHistory}>
+              <span>Today</span>
+            </div>
           </div>
           <div className={styles.transactionAssign}></div>
         </div>

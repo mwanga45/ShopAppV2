@@ -94,3 +94,18 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
 }
+.transactionInfoHistory{
+    width: 100%;
+    min-height:200px ;
+    max-height:250px;
+    border: 2px solid red;
+    margin-top: 12px;
+}
+.transactionInfoHistory span{
+    color: grey;
+    font-size: 22px;
+    font-weight: 500;
+    margin-left: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
