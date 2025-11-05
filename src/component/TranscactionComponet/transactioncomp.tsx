@@ -8,23 +8,25 @@ export const TransactionComp: React.FC = () => {
     <div className={styles.transctionmaincontainer}>
       <div className={styles.transcationtopbar}>
         <div className={styles.transactionIconContainer}>
-        <FaExchangeAlt size={35} color="white"/>
-        < FaCoins size={35} color="white"/>
+          <FaExchangeAlt size={35} color="white" />
+          <FaCoins size={35} color="white" />
         </div>
         <div className="icon-close">
           <RiCloseFill size={30} color="pink" />
         </div>
       </div>
-        <div className={styles.transactiontitle}>
-          <span>Transaction Activity</span>
-        </div>
+      <div className={styles.transactiontitle}>
+        <span>Transaction Activity</span>
+      </div>
       <div className={styles.TranscationBody}>
         <div className={styles.transcionamountcontainer}>
           <div className={styles.transactionRecord}>
-                 <AnimatedCard icon={"symbol"} details={"ON USE"} money={600000} />
+            <div className={styles.transactionsalaryContainer}>
+             <div></div>
+            <AnimatedCard icon={"symbol"} details={"ON USE"} money={600000} />
+            </div>
           </div>
           <div className={styles.transactionAssign}></div>
-     
         </div>
       </div>
     </div>
