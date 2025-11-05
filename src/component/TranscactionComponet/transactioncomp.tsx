@@ -31,6 +31,7 @@ export const TransactionComp: React.FC = () => {
             <div className={styles.transactionInfoHistory}>
               <span>Today</span>
             </div>
+            <TransactionBar/>
           </div>
           <div className={styles.transactionAssign}></div>
         </div>
@@ -40,4 +41,20 @@ export const TransactionComp: React.FC = () => {
 };
 export const TransactionForm = () => {
   return <div></div>;
+};
+export const TransactionBar = () => {
+  return (
+    <div className={styles.barRecord}>
+      <div>
+        <FaExchangeAlt />
+      </div>
+      <div>
+        <span>Electricity</span>
+      </div>
+      <div>
+        <span>5,000.Tsh</span>
+      </div>
+
+    </div>
+  );
 };
