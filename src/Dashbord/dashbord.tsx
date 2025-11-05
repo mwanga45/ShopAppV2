@@ -62,6 +62,7 @@ export const Dashboard = () => {
           <p className="title-desc">Welcome to ShopApp-V2</p>
         </div>
         <div className="export-data">
+          <Button buttonName="daily requirement"/>
           <Button buttonName="Make Order" Onclick={() => setopenOrder(true)} />
           <Button buttonName="export" />
         </div>
