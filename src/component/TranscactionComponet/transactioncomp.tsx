@@ -1,18 +1,19 @@
 import { RiCloseFill } from "react-icons/ri";
-import "./transaction.modele.css";
+import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
-export const TransactionComp = () => {
+import type React from "react";
+export const TransactionComp:React.FC = () => {
   return (
-    <div className="transction-main-container">
-      <div className="transcation-top-bar">
+    <div className={styles.transctionmaincontainer}>
+      <div className={styles.transcationtopbar}>
         <div className="icon-close">
           <RiCloseFill size={30} color="pink" />
         </div>
       </div>
-      <div className="transaction-title">
+      <div className={styles.transactiontitle}>
           <span>Transaction Activity</span>
       </div>
-      <div className="transcion-amount-container">
+      <div className={styles.transcionamountcontainer}>
          <AnimatedCard icon={"symbol"} details={"ON USE"} money={600000}/>
       </div>
     </div>

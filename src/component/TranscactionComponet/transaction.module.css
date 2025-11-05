@@ -1,7 +1,7 @@
-.transction-main-container{
+.transctionmaincontainer{
     display: flex;
     flex-direction: column;
-    column-gap: 5px;
+    row-gap: 5px;
     flex: 1;
     background-color: aliceblue;
     width: 100%;
@@ -9,7 +9,7 @@
     padding: 15px;
     border: 2px solid red
 }
-.transcation-top-bar{
+.transcationtopbar{
     width: 100%;
     height: 80px;
     border:2px solid green;
@@ -18,7 +18,12 @@
     justify-content: flex-end;
     padding:5px;
 }
-.transcion-amount-container{
+.transactiontitle{
+    width: 100%;
+    height: 40px;
+    border: 2px solid green;
+}
+.transcionamountcontainer{
    display: flex;
    justify-content: flex-end;
    align-items: center;
