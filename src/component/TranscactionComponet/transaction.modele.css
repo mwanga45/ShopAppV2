@@ -1,0 +1,8 @@
+.transction-main-container{
+    display: flex;
+    flex: 1;
+    background-color: aliceblue;
+    width: 100%;
+    min-height:100vh ;
+    
+}

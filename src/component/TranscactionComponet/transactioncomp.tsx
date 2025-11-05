@@ -1,6 +1,7 @@
+import './transaction.modele.css'
 export const TransactionComp = ()=>{
     return(
-        <div></div>
+        <div className='transction-main-container'></div>
     )
 }
 export const TransactionForm =()=>{
