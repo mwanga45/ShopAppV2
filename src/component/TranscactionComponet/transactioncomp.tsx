@@ -9,6 +9,9 @@ export const TransactionComp = () => {
           <RiCloseFill size={30} color="pink" />
         </div>
       </div>
+      <div className="transaction-title">
+          <span>Transaction Activity</span>
+      </div>
       <div className="transcion-amount-container">
          <AnimatedCard icon={"symbol"} details={"ON USE"} money={600000}/>
       </div>
