@@ -53,4 +53,18 @@
     height: 80vh;
     width: 100%;
     border: 2px solid gold;
+
+}
+.transactionRecord{
+  width: 60%;
+  height:50vh ;
+  border: 1px solid black;
+  margin-right:5px;
+}
+.transactionAssign{
+ width: 40%;
+  height:50vh ;
+  border: 1px solid rgb(0, 59, 196);
+   margin-left:5px;
+
 }

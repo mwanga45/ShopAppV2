@@ -20,9 +20,11 @@ export const TransactionComp: React.FC = () => {
         </div>
       <div className={styles.TranscationBody}>
         <div className={styles.transcionamountcontainer}>
-          <div className={styles.transactionRecord}></div>
+          <div className={styles.transactionRecord}>
+                 <AnimatedCard icon={"symbol"} details={"ON USE"} money={600000} />
+          </div>
           <div className={styles.transactionAssign}></div>
-          <AnimatedCard icon={"symbol"} details={"ON USE"} money={600000} />
+     
         </div>
       </div>
     </div>
