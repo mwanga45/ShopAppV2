@@ -1,13 +1,16 @@
 import { RiCloseFill } from "react-icons/ri";
 import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
-import { FcSalesPerformance } from "react-icons/fc";
+import { FaCoins, FaExchangeAlt } from "react-icons/fa";
 import type React from "react";
 export const TransactionComp: React.FC = () => {
   return (
     <div className={styles.transctionmaincontainer}>
       <div className={styles.transcationtopbar}>
-        < FcSalesPerformance size={60} color="black"/>
+        <div className={styles.transactionIconContainer}>
+        <FaExchangeAlt size={40} color="white"/>
+        < FaCoins size={40} color="white"/>
+        </div>
         <div className="icon-close">
           <RiCloseFill size={30} color="pink" />
         </div>
