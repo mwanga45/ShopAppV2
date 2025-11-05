@@ -1,66 +1,98 @@
-
-import { Accountbar } from "../component/account/Account"
+import { Accountbar } from "../component/account/Account";
 import { FcSalesPerformance } from "react-icons/fc";
-import {Button} from "../component/button/Button"
-import { SummaryCard } from "../component/summaryCard/summarycard"
-import "./overview.css"
-import { Complinechart, BarCompChart } from "../component/comparisonchart/Complinechart"; 
+import { Button } from "../component/button/Button";
+import { SummaryCard } from "../component/summaryCard/summarycard";
+import "./overview.css";
+import {
+  Complinechart,
+  BarCompChart,
+} from "../component/comparisonchart/Complinechart";
 import { GraphInfomation } from "./overview.api";
 import { useEffect, useState } from "react";
 import type { weekChartData } from "../type.interface";
 
-
-
 export default function Overview() {
-  const[Thisweek, setThisweek] = useState<weekChartData[] >([])
-  const [LastWeek, setLastWeek] = useState<weekChartData[]>([])
-const handleGraphData = async()=>{
-  const response = await GraphInfomation()
-  if(!response.data.success){
-    alert(response.data.message)
-    return
-  }
-  setThisweek(response.data.data.Thisweek)
-  setLastWeek(response.data.data.Lastweek)
-  console.log("this week data", Thisweek)
-}
-useEffect(()=>{
-   handleGraphData()
-},[])
+  const [Thisweek, setThisweek] = useState<weekChartData[]>([]);
+  const [LastWeek, setLastWeek] = useState<weekChartData[]>([]);
+  const handleGraphData = async () => {
+    const response = await GraphInfomation();
+    if (!response.data.success) {
+      alert(response.data.message);
+      return;
+    }
+    setThisweek(response.data.data.Thisweek);
+    setLastWeek(response.data.data.Lastweek);
+    console.log("this week data", Thisweek);
+  };
+  useEffect(() => {
+    handleGraphData();
+  }, []);
   return (
-    <div className='overview-container' >
+    <div className="overview-container">
       <div className="overview-Accountbar">
-        <Accountbar/>
+        <Accountbar />
       </div>
-       <div className="overview-title">
+      <div className="overview-title">
         <p>Business OverView -Summary</p>
-       </div>
-       <div className="overView-info-container">
+      </div>
+      <div className="overView-info-container">
         <Button buttonName="Debtor" />
-       </div>
-       <div className="business-summary">
+      </div>
+      <div className="business-summary">
         <div className="category-summary">
-          <SummaryCard SummaryActInfo="250000" SummaryTitle="Most  Sales Wholesales Product" icon={FcSalesPerformance} style={{ animationDelay: '0.7s' }}/>
-          <SummaryCard SummaryActInfo="25000" SummaryTitle="Profit Made" icon={FcSalesPerformance} style={{ animationDelay: '0.8s' }}/>
-          <SummaryCard SummaryActInfo="20000" SummaryTitle="Most  Sales Retailsales Product" icon={FcSalesPerformance} style={{ animationDelay: '0.9s' }}/>
-          <SummaryCard SummaryActInfo="5000" SummaryTitle="Profit Made" icon={FcSalesPerformance} style={{ animationDelay: '1.0s' }}/>
+          <SummaryCard
+            SummaryActInfo="250000"
+            SummaryTitle="Most  Sales Wholesales Product"
+            icon={FcSalesPerformance}
+            style={{ animationDelay: "0.7s" }}
+          />
+          <SummaryCard
+            SummaryActInfo="25000"
+            SummaryTitle="Profit Made"
+            icon={FcSalesPerformance}
+            style={{ animationDelay: "0.8s" }}
+          />
+          <SummaryCard
+            SummaryActInfo="20000"
+            SummaryTitle="Most  Sales Retailsales Product"
+            icon={FcSalesPerformance}
+            style={{ animationDelay: "0.9s" }}
+          />
+          <SummaryCard
+            SummaryActInfo="5000"
+            SummaryTitle="Profit Made"
+            icon={FcSalesPerformance}
+            style={{ animationDelay: "1.0s" }}
+          />
         </div>
         <div className="totalprofit-summary">
-           <SummaryCard SummaryActInfo="25500" SummaryTitle="Most  Sales Wholesales Product" icon={FcSalesPerformance} style={{ animationDelay: '1.5s' }}/>
+          <SummaryCard
+            SummaryActInfo="25500"
+            SummaryTitle="Most  Sales Wholesales Product"
+            icon={FcSalesPerformance}
+            style={{ animationDelay: "1.5s" }}
+          />
         </div>
-       </div>
-       <div className="product-and-sales-comparison">
+      </div>
+      <div className="product-and-sales-comparison">
         <h2 className="comarisons-title">Business Comparisons</h2>
         <div className="comparison-chart">
           <div className="Linecomponet-container">
-              <Complinechart title="Wholesales Product Performance" LastWeek={LastWeek} Thisweek={Thisweek}/>
+            <Complinechart
+              title="Wholesales Product Performance"
+              LastWeek={LastWeek}
+              Thisweek={Thisweek}
+            />
           </div>
-        <div className="Barcomponet-container">
-            <BarCompChart title="Wholesales Product Perfomance" LastWeek={LastWeek} Thisweek={Thisweek}/> 
+          <div className="Barcomponet-container">
+            <BarCompChart
+              title="Wholesales Product Perfomance"
+              LastWeek={LastWeek}
+              Thisweek={Thisweek}
+            />
+          </div>
         </div>
-        </div>
-       </div>
- 
+      </div>
     </div>
-  )
+  );
 }
