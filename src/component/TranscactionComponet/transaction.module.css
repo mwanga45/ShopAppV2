@@ -111,7 +111,7 @@
 }
 .barRecord{
     width: 100%;
-    min-height: 5vh;
+    min-height: 70px;
     border: 2px solid red;
     display: flex;
     align-items: center;
@@ -119,4 +119,12 @@
     padding: 15px;
     color: black;
 
+}
+.barRecord div:first-child{
+    width:60px;
+    height: 60px;
+    border: 2px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
