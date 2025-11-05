@@ -15,7 +15,7 @@
     border:2px solid green;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding:5px;
 }
 .transactiontitle{
@@ -26,9 +26,9 @@
   
 }
 .transactiontitle span{
-    color: black;
+    color: rgb(48, 48, 48);
     font-size: 45px;
-    font-weight: 900;
+    font-weight: 400;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .transcionamountcontainer{
