@@ -29,12 +29,16 @@ export const TransactionComp: React.FC = () => {
             <div className={styles.transactionHistory}>
               <span>Transaction History</span>
             </div>
+            <span className={styles.transactionHistoryHead}>Today</span>
             <div className={styles.transactionInfoHistory}>
-              <span>Today</span>
-            <div>
-            <TransactionBar/>
-             <TransactionBar/>
-            </div>
+              <div className={styles.TransactionBarContainer}>
+                <TransactionBar />
+                <TransactionBar />
+                <TransactionBar />
+                <TransactionBar />
+                <TransactionBar />
+                <TransactionBar />
+              </div>
             </div>
           </div>
           <div className={styles.transactionAssign}></div>
@@ -50,19 +54,18 @@ export const TransactionBar = () => {
   return (
     <div className={styles.barRecord}>
       <div>
-        <FaBoltLightning size={20}/>
+        <FaBoltLightning size={20} />
       </div>
       <div>
         <span>Electricity</span>
       </div>
       <div>
         <span>Amount 5,000.Tsh</span>
-        <span> Date 5 Nov 2025</span>   
+        <span> Date 5 Nov 2025</span>
       </div>
       <div>
         <span>Successfuly</span>
       </div>
-
     </div>
   );
 };
