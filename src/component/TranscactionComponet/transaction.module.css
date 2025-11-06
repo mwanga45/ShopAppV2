@@ -148,9 +148,7 @@
 }
 .barRecord div:nth-child(4){
     background-color: blue;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 5px;
     border: 2px solid red;
 }
+

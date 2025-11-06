@@ -51,7 +51,7 @@ export const TransactionBar = () => {
       <div>
         <span>Electricity</span>
       </div>
-      <div style={{display:"flex" , flexDirection:"column"}}>
+      <div>
         <span>Amount 5,000.Tsh</span>
         <span> Date 5 Nov 2025</span>   
       </div>
