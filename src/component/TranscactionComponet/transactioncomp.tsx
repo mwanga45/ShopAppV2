@@ -105,6 +105,7 @@ export const TransactionForm = () => {
       <div style={{width:"100%", height:"2px", backgroundColor:"grey"}}></div>
       <div className={styles.formMainContainer}>
        <label htmlFor="" style={{color:"black", fontSize:"20px", fontWeight:"bold"}}>OnUse Amount</label>
+       <div className={styles.inputfieldContainer}>
       <div className={styles.inputfield}>
         <div>
           <FaWallet size={30} color="gold" />
@@ -113,9 +114,12 @@ export const TransactionForm = () => {
           <input type="text" value={"200,000"} />
         </div>
       </div>
+      </div>
          <label htmlFor="" style={{color:"black", fontSize:"20px", fontWeight:"bold"}}>Amount for Service</label>
+      <div className={styles.inputfieldContainer}>
       <div className={styles.inputfield}>
         <input type="text" placeholder="Enter Amount" />
+      </div>
       </div>
       <span className={styles.precaution}><FaExclamationCircle color="black "/> Make sure the you have Enough On use money  to make request</span>
       <div className={styles.buttonCOntainer}>
