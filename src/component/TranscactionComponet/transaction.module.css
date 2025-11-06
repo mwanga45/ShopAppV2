@@ -147,8 +147,12 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .barRecord div:nth-child(4){
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: blue;
     padding: 5px;
+    color: white;
     border: 2px solid red;
 }
 

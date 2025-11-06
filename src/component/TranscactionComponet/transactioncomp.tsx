@@ -55,7 +55,7 @@ export const TransactionBar = () => {
         <span>Amount 5,000.Tsh</span>
         <span> Date 5 Nov 2025</span>   
       </div>
-      <div>
+      <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
         <span>Successfuly</span>
       </div>
 
