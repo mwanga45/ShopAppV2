@@ -1,7 +1,7 @@
 import { RiCloseFill } from "react-icons/ri";
 import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
-import { FaCoins, FaExchangeAlt } from "react-icons/fa";
+import { FaCoins, FaExchangeAlt, FaWallet, FaBullseye, FaExclamationCircle  } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
 import { GiChickenOven } from "react-icons/gi";
 import { RiWallet3Line } from "react-icons/ri";
@@ -104,8 +104,17 @@ export const TransactionForm = () => {
       </div>
       <div style={{width:"100%", height:"2px", backgroundColor:"grey"}}></div>
       <div>
-        
+        <div>
+          <FaWallet size={30} color="gold" />
+        </div>
+        <div>
+          <input type="text" value={"200,000"} />
+        </div>
       </div>
+      <div>
+        <input type="text" placeholder="Enter Amount" />
+      </div>
+      <span><FaExclamationCircle color="black "/> Make sure the you have Enough On use money  to make request</span>
     </div>
   );
 };
