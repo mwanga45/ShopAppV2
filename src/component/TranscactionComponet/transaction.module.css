@@ -66,10 +66,20 @@
   border: 1px solid rgb(0, 59, 196);
   margin-left: 10px;
   padding: 3px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  padding: 5px;
+}
+.transactionFormcontainer{
+    height: 70%;
+    width: 100%;
+    border: 2px solid blue;
+    background-color: #e9eeff;
 }
 .transactionsalaryContainer {
   background-color: blue;
-  width: 100%;
+  width: 80%;
   height: 190px;
   padding: 15px;
   display: flex;

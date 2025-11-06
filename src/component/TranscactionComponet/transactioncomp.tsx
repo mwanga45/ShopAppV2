@@ -53,7 +53,14 @@ export const TransactionComp: React.FC = () => {
             </div>
 
           </div>
-          <div className={styles.transactionAssign}></div>
+          <div className={styles.transactionAssign}>
+            <div className={styles.transactionFormcontainer}>
+              
+            </div>
+            <div className={styles.transactionCalenderContainer}>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
