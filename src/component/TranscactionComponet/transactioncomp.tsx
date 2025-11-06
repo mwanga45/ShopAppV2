@@ -29,7 +29,7 @@ export const TransactionComp: React.FC = () => {
             <div className={styles.transactionHistory}>
               <span>Transaction History</span>
             </div>
-            <span className={styles.transactionHistoryHead}>Today</span>
+            <span className={styles.transactionHistoryHead}>Today Record(5)</span>
             <div className={styles.transactionInfoHistory}>
               <div className={styles.TransactionBarContainer}>
                 <TransactionBar />
@@ -40,7 +40,7 @@ export const TransactionComp: React.FC = () => {
                 <TransactionBar />
               </div>
             </div>
-               <span className={styles.transactionHistoryHead}>Summary of week</span>
+               <span className={styles.transactionHistoryHead}>Summary of week(5)</span>
                <div className={styles.transactionInfoHistory}>
               <div className={styles.TransactionBarContainer}>
                 <TransactionBar />

@@ -145,6 +145,10 @@
     font-weight: 400;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+.barRecord div:nth-child(3){
+    display: flex;
+    column-gap: 10px;
+}
 .barRecord div:nth-child(3) span:first-child{
     color:rgb(1, 193, 30);
     font-size: medium;
