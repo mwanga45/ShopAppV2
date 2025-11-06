@@ -71,7 +71,6 @@ export const TransactionForm = () => {
     <div className={styles.formContainer}>
       <div className={styles.formContainerHead}>
         <span>Quick Action</span>
-        <span></span>
       </div>
     </div>
   ) 
