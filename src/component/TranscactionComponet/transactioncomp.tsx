@@ -2,6 +2,7 @@ import { RiCloseFill } from "react-icons/ri";
 import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
 import { FaCoins, FaExchangeAlt } from "react-icons/fa";
+import { FaBoltLightning } from "react-icons/fa6";
 import type React from "react";
 export const TransactionComp: React.FC = () => {
   return (
@@ -30,7 +31,10 @@ export const TransactionComp: React.FC = () => {
             </div>
             <div className={styles.transactionInfoHistory}>
               <span>Today</span>
+            <div>
             <TransactionBar/>
+             <TransactionBar/>
+            </div>
             </div>
           </div>
           <div className={styles.transactionAssign}></div>
@@ -46,7 +50,7 @@ export const TransactionBar = () => {
   return (
     <div className={styles.barRecord}>
       <div>
-        <FaExchangeAlt size={20}/>
+        <FaBoltLightning size={20}/>
       </div>
       <div>
         <span>Electricity</span>
@@ -55,7 +59,7 @@ export const TransactionBar = () => {
         <span>Amount 5,000.Tsh</span>
         <span> Date 5 Nov 2025</span>   
       </div>
-      <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
+      <div>
         <span>Successfuly</span>
       </div>
 
