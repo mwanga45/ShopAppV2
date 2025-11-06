@@ -199,9 +199,11 @@
 .formContainerHead{
     width: 100%;
     height: fit-content;
+    padding:10px ;
 }
 .formContainerHead span{
     color: grey;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 700;
+    
 }
