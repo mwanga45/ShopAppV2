@@ -3,6 +3,7 @@ import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
 import { FaCoins, FaExchangeAlt } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
+import { GiChickenOven } from "react-icons/gi";
 import type React from "react";
 export const TransactionComp: React.FC = () => {
   return (
@@ -29,7 +30,9 @@ export const TransactionComp: React.FC = () => {
             <div className={styles.transactionHistory}>
               <span>Transaction History</span>
             </div>
-            <span className={styles.transactionHistoryHead}>Today Record(5)</span>
+            <span className={styles.transactionHistoryHead}>
+              Today Record(5)
+            </span>
             <div className={styles.transactionInfoHistory}>
               <div className={styles.TransactionBarContainer}>
                 <TransactionBar />
@@ -40,8 +43,10 @@ export const TransactionComp: React.FC = () => {
                 <TransactionBar />
               </div>
             </div>
-               <span className={styles.transactionHistoryHead}>Summary of week(5)</span>
-               <div className={styles.transactionInfoHistory}>
+            <span className={styles.transactionHistoryHead}>
+              Summary of week(5)
+            </span>
+            <div className={styles.transactionInfoHistory}>
               <div className={styles.TransactionBarContainer}>
                 <TransactionBar />
                 <TransactionBar />
@@ -51,15 +56,12 @@ export const TransactionComp: React.FC = () => {
                 <TransactionBar />
               </div>
             </div>
-
           </div>
           <div className={styles.transactionAssign}>
             <div className={styles.transactionFormcontainer}>
-              <TransactionForm/>
+              <TransactionForm />
             </div>
-            <div className={styles.transactionCalenderContainer}>
-
-            </div>
+            <div className={styles.transactionCalenderContainer}></div>
           </div>
         </div>
       </div>
@@ -67,14 +69,40 @@ export const TransactionComp: React.FC = () => {
   );
 };
 export const TransactionForm = () => {
-  return(
+  return (
     <div className={styles.formContainer}>
       <div className={styles.formContainerHead}>
         <span>Quick Action</span>
       </div>
-      <div className={styles.transactionFormserviceContainer}></div>
+      <div className={styles.transactionFormserviceContainer}>
+        <div>
+          <div className={styles.iconContainer}>
+            <GiChickenOven color="black" size={50} />
+          </div>
+          <span>Food Service</span>
+        </div>
+          <div>
+          <div className={styles.iconContainer}>
+            <GiChickenOven color="black" size={50} />
+          </div>
+          <span>Electricity Service</span>
+        </div>
+          <div>
+          <div className={styles.iconContainer}>
+            <GiChickenOven color="black" size={50} />
+          </div>
+          <span>Pocket Service</span>
+        </div>
+          <div>
+          <div className={styles.iconContainer}>
+            <GiChickenOven color="black" size={50} />
+          </div>
+          <span>Other Service</span>
+        </div>
+        
+      </div>
     </div>
-  ) 
+  );
 };
 export const TransactionBar = () => {
   return (
