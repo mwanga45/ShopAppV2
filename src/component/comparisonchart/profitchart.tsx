@@ -3,7 +3,6 @@ import { LineChart } from '@mui/x-charts/LineChart';
 import type { XAxis } from '@mui/x-charts/models';
 import type { ChartPops } from '../../type.interface';
 import {
-  // dateAxisFormatter,
   monthAxisFormatter,
   percentageFormatter,
   usUnemploymentRate,
