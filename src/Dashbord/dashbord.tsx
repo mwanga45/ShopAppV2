@@ -11,18 +11,19 @@ import { PlaceOrder } from "../component/Form-comp/Form";
 import { useEffect, useState } from "react";
 import { GiTakeMyMoney, GiPiggyBank } from "react-icons/gi";
 import type { TodayRev } from "../type.interface";
-import { DashboardResponseInfo } from "./dash.api";
+import { DashboardResponseInfo ,  DashordGraphdata} from "./dash.api";
 import AnimatedCard from "../component/Admincord/animatedcard";
 import { GridDemo } from "../component/comparisonchart/profitchart";
+import type{ RevenueRatechange } from "../type.interface";
+
 export const Dashboard = () => {
   const [Cashmoney, setCashmoney] = useState<TodayRev>();
   const [TotalGenerated, setTotalGenerated] = useState<number>();
   const [Percentage_deviation, setPercentage_deviation] = useState<number>();
   const [DeviateAmont, setDeviateAmount] = useState();
   const [ExpectedRevenue, setExpectedRevenue] = useState();
-  useEffect(() => {
-    handleDashResponse();
-  }, []);
+  const [Ratedata , setRatedata] =useState<RevenueRatechange[] | null>()
+
   const handleDashResponse = async () => {
     try {
       const response = await DashboardResponseInfo();
@@ -41,6 +42,23 @@ export const Dashboard = () => {
       
     }
   };
+  const handlGrphData = async () => {
+     try{
+      const response = await DashordGraphdata()
+      if(!response.data.success){
+        alert("Error Occured")
+        return
+      }
+      setRatedata(response.data.data.formattedResult)
+     }catch(err){
+      console.error(err)
+      alert('Something went wrong')
+     }
+  }
+    useEffect(() => {
+    handleDashResponse();
+    handlGrphData()
+  }, []);
 
   const [openOrder, setopenOrder] = useState<boolean>(false);
   return (
@@ -73,7 +91,7 @@ export const Dashboard = () => {
             <CardReport titleone="Fast selling product this Month" />
             <CardReport titleone="Least selling product this Month" />
             <OrdersTable />
-            <GridDemo />
+            <GridDemo RevenueRateChange={Ratedata ?? []} />
             <GridDemo />
           </div>
           <div className="sale-info">
