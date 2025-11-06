@@ -359,4 +359,9 @@ export interface DeviationResultCard{
 export interface ChartPops {
     Thisweek?:weekChartData[]
     LastWeek?:weekChartData[]
+    RevenueRateChange?:RevenueRatechange[]
+}
+export interface RevenueRatechange{
+    date?:string
+    rate?: number
 }

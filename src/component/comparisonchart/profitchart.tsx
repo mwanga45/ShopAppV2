@@ -1,6 +1,7 @@
 
 import { LineChart } from '@mui/x-charts/LineChart';
 import type { XAxis } from '@mui/x-charts/models';
+import type { ChartPops } from '../../type.interface';
 import {
   dateAxisFormatter,
   percentageFormatter,
@@ -26,10 +27,10 @@ const series = [
     valueFormatter: percentageFormatter,
   },
 ];
-export const GridDemo=() => {
+export const GridDemo:React.FC<ChartPops>=({RevenueRateChange}) => {
   return (
     <LineChart
-      dataset={usUnemploymentRate}
+      dataset={RevenueRateChange && RevenueRateChange.length > 0 ? RevenueRateChange.map(i => ({x:new Date(i.date ?? new Date()), y: i.rate ?? 0})): usUnemploymentRate}
       xAxis={xAxis}
       yAxis={yAxis}
       series={series}
