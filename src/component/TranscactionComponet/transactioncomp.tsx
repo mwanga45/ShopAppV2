@@ -4,6 +4,8 @@ import AnimatedCard from "../Admincord/animatedcard";
 import { FaCoins, FaExchangeAlt } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
 import { GiChickenOven } from "react-icons/gi";
+import { RiWallet3Line } from "react-icons/ri";
+import { FcCollect } from "react-icons/fc";
 import type React from "react";
 export const TransactionComp: React.FC = () => {
   return (
@@ -77,28 +79,31 @@ export const TransactionForm = () => {
       <div className={styles.transactionFormserviceContainer}>
         <div>
           <div className={styles.iconContainer}>
-            <GiChickenOven color="black" size={50} />
+            <GiChickenOven color="gold" size={40} />
           </div>
           <span>Food Service</span>
         </div>
           <div>
           <div className={styles.iconContainer}>
-            <GiChickenOven color="black" size={50} />
+            <FaBoltLightning color="white" size={40} />
           </div>
           <span>Electricity Service</span>
         </div>
           <div>
           <div className={styles.iconContainer}>
-            <GiChickenOven color="black" size={50} />
+            <RiWallet3Line color="blue" size={40} />
           </div>
           <span>Pocket Service</span>
         </div>
           <div>
           <div className={styles.iconContainer}>
-            <GiChickenOven color="black" size={50} />
+            <FcCollect color="black" size={40} />
           </div>
           <span>Other Service</span>
         </div>
+      </div>
+      <div style={{width:"100%", height:"2px", backgroundColor:"grey"}}></div>
+      <div>
         
       </div>
     </div>
