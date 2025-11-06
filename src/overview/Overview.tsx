@@ -92,6 +92,22 @@ export default function Overview() {
             />
           </div>
         </div>
+        <div className="comparison-chart">
+          <div className="Linecomponet-container">
+            <Complinechart
+              title="Wholesales Product Performance"
+              LastWeek={LastWeek}
+              Thisweek={Thisweek}
+            />
+          </div>
+          <div className="Barcomponet-container">
+            <BarCompChart
+              title="Wholesales Product Perfomance"
+              LastWeek={LastWeek}
+              Thisweek={Thisweek}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
