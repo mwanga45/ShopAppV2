@@ -9,6 +9,16 @@ export const dateAxisFormatter = (value: Date, context: AxisValueFormatterContex
     year: 'numeric',
   });
 
+export const monthAxisFormatter = (
+value: Date,
+  context: AxisValueFormatterContext<'time'>
+) =>
+  value.toLocaleDateString(undefined, {
+    month: context.location === 'tooltip' ? 'long' : 'short', // tooltip = full month, axis = short
+    ...(context.location === 'tooltip' && { year: 'numeric' }), // add year only for tooltip
+  });
+
+
 export const percentageFormatter = (value: number | null) =>
   value === null
     ? ''

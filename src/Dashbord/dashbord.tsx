@@ -22,7 +22,7 @@ export const Dashboard = () => {
   const [Percentage_deviation, setPercentage_deviation] = useState<number>();
   const [DeviateAmont, setDeviateAmount] = useState();
   const [ExpectedRevenue, setExpectedRevenue] = useState();
-  const [Ratedata , setRatedata] =useState<RevenueRatechange[] | null>()
+  const [Ratedata , setRatedata] =useState<RevenueRatechange[] | null>([])
 
   const handleDashResponse = async () => {
     try {
@@ -50,6 +50,7 @@ export const Dashboard = () => {
         return
       }
       setRatedata(response.data.data.formattedResult)
+      console.log("something here",response.data.data.formattedResult)
      }catch(err){
       console.error(err)
       alert('Something went wrong')
