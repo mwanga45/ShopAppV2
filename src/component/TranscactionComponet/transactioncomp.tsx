@@ -1,12 +1,12 @@
-import { RiCloseFill } from "react-icons/ri";
+import { RiCloseFill,  RiWallet3Line } from "react-icons/ri";
 import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
-import { FaCoins, FaExchangeAlt, FaWallet, FaBullseye, FaExclamationCircle  } from "react-icons/fa";
+import { FaCoins, FaExchangeAlt, FaWallet, FaExclamationCircle  } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
 import { GiChickenOven } from "react-icons/gi";
-import { RiWallet3Line } from "react-icons/ri";
 import { FcCollect } from "react-icons/fc";
 import type React from "react";
+import { Button } from "../button/Button";
 export const TransactionComp: React.FC = () => {
   return (
     <div className={styles.transctionmaincontainer}>
@@ -101,20 +101,27 @@ export const TransactionForm = () => {
           </div>
           <span>Other Service</span>
         </div>
-      </div>
+      </div >
       <div style={{width:"100%", height:"2px", backgroundColor:"grey"}}></div>
-      <div>
+      <div className={styles.formMainContainer}>
+       <label htmlFor="" style={{color:"black", fontSize:"20px", fontWeight:"bold"}}>OnUse Amount</label>
+      <div className={styles.inputfield}>
         <div>
           <FaWallet size={30} color="gold" />
         </div>
-        <div>
+        <div className={styles.inputfield}>
           <input type="text" value={"200,000"} />
         </div>
       </div>
-      <div>
+         <label htmlFor="" style={{color:"black", fontSize:"20px", fontWeight:"bold"}}>Amount for Service</label>
+      <div className={styles.inputfield}>
         <input type="text" placeholder="Enter Amount" />
       </div>
-      <span><FaExclamationCircle color="black "/> Make sure the you have Enough On use money  to make request</span>
+      <span className={styles.precaution}><FaExclamationCircle color="black "/> Make sure the you have Enough On use money  to make request</span>
+      <div className={styles.buttonCOntainer}>
+      <Button buttonName="Confirm payment for your service."/>
+      </div>
+    </div>
     </div>
   );
 };

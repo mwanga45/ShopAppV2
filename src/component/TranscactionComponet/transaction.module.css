@@ -237,3 +237,74 @@
     height: fit-content;
     box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
+.formMainContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    justify-content: center;
+    align-items: start;
+    padding: 20px;
+}
+.inputfield {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 10px 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 350px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inputfield:hover {
+  border-color: #d1b000;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.inputfield input {
+  border:none;
+  outline: none;
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  background: transparent;
+}
+
+.inputfield div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type="text"]::placeholder {
+  color: #999;
+  font-size: 15px;
+}
+
+.precaution {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #444;
+  background-color: #fff3cd;
+  border-left: 4px solid #ffc107;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+.buttonCOntainer{
+    width: 100%;
+    height: fit-content;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
