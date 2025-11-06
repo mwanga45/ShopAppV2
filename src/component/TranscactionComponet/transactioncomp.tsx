@@ -55,7 +55,7 @@ export const TransactionComp: React.FC = () => {
           </div>
           <div className={styles.transactionAssign}>
             <div className={styles.transactionFormcontainer}>
-              
+              <TransactionForm/>
             </div>
             <div className={styles.transactionCalenderContainer}>
 
@@ -67,7 +67,14 @@ export const TransactionComp: React.FC = () => {
   );
 };
 export const TransactionForm = () => {
-  return <div></div>;
+  return(
+    <div className={styles.formContainer}>
+      <div className={styles.formContainerHead}>
+        <span>Quick Action</span>
+        <span></span>
+      </div>
+    </div>
+  ) 
 };
 export const TransactionBar = () => {
   return (
