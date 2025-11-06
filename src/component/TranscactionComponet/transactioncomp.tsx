@@ -46,14 +46,17 @@ export const TransactionBar = () => {
   return (
     <div className={styles.barRecord}>
       <div>
-        <FaExchangeAlt/>
+        <FaExchangeAlt size={20}/>
       </div>
       <div>
         <span>Electricity</span>
       </div>
       <div style={{display:"flex" , flexDirection:"column"}}>
         <span>Amount 5,000.Tsh</span>
-        <span> Date 5 Nov 2025</span>
+        <span> Date 5 Nov 2025</span>   
+      </div>
+      <div>
+        <span>Successfuly</span>
       </div>
 
     </div>

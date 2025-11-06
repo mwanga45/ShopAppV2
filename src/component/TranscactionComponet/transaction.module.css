@@ -128,3 +128,29 @@
     align-items: center;
     justify-content: center;
 }
+.barRecord div:nth-child(2) span{
+    color:rgb(46, 46, 46);
+    font-size: large;
+    font-weight: 400;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.barRecord div:nth-child(3) span:first-child{
+    color:rgb(1, 193, 30);
+    font-size: medium;
+    font-weight: 400;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.barRecord div:nth-child(3) span:last-child{
+    color: rgb(162, 5, 5);
+    font-size: medium;
+    font-weight: 400;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.barRecord div:nth-child(4){
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border: 2px solid red;
+}
