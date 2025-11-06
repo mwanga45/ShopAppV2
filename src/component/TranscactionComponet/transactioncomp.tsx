@@ -40,6 +40,18 @@ export const TransactionComp: React.FC = () => {
                 <TransactionBar />
               </div>
             </div>
+               <span className={styles.transactionHistoryHead}>Summary of week</span>
+               <div className={styles.transactionInfoHistory}>
+              <div className={styles.TransactionBarContainer}>
+                <TransactionBar />
+                <TransactionBar />
+                <TransactionBar />
+                <TransactionBar />
+                <TransactionBar />
+                <TransactionBar />
+              </div>
+            </div>
+
           </div>
           <div className={styles.transactionAssign}></div>
         </div>

@@ -3,7 +3,7 @@
   flex-direction: column;
   row-gap: 5px;
   flex: 1;
-  background-color: rgb(213, 213, 213);
+  background-color: #EDEDED;
   width: 100%;
   min-height: 100vh;
   padding: 15px;
@@ -48,7 +48,6 @@
   padding-right: 20px;
 }
 .TranscationBody {
-  overflow-y: auto;
   height: 80vh;
   width: 100%;
   border: 2px solid gold;
@@ -97,7 +96,7 @@
 .transactionInfoHistory{
     width: 100%;
     min-height:200px ;
-    max-height:250px;
+    max-height:200px;
     margin-top: 12px;
     overflow-y: auto;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
@@ -173,6 +172,5 @@
     font-size: medium;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: aliceblue;
-    margin-right: 40px;
     font-weight: 800;
 }
