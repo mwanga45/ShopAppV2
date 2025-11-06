@@ -16,7 +16,7 @@ export const TransactionComp: React.FC = () => {
           <FaCoins size={35} color="white" />
         </div>
         <div className="icon-close">
-          <RiCloseFill size={30} color="pink" />
+          <RiCloseFill size={30} color="black" />
         </div>
       </div>
       <div className={styles.transactiontitle}>
