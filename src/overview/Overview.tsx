@@ -95,14 +95,14 @@ export default function Overview() {
         <div className="comparison-chart">
           <div className="Linecomponet-container">
             <Complinechart
-              title="Wholesales Product Performance"
+              title="Retailsales Product Performance"
               LastWeek={LastWeek}
               Thisweek={Thisweek}
             />
           </div>
           <div className="Barcomponet-container">
             <BarCompChart
-              title="Wholesales Product Perfomance"
+              title="Retailsales Product Perfomance"
               LastWeek={LastWeek}
               Thisweek={Thisweek}
             />
