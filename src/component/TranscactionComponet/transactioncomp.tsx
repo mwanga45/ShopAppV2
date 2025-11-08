@@ -229,86 +229,7 @@ export const TransactionBar = () => {
 import React, { useState } from "react";
 import { FaHotel, FaCar, FaPlane, FaUtensils, FaClinicMedical } from "react-icons/fa";
 
-const ServiceForm: React.FC = () => {
-  const [name, setName] = useState("");
-  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (name.trim() === "") return alert("Please enter your name.");
-    setSubmitted(true);
-  };
-
-  const services = [
-    {
-      category: "Travel",
-      icons: [<FaPlane key="plane" />, <FaCar key="car" />],
-    },
-    {
-      category: "Hospitality",
-      icons: [<FaHotel key="hotel" />, <FaUtensils key="food" />],
-    },
-    {
-      category: "Health",
-      icons: [<FaClinicMedical key="clinic" />],
-    },
-  ];
-
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-      {!submitted ? (
-        <form
-          onSubmit={handleSubmit}
-          className="bg-gray-800 p-6 rounded-2xl shadow-md flex flex-col items-center gap-4 w-80"
-        >
-          <h2 className="text-xl font-semibold">Enter Your Name</h2>
-          <input
-            type="text"
-            placeholder="Your name..."
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="p-2 rounded-lg w-full text-black outline-none"
-          />
-          <button
-            type="submit"
-            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg w-full transition"
-          >
-            Proceed
-          </button>
-        </form>
-      ) : (
-        <div className="text-center">
-          <h2 className="text-2xl font-semibold mb-4">
-            Welcome, {name}! Choose a Service:
-          </h2>
-
-          <div className="grid gap-6">
-            {services.map((service) => (
-              <div
-                key={service.category}
-                className="bg-gray-800 p-4 rounded-xl shadow-md"
-              >
-                <h3 className="text-lg font-semibold mb-3 text-blue-400">
-                  {service.category}
-                </h3>
-                <div className="flex justify-center gap-6 text-3xl">
-                  {service.icons.map((icon, index) => (
-                    <div
-                      key={index}
-                      className="hover:text-yellow-400 transition-transform hover:scale-110 cursor-pointer"
-                    >
-                      {icon}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
 export const ServiceFormregister: React.FC = () => {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -341,7 +262,8 @@ export const ServiceFormregister: React.FC = () => {
     <div className={styles.container}>
       {!submitted ? (
         <form onSubmit={handleSubmit} className={styles.form}>
-          <h2 className={styles.title}>Enter Your Name</h2>
+          <h2 className={styles.title}>Enter Service Name</h2>
+          <div className={styles.inputcontainer}>
           <input
             type="text"
             placeholder="Your name..."
@@ -352,6 +274,7 @@ export const ServiceFormregister: React.FC = () => {
           <button type="submit" className={styles.button}>
             Proceed
           </button>
+          </div>
         </form>
       ) : (
         <div className={styles.servicesSection}>
