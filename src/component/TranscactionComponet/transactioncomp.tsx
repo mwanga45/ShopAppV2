@@ -13,9 +13,9 @@ import {
 import { FaBoltLightning } from "react-icons/fa6";
 import { GiChickenOven } from "react-icons/gi";
 import { FcCollect } from "react-icons/fc";
-import type React from "react";
 import { Button } from "../button/Button";
 export const TransactionComp: React.FC = () => {
+  const [showAddServe, setshowAddServe] = useState<boolean>(false)
   return (
     <div className={styles.transctionmaincontainer}>
       <div className={styles.transcationtopbar}>
@@ -83,29 +83,52 @@ export const TransactionComp: React.FC = () => {
                   Create servece & View service
                 </span>
                 <div className={styles.viewAddservece}>
-                <div className={styles.serviceNumber}>
-                  <span style={{color:'black', fontWeight:"600", fontSize:"30px"}}>Total Service</span>
-                  <span style={{color:'#18a200ff', fontWeight:"600", fontSize:"30px" , scale:"4.4"}}>5</span>
-                </div>
-                <div className={styles.serviceAction}>
-                  <div className={styles.serveceprocess}>
-                    <MdAdd color="white" size = {35} fontWeight={900} />
-                    <span>Add</span>
+                  <div className={styles.serviceNumber}>
+                    <span
+                      style={{
+                        color: "black",
+                        fontWeight: "600",
+                        fontSize: "30px",
+                      }}
+                    >
+                      Total Service
+                    </span>
+                    <span
+                      style={{
+                        color: "#18a200ff",
+                        fontWeight: "600",
+                        fontSize: "30px",
+                        scale: "4.4",
+                      }}
+                    >
+                      5
+                    </span>
                   </div>
-                       <div className={styles.serveceprocess}>
-                    <FaEye color="white" size = {35}/>
-                    <span>View</span>
-                  </div>
-                       <div className={styles.serveceprocess}>
-                    < RiDeleteBinLine color="white" size = {35}/>
-                    <span>Remove</span>
-                  </div>
-                  </div>
+                  <div className={styles.serviceAction}>
+                    <div className={styles.serveceprocess}>
+                      <MdAdd color="white" size={35} fontWeight={900} />
+                      <span>Add</span>
+                    </div>
+                    <div className={styles.serveceprocess}>
+                      <FaEye color="white" size={35} />
+                      <span>View</span>
+                    </div>
+                    <div className={styles.serveceprocess}>
+                      <RiDeleteBinLine color="white" size={35} />
+                      <span>Remove</span>
+                    </div>
+                  </div>  
                 </div>
               </div>
             </div>
           </div>
         </div>
+         { showAddServe  &&
+           <div className={styles.popupCompocontainer}>
+             <ServiceFormregister/>
+           </div>
+
+         }
       </div>
     </div>
   );
@@ -203,3 +226,154 @@ export const TransactionBar = () => {
     </div>
   );
 };
+import React, { useState } from "react";
+import { FaHotel, FaCar, FaPlane, FaUtensils, FaClinicMedical } from "react-icons/fa";
+
+const ServiceForm: React.FC = () => {
+  const [name, setName] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (name.trim() === "") return alert("Please enter your name.");
+    setSubmitted(true);
+  };
+
+  const services = [
+    {
+      category: "Travel",
+      icons: [<FaPlane key="plane" />, <FaCar key="car" />],
+    },
+    {
+      category: "Hospitality",
+      icons: [<FaHotel key="hotel" />, <FaUtensils key="food" />],
+    },
+    {
+      category: "Health",
+      icons: [<FaClinicMedical key="clinic" />],
+    },
+  ];
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+      {!submitted ? (
+        <form
+          onSubmit={handleSubmit}
+          className="bg-gray-800 p-6 rounded-2xl shadow-md flex flex-col items-center gap-4 w-80"
+        >
+          <h2 className="text-xl font-semibold">Enter Your Name</h2>
+          <input
+            type="text"
+            placeholder="Your name..."
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="p-2 rounded-lg w-full text-black outline-none"
+          />
+          <button
+            type="submit"
+            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg w-full transition"
+          >
+            Proceed
+          </button>
+        </form>
+      ) : (
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold mb-4">
+            Welcome, {name}! Choose a Service:
+          </h2>
+
+          <div className="grid gap-6">
+            {services.map((service) => (
+              <div
+                key={service.category}
+                className="bg-gray-800 p-4 rounded-xl shadow-md"
+              >
+                <h3 className="text-lg font-semibold mb-3 text-blue-400">
+                  {service.category}
+                </h3>
+                <div className="flex justify-center gap-6 text-3xl">
+                  {service.icons.map((icon, index) => (
+                    <div
+                      key={index}
+                      className="hover:text-yellow-400 transition-transform hover:scale-110 cursor-pointer"
+                    >
+                      {icon}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+export const ServiceFormregister: React.FC = () => {
+  const [name, setName] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (name.trim() === "") {
+      alert("Please enter your name.");
+      return;
+    }
+    setSubmitted(true);
+  };
+
+  const services = [
+    {
+      category: "Travel",
+      icons: [<FaPlane key="plane" />, <FaCar key="car" />],
+    },
+    {
+      category: "Hospitality",
+      icons: [<FaHotel key="hotel" />, <FaUtensils key="food" />],
+    },
+    {
+      category: "Health",
+      icons: [<FaClinicMedical key="clinic" />],
+    },
+  ];
+
+  return (
+    <div className={styles.container}>
+      {!submitted ? (
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <h2 className={styles.title}>Enter Your Name</h2>
+          <input
+            type="text"
+            placeholder="Your name..."
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className={styles.input}
+          />
+          <button type="submit" className={styles.button}>
+            Proceed
+          </button>
+        </form>
+      ) : (
+        <div className={styles.servicesSection}>
+          <h2 className={styles.welcomeText}>Welcome, {name}! Choose a Service:</h2>
+
+          <div className={styles.servicesList}>
+            {services.map((service) => (
+              <div key={service.category} className={styles.serviceCard}>
+                <h3 className={styles.serviceTitle}>{service.category}</h3>
+                <div className={styles.iconGroup}>
+                  {service.icons.map((icon, index) => (
+                    <div key={index} className={styles.icon}>
+                      {icon}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
