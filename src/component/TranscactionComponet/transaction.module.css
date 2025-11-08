@@ -3,12 +3,10 @@
   flex-direction: column;
   row-gap: 5px;
   flex: 1;
-  background-color: #EDEDED;
+  background-color: #ededed;
   width: 100%;
   min-height: fit-content;
   padding: 15px;
-
-
 }
 .transcationtopbar {
   width: 100%;
@@ -50,14 +48,12 @@
   height: 80vh;
   width: 100%;
   overflow-y: auto;
-  
 }
 .transactionRecord {
   width: 60%;
   height: 80vh;
   margin-right: 10px;
   padding: 3px;
-
 }
 .transactionAssign {
   width: 40%;
@@ -68,12 +64,11 @@
   flex-direction: column;
   row-gap: 5px;
   padding: 5px;
-
 }
-.transactionFormcontainer{
-    height: fit-content;
-    width: 100%;
-    background-color: #e9eeff;
+.transactionFormcontainer {
+  height: fit-content;
+  width: 100%;
+  background-color: #e9eeff;
 }
 .transactionsalaryContainer {
   background-color: rgb(228, 228, 228);
@@ -84,7 +79,8 @@
   justify-content: space-between;
   margin-bottom: 5px;
   border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
 }
 .transactionHistory {
   width: 100%;
@@ -96,168 +92,214 @@
   justify-content: space-between;
   padding: 5px;
 }
-.transactionHistory span{
-    color: grey;
-    font-size: 25px;
-    font-weight: 600;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
+.transactionHistory span {
+  color: grey;
+  font-size: 25px;
+  font-weight: 600;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
-.transactionInfoHistory{
-    width: 100%;
-    min-height:200px ;
-    max-height:200px;
-    margin-top: 12px;
-    overflow-y: auto;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
-    background-color: aliceblue;
+.transactionInfoHistory {
+  width: 100%;
+  min-height: 200px;
+  max-height: 200px;
+  margin-top: 12px;
+  overflow-y: auto;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  background-color: aliceblue;
 }
-.transactionHistoryHead{
-    color: grey;
-    font-size: 22px;
-    font-weight: 500;
-    margin-left: 40px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    margin-top: 12px;
+.transactionHistoryHead {
+  color: grey;
+  font-size: 22px;
+  font-weight: 500;
+  margin-left: 40px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  margin-top: 12px;
 }
-.TransactionBarContainer{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    row-gap: 15px;
-}
-.barRecord{
-    width: 100%;
-    min-height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    color: black;
-    background-color: #e9eeff;
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
-
-}
-.barRecord div:first-child{
-    width:60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-}
-
-.barRecord div:nth-child(2) span{
-    color:rgb(46, 46, 46);
-    font-size: large;
-    font-weight: 400;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-.barRecord div:nth-child(3){
-    display: flex;
-    column-gap: 10px;
-}
-.barRecord div:nth-child(3) span:first-child{
-    color:rgb(1, 193, 30);
-    font-size: medium;
-    font-weight: 400;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-.barRecord div:nth-child(3) span:last-child{
-    color: rgb(162, 5, 5);
-    font-size: medium;
-    font-weight: 400;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-.barRecord div:nth-child(4){
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(22, 192, 0);
-    padding: 5px;
-    color: rgb(178, 178, 178);
-    width: 8vw;
-    border-radius: 30px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-}
-.barRecord div:nth-child(4) span:first-child{
-    font-size: medium;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: aliceblue;
-    font-weight: 800;
-}
-
-.serviceContainer{
+.TransactionBarContainer {
+  width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+.barRecord {
+  width: 100%;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  color: black;
+  background-color: #e9eeff;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+}
+.barRecord div:first-child {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.barRecord div:nth-child(2) span {
+  color: rgb(46, 46, 46);
+  font-size: large;
+  font-weight: 400;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.barRecord div:nth-child(3) {
+  display: flex;
+  column-gap: 10px;
+}
+.barRecord div:nth-child(3) span:first-child {
+  color: rgb(1, 193, 30);
+  font-size: medium;
+  font-weight: 400;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.barRecord div:nth-child(3) span:last-child {
+  color: rgb(162, 5, 5);
+  font-size: medium;
+  font-weight: 400;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.barRecord div:nth-child(4) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(22, 192, 0);
+  padding: 5px;
+  color: rgb(178, 178, 178);
+  width: 8vw;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.barRecord div:nth-child(4) span:first-child {
+  font-size: medium;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: aliceblue;
+  font-weight: 800;
+}
+
+.serviceContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
   width: 100%;
   height: 250px;
   background-color: white;
+  padding: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
-.transactionFormserviceContainer{
-    width: 100%;
-    height: fit-content ;
-    padding: 5px;
-    display: flex;
-    justify-content: space-between;
+.viewAddservece {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 }
-.transactionFormserviceContainer div{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 10px;
-
+.serviceNumber {
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
+  align-items: center;
 }
-.transactionFormserviceContainer div span{
-    color: rgb(67, 67, 67);
-    font-size: medium;
-    font-weight: 400;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+.serviceAction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.serveceprocess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 3px;
+  padding: 4px;
+  box-shadow: rgba(0, 99, 149, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 41, 151, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 125, 202, 0.1) 0px -79px 40px 0px inset,
+    rgba(29, 63, 255, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+    rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+.transactionFormserviceContainer {
+  width: 100%;
+  height: fit-content;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.transactionFormserviceContainer div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+}
+.transactionFormserviceContainer div span {
+  color: rgb(67, 67, 67);
+  font-size: medium;
+  font-weight: 400;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
 /* form style */
 
-.formContainer{
-    height: fit-content;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    border-radius:10px;
-    background-color: white;
+.formContainer {
+  height: fit-content;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 10px;
+  background-color: white;
 }
-.formContainerHead{
-    width: 100%;
-    height: fit-content;
-    padding:10px ;
+.formContainerHead {
+  width: 100%;
+  height: fit-content;
+  padding: 10px;
 }
-.formContainerHead span{
-    color: grey;
-    font-size: 30px;
-    font-weight: 700;
-    
+.formContainerHead span {
+  color: grey;
+  font-size: 30px;
+  font-weight: 700;
 }
-.iconContainer{
-    padding: 5px;
-    width: fit-content;
-    height: fit-content;
-    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+.iconContainer {
+  padding: 5px;
+  width: fit-content;
+  height: fit-content;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
-.formMainContainer{
-    width: 100%;
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    justify-content: center;
-    align-items: start;
-    padding: 20px;
+.formMainContainer {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  justify-content: center;
+  align-items: start;
+  padding: 20px;
 }
-.inputfieldContainer{
-    width: 100%;
-    height: fit-content;
-    display:flex ;
-    align-items: center;
-    justify-content: center;
+.inputfieldContainer {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .inputfield {
   display: flex;
@@ -271,7 +313,6 @@
   width: 100%;
   max-width: 650px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  
 }
 
 .inputfield:hover {
@@ -280,7 +321,7 @@
 }
 
 .inputfield input {
-  border:none;
+  border: none;
   outline: none;
   width: 100%;
   height: 40px;
@@ -314,11 +355,11 @@ input[type="text"]::placeholder {
   padding: 6px 10px;
   border-radius: 6px;
 }
-.buttonCOntainer{
-    width: 100%;
-    height: fit-content;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.buttonCOntainer {
+  width: 100%;
+  height: fit-content;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

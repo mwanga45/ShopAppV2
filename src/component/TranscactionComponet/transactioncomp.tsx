@@ -1,4 +1,7 @@
 import { RiCloseFill, RiWallet3Line } from "react-icons/ri";
+import { MdAdd } from "react-icons/md";
+import { FaEye } from "react-icons/fa6";
+import { RiDeleteBinLine } from "react-icons/ri";
 import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
 import {
@@ -69,16 +72,36 @@ export const TransactionComp: React.FC = () => {
               <TransactionForm />
             </div>
             <div>
-              <span
-                style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
-              >
-                Create Servece
-              </span>
               <div className={styles.serviceContainer}>
-                 <div className={styles.serviceNUmber}>
-
-                 </div>
-                 <div className={styles.serviceAction}></div>
+                <span
+                  style={{
+                    color: "grey",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Create servece & View service
+                </span>
+                <div className={styles.viewAddservece}>
+                <div className={styles.serviceNumber}>
+                  <span style={{color:'black', fontWeight:"600", fontSize:"30px"}}>Total Service</span>
+                  <span style={{color:'black', fontWeight:"600", fontSize:"30px"}}>5</span>
+                </div>
+                <div className={styles.serviceAction}>
+                  <div className={styles.serveceprocess}>
+                    <MdAdd color="white" size = {25}/>
+                    <span>Add</span>
+                  </div>
+                       <div className={styles.serveceprocess}>
+                    <FaEye color="white" size = {25}/>
+                    <span>Add</span>
+                  </div>
+                       <div className={styles.serveceprocess}>
+                    < RiDeleteBinLine color="white" size = {25}/>
+                    <span>Add</span>
+                  </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
