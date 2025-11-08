@@ -3,7 +3,11 @@ import { MdAdd } from "react-icons/md";
 import { FaEye } from "react-icons/fa6";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Services } from "./icon";
-import type{ ServiceIcon, ServiceCategory, ServiceIconchoose } from "../../type.interface";
+import type {
+  ServiceIcon,
+  ServiceCategory,
+  ServiceIconchoose,
+} from "../../type.interface";
 import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
 import {
@@ -17,14 +21,14 @@ import { GiChickenOven } from "react-icons/gi";
 import { FcCollect } from "react-icons/fc";
 import { Button } from "../button/Button";
 export const TransactionComp: React.FC = () => {
-  const [showAddServe, setshowAddServe] = useState<boolean>(false)
-  const [iconlist, seticonlist] = useState<ServiceCategory[]>([])
-  useEffect(()=> {
-  const handleIconlist = ()=>{
-   seticonlist(Services)
-  }
-  handleIconlist()
-  }, [])
+  const [showAddServe, setshowAddServe] = useState<boolean>(false);
+  const [iconlist, seticonlist] = useState<ServiceCategory[]>([]);
+  useEffect(() => {
+    const handleIconlist = () => {
+      seticonlist(Services);
+    };
+    handleIconlist();
+  }, []);
   return (
     <div className={styles.transctionmaincontainer}>
       <div className={styles.transcationtopbar}>
@@ -114,7 +118,10 @@ export const TransactionComp: React.FC = () => {
                     </span>
                   </div>
                   <div className={styles.serviceAction}>
-                    <div className={styles.serveceprocess} onClick={()=> setshowAddServe(true)}>
+                    <div
+                      className={styles.serveceprocess}
+                      onClick={() => setshowAddServe(true)}
+                    >
                       <MdAdd color="white" size={35} fontWeight={900} />
                       <span>Add</span>
                     </div>
@@ -126,18 +133,17 @@ export const TransactionComp: React.FC = () => {
                       <RiDeleteBinLine color="white" size={35} />
                       <span>Remove</span>
                     </div>
-                  </div>  
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-         { showAddServe  &&
-           <div className={styles.popupCompocontainer}>
-             <ServiceFormregister Icon={iconlist} />
-           </div>
-
-         }
+        {showAddServe && (
+          <div className={styles.popupCompocontainer}>
+            <ServiceFormregister Icon={iconlist} />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -269,14 +275,20 @@ export const ServiceFormregister: React.FC<ServiceIconchoose> = ({ Icon }) => {
         </form>
       ) : (
         <div className={styles.servicesSection}>
-          <h2 className={styles.welcomeText}>Welcome, {name}! Choose a Service:</h2>
+          <h2 className={styles.welcomeText}>
+            Welcome, {name}! Choose a Service:
+          </h2>
           <div className={styles.servicesList}>
             {Icon.map((service) => (
               <div key={service.category} className={styles.serviceCard}>
                 <h3 className={styles.serviceTitle}>{service.category}</h3>
                 <div className={styles.iconGroup}>
                   {service.icons.map((iconObj) => (
-                    <div key={iconObj.name} className={styles.icon} style={{ color: iconObj.color }}>
+                    <div
+                      key={iconObj.name}
+                      className={styles.icon}
+                      style={{ color: iconObj.color }}
+                    >
                       {iconObj.icon}
                       <span className={styles.iconName}>{iconObj.name}</span>
                     </div>
@@ -290,5 +302,3 @@ export const ServiceFormregister: React.FC<ServiceIconchoose> = ({ Icon }) => {
     </div>
   );
 };
-
-
