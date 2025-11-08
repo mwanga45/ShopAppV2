@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import type React from "react";
 
 export interface Product {
@@ -364,4 +365,17 @@ export interface ChartPops {
 export interface RevenueRatechange{
     date?:string
     rate?: number
+}
+export interface ServiceIcon {
+  name: string;
+  icon: ReactElement;
+  color: string;
+}
+
+export interface ServiceCategory {
+  category: string;
+  icons: ServiceIcon[];
+}
+export interface ServiceIconchoose {
+  Icon:ServiceCategory[]
 }
