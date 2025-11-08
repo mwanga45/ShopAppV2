@@ -76,7 +76,7 @@ export const TransactionComp: React.FC = () => {
                 <span
                   style={{
                     color: "grey",
-                    fontSize: "20px",
+                    fontSize: "25px",
                     fontWeight: "bold",
                   }}
                 >
@@ -85,20 +85,20 @@ export const TransactionComp: React.FC = () => {
                 <div className={styles.viewAddservece}>
                 <div className={styles.serviceNumber}>
                   <span style={{color:'black', fontWeight:"600", fontSize:"30px"}}>Total Service</span>
-                  <span style={{color:'black', fontWeight:"600", fontSize:"30px"}}>5</span>
+                  <span style={{color:'#18a200ff', fontWeight:"600", fontSize:"30px" , scale:"4.4"}}>5</span>
                 </div>
                 <div className={styles.serviceAction}>
                   <div className={styles.serveceprocess}>
-                    <MdAdd color="white" size = {25}/>
+                    <MdAdd color="white" size = {35} fontWeight={900} />
                     <span>Add</span>
                   </div>
                        <div className={styles.serveceprocess}>
-                    <FaEye color="white" size = {25}/>
-                    <span>Add</span>
+                    <FaEye color="white" size = {35}/>
+                    <span>View</span>
                   </div>
                        <div className={styles.serveceprocess}>
-                    < RiDeleteBinLine color="white" size = {25}/>
-                    <span>Add</span>
+                    < RiDeleteBinLine color="white" size = {35}/>
+                    <span>Remove</span>
                   </div>
                   </div>
                 </div>
