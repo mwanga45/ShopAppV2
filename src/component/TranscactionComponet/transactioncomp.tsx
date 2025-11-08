@@ -93,7 +93,7 @@ export const TransactionForm = () => {
           <div className={styles.iconContainer}>
             <RiWallet3Line color="blue" size={40} />
           </div>
-          <span>Pocket Service</span>
+          <span>Withdraw Service</span>
         </div>
           <div>
           <div className={styles.iconContainer}>
