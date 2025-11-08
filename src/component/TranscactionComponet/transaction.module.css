@@ -307,6 +307,10 @@ column-gap: 20px;
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(10px);
+  right:0 ;
+  left: 0;
+  bottom: 0;
+  top: 0;
 }
 
 /* form style */
@@ -426,16 +430,21 @@ input[type="text"]::placeholder {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  
+
 }
 
 .form {
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  width: 300px;
+  width: 500px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
+  height: 300px;
+  background-color: #e0e0e0;
 }
 
 .title {

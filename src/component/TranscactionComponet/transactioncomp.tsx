@@ -105,7 +105,7 @@ export const TransactionComp: React.FC = () => {
                     </span>
                   </div>
                   <div className={styles.serviceAction}>
-                    <div className={styles.serveceprocess}>
+                    <div className={styles.serveceprocess} onClick={()=> setshowAddServe(true)}>
                       <MdAdd color="white" size={35} fontWeight={900} />
                       <span>Add</span>
                     </div>
