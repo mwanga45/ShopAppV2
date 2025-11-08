@@ -5,8 +5,9 @@
   flex: 1;
   background-color: #EDEDED;
   width: 100%;
-  min-height: 100vh;
+  min-height: fit-content;
   padding: 15px;
+
 
 }
 .transcationtopbar {
@@ -48,6 +49,7 @@
 .TranscationBody {
   height: 80vh;
   width: 100%;
+  overflow-y: auto;
   
 }
 .transactionRecord {
@@ -55,16 +57,18 @@
   height: 80vh;
   margin-right: 10px;
   padding: 3px;
+
 }
 .transactionAssign {
   width: 40%;
-  height: 80vh;
+  height: fit-content;
   margin-left: 10px;
   padding: 3px;
   display: flex;
   flex-direction: column;
   row-gap: 5px;
   padding: 5px;
+
 }
 .transactionFormcontainer{
     height: fit-content;
@@ -84,7 +88,7 @@
 }
 .transactionHistory {
   width: 100%;
-  height: 80px;
+  height: 100px;
   background-color: #e9eeff;
   border-radius: 12px;
   display: flex;
@@ -185,7 +189,13 @@
     font-weight: 800;
 }
 
-
+.serviceContainer{
+  display: flex;
+  width: 100%;
+  height: 250px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
 .transactionFormserviceContainer{
     width: 100%;
     height: fit-content ;

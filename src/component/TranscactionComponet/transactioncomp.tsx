@@ -75,9 +75,11 @@ export const TransactionComp: React.FC = () => {
                 Create Servece
               </span>
               <div className={styles.serviceContainer}>
-                
-              </div>
+                 <div className={styles.serviceNUmber}>
 
+                 </div>
+                 <div className={styles.serviceAction}></div>
+              </div>
             </div>
           </div>
         </div>
