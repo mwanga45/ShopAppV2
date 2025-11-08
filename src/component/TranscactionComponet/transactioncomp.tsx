@@ -1,7 +1,12 @@
-import { RiCloseFill,  RiWallet3Line } from "react-icons/ri";
+import { RiCloseFill, RiWallet3Line } from "react-icons/ri";
 import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
-import { FaCoins, FaExchangeAlt, FaWallet, FaExclamationCircle  } from "react-icons/fa";
+import {
+  FaCoins,
+  FaExchangeAlt,
+  FaWallet,
+  FaExclamationCircle,
+} from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
 import { GiChickenOven } from "react-icons/gi";
 import { FcCollect } from "react-icons/fc";
@@ -63,7 +68,17 @@ export const TransactionComp: React.FC = () => {
             <div className={styles.transactionFormcontainer}>
               <TransactionForm />
             </div>
-            <div className={styles.transactionCalenderContainer}></div>
+            <div>
+              <span
+                style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+              >
+                Create Servece
+              </span>
+              <div className={styles.serviceContainer}>
+                
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
@@ -83,49 +98,64 @@ export const TransactionForm = () => {
           </div>
           <span>Food Service</span>
         </div>
-          <div>
+        <div>
           <div className={styles.iconContainer}>
             <FaBoltLightning color="white" size={40} />
           </div>
           <span>Electricity Service</span>
         </div>
-          <div>
+        <div>
           <div className={styles.iconContainer}>
             <RiWallet3Line color="blue" size={40} />
           </div>
           <span>Withdraw Service</span>
         </div>
-          <div>
+        <div>
           <div className={styles.iconContainer}>
             <FcCollect color="black" size={40} />
           </div>
           <span>Other Service</span>
         </div>
-      </div >
-      <div style={{width:"100%", height:"2px", backgroundColor:"grey"}}></div>
+      </div>
+      <div
+        style={{ width: "100%", height: "2px", backgroundColor: "grey" }}
+      ></div>
       <div className={styles.formMainContainer}>
-       <label htmlFor="" style={{color:"black", fontSize:"20px", fontWeight:"bold"}}>OnUse Amount</label>
-       <div className={styles.inputfieldContainer}>
-      <div className={styles.inputfield}>
-        <div>
-          <FaWallet size={30} color="gold" />
+        <label
+          htmlFor=""
+          style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+        >
+          OnUse Amount
+        </label>
+        <div className={styles.inputfieldContainer}>
+          <div className={styles.inputfield}>
+            <div>
+              <FaWallet size={30} color="gold" />
+            </div>
+            <div className={styles.inputfield}>
+              <input type="text" value={"200,000"} />
+            </div>
+          </div>
         </div>
-        <div className={styles.inputfield}>
-          <input type="text" value={"200,000"} />
+        <label
+          htmlFor=""
+          style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+        >
+          Amount for Service
+        </label>
+        <div className={styles.inputfieldContainer}>
+          <div className={styles.inputfield}>
+            <input type="text" placeholder="Enter Amount" />
+          </div>
+        </div>
+        <span className={styles.precaution}>
+          <FaExclamationCircle color="black " /> Make sure the you have Enough
+          On use money to make request
+        </span>
+        <div className={styles.buttonCOntainer}>
+          <Button buttonName="Confirm payment for your service." />
         </div>
       </div>
-      </div>
-         <label htmlFor="" style={{color:"black", fontSize:"20px", fontWeight:"bold"}}>Amount for Service</label>
-      <div className={styles.inputfieldContainer}>
-      <div className={styles.inputfield}>
-        <input type="text" placeholder="Enter Amount" />
-      </div>
-      </div>
-      <span className={styles.precaution}><FaExclamationCircle color="black "/> Make sure the you have Enough On use money  to make request</span>
-      <div className={styles.buttonCOntainer}>
-      <Button buttonName="Confirm payment for your service."/>
-      </div>
-    </div>
     </div>
   );
 };
