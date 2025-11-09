@@ -4,7 +4,6 @@ import { FaEye } from "react-icons/fa6";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Services } from "./icon";
 import type {
-  ServiceIcon,
   ServiceCategory,
   ServiceIconchoose,
 } from "../../type.interface";

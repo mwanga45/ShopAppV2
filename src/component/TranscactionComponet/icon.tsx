@@ -1,5 +1,4 @@
 import {
-  FaMoneyBillWave,
   FaBolt,
   FaUserTie,
   FaWallet,
