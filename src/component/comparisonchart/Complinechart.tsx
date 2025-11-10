@@ -12,7 +12,7 @@ import {
     Bar 
     
 } from "recharts"
-import type { ChartPops } from "../../type.interface"
+import type { ChartPops, weekChartData } from "../../type.interface"
 interface GraphTitle {
     title?:string
 }
@@ -29,8 +29,8 @@ export const Complinechart: React.FC<ChartPops & GraphTitle> = ({ title, Thiswee
   });
 
   const allValues = [
-    ...Thisweek.map((d) => d.Revenue ?? 0),
-    ...LastWeek.map((d) => d.Revenue ?? 0),
+    ...Thisweek.map((d: weekChartData) => d.Revenue ?? 0),
+    ...LastWeek.map((d: weekChartData) => d.Revenue ?? 0),
   ];
   const maxValue = Math.max(...allValues);
   const minValue = Math.min(...allValues);

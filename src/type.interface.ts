@@ -340,3 +340,21 @@ export interface ProductItem {
 export interface CombinedProductUNoN {
   combinedResult?: ProductItem[]
 }
+
+export interface weekChartData {
+  day: string;
+  Revenue: number;
+  Date?: string;
+  Quantity?: number;
+  product_id?: number;
+  product_name?: string;
+}
+
+export interface ChartPops {
+  Thisweek?: weekChartData[];
+  LastWeek?: weekChartData[];
+  RevenueRateChange?: Array<{
+    date?: string | Date;
+    rate?: number;
+  }>;
+}
