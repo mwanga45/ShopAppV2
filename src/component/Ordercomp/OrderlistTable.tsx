@@ -1,292 +1,106 @@
-import { Pencil } from "lucide-react";
-import { useState, useEffect } from "react";
-import styles from "./order-list.module.css";
-import { fetchOrders, fetchOrdersByDateRange } from "../../central-api/central-api";
-import { toast, ToastContainer } from "react-toastify";
+
+import { Pencil } from "lucide-react"
+import { useState } from "react"
+import styles from "./order-list.module.css"
 
 interface Order {
-  id: string;
-  paidMoney: number;
-  payMoney: number;
-  productName: string;
-  orderStatus:
-    | "pending"
-    | "completed"
-    | "cancelled"
-    | "processing"
-    | "Paid"
-    | "Partial"
-    | "Pending";
-  clientPhone: string;
-  clientName: string;
-  orderDate: string;
+  id: string
+  paidMoney: number
+  payMoney: number
+  username: string
+  productName: string
+  orderStatus: "pending" | "completed" | "cancelled" | "processing"
+  clientPhone: string
+  clientName: string
+  orderDate: string
 }
 
+const sampleOrders: Order[] = [
+  {
+    id: "1",
+    payMoney: 399.99,
+    paidMoney: 299.99,
+    username: "john_doe",
+    productName: "Wireless Headphones",
+    orderStatus: "completed",
+    clientPhone: "+1 234-567-8900",
+    clientName: "John Doe",
+    orderDate: "2025-01-15",
+  },
+  {
+    id: "2",
+    payMoney: 199.99,
+    paidMoney: 149.5,
+    username: "jane_smith",
+    productName: "Smart Watch",
+    orderStatus: "processing",
+    clientPhone: "+1 234-567-8901",
+    clientName: "Jane Smith",
+    orderDate: "2025-01-20",
+  },
+  {
+    id: "3",
+    payMoney: 89.99,
+    paidMoney: 89.99,
+    username: "bob_wilson",
+    productName: "Phone Case",
+    orderStatus: "pending",
+    clientPhone: "+1 234-567-8902",
+    clientName: "Bob Wilson",
+    orderDate: "2025-01-22",
+  },
+]
+
 export function OrdersTable() {
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [editForm, setEditForm] = useState<Order | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [startDate, setStartDate] = useState<string>("");
-  const [endDate, setEndDate] = useState<string>("");
-  const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
-
-  // Fetch orders on mount
-  useEffect(() => {
-    loadOrders();
-  }, []);
-
-  // Filter by date range
-  useEffect(() => {
-    if (startDate && endDate) {
-      const filtered = orders.filter((order) => {
-        const orderDate = new Date(order.orderDate);
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        return orderDate >= start && orderDate <= end;
-      });
-      setFilteredOrders(filtered);
-    } else {
-      setFilteredOrders(orders);
-    }
-  }, [orders, startDate, endDate]);
-
-  const loadOrders = async () => {
-    try {
-      setLoading(true);
-      const response = await fetchOrders();
-
-      if (response.data.success) {
-        // Normalize backend response
-        const normalized = response.data.data.map((item: any) => ({
-          id: String(item.id),
-          paidMoney: Number(item.paidmoney),
-          payMoney: Number(item.paymoney),
-          productName: item.productname,
-          orderStatus:
-            item.orderstatus.toLowerCase() === "partialpaid"
-              ? "Partial"
-              : item.orderstatus.toLowerCase() === "paid"
-              ? "Paid"
-              : item.orderstatus.toLowerCase() === "pending"
-              ? "Pending"
-              : item.orderstatus,
-          clientPhone: item.clientphone,
-          clientName: item.clientname,
-          orderDate: item.orderdate,
-        }));
-
-        setOrders(normalized);
-        setFilteredOrders(normalized);
-        toast.success("Orders loaded successfully!");
-      } else {
-        toast.error(response.data.message || "Failed to load orders");
-      }
-    } catch (error: any) {
-      console.error("Error loading orders:", error);
-      toast.error(
-        "Error loading orders: " +
-          (error.response?.data?.message || error.message)
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleDateRangeFilter = async () => {
-    if (!startDate || !endDate) {
-      toast.error("Please select both start and end dates");
-      return;
-    }
-
-    try {
-      setLoading(true);
-      const response = await fetchOrdersByDateRange(startDate, endDate);
-      if (response.data.success) {
-        const normalized = response.data.data.map((item: any) => ({
-          id: String(item.id),
-          paidMoney: Number(item.paidmoney),
-          payMoney: Number(item.paymoney),
-          productName: item.productname,
-          orderStatus:
-            item.orderstatus.toLowerCase() === "partialpaid"
-              ? "Partial"
-              : item.orderstatus.toLowerCase() === "paid"
-              ? "Paid"
-              : item.orderstatus.toLowerCase() === "pending"
-              ? "Pending"
-              : item.orderstatus,
-          clientPhone: item.clientphone,
-          clientName: item.clientname,
-          orderDate: item.orderdate,
-        }));
-
-        setOrders(normalized);
-        setFilteredOrders(normalized);
-        toast.success(`Found ${response.data.data.length} orders in date range`);
-      } else {
-        toast.error(response.data.message || "Failed to fetch orders");
-      }
-    } catch (error: any) {
-      console.error("Error fetching orders by date range:", error);
-      toast.error(
-        "Error fetching orders: " +
-          (error.response?.data?.message || error.message)
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [editingId, setEditingId] = useState<string | null>(null)
+  const [orders, setOrders] = useState<Order[]>(sampleOrders)
+  const [editForm, setEditForm] = useState<Order | null>(null)
 
   const handleEdit = (orderId: string) => {
-    const orderToEdit = orders.find((order) => order.id === orderId);
+    const orderToEdit = orders.find((order) => order.id === orderId)
     if (orderToEdit) {
-      setEditingId(orderId);
-      setEditForm({ ...orderToEdit });
+      setEditingId(orderId)
+      setEditForm({ ...orderToEdit })
     }
-  };
+  }
 
   const handleSave = (orderId: string) => {
     if (editForm) {
-      setOrders(
-        orders.map((order) => (order.id === orderId ? editForm : order))
-      );
-      setEditingId(null);
-      setEditForm(null);
-      toast.success("Order updated successfully!");
+      setOrders(orders.map((order) => (order.id === orderId ? editForm : order)))
+      setEditingId(null)
+      setEditForm(null)
     }
-  };
+  }
 
   const handleCancel = () => {
-    setEditingId(null);
-    setEditForm(null);
-  };
+    setEditingId(null)
+    setEditForm(null)
+  }
 
   const handleInputChange = (field: keyof Order, value: string | number) => {
     if (editForm) {
-      setEditForm({ ...editForm, [field]: value });
+      setEditForm({ ...editForm, [field]: value })
     }
-  };
+  }
 
   const getStatusClass = (status: Order["orderStatus"]) => {
-    const baseClass = styles.statusBadge;
+    const baseClass = styles.statusBadge
     switch (status) {
       case "completed":
-      case "Paid":
-        return `${baseClass} ${styles.statusCompleted}`;
+        return `${baseClass} ${styles.statusCompleted}`
       case "processing":
-        return `${baseClass} ${styles.statusProcessing}`;
+        return `${baseClass} ${styles.statusProcessing}`
       case "pending":
-      case "Pending":
-        return `${baseClass} ${styles.statusPending}`;
+        return `${baseClass} ${styles.statusPending}`
       case "cancelled":
-        return `${baseClass} ${styles.statusCancelled}`;
-      case "Partial":
-        return `${baseClass} ${styles.statusProcessing}`;
+        return `${baseClass} ${styles.statusCancelled}`
       default:
-        return baseClass;
+        return baseClass
     }
-  };
-
-  const formatStatus = (status: Order["orderStatus"]) => {
-    switch (status) {
-      case "Paid":
-        return "Completed";
-      case "Partial":
-        return "Partial";
-      case "Pending":
-        return "Pending";
-      default:
-        return status;
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className={styles.tableContainer}>
-        <div style={{ textAlign: "center", padding: "50px" }}>
-          <p>Loading orders...</p>
-        </div>
-      </div>
-    );
   }
 
   return (
     <div className={styles.tableContainer}>
-      <ToastContainer />
-       <span style={{fontSize:"55", fontWeight:"bolder", color:"grey"}}>OrderList</span>
-      <div
-        style={{
-          display: "flex",
-          gap: "10px",
-          marginBottom: "20px",
-          padding: "15px",
-          backgroundColor: "#f8f9fa",
-          borderRadius: "8px",
-          alignItems: "center",
-        }}
-      >
-        <div>
-          <label style={{ marginRight: "5px", fontWeight: "bold" }}>
-            Start Date:
-          </label>
-          <input
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            style={{
-              padding: "5px",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
-            }}
-          />
-        </div>
-        <div>
-          <label style={{ marginRight: "5px", fontWeight: "bold" }}>
-            End Date:
-          </label>
-          <input
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            style={{
-              padding: "5px",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
-            }}
-          />
-        </div>
-        <button
-          onClick={handleDateRangeFilter}
-          style={{
-            padding: "8px 16px",
-            backgroundColor: "#007bff",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
-        >
-          Filter by Date
-        </button>
-        <button
-          onClick={loadOrders}
-          style={{
-            padding: "8px 16px",
-            backgroundColor: "#6c757d",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
-        >
-          Load All Orders
-        </button>
-        <div style={{ marginLeft: "auto", fontWeight: "bold" }}>
-          Total Orders: {filteredOrders.length}
-        </div>
-      </div>
-          
       <table className={styles.table}>
         <thead className={styles.tableHead}>
           <tr>
@@ -294,6 +108,7 @@ export function OrdersTable() {
             <th className={styles.tableHeaderCell}>Client Name</th>
             <th className={styles.tableHeaderCell}>Client Phone</th>
             <th className={styles.tableHeaderCell}>Product Name</th>
+            <th className={styles.tableHeaderCell}>Username</th>
             <th className={styles.tableHeaderCell}>Order Status</th>
             <th className={styles.tableHeaderCell}>Total Amount</th>
             <th className={styles.tableHeaderCell}>Paid Money</th>
@@ -301,16 +116,14 @@ export function OrdersTable() {
           </tr>
         </thead>
         <tbody className={styles.tableBody}>
-          {filteredOrders.map((order) => (
+          {orders.map((order) => (
             <tr key={order.id} className={styles.tableRow}>
               <td className={`${styles.tableCell} ${styles.tableCellMuted}`}>
                 {editingId === order.id ? (
                   <input
                     type="date"
                     value={editForm?.orderDate || ""}
-                    onChange={(e) =>
-                      handleInputChange("orderDate", e.target.value)
-                    }
+                    onChange={(e) => handleInputChange("orderDate", e.target.value)}
                     style={{ padding: "4px" }}
                   />
                 ) : (
@@ -322,9 +135,7 @@ export function OrdersTable() {
                   <input
                     type="text"
                     value={editForm?.clientName || ""}
-                    onChange={(e) =>
-                      handleInputChange("clientName", e.target.value)
-                    }
+                    onChange={(e) => handleInputChange("clientName", e.target.value)}
                     style={{ width: "120px", padding: "4px" }}
                   />
                 ) : (
@@ -336,9 +147,7 @@ export function OrdersTable() {
                   <input
                     type="text"
                     value={editForm?.clientPhone || ""}
-                    onChange={(e) =>
-                      handleInputChange("clientPhone", e.target.value)
-                    }
+                    onChange={(e) => handleInputChange("clientPhone", e.target.value)}
                     style={{ width: "130px", padding: "4px" }}
                   />
                 ) : (
@@ -350,22 +159,30 @@ export function OrdersTable() {
                   <input
                     type="text"
                     value={editForm?.productName || ""}
-                    onChange={(e) =>
-                      handleInputChange("productName", e.target.value)
-                    }
+                    onChange={(e) => handleInputChange("productName", e.target.value)}
                     style={{ width: "150px", padding: "4px" }}
                   />
                 ) : (
                   order.productName
                 )}
               </td>
+              <td className={`${styles.tableCell} ${styles.tableCellMuted}`}>
+                {editingId === order.id ? (
+                  <input
+                    type="text"
+                    value={editForm?.username || ""}
+                    onChange={(e) => handleInputChange("username", e.target.value)}
+                    style={{ width: "120px", padding: "4px" }}
+                  />
+                ) : (
+                  order.username
+                )}
+              </td>
               <td className={styles.tableCell}>
                 {editingId === order.id ? (
                   <select
                     value={editForm?.orderStatus || "pending"}
-                    onChange={(e) =>
-                      handleInputChange("orderStatus", e.target.value)
-                    }
+                    onChange={(e) => handleInputChange("orderStatus", e.target.value)}
                     style={{ padding: "4px" }}
                   >
                     <option value="pending">Pending</option>
@@ -374,37 +191,27 @@ export function OrdersTable() {
                     <option value="cancelled">Cancelled</option>
                   </select>
                 ) : (
-                  <span className={getStatusClass(order.orderStatus)}>
-                    {formatStatus(order.orderStatus)}
-                  </span>
+                  <span className={getStatusClass(order.orderStatus)}>{order.orderStatus}</span>
                 )}
               </td>
-              <td
-                className={`${styles.tableCell} ${styles.tableCellMedium}`}
-              >
+              <td className={`${styles.tableCell} ${styles.tableCellMedium}`}>
                 {editingId === order.id ? (
                   <input
                     type="number"
                     value={editForm?.payMoney || 0}
-                    onChange={(e) =>
-                      handleInputChange("payMoney", Number(e.target.value))
-                    }
+                    onChange={(e) => handleInputChange("payMoney", Number.parseFloat(e.target.value))}
                     style={{ width: "100px", padding: "4px" }}
                   />
                 ) : (
                   `$${order.payMoney.toFixed(2)}`
                 )}
               </td>
-              <td
-                className={`${styles.tableCell} ${styles.tableCellMedium} ${styles.firstColumn}`}
-              >
+              <td className={`${styles.tableCell} ${styles.tableCellMedium} ${styles.firstColumn}`}>
                 {editingId === order.id ? (
                   <input
                     type="number"
                     value={editForm?.paidMoney || 0}
-                    onChange={(e) =>
-                      handleInputChange("paidMoney", Number(e.target.value))
-                    }
+                    onChange={(e) => handleInputChange("paidMoney", Number.parseFloat(e.target.value))}
                     style={{ width: "100px", padding: "4px" }}
                   />
                 ) : (
@@ -421,23 +228,14 @@ export function OrdersTable() {
                     >
                       Save
                     </button>
-                    <button
-                      className={styles.editButton}
-                      onClick={handleCancel}
-                      style={{ color: "#ef4444" }}
-                    >
+                    <button className={styles.editButton} onClick={handleCancel} style={{ color: "#ef4444" }}>
                       Cancel
                     </button>
                   </div>
                 ) : (
-                  <button
-                    className={styles.editButton}
-                    onClick={() => handleEdit(order.id)}
-                  >
+                  <button className={styles.editButton} onClick={() => handleEdit(order.id)}>
                     <Pencil className={styles.editIcon} />
-                    <span className={styles.srOnly}>
-                      Edit order {order.id}
-                    </span>
+                    <span className={styles.srOnly}>Edit order {order.id}</span>
                   </button>
                 )}
               </td>
@@ -446,5 +244,5 @@ export function OrdersTable() {
         </tbody>
       </table>
     </div>
-  );
+  )
 }

@@ -4,7 +4,7 @@
     width: 100%;
     height: 100%;
     min-height: 100vh;
-    background-color:aliceblue;
+    background-color: azure;
     overflow-x: hidden;
     flex: 1;
     margin: 0;
@@ -63,14 +63,11 @@
 .sale-info{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     row-gap: 20px;
     padding: 0;
     flex: 1;
     min-width: 300px;
     max-width: 500px;
-
 }
 
 .cardreport{
@@ -94,11 +91,6 @@
     grid-row: 2;
     width: 100%;
 }
-.export-data{
-    display: flex;
-    column-gap: 15px;
-}
-
 
 /* Responsive Design */
 @media (max-width: 1400px) {

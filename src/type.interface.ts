@@ -1,36 +1,50 @@
-import type { ReactElement } from "react";
 import type React from "react";
+
+export interface ServiceIcon {
+  name: string;
+  icon: React.ReactNode;
+  color: string;
+}
+
+export interface ServiceCategory {
+  category: string;
+  icons: ServiceIcon[];
+}
+
+export interface ServiceIconchoose {
+  Icon: ServiceCategory[];
+}
 
 export interface Product {
   id?: number;
   product_name?: string;
-  product_category?: "wholesales" | "retailsales" | "";
+  product_category?: 'wholesales' | 'retailsales' | '';
   product_type?: string;
   wholesales_price?: string | null;
   retailsales_price?: string | null;
   Total_stock?: number | null;
-  Pnum?: number;
+  Pnum?:number
 }
 export interface wProduct {
   id: number;
   product_name: string;
-  product_category: "wholesales";
+  product_category: 'wholesales' 
   product_type: string;
-  wholesales_price: string;
+  wholesales_price: string 
   Total_stock: number | null;
 }
 
 export interface rProduct {
   id: number;
   product_name: string;
-  product_category: "retailsales";
+  product_category: 'retailsales';
   product_type: string;
-  retailsales_price: string;
+  retailsales_price: string 
   Total_stock: number | null;
 }
-export interface receiveProduct {
-  wholesales: wProduct[];
-  retailsales: rProduct[];
+export interface receiveProduct{
+    wholesales:wProduct[];
+    retailsales:rProduct[]
 }
 export interface DiscInterface {
   product_id?: number;
@@ -79,15 +93,15 @@ export interface productInfoprops {
   product_category: string;
   product_name: string;
 }
-export interface SaleResponseOne {
-  ProductId: number;
-  Selling_price: number;
-  Total_product: number;
+export interface SaleResponseOne{
+    ProductId:number;
+    Selling_price:number;
+    Total_product:number;
 }
 
 export interface StockCheckData {
   totalstock: number;
-  product_status: "Enough" | "Less" | string;
+  product_status: 'Enough' | 'Less' | string;
 }
 
 export interface StockCheckResponse {
@@ -132,6 +146,7 @@ export interface SalesSummaryData {
   stock_check: StockCheckResponse;
   DiscontResult: DiscountResponse;
   CalculateDeviation: DeviationResponse;
+  
 }
 
 export interface SalesSummaryResponse {
@@ -139,18 +154,20 @@ export interface SalesSummaryResponse {
   success: boolean;
   data: SalesSummaryData;
 }
-export interface paymentstatus {
-  Paid: "paid";
-  Pending: "pending";
-  Parctial: "partialpaid";
-}
-export interface StockStatus {
-  Enough: "Enough";
-  NotEnough: "NotEnough";
+export interface paymentstatus{
+    Paid:'paid',
+    Pending:'pending',
+    Parctial: 'partialpaid' 
+} 
+export interface StockStatus{
+  Enough:'Enough',
+  NotEnough:'NotEnough'
+
 }
 
-export interface override {
-  override: "Override";
+export interface override{
+  override: 'Override'
+  
 }
 export interface Salerequest {
   Total_pc_pkg_litre?: number;
@@ -158,11 +175,12 @@ export interface Salerequest {
   Expecte_profit?: number;
   Net_profit?: number;
   Discount_percentage?: string;
-  Percentage_deviation?: number;
+  Percentage_deviation?: number ;
   Revenue?: number | null;
   profit_deviation?: number;
   Stock_status?: string;
   paymentstatus?: string;
+  
 }
 export interface FetchLastRec {
   Total_pc_pkg_litre?: number;
@@ -176,7 +194,7 @@ export interface FetchLastRec {
   product: {
     product_name?: string;
   };
-  Onclick?: () => void;
+  Onclick?:() => void
 }
 
 export interface SalesRecord {
@@ -187,20 +205,20 @@ export interface SalesRecord {
   total_quantity?: string;
   total_revenue?: string;
   total_profit?: string;
-  status?: string;
+  status?:string
 }
 
 export interface SalesSummaryDatasales {
   Normalsaleswholereturn?: SalesRecord[];
   Normalsalesretailreturn?: SalesRecord[];
-  Pendingsalesreturn?: SalesRecord[];
-  AllDebtRecord?: DebtRecord[];
+  Pendingsalesreturn?:SalesRecord[];
+  AllDebtRecord?:DebtRecord[]
   Allcombined?: SalesRecord[];
   totalRevenue?: number;
   totalWholeRevenue?: number;
   totolRetailRevenue?: number;
-  category?: string;
-  Onclick: (id: string) => void;
+  category?:string
+  Onclick:(id:string) => void
 }
 
 export type Result = {
@@ -212,45 +230,48 @@ export interface SalesSummaryResponsesales {
   data: SalesSummaryDatasales;
 }
 
-export interface Debtinfo {
-  Debtor_name?: string;
-  paidmoney?: number;
-  Phone_number?: string;
-  location?: string;
-  PaymentDateAt?: Date;
+export interface Debtinfo{
+  Debtor_name?:string
+  paidmoney?:number
+  Phone_number?:string
+  location?:string
+  PaymentDateAt?:Date
+
 }
 
-export interface DebtorOtherinfoProps {
-  Debtnumber?: number;
-  countUnpaid?: number;
-  countpaid?: number;
-  CountPaidMoney?: number;
-  countUnpaidMoney?: number;
-  total_revenue?: number;
-  Location?: string;
-  Debtor_name?: string;
-  Phone_number?: string;
-  PaidOutDate?: number;
+ export interface DebtorOtherinfoProps {
+    Debtnumber?: number,
+    countUnpaid?: number,
+    countpaid?: number,
+    CountPaidMoney?:number,
+    countUnpaidMoney?: number,
+    total_revenue?: number
+    Location?:string
+    Debtor_name?:string
+    Phone_number?:string
+    PaidOutDate?:number
+
 }
-export interface PersonOverallDebtRec {
-  Debtnumber?: number;
-  countUnpaid?: number;
-  countpaid?: number;
-  CountPaidMoney?: number;
-  countUnpaidMoney?: number;
-  total_revenue?: number;
-  Location?: {
-    Location?: string;
-    Phone_number?: string;
-  };
-  customer_name?: string;
-  PaidOutDate?: number;
+export  interface PersonOverallDebtRec {
+    Debtnumber?: number,
+    countUnpaid?: number,
+    countpaid?: number,
+    CountPaidMoney?:number,
+    countUnpaidMoney?: number,
+    total_revenue?: number
+    Location?:{
+     Location?:string 
+     Phone_number?:string
+    }
+    customer_name?:string
+    PaidOutDate?:number
 }
 export interface DebtResponse {
-  findUserDebtInfo?: DebtRecord[];
-  findtrack?: TrackRecord[];
-  PersonDebt?: DebtRecord[];
-  PersonOverallDebtRec?: PersonOverallDebtRec;
+    findUserDebtInfo?: DebtRecord[];
+    findtrack?: TrackRecord[];
+    PersonDebt?: DebtRecord[];
+    PersonOverallDebtRec?:PersonOverallDebtRec
+  
 }
 
 export interface DebtRecord {
@@ -264,30 +285,37 @@ export interface DebtRecord {
   product_name?: string;
   updated_at?: string;
   createdat?: string;
-  deadlinedate?: string;
-  tracks?: TrackRecord[];
-  Onclose?: () => void;
+  deadlinedate?: string; 
+  tracks?:TrackRecord[];
+  Onclose?:() => void
+  
 }
+
+
 export interface TrackRecord {
   paidmoney?: number;
-  updated_at?: string;
+  updated_at?:string
 }
+
+
 export interface CardDiscriptionInterface {
-  name?: string;
-  date?: string;
-  amount?: string;
-  title?: string;
-  id?: any;
-  Icon?: React.ElementType;
-  color: string;
+  name?:string;
+  date?:string;
+  amount?:string;
+  title?:string;
+  id?:any
+  Icon?:React.ElementType
+  color:string
 }
 export interface CustomerInfo {
-  Location?: string;
-  phone_number?: string;
-  customer_name?: string;
-  Cid?: string;
+  Location?:string,
+  phone_number?:string,
+  customer_name?:string,
+  Cid?:string
 }
-export interface UpdateDebt {}
+export interface UpdateDebt{
+  
+}
 export interface ICreateOrder {
   product_name?: string;
   client_name?: string;
@@ -298,10 +326,11 @@ export interface ICreateOrder {
   Quantity?: string;
   Phone_number?: string;
   Orderstatus?: string;
+  Order_Description?: string;
 }
 
 export interface Oncloseform {
-  onclose?: () => void;
+  onclose?: ()=> void
 }
 
 export interface ProductItem {
@@ -309,73 +338,5 @@ export interface ProductItem {
   selling_price?: string;
 }
 export interface CombinedProductUNoN {
-  combinedResult?: ProductItem[];
-}
-export interface mostSoldProductRetail {
-  product_name?: string;
-  total_quantity?: string;
-  Revenue: string;
-}
-
-export interface ProductMonthResult{
-  product_name?: string,
-  total_revenue?:string,
-  total_quantity: string
-}
-export interface CardReportType{
-  totalRevenue?:number
-  averageRevenue?:number
-  mostSoldProductWholesales?:ProductMonthResult[]
-  leastSoldProduct?:ProductMonthResult[]
-  leastSoldProductRetails?:ProductMonthResult[]
-  mostSoldProductRetail?:ProductMonthResult[]
-  combineResult?:number
-  TodayRevenue?:TodayRevenue
-  Percentage_deviation?:number
-  Deviation?:[]
-}
-export interface TodayRev{
-  generated_today?: string,
-  bankRevenue?: string
-
-}
-export interface TodayRevenue {
-  TodayRevenue:TodayRev[]
-}
-
-
-export interface weekChartData {
-  Revenue?: number
-  Quantity?: 40
-  Date?: string
-  day?: string
-}
-export interface DeviationResultCard{
-  ExpectedRevenue?:number
-  TotalGenerated?:number
-  PercentageDeviation?:number
-  DeviationAmount?:number
-}
-
-export interface ChartPops {
-    Thisweek?:weekChartData[]
-    LastWeek?:weekChartData[]
-    RevenueRateChange?:RevenueRatechange[]
-}
-export interface RevenueRatechange{
-    date?:string
-    rate?: number
-}
-export interface ServiceIcon {
-  name: string;
-  icon: ReactElement;
-  color: string;
-}
-
-export interface ServiceCategory {
-  category: string;
-  icons: ServiceIcon[];
-}
-export interface ServiceIconchoose {
-  Icon:ServiceCategory[]
+  combinedResult?: ProductItem[]
 }

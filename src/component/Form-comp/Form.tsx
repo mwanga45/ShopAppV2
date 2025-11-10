@@ -961,10 +961,17 @@ export const SalesRecForm: React.FC<
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
+                justifyContent: "space-between",
               }}
             >
-              <span>{isWhole ? "Whole sales Record" : "Retail sales Record"}</span>
+              <p>{isWhole ? "Whole sales Record" : "Retail sales Record"}</p>
+              <button
+                type="button"
+                className="Actin-btn"
+                onClick={() => setWhole((prev) => !prev)}
+              >
+                {isWhole ? "Switch to Retail" : "Switch to Wholesale"}
+              </button>
             </div>
             <form className="main-form-content" onSubmit={handleOnsubmit}>
               <div className="form-container-decoration">
@@ -1035,13 +1042,6 @@ export const SalesRecForm: React.FC<
                   />
                 </div>
                 <div className="btn-container">
-                      <button
-                type="button"
-                className="toggle-customer-btn"
-                onClick={() => setWhole((prev) => !prev)}
-              >
-                {isWhole ? "Switch to Retail" : "Switch to Wholesale"}
-              </button>
                   <Submitbtn buttonName="calculate sales" type="submit" />
                 </div>
               </div>
@@ -1657,6 +1657,7 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
         Quantity: Orderpayload.Quantity,
         Phone_number: Orderpayload.client_phone, // Use client_phone as Phone_number
         Orderstatus: Orderpayload.Orderstatus,
+        Order_Description: Orderpayload.Order_Description || ""
       };
 
       console.log("Sending order data:", orderData);
@@ -1860,6 +1861,17 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
                 <option value="pending">Pending</option>
                 <option value="Partial">Partial</option>
               </select>
+            </div>
+            <div className="input-value">
+              <label htmlFor="orderDescription">Order Description (Optional)</label>
+              <textarea
+                name="Order_Description"
+                id="orderDescription"
+                value={Orderpayload?.Order_Description || ""}
+                onChange={handleChange}
+                placeholder="Enter order description..."
+                rows={3}
+              />
             </div>
             <div className="btn-container">
               <button
