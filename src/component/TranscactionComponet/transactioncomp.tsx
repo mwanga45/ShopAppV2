@@ -8,6 +8,7 @@ import type { ServiceCategory, ServiceIconchoose } from "../../type.interface";
 import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
 import { FaBalanceScale } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
 
 import {
   FaCoins,
@@ -21,6 +22,7 @@ import { FcCollect } from "react-icons/fc";
 import { Button } from "../button/Button";
 export const TransactionComp: React.FC = () => {
   const [showAddServe, setshowAddServe] = useState<boolean>(false);
+  const [showCapital, setshowCapital] = useState<boolean>(false)
   const [iconlist, seticonlist] = useState<ServiceCategory[]>([]);
   useEffect(() => {
     const handleIconlist = () => {
@@ -46,7 +48,7 @@ export const TransactionComp: React.FC = () => {
         <div className={styles.transcionamountcontainer}>
           <div className={styles.transactionRecord}>
             <div className={styles.transactionsalaryContainer}>
-              <div style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ display: "flex", alignItems: "center" }} onClick={()=> setshowCapital(true)}>
                 <AnimatedCard
                   icon={"symbol"}
                   details={"Business Capital"}
@@ -256,6 +258,11 @@ export const TransactionBar = () => {
 export const BusinessCapital: React.FC = () => {
   return (
     <div className={styles.transctionmaincontainer}>
+      <div className={styles.BusinessCapital_close}>
+         <div>
+          <IoMdClose/>
+         </div>
+      </div>
       <div className={styles.formContainerHead}>
         <span>Capital Registered </span>
       </div>
@@ -267,7 +274,15 @@ export const BusinessCapital: React.FC = () => {
                 <FaBalanceScale size={30} color="gold" />
               </div>
               <div className={styles.inputfield}>
-                <input type="text" value={"200,000"} />
+                <input type="text"  />
+              </div>
+            </div>
+               <div className={styles.inputfield}>
+              <div>
+                <FaBalanceScale size={30} color="gold" />
+              </div>
+              <div className={styles.inputfield}>
+                <input type="text" name="code" />
               </div>
             </div>
           </div>
