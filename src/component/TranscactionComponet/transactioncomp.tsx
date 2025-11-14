@@ -17,15 +17,17 @@ import { FaBoltLightning } from "react-icons/fa6";
 import { GiChickenOven } from "react-icons/gi";
 import { FcCollect } from "react-icons/fc";
 import { Button } from "../button/Button";
+import { BusinessCapital } from "../Form-comp/Form";
+import { flex } from "@mui/system";
 export const TransactionComp: React.FC = () => {
-  const [showAddServe, setshowAddServe] = useState<boolean>(false)
-  const [iconlist, seticonlist] = useState<ServiceCategory[]>([])
-  useEffect(()=> {
-  const handleIconlist = ()=>{
-   seticonlist(Services)
-  }
-  handleIconlist()
-  }, [])
+  const [showAddServe, setshowAddServe] = useState<boolean>(false);
+  const [iconlist, seticonlist] = useState<ServiceCategory[]>([]);
+  useEffect(() => {
+    const handleIconlist = () => {
+      seticonlist(Services);
+    };
+    handleIconlist();
+  }, []);
   return (
     <div className={styles.transctionmaincontainer}>
       <div className={styles.transcationtopbar}>
@@ -44,8 +46,21 @@ export const TransactionComp: React.FC = () => {
         <div className={styles.transcionamountcontainer}>
           <div className={styles.transactionRecord}>
             <div className={styles.transactionsalaryContainer}>
-              <div></div>
-              <AnimatedCard icon={"symbol"} details={"ON USE"} money={600000} />
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <AnimatedCard
+                  icon={"symbol"}
+                  details={"Business Capital"}
+                  money={700000}
+                />
+              </div>
+
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <AnimatedCard
+                  icon={"symbol"}
+                  details={"ON USE"}
+                  money={600000}
+                />
+              </div>
             </div>
             <div className={styles.transactionHistory}>
               <span>Transaction History</span>
@@ -115,7 +130,10 @@ export const TransactionComp: React.FC = () => {
                     </span>
                   </div>
                   <div className={styles.serviceAction}>
-                    <div className={styles.serveceprocess} onClick={()=> setshowAddServe(true)}>
+                    <div
+                      className={styles.serveceprocess}
+                      onClick={() => setshowAddServe(true)}
+                    >
                       <MdAdd color="white" size={35} fontWeight={900} />
                       <span>Add</span>
                     </div>
@@ -127,18 +145,17 @@ export const TransactionComp: React.FC = () => {
                       <RiDeleteBinLine color="white" size={35} />
                       <span>Remove</span>
                     </div>
-                  </div>  
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-         { showAddServe  &&
-           <div className={styles.popupCompocontainer}>
-             <ServiceFormregister Icon={iconlist} />
-           </div>
-
-         }
+        {showAddServe && (
+          <div className={styles.popupCompocontainer}>
+            <ServiceFormregister Icon={iconlist} />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -254,21 +271,23 @@ export const ServiceFormregister: React.FC<ServiceIconchoose> = ({ Icon }) => {
         <form onSubmit={handleSubmit} className={styles.form}>
           <span className={styles.title}>Enter Service Name</span>
           <div className={styles.inputcontainer}>
-          <input
-            type="text"
-            placeholder="Your name..."
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className={styles.input}
-          />
-          <button type="submit" className={styles.button}>
-            Proceed
-          </button>
+            <input
+              type="text"
+              placeholder="Your name..."
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className={styles.input}
+            />
+            <button type="submit" className={styles.button}>
+              Proceed
+            </button>
           </div>
         </form>
       ) : (
         <div className={styles.servicesSection}>
-          <h2 className={styles.welcomeText}>Welcome, {name}! Choose a Service:</h2>
+          <h2 className={styles.welcomeText}>
+            Welcome, {name}! Choose a Service:
+          </h2>
           <div className={styles.servicesList}>
             {Icon.map((service) => (
               <div key={service.category} className={styles.serviceCard}>
@@ -292,4 +311,3 @@ export const ServiceFormregister: React.FC<ServiceIconchoose> = ({ Icon }) => {
     </div>
   );
 };
-

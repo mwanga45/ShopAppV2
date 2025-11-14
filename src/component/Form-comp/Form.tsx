@@ -27,6 +27,7 @@ import type {
   Salerequest,
   SalesSummaryResponse,
 } from "../../type.interface";
+import { paymentvia, type PaymentVia } from "../../type.interface";
 
 import type {
   wProduct,
@@ -579,6 +580,7 @@ export const SalesRecForm: React.FC<
   const [isSaleSummary, setisSaleSummary] = useState<boolean>(false);
   const [iscustomerexist, setiscustomerexist] = useState<boolean>(true);
   const [customerdetails, setcustomerdetails] = useState<CustomerInfo[]>([]);
+  const [paymentVia, setPaymentVia] = useState<PaymentVia>(paymentvia.Cash);
 
   const handleDbfrmclose = () => {
     setdbformOpen(false);
@@ -646,7 +648,9 @@ export const SalesRecForm: React.FC<
       setisreturned(false);
       setmakesales({
         paymentstatus: "",
+        payment_via: paymentvia.Cash,
       });
+      setPaymentVia(paymentvia.Cash);
     } catch (err: any) {
       console.error("Sales submit error:", err?.response?.data || err);
       alert(err?.response?.data?.message || "Failed to submit sales");
@@ -705,6 +709,7 @@ export const SalesRecForm: React.FC<
       Stock_status: salesSummary?.data?.stock_check.data.product_status ?? "",
       Discount_percentage: percentageDiscount,
       paymentstatus: makesales?.paymentstatus || "paid",
+      payment_via: paymentVia || paymentvia.Cash,
     };
 
     if (!nextSales.Total_pc_pkg_litre || nextSales.Total_pc_pkg_litre <= 0) {
@@ -727,7 +732,7 @@ export const SalesRecForm: React.FC<
         paidmoney: Number(debtorInfo?.paidmoney) || 0,
       };
 
-      // Create the final debt payload with correct field names and types
+
       const finaldebtPayload = {
         Debtor_name: debtPayload.Debtor_name,
         paidmoney: debtPayload.paidmoney,
@@ -748,6 +753,7 @@ export const SalesRecForm: React.FC<
         profit_deviation: nextSales.profit_deviation,
         Stock_status: nextSales.Stock_status, // Fix field name
         paymentstatus: nextSales.paymentstatus,
+        payment_via: nextSales.payment_via || paymentvia.Cash,
       };
 
       const sentWithDebt = { ...salesData, ...finaldebtPayload };
@@ -755,7 +761,6 @@ export const SalesRecForm: React.FC<
 
       try {
         const response = await CreateDebtrecord(sentWithDebt);
-        console.log("Debt creation response:", response);
 
         if (!response.data.success) {
           alert(response.data.message || "Failed to create debt record");
@@ -771,6 +776,20 @@ export const SalesRecForm: React.FC<
           Phone_number: undefined,
           PaymentDateAt: undefined,
         });
+        setPaymentVia(paymentvia.Cash);
+        setmakesales({
+          Total_pc_pkg_litre: 0,
+          ProductId: 0,
+          Expecte_profit: 0,
+          Net_profit: 0,
+          Discount_percentage: "0",
+          Percentage_deviation: 0,
+          Revenue: 0,
+          profit_deviation: 0,
+          Stock_status: "",
+          paymentstatus: "",
+          payment_via: paymentvia.Cash,
+        });
       } catch (err: any) {
         console.error("Debt creation error:", err);
         alert(
@@ -781,7 +800,7 @@ export const SalesRecForm: React.FC<
 
       return;
     }
-
+     console.log(nextSales)
     const confirm = window.confirm("Confirm sales?");
     if (!confirm) {
       setmakesales({
@@ -795,11 +814,20 @@ export const SalesRecForm: React.FC<
         profit_deviation: 0,
         Stock_status: "",
         paymentstatus: "",
+        payment_via: paymentvia.Cash,
       });
+      setPaymentVia(paymentvia.Cash);
       toast.success("Successfully terminated process");
+
       return;
     }
 
+    // Validate payment_via is selected
+    if (!paymentVia) {
+      alert("Please select a payment method (Bank or Cash)");
+      return;
+    }
+    console.log(nextSales)
     try {
       const response = await makesalesrequest(nextSales);
       if (!response.data.success) {
@@ -819,7 +847,9 @@ export const SalesRecForm: React.FC<
         profit_deviation: 0,
         Stock_status: "",
         paymentstatus: "",
+        payment_via: paymentvia.Cash,
       });
+      setPaymentVia(paymentvia.Cash);
 
       toast.success("Sales processed successfully");
       setisreturned(true);
@@ -889,6 +919,10 @@ export const SalesRecForm: React.FC<
         setdebtorInfo((prev) => ({ ...prev }));
       }
       setmakesales((prev) => ({ ...prev, ["paymentstatus"]: value }));
+    } else if (name === "payment_via") {
+      // Handle payment method selection
+      setPaymentVia(value as PaymentVia);
+      setmakesales((prev) => ({ ...prev, payment_via: value as PaymentVia }));
     } else if (name === "Debtor_name" && iscustomerexist) {
       // Handle customer selection specifically when customer exists
       handleCustomerSelection(value);
@@ -1143,7 +1177,7 @@ export const SalesRecForm: React.FC<
                     />
                     <div className="input-value">
                       <label
-                        htmlFor="product-category"
+                        htmlFor="paymentstatus"
                         style={{ color: "white" }}
                       >
                         Choose payment style
@@ -1158,6 +1192,23 @@ export const SalesRecForm: React.FC<
                         <option value="pending">pending...</option>
                         <option value="partialpaid">partialpaid</option>
                         <option value="debt">dept</option>
+                      </select>
+                    </div>
+                    <div className="input-value">
+                      <label
+                        htmlFor="payment_via"
+                        style={{ color: "white" }}
+                      >
+                        Payment Method
+                      </label>
+                      <select
+                        name="payment_via"
+                        value={paymentVia}
+                        onChange={handleChange}
+                        required
+                      >
+                        <option value={paymentvia.Cash}>Cash</option>
+                        <option value={paymentvia.Bank}>Bank</option>
                       </select>
                     </div>
                   </div>
@@ -1896,6 +1947,46 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
     </>
   );
 };
+export const BusinessCapital =()=>{
+  return(
+    <div className="form-main-container">
+      <ToastContainer />
+      <div className="frm-container">
+        <div className="form-title">
+          <p>Capital Injection</p>
+        </div>
+        <form className="main-form-content">
+          <div className="input-value">
+            <label htmlFor="ProductName">Product Name</label>
+            <input
+              type="text"
+              name="product_name"
+              id="ProductName"
+              // value={formData.product_name}
+              // onChange={handleChange}
+              required
+            />
+          </div>
+            <div className="input-value">
+              <label htmlFor="product-category">Category</label>
+              <select
+                name="product_category"
+                id="product-category"
+                // value={formData.product_category}
+                // onChange={handleChange}
+              >
+                <option value="wholesales">Wholesales</option>
+                <option value="retailsales">Retailsales</option>
+              </select>
+            </div>
+            <div className="input-value">
+              <label htmlFor="product-type">Type</label>
+            </div>
+            </form>
+            </div>
+      </div>
+  )
+}
 export const useFormClose = () => {
   const [isOpen, setIsOpen] = useState(true);
 

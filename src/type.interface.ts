@@ -158,7 +158,14 @@ export interface paymentstatus{
     Paid:'paid',
     Pending:'pending',
     Parctial: 'partialpaid' 
-} 
+}
+
+export const paymentvia = {
+  Bank: 'bank',
+  Cash: 'cash'
+} as const;
+
+export type PaymentVia = typeof paymentvia[keyof typeof paymentvia]; 
 export interface StockStatus{
   Enough:'Enough',
   NotEnough:'NotEnough'
@@ -180,7 +187,7 @@ export interface Salerequest {
   profit_deviation?: number;
   Stock_status?: string;
   paymentstatus?: string;
-  
+  payment_via?: PaymentVia;
 }
 export interface FetchLastRec {
   Total_pc_pkg_litre?: number;
