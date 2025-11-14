@@ -548,6 +548,160 @@ input[type="text"]::placeholder {
   height: fit-content;
   width: 100%;
   padding: 2px;
+  justify-content: flex-end;
   
-  
+}
+.BusinessCapital_close div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(211, 100%, 89%);
+  height: fit-content;
+  width: fit-content;
+  border-radius:5px ;
+  padding: 5px;
+}
+.BusinessCapitalformCOntainer{
+  background-color: aliceblue;
+  height: fit-content;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.formSubHeading{
+  color: #8f8f8f;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.capitalSummaryRow{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 0 15px 15px;
+}
+.capitalSummaryCard{
+  flex: 1 1 220px;
+  background: #f7f9ff;
+  border: 1px solid #ebefff;
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.capitalSummaryCard span{
+  color: #8b8b8b;
+  font-size: 14px;
+}
+.capitalSummaryCard strong{
+  font-size: 26px;
+  color: #1b1a2a;
+  font-weight: 700;
+}
+.capitalSummaryBadge{
+  color: #1e9e49;
+  font-size: 14px;
+  font-weight: 600;
+}
+.capitalSummaryMuted{
+  color: #7b7b7b;
+  font-size: 14px;
+}
+
+.fieldGroup{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+.fieldLabel{
+  font-size: 15px;
+  font-weight: 600;
+  color: #4a4a4a;
+}
+.fieldGridTwo{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  width: 100%;
+}
+.fieldGridTwo > div{
+  flex: 1 1 250px;
+}
+
+.capitalSelect{
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: 500;
+  background: transparent;
+  color: #333;
+}
+
+.textareaWrapper{
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 12px 15px;
+  background: #fff;
+  min-height: 130px;
+}
+.capitalNotes{
+  flex: 1;
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 16px;
+  color: #333;
+  background: transparent;
+}
+.capitalActions{
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 10px;
+}
+.capitalGhostButton,
+.capitalPrimaryButton{
+  border: none;
+  outline: none;
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.capitalGhostButton{
+  background: #f1f2f6;
+  color: #3f3f3f;
+}
+.capitalPrimaryButton{
+  background: linear-gradient(135deg, #005bea, #00c6fb);
+  color: #fff;
+}
+.capitalGhostButton:hover,
+.capitalPrimaryButton:hover{
+  opacity: .85;
+}
+
+.iconButton{
+  border:none;
+  outline:none;
+  background: transparent;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px;
+  border-radius: 6px;
+  cursor:pointer;
+}
+.iconButton:hover{
+  background-color:#f0f0f0;
 }

@@ -15,6 +15,10 @@ import {
   FaExchangeAlt,
   FaWallet,
   FaExclamationCircle,
+  FaHashtag,
+  FaRegCalendarAlt,
+  FaRegStickyNote,
+  FaTags,
 } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
 import { GiChickenOven } from "react-icons/gi";
@@ -48,7 +52,7 @@ export const TransactionComp: React.FC = () => {
         <div className={styles.transcionamountcontainer}>
           <div className={styles.transactionRecord}>
             <div className={styles.transactionsalaryContainer}>
-              <div style={{ display: "flex", alignItems: "center" }} onClick={()=> setshowCapital(true)}>
+              <div style={{ display: "flex", alignItems: "center", cursor:"pointer"}} onClick={()=> setshowCapital(true)}>
                 <AnimatedCard
                   icon={"symbol"}
                   details={"Business Capital"}
@@ -158,6 +162,13 @@ export const TransactionComp: React.FC = () => {
             <ServiceFormregister Icon={iconlist} />
           </div>
         )}
+        {
+          showCapital && (
+               <div className={styles.popupCompocontainer}>
+                <BusinessCapital/>
+               </div>
+          )
+        }
       </div>
     </div>
   );
@@ -256,39 +267,200 @@ export const TransactionBar = () => {
   );
 };
 export const BusinessCapital: React.FC = () => {
+  const [formData, setFormData] = useState({
+    amount: "",
+    serviceAmount: "",
+    paymentMethod: "cash",
+    reference: "",
+    code: "",
+    date: new Date().toISOString().split("T")[0],
+  });
+  const [notes, setNotes] = useState("");
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    alert("Capital recorded successfully");
+  };
+
+  const handleReset = () => {
+    setFormData({
+      amount: "",
+      serviceAmount: "",
+      paymentMethod: "cash",
+      reference: "",
+      code: "",
+      date: new Date().toISOString().split("T")[0],
+    });
+    setNotes("");
+  };
+
   return (
-    <div className={styles.transctionmaincontainer}>
+    <div className={styles.formContainer}>
       <div className={styles.BusinessCapital_close}>
-         <div>
-          <IoMdClose/>
-         </div>
+        <button type="button" className={styles.iconButton}>
+          <IoMdClose size={22} />
+        </button>
       </div>
       <div className={styles.formContainerHead}>
         <span>Capital Registered </span>
+        <p className={styles.formSubHeading}>
+          Log every capital injection, link it to a service, and leave a note
+          for finance to review.
+        </p>
       </div>
-      <div>
-        <form>
-          <div className={styles.inputfieldContainer}>
+
+      <div className={styles.capitalSummaryRow}>
+        <div className={styles.capitalSummaryCard}>
+          <span>Total Capital</span>
+          <strong>TZS 15,450,000</strong>
+          <small className={styles.capitalSummaryBadge}>+ 4.5% this month</small>
+        </div>
+        <div className={styles.capitalSummaryCard}>
+          <span>Allocated to services</span>
+          <strong>TZS 8,320,000</strong>
+          <small className={styles.capitalSummaryMuted}>
+            Remaining balance TZS 7,130,000
+          </small>
+        </div>
+      </div>
+
+      <form
+        className={styles.BusinessCapitalformCOntainer}
+        onSubmit={handleSubmit}
+      >
+        <div className={styles.fieldGroup}>
+          <label className={styles.fieldLabel}>Capital Amount</label>
+          <div className={styles.inputfield}>
+            <div>
+              <FaWallet size={26} color="#d1b000" />
+            </div>
+            <input
+              type="text"
+              name="amount"
+              placeholder="TZS 0.00"
+              value={formData.amount}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <div className={styles.fieldGroup}>
+          <label className={styles.fieldLabel}>Amount for Service</label>
+          <div className={styles.inputfield}>
+            <div>
+              <FaBalanceScale size={26} color="#2f80ed" />
+            </div>
+            <input
+              type="text"
+              name="serviceAmount"
+              placeholder="Service allocation"
+              value={formData.serviceAmount}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <div className={styles.fieldGridTwo}>
+          <div className={styles.fieldGroup}>
+            <label className={styles.fieldLabel}>Payment Method</label>
             <div className={styles.inputfield}>
               <div>
-                <FaBalanceScale size={30} color="gold" />
+                <FaCoins size={24} color="#27ae60" />
               </div>
-              <div className={styles.inputfield}>
-                <input type="text"  />
-              </div>
-            </div>
-               <div className={styles.inputfield}>
-              <div>
-                <FaBalanceScale size={30} color="gold" />
-              </div>
-              <div className={styles.inputfield}>
-                <input type="text" name="code" />
-              </div>
+              <select
+                name="paymentMethod"
+                value={formData.paymentMethod}
+                onChange={handleChange}
+                className={styles.capitalSelect}
+              >
+                <option value="cash">Cash</option>
+                <option value="bank">Bank Transfer</option>
+                <option value="mobile">Mobile Money</option>
+              </select>
             </div>
           </div>
-        </form>
+          <div className={styles.fieldGroup}>
+            <label className={styles.fieldLabel}>Date</label>
+            <div className={styles.inputfield}>
+              <div>
+                <FaRegCalendarAlt size={24} color="#ff7a00" />
+              </div>
+              <input
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.fieldGridTwo}>
+          <div className={styles.fieldGroup}>
+            <label className={styles.fieldLabel}>Reference / Vendor</label>
+            <div className={styles.inputfield}>
+              <div>
+                <FaTags size={24} color="#6c63ff" />
+              </div>
+              <input
+                type="text"
+                name="reference"
+                placeholder="Vendor or project name"
+                value={formData.reference}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className={styles.fieldGroup}>
+            <label className={styles.fieldLabel}>Tracking Code</label>
+            <div className={styles.inputfield}>
+              <div>
+                <FaHashtag size={24} color="#00b894" />
+              </div>
+              <input
+                type="text"
+                name="code"
+                placeholder="CAP-2025-001"
+                value={formData.code}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+        </div>
+
+        <label className={styles.fieldLabel}>Notes</label>
+        <div className={styles.textareaWrapper}>
+          <FaRegStickyNote size={20} color="#999" />
+          <textarea
+            name="notes"
+            placeholder="Add internal remarks, approval details or attachment reference..."
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            className={styles.capitalNotes}
+          />
+        </div>
+
+        <div className={styles.capitalActions}>
+          <button
+            type="button"
+            onClick={handleReset}
+            className={styles.capitalGhostButton}
+          >
+            Clear
+          </button>
+          <button type="submit" className={styles.capitalPrimaryButton}>
+            Record Capital
+          </button>
+        </div>
+      </form>
       </div>
-    </div>
   );
 };
 export const ServiceFormregister: React.FC<ServiceIconchoose> = ({ Icon }) => {

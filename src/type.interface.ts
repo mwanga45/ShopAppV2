@@ -158,7 +158,7 @@ export interface paymentstatus{
     Paid:'paid',
     Pending:'pending',
     Parctial: 'partialpaid' 
-}
+} 
 
 export const paymentvia = {
   Bank: 'bank',
