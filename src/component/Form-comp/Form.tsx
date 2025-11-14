@@ -1947,46 +1947,6 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
     </>
   );
 };
-export const BusinessCapital =()=>{
-  return(
-    <div className="form-main-container">
-      <ToastContainer />
-      <div className="frm-container">
-        <div className="form-title">
-          <p>Capital Injection</p>
-        </div>
-        <form className="main-form-content">
-          <div className="input-value">
-            <label htmlFor="ProductName">Product Name</label>
-            <input
-              type="text"
-              name="product_name"
-              id="ProductName"
-              // value={formData.product_name}
-              // onChange={handleChange}
-              required
-            />
-          </div>
-            <div className="input-value">
-              <label htmlFor="product-category">Category</label>
-              <select
-                name="product_category"
-                id="product-category"
-                // value={formData.product_category}
-                // onChange={handleChange}
-              >
-                <option value="wholesales">Wholesales</option>
-                <option value="retailsales">Retailsales</option>
-              </select>
-            </div>
-            <div className="input-value">
-              <label htmlFor="product-type">Type</label>
-            </div>
-            </form>
-            </div>
-      </div>
-  )
-}
 export const useFormClose = () => {
   const [isOpen, setIsOpen] = useState(true);
 

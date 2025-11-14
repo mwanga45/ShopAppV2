@@ -7,6 +7,8 @@ import { Services } from "./icon";
 import type { ServiceCategory, ServiceIconchoose } from "../../type.interface";
 import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
+import { FaBalanceScale } from "react-icons/fa";
+
 import {
   FaCoins,
   FaExchangeAlt,
@@ -17,8 +19,6 @@ import { FaBoltLightning } from "react-icons/fa6";
 import { GiChickenOven } from "react-icons/gi";
 import { FcCollect } from "react-icons/fc";
 import { Button } from "../button/Button";
-import { BusinessCapital } from "../Form-comp/Form";
-import { flex } from "@mui/system";
 export const TransactionComp: React.FC = () => {
   const [showAddServe, setshowAddServe] = useState<boolean>(false);
   const [iconlist, seticonlist] = useState<ServiceCategory[]>([]);
@@ -253,6 +253,27 @@ export const TransactionBar = () => {
     </div>
   );
 };
+export const BusinessCapital :React.FC = ()=>{
+  return(
+    <div>
+      <div><span>Capital Registered </span></div>
+      <div>
+        <form>
+          <div className={styles.inputfieldContainer}>
+          <div className={styles.inputfield}>
+            <div>
+              <FaBalanceScale size={30} color="gold" />
+            </div>
+            <div className={styles.inputfield}>
+              <input type="text" value={"200,000"} />
+            </div>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  )
+}
 export const ServiceFormregister: React.FC<ServiceIconchoose> = ({ Icon }) => {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
