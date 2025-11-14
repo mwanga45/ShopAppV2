@@ -253,27 +253,29 @@ export const TransactionBar = () => {
     </div>
   );
 };
-export const BusinessCapital :React.FC = ()=>{
-  return(
-    <div>
-      <div><span>Capital Registered </span></div>
+export const BusinessCapital: React.FC = () => {
+  return (
+    <div className={styles.transctionmaincontainer}>
+      <div className={styles.formContainerHead}>
+        <span>Capital Registered </span>
+      </div>
       <div>
         <form>
           <div className={styles.inputfieldContainer}>
-          <div className={styles.inputfield}>
-            <div>
-              <FaBalanceScale size={30} color="gold" />
-            </div>
             <div className={styles.inputfield}>
-              <input type="text" value={"200,000"} />
+              <div>
+                <FaBalanceScale size={30} color="gold" />
+              </div>
+              <div className={styles.inputfield}>
+                <input type="text" value={"200,000"} />
+              </div>
             </div>
           </div>
-        </div>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 export const ServiceFormregister: React.FC<ServiceIconchoose> = ({ Icon }) => {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
