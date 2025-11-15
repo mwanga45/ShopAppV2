@@ -175,7 +175,7 @@ export const TransactionComp: React.FC = () => {
 };
 export const TransactionForm = () => {
   return (
-    <div className={styles.formContainer}>
+    <div className={styles.formContainer} style={{width:'100%'}}>
       <div className={styles.formContainerHead}>
         <span>Quick Action</span>
       </div>
