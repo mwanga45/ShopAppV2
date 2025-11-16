@@ -9,8 +9,6 @@ import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
 import { FaBalanceScale } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
-import { FaShopify } from "react-icons/fa";
-import { PiHandWithdrawFill } from "react-icons/pi";
 
 import {
   FaCoins,
@@ -26,11 +24,9 @@ import { FaBoltLightning } from "react-icons/fa6";
 import { GiChickenOven } from "react-icons/gi";
 import { FcCollect } from "react-icons/fc";
 import { Button } from "../button/Button";
-import CapitalForm from "./capital_management";
 export const TransactionComp: React.FC = () => {
   const [showAddServe, setshowAddServe] = useState<boolean>(false);
   const [showCapital, setshowCapital] = useState<boolean>(false)
-  const [businesscapital, setbusinesscapital] = useState(0)
   const [iconlist, seticonlist] = useState<ServiceCategory[]>([]);
   useEffect(() => {
     const handleIconlist = () => {
@@ -58,15 +54,15 @@ export const TransactionComp: React.FC = () => {
             <div className={styles.transactionsalaryContainer}>
               <div style={{ display: "flex", alignItems: "center", cursor:"pointer"}} onClick={()=> setshowCapital(true)}>
                 <AnimatedCard
-                  icon={FaShopify}
+                  icon={"symbol"}
                   details={"Business Capital"}
-                  money={businesscapital}
+                  money={700000}
                 />
               </div>
 
               <div style={{ display: "flex", alignItems: "center" }}>
                 <AnimatedCard
-                  icon={PiHandWithdrawFill}
+                  icon={"symbol"}
                   details={"ON USE"}
                   money={600000}
                 />
@@ -169,8 +165,7 @@ export const TransactionComp: React.FC = () => {
         {
           showCapital && (
                <div className={styles.popupCompocontainer}>
-                {/* <BusinessCapital/> */}
-                <CapitalForm/>
+                <BusinessCapital/>
                </div>
           )
         }
@@ -199,7 +194,7 @@ export const TransactionForm = () => {
         </div>
         <div>
           <div className={styles.iconContainer}>
-            <PiHandWithdrawFill color="blue" size={40} />
+            <RiWallet3Line color="blue" size={40} />
           </div>
           <span>Withdraw Service</span>
         </div>
@@ -471,7 +466,8 @@ export const BusinessCapital: React.FC = () => {
 export const ServiceFormregister: React.FC<ServiceIconchoose> = ({ Icon }) => {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  
+  const [activeIcon, setActiveIcon] = useState<string | null>(null);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (name.trim() === "") {
@@ -479,6 +475,10 @@ export const ServiceFormregister: React.FC<ServiceIconchoose> = ({ Icon }) => {
       return;
     }
     setSubmitted(true);
+  };
+
+  const handleIconClick = (iconKey: string) => {
+    setActiveIcon(activeIcon === iconKey ? null : iconKey);
   };
   return (
     <div className={styles.container}>
@@ -508,15 +508,20 @@ export const ServiceFormregister: React.FC<ServiceIconchoose> = ({ Icon }) => {
               <div key={service.category} className={styles.serviceCard}>
                 <h3 className={styles.serviceTitle}>{service.category}</h3>
                 <div className={styles.iconGroup}>
-                  {service.icons.map(({ name, icon, color }) => (
-                    <div
-                      key={`${service.category}-${name}`}
-                      className={styles.icon}
-                    >
-                      <span className={color}>{icon}</span>
-                      <span>{name}</span>
-                    </div>
-                  ))}
+                  {service.icons.map(({ name, icon, color }) => {
+                    const iconKey = `${service.category}-${name}`;
+                    const isActive = activeIcon === iconKey;
+                    return (
+                      <div
+                        key={iconKey}
+                        className={`${styles.icon} ${isActive ? styles.iconActive : ""}`}
+                        onClick={() => handleIconClick(iconKey)}
+                      >
+                        <span className={color}>{icon}</span>
+                        <span>{name}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             ))}

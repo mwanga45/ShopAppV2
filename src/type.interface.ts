@@ -365,3 +365,13 @@ export interface ChartPops {
     rate?: number;
   }>;
 }
+
+export interface TodayRev {
+  generated_today?: string;
+  bankRevenue?: string;
+}
+
+export interface RevenueRatechange {
+  date?: string | Date;
+  rate?: number;
+}
