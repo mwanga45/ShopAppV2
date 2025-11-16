@@ -24,6 +24,7 @@ import { FaBoltLightning } from "react-icons/fa6";
 import { GiChickenOven } from "react-icons/gi";
 import { FcCollect } from "react-icons/fc";
 import { Button } from "../button/Button";
+import CapitalForm from "./capital_management";
 export const TransactionComp: React.FC = () => {
   const [showAddServe, setshowAddServe] = useState<boolean>(false);
   const [showCapital, setshowCapital] = useState<boolean>(false)
@@ -165,7 +166,8 @@ export const TransactionComp: React.FC = () => {
         {
           showCapital && (
                <div className={styles.popupCompocontainer}>
-                <BusinessCapital/>
+                {/* <BusinessCapital/> */}
+                <CapitalForm/>
                </div>
           )
         }

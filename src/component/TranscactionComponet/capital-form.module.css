@@ -1,15 +1,7 @@
-/* Create new pure CSS module for form styling */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .capitalFormWrapper {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(135deg, #1f1f1f 0%, #000000 100%);
   padding: 2rem;
   display: flex;
   align-items: center;
@@ -40,7 +32,7 @@
 
 /* Header Styling */
 .capitalFormHeader {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #24378e 0%, #222122 100%);
   color: white;
   padding: 2.5rem;
   display: flex;
@@ -75,7 +67,7 @@
   font-weight: 300;
 }
 
-/* Success Message */
+
 .successMessage {
   display: flex;
   align-items: flex-start;
@@ -118,7 +110,6 @@
   opacity: 0.85;
 }
 
-/* Form */
 .capitalForm {
   padding: 2.5rem;
 }
@@ -238,18 +229,17 @@
   flex-shrink: 0;
 }
 
-/* Divider */
 .formDivider {
   height: 1px;
   background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
   margin: 2rem 0;
 }
 
-/* Submit Button */
+
 .submitButton {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #080b17 0%, #1e1e1e 100%);
   color: white;
   font-size: 1rem;
   font-weight: 600;
@@ -278,7 +268,7 @@
   transform: none;
 }
 
-/* Info Box */
+
 .infoBox {
   margin: 2rem;
   padding: 1.25rem;
