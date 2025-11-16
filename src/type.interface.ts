@@ -4,6 +4,7 @@ export interface ServiceIcon {
   name: string;
   icon: React.ReactNode;
   color: string;
+  icon_name:string
 }
 
 export interface ServiceCategory {

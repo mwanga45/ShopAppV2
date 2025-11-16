@@ -24,6 +24,7 @@ import { FaBoltLightning } from "react-icons/fa6";
 import { GiChickenOven } from "react-icons/gi";
 import { FcCollect } from "react-icons/fc";
 import { Button } from "../button/Button";
+import { CreateService } from "../../AdminPanel/adminservice";
 export const TransactionComp: React.FC = () => {
   const [showAddServe, setshowAddServe] = useState<boolean>(false);
   const [showCapital, setshowCapital] = useState<boolean>(false)
@@ -159,13 +160,13 @@ export const TransactionComp: React.FC = () => {
         </div>
         {showAddServe && (
           <div className={styles.popupCompocontainer}>
-            <ServiceFormregister Icon={iconlist} />
+            <ServiceFormregister Icon={iconlist} onClose={() => setshowAddServe(false)} />
           </div>
         )}
         {
           showCapital && (
                <div className={styles.popupCompocontainer}>
-                <BusinessCapital/>
+                <BusinessCapital onClose={() => setshowCapital(false)}/>
                </div>
           )
         }
@@ -266,7 +267,7 @@ export const TransactionBar = () => {
     </div>
   );
 };
-export const BusinessCapital: React.FC = () => {
+export const BusinessCapital: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
   const [formData, setFormData] = useState({
     amount: "",
     serviceAmount: "",
@@ -302,9 +303,9 @@ export const BusinessCapital: React.FC = () => {
   };
 
   return (
-    <div className={styles.formContainer}>
+      <div className={styles.formContainer}>
       <div className={styles.BusinessCapital_close}>
-        <button type="button" className={styles.iconButton}>
+        <button type="button" className={styles.iconButton} onClick={onClose}>
           <IoMdClose size={22} />
         </button>
       </div>
@@ -463,25 +464,74 @@ export const BusinessCapital: React.FC = () => {
       </div>
   );
 };
-export const ServiceFormregister: React.FC<ServiceIconchoose> = ({ Icon }) => {
+export const ServiceFormregister: React.FC<ServiceIconchoose & { onClose?: () => void }> = ({ Icon, onClose }) => {
   const [name, setName] = useState("");
+  const [icon_name, seticon_name] = useState('')
   const [submitted, setSubmitted] = useState(false);
   const [activeIcon, setActiveIcon] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (name.trim() === "") {
-      alert("Please enter your name.");
+      alert("Please enter service name.");
       return;
     }
     setSubmitted(true);
   };
-
-  const handleIconClick = (iconKey: string) => {
-    setActiveIcon(activeIcon === iconKey ? null : iconKey);
+  
+  const handleCreateservice = async() => {
+    if (!name.trim()) {
+      alert("Please enter service name.");
+      return;
+    }
+    if (!icon_name) {
+      alert("Please select an icon.");
+      return;
+    }
+    
+    const finalPayload = {
+      service_name: name.trim(),
+      icon_name: icon_name
+    };
+    
+    try {
+      setIsLoading(true);
+      const response = await CreateService(finalPayload);
+      if (response?.data?.success) {
+        alert(response.data.message || "Service created successfully!");
+        if (onClose) {
+          onClose();
+        }
+        // Reset form
+        setName("");
+        seticon_name("");
+        setSubmitted(false);
+        setActiveIcon(null);
+      } else {
+        alert(response?.data?.message || "Failed to create service");
+      }
+    } catch(err: any) {
+      alert(err?.response?.data?.message || err?.message || "An error occurred");
+    } finally {
+      setIsLoading(false);
+    }
   };
+  
+  const handleIconClick = (iconKey: string, icon_name_value: string) => {
+    setActiveIcon(activeIcon === iconKey ? null : iconKey);
+    seticon_name(activeIcon === iconKey ? '' : icon_name_value);
+  };
+  
   return (
     <div className={styles.container}>
+      {onClose && (
+        <div className={styles.BusinessCapital_close}>
+          <button type="button" className={styles.iconButton} onClick={onClose}>
+            <IoMdClose size={22} />
+          </button>
+        </div>
+      )}
       {!submitted ? (
         <form onSubmit={handleSubmit} className={styles.form}>
           <span className={styles.title}>Enter Service Name</span>
@@ -508,14 +558,14 @@ export const ServiceFormregister: React.FC<ServiceIconchoose> = ({ Icon }) => {
               <div key={service.category} className={styles.serviceCard}>
                 <h3 className={styles.serviceTitle}>{service.category}</h3>
                 <div className={styles.iconGroup}>
-                  {service.icons.map(({ name, icon, color }) => {
+                  {service.icons.map(({ name, icon, color , icon_name}) => {
                     const iconKey = `${service.category}-${name}`;
                     const isActive = activeIcon === iconKey;
                     return (
                       <div
                         key={iconKey}
                         className={`${styles.icon} ${isActive ? styles.iconActive : ""}`}
-                        onClick={() => handleIconClick(iconKey)}
+                        onClick={() => handleIconClick(iconKey, icon_name)}
                       >
                         <span className={color}>{icon}</span>
                         <span>{name}</span>
@@ -526,6 +576,13 @@ export const ServiceFormregister: React.FC<ServiceIconchoose> = ({ Icon }) => {
               </div>
             ))}
           </div>
+          <Button 
+            buttonName={isLoading ? "Creating..." : "Create Service"} 
+            Onclick={isLoading || !icon_name ? undefined : (e) => {
+              e.preventDefault();
+              handleCreateservice();
+            }}
+          />
         </div>
       )}
     </div>
