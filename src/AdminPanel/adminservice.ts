@@ -108,6 +108,8 @@ export const CapitalAssign = async(data:any)=>{
 }
 export const CreateService = async(data:any) => {
     try{
+        const response = await api.post('management/createservice', data)
+        return response
 
     }catch(err){
         console.log(err)
