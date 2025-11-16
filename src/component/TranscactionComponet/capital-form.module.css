@@ -162,7 +162,6 @@
   margin-left: 0.5rem;
 }
 
-/* Input Fields */
 .formInput,
 .formSelect {
   padding: 0.875rem 1rem;
@@ -172,6 +171,7 @@
   font-family: inherit;
   transition: all 0.3s ease;
   background-color: #f7fafc;
+  color: #000000;
 }
 
 .formInput:hover,
@@ -208,7 +208,6 @@
   padding-right: 2.5rem;
 }
 
-/* Error Message */
 .errorMessage {
   display: flex;
   align-items: center;

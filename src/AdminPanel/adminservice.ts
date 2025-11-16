@@ -97,3 +97,12 @@ export const BusinessWorthData = async()=>{
         throw err
     }
 }
+export const CapitalAssign = async()=>{
+    try{
+        const  response =await api.post('create&update')
+        return response
+    }catch(err){
+        console.error(err)
+        throw err
+    }
+}

@@ -263,23 +263,19 @@ export default function CapitalForm() {
 
             <div className={styles.formGroup}>
               <label htmlFor="registerTime" className={styles.formLabel}>
-                Registration Time
+                Registration Time-(Already filed )
                 <span className={styles.requiredStar}>*</span>
               </label>
-              <select
-                id="registerTime"
+               <input
+                id=" registerTime"
+                type="text"
                 name="registerTime"
-                value={formData.registerTime}
+                value={'firstTimes'}
+                readOnly
                 onChange={handleChange}
-                className={`${styles.formSelect} ${errors.registerTime ? styles.inputError : ''}`}
-              >
-                <option value="">Select a time...</option>
-                {REGISTER_TIMES.map(time => (
-                  <option key={time.value} value={time.value}>
-                    {time.label}
-                  </option>
-                ))}
-              </select>
+                placeholder="Enter unique code"
+                className={`${styles.formInput} ${errors.code ? styles.inputError : ''}`}
+              />
               {errors.registerTime && (
                 <div className={styles.errorMessage}>
                   <span className={styles.errorIcon}>⚠</span>
