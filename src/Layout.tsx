@@ -7,19 +7,18 @@ import { useEffect, useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
 
 export default function Layout() {
-  const [ShowCapitalform, setShowCapitalform] = useState<boolean>(false)
+  const [ShowCapitalform, setShowCapitalform] = useState<boolean>(true)
   useEffect(()=>{
   const handleCapitalmanagement = async()=>{
     const response = await CheckCapitalInfo()
     if(!response.data.success){
-      setShowCapitalform(true)
+      setShowCapitalform(response.data.success)
       toast.success(response.data.message)
       return
     }
     console.log(response.data.success)
-    setShowCapitalform(true)
+    setShowCapitalform(response.data.success)
   }
-  
   
   handleCapitalmanagement()
 },[])
@@ -31,8 +30,8 @@ export default function Layout() {
       </div>
       <main className="main-content">
         {
-        ShowCapitalform === false ?
-        <CapitalForm/>: <Outlet/>
+        ShowCapitalform === true ?
+        <Outlet/>: <CapitalForm/>
 }
       </main>
     </div>

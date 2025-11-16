@@ -1,5 +1,6 @@
-import { useState, type FormEvent } from 'react';
-import styles from './capital-form.module.css';
+import { useState, type FormEvent } from "react";
+import styles from "./capital-form.module.css";
+import { CapitalAssign } from "../../AdminPanel/adminservice";
 
 interface FormData {
   total_capital: string;
@@ -9,26 +10,27 @@ interface FormData {
   registerTime: string;
   withdraw: string;
 }
+interface FormPayload {
+  total_capital: number;
+  cash_capital: number;
+  Bank_capital: number;
+  code: string;
+  registerTime: string;
+  withdraw: number;
+}
 
 interface FormErrors {
   [key: string]: string;
 }
 
-const REGISTER_TIMES = [
-  { value: 'morning', label: 'Morning (6 AM - 12 PM)' },
-  { value: 'afternoon', label: 'Afternoon (12 PM - 6 PM)' },
-  { value: 'evening', label: 'Evening (6 PM - 12 AM)' },
-  { value: 'night', label: 'Night (12 AM - 6 AM)' },
-];
-
 export default function CapitalForm() {
   const [formData, setFormData] = useState<FormData>({
-    total_capital: '',
-    cash_capital: '',
-    Bank_capital: '',
-    code: '',
-    registerTime: '',
-    withdraw: '',
+    total_capital: "",
+    cash_capital: "",
+    Bank_capital: "",
+    code: "",
+    registerTime: "firstTimes",
+    withdraw: "",
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -36,83 +38,117 @@ export default function CapitalForm() {
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
-
+    if (!/^\d{4}$/.test(formData.code)) {
+      newErrors.code = "code must be exactly 4 digits";
+    }
     if (!formData.total_capital) {
-      newErrors.total_capital = 'Total capital is required';
-    } else if (isNaN(Number(formData.total_capital)) || Number(formData.total_capital) < 0) {
-      newErrors.total_capital = 'Total capital must be a valid positive number';
+      newErrors.total_capital = "Total capital is required";
+    } else if (
+      isNaN(Number(formData.total_capital)) ||
+      Number(formData.total_capital) < 0
+    ) {
+      newErrors.total_capital = "Total capital must be a valid positive number";
     }
 
     if (!formData.cash_capital) {
-      newErrors.cash_capital = 'Cash capital is required';
-    } else if (isNaN(Number(formData.cash_capital)) || Number(formData.cash_capital) < 0) {
-      newErrors.cash_capital = 'Cash capital must be a valid positive number';
+      newErrors.cash_capital = "Cash capital is required";
+    } else if (
+      isNaN(Number(formData.cash_capital)) ||
+      Number(formData.cash_capital) < 0
+    ) {
+      newErrors.cash_capital = "Cash capital must be a valid positive number";
     }
 
     if (!formData.Bank_capital) {
-      newErrors.Bank_capital = 'Bank capital is required';
-    } else if (isNaN(Number(formData.Bank_capital)) || Number(formData.Bank_capital) < 0) {
-      newErrors.Bank_capital = 'Bank capital must be a valid positive number';
+      newErrors.Bank_capital = "Bank capital is required";
+    } else if (
+      isNaN(Number(formData.Bank_capital)) ||
+      Number(formData.Bank_capital) < 0
+    ) {
+      newErrors.Bank_capital = "Bank capital must be a valid positive number";
     }
 
     const total = Number(formData.total_capital);
     const cash = Number(formData.cash_capital);
     const bank = Number(formData.Bank_capital);
-    
+
     if (total !== cash + bank) {
-      newErrors.total_capital = 'Total capital must equal cash + bank capital';
+      newErrors.total_capital = "Total capital must equal cash + bank capital";
     }
 
     if (!formData.code) {
-      newErrors.code = 'Code is required';
+      newErrors.code = "Code is required";
     } else if (formData.code.length < 3) {
-      newErrors.code = 'Code must be at least 3 characters';
+      newErrors.code = "Code must be at least 3 characters";
     }
 
     if (!formData.registerTime) {
-      newErrors.registerTime = 'Registration time is required';
+      newErrors.registerTime = "Registration time is required";
     }
 
-    if (formData.withdraw && (isNaN(Number(formData.withdraw)) || Number(formData.withdraw) < 0)) {
-      newErrors.withdraw = 'Withdraw must be a valid positive number';
+    if (
+      formData.withdraw &&
+      (isNaN(Number(formData.withdraw)) || Number(formData.withdraw) < 0)
+    ) {
+      newErrors.withdraw = "Withdraw must be a valid positive number";
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: '',
+        [name]: "",
       }));
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
     if (validateForm()) {
-      setSubmitted(true);
-      console.log('Form submitted:', formData);
-      
-      setTimeout(() => {
-        setFormData({
-          total_capital: '',
-          cash_capital: '',
-          Bank_capital: '',
-          code: '',
-          registerTime: '',
-          withdraw: '',
-        });
-        setSubmitted(false);
-      }, 2000);
+      console.log("Form submitted:", formData);
+       const finalPayload:FormPayload = {
+        total_capital:Number(formData.total_capital),
+        cash_capital:Number(formData.cash_capital),
+        code:formData.code,
+        registerTime:formData.registerTime,
+        Bank_capital:Number(formData.Bank_capital),
+        withdraw:formData.withdraw ? Number(formData.withdraw) : 0
+       }
+       console.log(finalPayload)
+      try {
+        const response = await CapitalAssign(finalPayload);
+       
+        if (!response.data.success) {
+           alert(response.data.message)
+          return
+        }
+         setTimeout(() => {
+            setFormData({
+              total_capital: "",
+              cash_capital: "",
+              Bank_capital: "",
+              code: "",
+              registerTime: "firstTimes",
+              withdraw: "",
+            });
+            setSubmitted(false);
+          }, 2000);
+          setSubmitted(true)
+          return
+      } catch (err) {
+        alert( err);
+      }
     }
   };
 
@@ -123,7 +159,9 @@ export default function CapitalForm() {
           <div className={styles.headerIcon}>💰</div>
           <div className={styles.headerContent}>
             <h1 className={styles.formTitle}>Capital Management</h1>
-            <p className={styles.formSubtitle}>Enter your capital allocation details</p>
+            <p className={styles.formSubtitle}>
+              Enter your capital allocation details
+            </p>
           </div>
         </div>
 
@@ -153,7 +191,9 @@ export default function CapitalForm() {
                 onChange={handleChange}
                 placeholder="Enter total capital"
                 step="0.01"
-                className={`${styles.formInput} ${errors.total_capital ? styles.inputError : ''}`}
+                className={`${styles.formInput} ${
+                  errors.total_capital ? styles.inputError : ""
+                }`}
               />
               {errors.total_capital && (
                 <div className={styles.errorMessage}>
@@ -177,7 +217,9 @@ export default function CapitalForm() {
                 onChange={handleChange}
                 placeholder="Enter cash amount"
                 step="0.01"
-                className={`${styles.formInput} ${errors.cash_capital ? styles.inputError : ''}`}
+                className={`${styles.formInput} ${
+                  errors.cash_capital ? styles.inputError : ""
+                }`}
               />
               {errors.cash_capital && (
                 <div className={styles.errorMessage}>
@@ -201,7 +243,9 @@ export default function CapitalForm() {
                 onChange={handleChange}
                 placeholder="Enter bank amount"
                 step="0.01"
-                className={`${styles.formInput} ${errors.Bank_capital ? styles.inputError : ''}`}
+                className={`${styles.formInput} ${
+                  errors.Bank_capital ? styles.inputError : ""
+                }`}
               />
               {errors.Bank_capital && (
                 <div className={styles.errorMessage}>
@@ -225,7 +269,9 @@ export default function CapitalForm() {
                 onChange={handleChange}
                 placeholder="Enter withdrawal amount"
                 step="0.01"
-                className={`${styles.formInput} ${errors.withdraw ? styles.inputError : ''}`}
+                className={`${styles.formInput} ${
+                  errors.withdraw ? styles.inputError : ""
+                }`}
               />
               {errors.withdraw && (
                 <div className={styles.errorMessage}>
@@ -251,7 +297,9 @@ export default function CapitalForm() {
                 value={formData.code}
                 onChange={handleChange}
                 placeholder="Enter unique code"
-                className={`${styles.formInput} ${errors.code ? styles.inputError : ''}`}
+                className={`${styles.formInput} ${
+                  errors.code ? styles.inputError : ""
+                }`}
               />
               {errors.code && (
                 <div className={styles.errorMessage}>
@@ -266,15 +314,17 @@ export default function CapitalForm() {
                 Registration Time-(Already filed )
                 <span className={styles.requiredStar}>*</span>
               </label>
-               <input
+              <input
                 id=" registerTime"
                 type="text"
                 name="registerTime"
-                value={'firstTimes'}
+                value={formData.registerTime}
                 readOnly
                 onChange={handleChange}
                 placeholder="Enter unique code"
-                className={`${styles.formInput} ${errors.code ? styles.inputError : ''}`}
+                className={`${styles.formInput} ${
+                  errors.code ? styles.inputError : ""
+                }`}
               />
               {errors.registerTime && (
                 <div className={styles.errorMessage}>
@@ -291,7 +341,8 @@ export default function CapitalForm() {
         </form>
 
         <div className={styles.infoBox}>
-          <strong>Note:</strong> Total capital must equal the sum of cash and bank capital for validation.
+          <strong>Note:</strong> Total capital must equal the sum of cash and
+          bank capital for validation.
         </div>
       </div>
     </div>

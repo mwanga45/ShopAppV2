@@ -9,7 +9,7 @@ import { DonalChart } from "../component/donatchart/Donalchart";
 import { OrdersTable } from "../component/Ordercomp/OrderlistTable";
 import { PlaceOrder } from "../component/Form-comp/Form";
 import { useEffect, useState } from "react";
-import { GiTakeMyMoney, GiPiggyBank } from "react-icons/gi";
+import { GiTakeMyMoney } from "react-icons/gi";
 import type { TodayRev } from "../type.interface";
 import { DashboardResponseInfo ,  DashordGraphdata} from "./dash.api";
 import AnimatedCard from "../component/Admincord/animatedcard";

@@ -9,6 +9,8 @@ import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
 import { FaBalanceScale } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import { FaShopify } from "react-icons/fa";
+import { PiHandWithdrawFill } from "react-icons/pi";
 
 import {
   FaCoins,
@@ -28,6 +30,7 @@ import CapitalForm from "./capital_management";
 export const TransactionComp: React.FC = () => {
   const [showAddServe, setshowAddServe] = useState<boolean>(false);
   const [showCapital, setshowCapital] = useState<boolean>(false)
+  const [businesscapital, setbusinesscapital] = useState(0)
   const [iconlist, seticonlist] = useState<ServiceCategory[]>([]);
   useEffect(() => {
     const handleIconlist = () => {
@@ -55,15 +58,15 @@ export const TransactionComp: React.FC = () => {
             <div className={styles.transactionsalaryContainer}>
               <div style={{ display: "flex", alignItems: "center", cursor:"pointer"}} onClick={()=> setshowCapital(true)}>
                 <AnimatedCard
-                  icon={"symbol"}
+                  icon={FaShopify}
                   details={"Business Capital"}
-                  money={700000}
+                  money={businesscapital}
                 />
               </div>
 
               <div style={{ display: "flex", alignItems: "center" }}>
                 <AnimatedCard
-                  icon={"symbol"}
+                  icon={PiHandWithdrawFill}
                   details={"ON USE"}
                   money={600000}
                 />
@@ -196,7 +199,7 @@ export const TransactionForm = () => {
         </div>
         <div>
           <div className={styles.iconContainer}>
-            <RiWallet3Line color="blue" size={40} />
+            <PiHandWithdrawFill color="blue" size={40} />
           </div>
           <span>Withdraw Service</span>
         </div>
@@ -468,7 +471,7 @@ export const BusinessCapital: React.FC = () => {
 export const ServiceFormregister: React.FC<ServiceIconchoose> = ({ Icon }) => {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
-
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (name.trim() === "") {
