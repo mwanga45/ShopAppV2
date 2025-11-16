@@ -15,6 +15,8 @@ import { DashboardResponseInfo ,  DashordGraphdata} from "./dash.api";
 import AnimatedCard from "../component/Admincord/animatedcard";
 import { GridDemo } from "../component/comparisonchart/profitchart";
 import type{ RevenueRatechange } from "../type.interface";
+import { TbSum } from "react-icons/tb";
+import { BsBank2 } from "react-icons/bs";
 
 export const Dashboard = () => {
   const [Cashmoney, setCashmoney] = useState<TodayRev>();
@@ -103,12 +105,12 @@ export const Dashboard = () => {
                 money={Number(Cashmoney?.generated_today) ?? 0}
               />
               <AnimatedCard
-                icon={GiPiggyBank}
+                icon={BsBank2}
                 details={"Bank money"}
                 money={Number(Cashmoney?.bankRevenue) ?? 0}
               />
               <AnimatedCard
-                icon={"symbol"}
+                icon={ TbSum}
                 details={"Total Generated Today"}
                 money={TotalGenerated}
               />
