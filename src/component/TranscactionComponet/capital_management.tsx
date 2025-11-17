@@ -90,7 +90,7 @@ export default function CapitalForm() {
       formData.bankdebt &&
       (isNaN(Number(formData.bankdebt)) || Number(formData.bankdebt) < 0)
     ) {
-      newErrors.withdraw = "Withdraw must be a valid positive number";
+      newErrors.bankdebt = "bank debt must be a valid positive number";
     }
 
     setErrors(newErrors);

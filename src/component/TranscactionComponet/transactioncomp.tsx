@@ -485,6 +485,10 @@ export const ServiceFormregister: React.FC<ServiceIconchoose & { onClose?: () =>
     if (!name.trim()) {
       toast.error('please make sure fill service name');
       return;
+    }else if(name.length < 3){
+      toast.error('please make sure name of service have atleast 5 character ' )
+    }else if(name.length > 30){
+      toast.error('please make sure the name of service have atmost 30 character')
     }
     if (!icon_name) {
       toast.error('please make sure choose icon of service');
