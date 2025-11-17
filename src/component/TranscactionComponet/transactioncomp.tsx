@@ -25,6 +25,7 @@ import { GiChickenOven } from "react-icons/gi";
 import { FcCollect } from "react-icons/fc";
 import { Button } from "../button/Button";
 import { CreateService } from "../../AdminPanel/adminservice";
+import { toast } from "react-toastify";
 export const TransactionComp: React.FC = () => {
   const [showAddServe, setshowAddServe] = useState<boolean>(false);
   const [showCapital, setshowCapital] = useState<boolean>(false)
@@ -473,46 +474,46 @@ export const ServiceFormregister: React.FC<ServiceIconchoose & { onClose?: () =>
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (name.trim() === "") {
-      alert("Please enter service name.");
+    if (!name.trim()) {
+      toast.error('please make sure fill service name');
       return;
     }
     setSubmitted(true);
   };
-  
-  const handleCreateservice = async() => {
+
+  const handleCreateservice = async () => {
     if (!name.trim()) {
-      alert("Please enter service name.");
+      toast.error('please make sure fill service name');
       return;
     }
     if (!icon_name) {
-      alert("Please select an icon.");
+      toast.error('please make sure choose icon of service');
       return;
     }
-    
-    const finalPayload = {
-      service_name: name.trim(),
-      icon_name: icon_name
+
+    const finalPayload: any = {
+      icon_name: icon_name,
+      service_name: name.trim()
     };
-    
+    console.log(finalPayload)
     try {
       setIsLoading(true);
       const response = await CreateService(finalPayload);
       if (response?.data?.success) {
-        alert(response.data.message || "Service created successfully!");
+        toast.success(response.data.message || 'Service created successfully!');
         if (onClose) {
           onClose();
         }
-        // Reset form
         setName("");
         seticon_name("");
         setSubmitted(false);
         setActiveIcon(null);
       } else {
-        alert(response?.data?.message || "Failed to create service");
+        toast.error(response?.data?.message || 'Failed to create service');
       }
-    } catch(err: any) {
-      alert(err?.response?.data?.message || err?.message || "An error occurred");
+    } catch (err: any) {
+      toast.error(err?.response?.data?.message || 'Something went wrong');
+      console.error(err);
     } finally {
       setIsLoading(false);
     }
