@@ -8,7 +8,7 @@ interface FormData {
   Bank_capital: string;
   code: string;
   registerTime: string;
-  withdraw: string;
+  bankdebt: string;
 }
 interface FormPayload {
   total_capital: number;
@@ -16,7 +16,7 @@ interface FormPayload {
   Bank_capital: number;
   code: string;
   registerTime: string;
-  withdraw: number;
+  bankdebt: number;
 }
 
 interface FormErrors {
@@ -30,7 +30,7 @@ export default function CapitalForm() {
     Bank_capital: "",
     code: "",
     registerTime: "firstTimes",
-    withdraw: "",
+    bankdebt: "",
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -87,8 +87,8 @@ export default function CapitalForm() {
     }
 
     if (
-      formData.withdraw &&
-      (isNaN(Number(formData.withdraw)) || Number(formData.withdraw) < 0)
+      formData.bankdebt &&
+      (isNaN(Number(formData.bankdebt)) || Number(formData.bankdebt) < 0)
     ) {
       newErrors.withdraw = "Withdraw must be a valid positive number";
     }
@@ -123,7 +123,7 @@ export default function CapitalForm() {
         code:formData.code,
         registerTime:formData.registerTime,
         Bank_capital:Number(formData.Bank_capital),
-        withdraw:formData.withdraw ? Number(formData.withdraw) : 0
+        bankdebt:formData.bankdebt ? Number(formData.bankdebt) : 0
        }
        console.log(finalPayload)
       try {
@@ -140,7 +140,7 @@ export default function CapitalForm() {
               Bank_capital: "",
               code: "",
               registerTime: "firstTimes",
-              withdraw: "",
+              bankdebt: "",
             });
             setSubmitted(false);
           }, 2000);
@@ -256,27 +256,27 @@ export default function CapitalForm() {
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="withdraw" className={styles.formLabel}>
+              <label htmlFor="bd" className={styles.formLabel}>
                 <span className={styles.labelIcon}>🪙</span>
                 Withdraw
                 <span className={styles.optionalText}>(optional)</span>
               </label>
               <input
-                id="withdraw"
+                id="bd"
                 type="number"
-                name="withdraw"
-                value={formData.withdraw}
+                name="bankdebt"
+                value={formData.bankdebt}
                 onChange={handleChange}
                 placeholder="Enter withdrawal amount"
                 step="0.01"
                 className={`${styles.formInput} ${
-                  errors.withdraw ? styles.inputError : ""
+                  errors.bankdebt ? styles.inputError : ""
                 }`}
               />
-              {errors.withdraw && (
+              {errors.bankdebt && (
                 <div className={styles.errorMessage}>
                   <span className={styles.errorIcon}>⚠</span>
-                  {errors.withdraw}
+                  {errors.bankdebt}
                 </div>
               )}
             </div>
