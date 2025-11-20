@@ -37,6 +37,9 @@ export const AdminPanel = () => {
   const [Productlist, setProductlist] = useState<boolean>(false);
   const [showStockreg, setShowStockreg] = useState<boolean>(false);
   const [register, setregister] = useState<boolean>(false);
+  const [rate , setrate] = useState(0)
+  const [rate_status, setrate_status] = useState('')
+  const [capital, setcapital] = useState(0)
   const [Accountdetails, setAccountdetails] = useState<AccountUserRespose[]>(
     []
   );
@@ -89,6 +92,9 @@ export const AdminPanel = () => {
       setStockWorth(response.data.data.StockWorth);
       setCustomerDebt(response.data.data.CustomerDebt);
       setBusinessnetworth(response.data.data.networth);
+      setrate(response.data.data.Revenue_Rate.data.rate)
+      setrate_status(response.data.data.Revenue_Rate.data.rate_status)
+      setcapital(response.data.data.capital_amount)
       return;
     } catch (err) {
       alert(err);
@@ -133,26 +139,8 @@ export const AdminPanel = () => {
         className="busniess-details-container"
         variants={itemVariants}
       >
-        {/* <SummaryCard
-          SummaryActInfo="250000"
-          SummaryTitle="Business Money"
-          icon={GiTakeMyMoney}
-          style={{ animationDelay: "0.7s" }}
-        /> */}
-        <ShowinfoCard/>
-        {/* <SummaryCard
-          SummaryActInfo="250000"
-          SummaryTitle="Business Capital "
-          icon={GiDjedPillar}
-          style={{ animationDelay: "0.8s" }}
-        /> */}
-        <ShowinfoCard/>
-        {/* <SummaryCard
-          SummaryActInfo="20000"
-          SummaryTitle="Busines Profit"
-          icon={GiProfit}
-          style={{ animationDelay: "0.9s" }}
-        /> */}
+        <ShowinfoCard discription="Rate of Capital growth" rate={rate ?? 0}totalAmount={Number(capital).toLocaleString() ?? 0} rate_status={rate_status} />
+        <ShowinfoCard />
       </motion.div>
       <motion.div className="admin-action-container" variants={itemVariants}>
         <Button
@@ -272,11 +260,11 @@ export const AdminPanel = () => {
           <AdminReg />
         </div>
       )}
-      {transactionopen &&
-      <div>
+      {transactionopen && (
+        <div>
           <TransactionComp />
-      </div>
-       }
+        </div>
+      )}
     </motion.div>
   );
 };

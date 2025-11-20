@@ -379,7 +379,8 @@ export interface RevenueRatechange {
 
 }
 export interface ShowInfoCard {
-   totalAmount?:number,
+   totalAmount?:string,
    discription?:string,
-   rate?:number
+   rate?:number,
+   rate_status?:string
 }
