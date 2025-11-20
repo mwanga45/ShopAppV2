@@ -129,10 +129,10 @@ export const AdminPanel = () => {
       animate="visible"
     >
       <motion.div
-        className="panel-title-account-container"
+        className="sales-header"
         variants={itemVariants}
       >
-        <h2>Admin-Panel</h2>
+        <h1  className="page-title">Admin-Panel</h1>
         {/* <Accountbar /> */}
       </motion.div>
       <motion.div
