@@ -367,6 +367,7 @@ export interface ChartPops {
   }>;
 }
 
+
 export interface TodayRev {
   generated_today?: string;
   bankRevenue?: string;
@@ -375,4 +376,10 @@ export interface TodayRev {
 export interface RevenueRatechange {
   date?: string | Date;
   rate?: number;
+
+}
+export interface ShowInfoCard {
+   totalAmount?:number,
+   discription?:string,
+   rate?:number
 }

@@ -19,6 +19,7 @@ import { OtherAc } from "../component/account/otherAc";
 import { BusinessWorthData, GetuserList } from "./adminservice";
 import { AdminReg } from "../component/admin-reg/admin-reg";
 import { TransactionComp } from "../component/TranscactionComponet/transactioncomp";
+import { ShowinfoCard } from "../component/card-report/shownInfo";
 
 interface AccountUserRespose {
   id?: number;
@@ -126,30 +127,32 @@ export const AdminPanel = () => {
         variants={itemVariants}
       >
         <h2>Admin-Panel</h2>
-        <Accountbar />
+        {/* <Accountbar /> */}
       </motion.div>
       <motion.div
         className="busniess-details-container"
         variants={itemVariants}
       >
-        <SummaryCard
+        {/* <SummaryCard
           SummaryActInfo="250000"
           SummaryTitle="Business Money"
           icon={GiTakeMyMoney}
           style={{ animationDelay: "0.7s" }}
-        />
-        <SummaryCard
+        /> */}
+        <ShowinfoCard/>
+        {/* <SummaryCard
           SummaryActInfo="250000"
           SummaryTitle="Business Capital "
           icon={GiDjedPillar}
           style={{ animationDelay: "0.8s" }}
-        />
-        <SummaryCard
+        /> */}
+        <ShowinfoCard/>
+        {/* <SummaryCard
           SummaryActInfo="20000"
           SummaryTitle="Busines Profit"
           icon={GiProfit}
           style={{ animationDelay: "0.9s" }}
-        />
+        /> */}
       </motion.div>
       <motion.div className="admin-action-container" variants={itemVariants}>
         <Button
