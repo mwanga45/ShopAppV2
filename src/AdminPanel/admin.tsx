@@ -1,8 +1,3 @@
-import { Accountbar } from "../component/account/Account";
-import { SummaryCard } from "../component/summaryCard/summarycard";
-import { GiDjedPillar } from "react-icons/gi";
-import { GiProfit } from "react-icons/gi";
-import { GiTakeMyMoney } from "react-icons/gi";
 import { FaWallet, FaPiggyBank } from "react-icons/fa";
 import { FcDebt } from "react-icons/fc";
 import { FaCoins } from "react-icons/fa";
@@ -40,6 +35,7 @@ export const AdminPanel = () => {
   const [rate , setrate] = useState(0)
   const [rate_status, setrate_status] = useState('')
   const [capital, setcapital] = useState(0)
+  const [Bankdebt, setBankdebt] = useState(0)
   const [Accountdetails, setAccountdetails] = useState<AccountUserRespose[]>(
     []
   );
@@ -95,6 +91,7 @@ export const AdminPanel = () => {
       setrate(response.data.data.Revenue_Rate.data.rate)
       setrate_status(response.data.data.Revenue_Rate.data.rate_status)
       setcapital(response.data.data.capital_amount)
+      setBankdebt(response.data.data.Bank_Debt)
       return;
     } catch (err) {
       alert(err);
@@ -162,7 +159,7 @@ export const AdminPanel = () => {
           <AnimatedCard
             details="Bank-dept"
             icon={FaPiggyBank}
-            money={2300000}
+            money={Bankdebt}
           />
           <AnimatedCard
             details="Debt"
