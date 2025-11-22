@@ -159,7 +159,7 @@ export const AdminPanel = () => {
           <AnimatedCard
             details="Bank-dept"
             icon={FaPiggyBank}
-            money={Bankdebt}
+            money={Bankdebt ?? 0}
           />
           <AnimatedCard
             details="Debt"

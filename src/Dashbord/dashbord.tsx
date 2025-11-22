@@ -94,8 +94,14 @@ export const Dashboard = () => {
             <CardReport titleone="Fast selling product this Month" />
             <CardReport titleone="Least selling product this Month" />
             <OrdersTable />
+            <div className="dash-graph-container">
+              <span>Revenue Chart Per Day</span>
             <GridDemo RevenueRateChange={Ratedata ?? []} />
+            </div>
+            <div className="dash-graph-container">
+              <span>Stock Out Chart Per Day </span>
             <GridDemo />
+            </div>
           </div>
           <div className="sale-info">
             <div className="cardreport">
