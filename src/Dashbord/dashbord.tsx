@@ -12,10 +12,10 @@ import { PlaceOrder } from "../component/Form-comp/Form";
 import { useEffect, useState } from "react";
 import { GiTakeMyMoney } from "react-icons/gi";
 import type { TodayRev } from "../type.interface";
-import { DashboardResponseInfo ,  DashordGraphdata} from "./dash.api";
+import { DashboardResponseInfo ,  DashordGraphdata, Pendingsalesreturn} from "./dash.api";
 import AnimatedCard from "../component/Admincord/animatedcard";
 import { GridDemo } from "../component/comparisonchart/profitchart";
-import type{ RevenueRatechange } from "../type.interface";
+import type{ RevenueRatechange, PendingReturnResult } from "../type.interface";
 import { TbSum } from "react-icons/tb";
 import { BsBank2 } from "react-icons/bs";
 
@@ -26,7 +26,31 @@ export const Dashboard = () => {
   const [DeviateAmont, setDeviateAmount] = useState();
   const [ExpectedRevenue, setExpectedRevenue] = useState();
   const [Ratedata , setRatedata] =useState<RevenueRatechange[] | null>([])
+  const [Pendinglist, setPendinglist] = useState<PendingReturnResult[]>([])
 
+  const handlePendingResult = async() => {
+    try{
+     const response = await Pendingsalesreturn()
+     if(response.data.success && response.data.data.PendingcombineResult) {
+       setPendinglist(response.data.data.PendingcombineResult)
+     }
+    }catch(err){
+      console.error(err)
+    }
+  }
+
+  // Transform PendingReturnResult to Payment format
+  const transformPendingToPayment = (pending: typeof Pendinglist[0]) => ({
+    id: String(pending.id || pending.product_id || Math.random()),
+    title: pending.product_name || 'Pending Payment',
+    amount: Number(pending.Revenue) || 0,
+    dueDate: pending.CreatedAt 
+      ? new Date(pending.CreatedAt).toISOString() 
+      : new Date().toISOString(),
+    recipient: pending.seller || 'Unknown Seller',
+    description: `Product: ${pending.product_name || 'N/A'} | Category: ${pending.Category || 'N/A'} | Quantity: ${pending.total_quantity || 0}`,
+    invoiceNumber: `INV-${pending.id || pending.product_id || 'N/A'}`,
+  })
   const handleDashResponse = async () => {
     try {
       const response = await DashboardResponseInfo();
@@ -61,7 +85,8 @@ export const Dashboard = () => {
   }
     useEffect(() => {
     handleDashResponse();
-    handlGrphData()
+    handlGrphData();
+    handlePendingResult();
   }, []);
 
   const [openOrder, setopenOrder] = useState<boolean>(false);
@@ -104,7 +129,7 @@ export const Dashboard = () => {
             <GridDemo />
             </div>
             <div className="pending-container">
-              <PendingPaymentSlider payments={[]}/>
+              <PendingPaymentSlider payments={Pendinglist.map(transformPendingToPayment)}/>
             </div>
           </div>
           <div className="sale-info">

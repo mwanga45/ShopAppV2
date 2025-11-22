@@ -384,3 +384,13 @@ export interface ShowInfoCard {
    rate?:number,
    rate_status?:string
 }
+export interface PendingReturnResult {
+  id?:number
+  product_id?: number;
+  product_name?: string;
+  seller?: string;
+  Revenue?: number; 
+  total_quantity?: number; 
+  CreatedAt?: string;
+  Category?: string;
+}

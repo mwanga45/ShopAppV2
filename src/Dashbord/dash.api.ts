@@ -13,3 +13,12 @@ export const DashordGraphdata =async() =>{
       throw err
    }
 }
+export const Pendingsalesreturn =async() =>{
+   try{
+    const response = await api.get('sales/salesToday')
+    return response
+   }catch(err){
+      console.error(err)
+      throw err
+   }
+}

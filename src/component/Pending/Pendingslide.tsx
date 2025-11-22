@@ -164,7 +164,7 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
                     <div>
                       <p className={styles.paymentDetailLabel}>Amount</p>
                       <p className={styles.paymentDetailValue}>
-                        ${currentPayment.amount.toFixed(2)}
+                        {currentPayment.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} TZS
                       </p>
                     </div>
                   </div>
@@ -272,7 +272,7 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
               <div className={styles.paymentModalField}>
                 <p className={styles.paymentModalLabel}>Amount</p>
                 <p className={styles.paymentModalValueLarge}>
-                  ${currentPayment.amount.toFixed(2)}
+                  {currentPayment.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} TZS
                 </p>
               </div>
 
