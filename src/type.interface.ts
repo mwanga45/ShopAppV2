@@ -389,8 +389,11 @@ export interface PendingReturnResult {
   product_id?: number;
   product_name?: string;
   seller?: string;
-  Revenue?: number; 
-  total_quantity?: number; 
+  Revenue?: string;
+  revenue?: string; // Backend returns lowercase
+  total_quantity?: string | number; 
   CreatedAt?: string;
+  createdat?: string; // Backend returns lowercase
   Category?: string;
+  category?: string; // Backend returns lowercase
 }

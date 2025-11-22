@@ -33,6 +33,7 @@ export const Dashboard = () => {
      const response = await Pendingsalesreturn()
      if(response.data.success && response.data.data.PendingcombineResult) {
        setPendinglist(response.data.data.PendingcombineResult)
+      console.log(` somthing here ${response.data.data.PendingcombineResult}`)
      }
     }catch(err){
       console.error(err)
@@ -40,16 +41,14 @@ export const Dashboard = () => {
   }
 
   // Transform PendingReturnResult to Payment format
-  const transformPendingToPayment = (pending: typeof Pendinglist[0]) => ({
-    id: String(pending.id || pending.product_id || Math.random()),
-    title: pending.product_name || 'Pending Payment',
-    amount: Number(pending.Revenue) || 0,
-    dueDate: pending.CreatedAt 
-      ? new Date(pending.CreatedAt).toISOString() 
-      : new Date().toISOString(),
-    recipient: pending.seller || 'Unknown Seller',
-    description: `Product: ${pending.product_name || 'N/A'} | Category: ${pending.Category || 'N/A'} | Quantity: ${pending.total_quantity || 0}`,
-    invoiceNumber: `INV-${pending.id || pending.product_id || 'N/A'}`,
+  const transformPendingToPayment = (pending: PendingReturnResult) => ({
+    id: String(pending.id || pending.product_id || ''),
+    product_name: pending.product_name || '',
+    Revenue: Number(pending.revenue || pending.Revenue || 0),
+    CreatedAt: pending.createdat || pending.CreatedAt || new Date().toISOString(),
+    seller: pending.seller || '',
+    Category: pending.category || pending.Category,
+    total_quantity: pending.total_quantity ? Number(pending.total_quantity) : undefined,
   })
   const handleDashResponse = async () => {
     try {

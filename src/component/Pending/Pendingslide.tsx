@@ -4,12 +4,12 @@ import styles from "./pending-payment-slider.module.css";
 
 interface Payment {
   id: string;
-  title: string;
-  amount: number;
-  dueDate: string;
-  recipient: string;
-  description?: string;
-  invoiceNumber?: string;
+  product_name: string;
+  Revenue: number;
+  CreatedAt: string;
+  seller: string;
+  Category?: string;
+  total_quantity?: number;
 }
 
 interface PendingPaymentSliderProps {
@@ -39,7 +39,6 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
     return () => clearInterval(timer);
   }, [payments.length]);
 
-  // Reset currentIndex if it's out of bounds
   useEffect(() => {
     if (payments.length > 0 && currentIndex >= payments.length) {
       setCurrentIndex(0);
@@ -57,14 +56,6 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
     });
   };
 
-  const getDaysUntilDue = (dateString: string) => {
-    const today = new Date();
-    const dueDate = new Date(dateString);
-    const diffTime = dueDate.getTime() - today.getTime();
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  };
-
-  // Early return if no payments
   if (payments.length === 0 || !currentPayment) {
     return (
       <div className={styles.paymentSliderWrapper}>
@@ -107,8 +98,6 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
     );
   }
 
-  const daysUntilDue = getDaysUntilDue(currentPayment.dueDate);
-
   return (
     <div className={styles.paymentSliderWrapper}>
       <div className={styles.paymentCard}>
@@ -132,18 +121,14 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
               <div className={styles.paymentInfoSection}>
                 <div className={styles.paymentHeaderRow}>
                   <div>
-                    <h3 className={styles.paymentItemTitle}>{currentPayment.title}</h3>
-                    <p className={styles.paymentRecipient}>{currentPayment.recipient}</p>
+                    <h3 className={styles.paymentItemTitle}>{currentPayment.product_name}</h3>
+                    <p className={styles.paymentRecipient}>{currentPayment.seller}</p>
                   </div>
-                  <div
-                    className={`${styles.paymentBadge} ${
-                      daysUntilDue <= 3
-                        ? styles.paymentBadgeUrgent
-                        : styles.paymentBadgeNormal
-                    }`}
-                  >
-                    {daysUntilDue <= 0 ? "Overdue" : `${daysUntilDue} days left`}
-                  </div>
+                  {currentPayment.Category && (
+                    <div className={styles.paymentBadge}>
+                      {currentPayment.Category}
+                    </div>
+                  )}
                 </div>
 
                 <div className={styles.paymentDetailsRow}>
@@ -162,12 +147,36 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
                       />
                     </svg>
                     <div>
-                      <p className={styles.paymentDetailLabel}>Amount</p>
+                      <p className={styles.paymentDetailLabel}>Revenue</p>
                       <p className={styles.paymentDetailValue}>
-                        {currentPayment.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} TZS
+                        {currentPayment.Revenue} Tsh
                       </p>
                     </div>
                   </div>
+
+                  {currentPayment.total_quantity && (
+                    <div className={styles.paymentDetailItem}>
+                      <svg
+                        className={styles.paymentIcon}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                        />
+                      </svg>
+                      <div>
+                        <p className={styles.paymentDetailLabel}>Quantity</p>
+                        <p className={styles.paymentDetailValue}>
+                          {currentPayment.total_quantity}
+                        </p>
+                      </div>
+                    </div>
+                  )}
 
                   <div className={styles.paymentDetailItem}>
                     <svg
@@ -184,9 +193,9 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
                       />
                     </svg>
                     <div>
-                      <p className={styles.paymentDetailLabel}>Due Date</p>
+                      <p className={styles.paymentDetailLabel}>Date</p>
                       <p className={styles.paymentDetailValue}>
-                        {formatDate(currentPayment.dueDate)}
+                        {formatDate(currentPayment.CreatedAt)}
                       </p>
                     </div>
                   </div>
@@ -260,42 +269,42 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
 
             <div className={styles.paymentModalBody}>
               <div className={styles.paymentModalField}>
-                <p className={styles.paymentModalLabel}>Payment Title</p>
-                <p className={styles.paymentModalValue}>{currentPayment.title}</p>
+                <p className={styles.paymentModalLabel}>Product Name</p>
+                <p className={styles.paymentModalValue}>{currentPayment.product_name}</p>
               </div>
 
               <div className={styles.paymentModalField}>
-                <p className={styles.paymentModalLabel}>Recipient</p>
-                <p className={styles.paymentModalValue}>{currentPayment.recipient}</p>
+                <p className={styles.paymentModalLabel}>Seller</p>
+                <p className={styles.paymentModalValue}>{currentPayment.seller}</p>
               </div>
 
               <div className={styles.paymentModalField}>
-                <p className={styles.paymentModalLabel}>Amount</p>
+                <p className={styles.paymentModalLabel}>Revenue</p>
                 <p className={styles.paymentModalValueLarge}>
-                  {currentPayment.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} TZS
+                  {currentPayment.Revenue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Tsh
                 </p>
               </div>
+
+              {currentPayment.Category && (
+                <div className={styles.paymentModalField}>
+                  <p className={styles.paymentModalLabel}>Category</p>
+                  <p className={styles.paymentModalValue}>{currentPayment.Category}</p>
+                </div>
+              )}
+
+              {currentPayment.total_quantity && (
+                <div className={styles.paymentModalField}>
+                  <p className={styles.paymentModalLabel}>Quantity</p>
+                  <p className={styles.paymentModalValue}>{currentPayment.total_quantity}</p>
+                </div>
+              )}
 
               <div className={styles.paymentModalField}>
-                <p className={styles.paymentModalLabel}>Due Date</p>
+                <p className={styles.paymentModalLabel}>Date</p>
                 <p className={styles.paymentModalValue}>
-                  {formatDate(currentPayment.dueDate)}
+                  {formatDate(currentPayment.CreatedAt)}
                 </p>
               </div>
-
-              {currentPayment.invoiceNumber && (
-                <div className={styles.paymentModalField}>
-                  <p className={styles.paymentModalLabel}>Invoice Number</p>
-                  <p className={styles.paymentModalValue}>{currentPayment.invoiceNumber}</p>
-                </div>
-              )}
-
-              {currentPayment.description && (
-                <div className={styles.paymentModalField}>
-                  <p className={styles.paymentModalLabel}>Description</p>
-                  <p className={styles.paymentModalValue}>{currentPayment.description}</p>
-                </div>
-              )}
 
               <div className={styles.paymentModalActions}>
                 <Button buttonName="Pay Now" />
