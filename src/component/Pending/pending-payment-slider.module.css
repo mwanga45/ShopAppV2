@@ -311,3 +311,337 @@
   padding-top: 1.5rem;
   border-top: 1px solid #e5e7eb;
 }
+
+/* Component-specific styles matching the component class names */
+.paymentSliderWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.paymentCard {
+  overflow: hidden;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+}
+
+.paymentCardHeader {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.paymentCardHeaderContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.paymentCardTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.paymentCounter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.paymentSlideContainer {
+  position: relative;
+  min-height: 16rem;
+  padding: 2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paymentSlideContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.paymentInfoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.paymentHeaderRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.paymentItemTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.paymentRecipient {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0;
+}
+
+.paymentBadge {
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.paymentBadgeUrgent {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.paymentBadgeNormal {
+  background-color: #dbeafe;
+  color: #2563eb;
+}
+
+.paymentDetailsRow {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.paymentDetailItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.paymentIcon {
+  height: 1.5rem;
+  width: 1.5rem;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.paymentDetailLabel {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.paymentDetailValue {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0.25rem 0 0 0;
+}
+
+.paymentActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.paymentFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  padding: 1rem 1.5rem;
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+
+.paymentDots {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.paymentDot {
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 9999px;
+  background-color: #d1d5db;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.paymentDotActive {
+  width: 2rem;
+  background-color: #667eea;
+}
+
+.paymentDot:hover {
+  background-color: #9ca3af;
+}
+
+.paymentSlide {
+  width: 100%;
+}
+
+.paymentSlide-right {
+  animation: slideInRight 0.5s ease-out;
+}
+
+.paymentSlide-left {
+  animation: slideInLeft 0.5s ease-out;
+}
+
+.paymentModalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.paymentModalBox {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  max-width: 32rem;
+  width: 90%;
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: slideUp 0.3s ease-out;
+}
+
+.paymentModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.paymentModalTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.paymentModalClose {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #f3f4f6;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+.paymentModalClose:hover {
+  background-color: #e5e7eb;
+  transform: scale(1.05);
+}
+
+.paymentModalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.paymentModalField {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.paymentModalLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.paymentModalValue {
+  font-size: 1.125rem;
+  color: #1f2937;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.paymentModalValueLarge {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.paymentModalActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Empty State Styles */
+.paymentEmptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+  min-height: 16rem;
+}
+
+.paymentEmptyIcon {
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1.5rem;
+  color: #9ca3af;
+  opacity: 0.5;
+}
+
+.paymentEmptyText {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.paymentEmptySubtext {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
