@@ -67,6 +67,21 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
 }
+.dash-graph-container span {
+    font-size: 26px; /* slightly bigger for emphasis */
+    color: #2f4f4f; /* darkslategray, but a bit softer */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 600; /* a bit bolder */
+    letter-spacing: 0.5px; /* subtle spacing for readability */
+    text-transform: capitalize; /* ensures first letter is uppercase */
+    transition: color 0.3s ease, transform 0.3s ease; /* smooth hover effects */
+}
+
+.dash-graph-container span:hover {
+    color: #1e90ff; /* changes to DodgerBlue on hover */
+    transform: scale(1.05); /* slight zoom effect on hover */
+}
+
 .sale-info{
     display: flex;
     flex-direction: column;

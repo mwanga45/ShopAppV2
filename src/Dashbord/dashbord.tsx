@@ -95,7 +95,7 @@ export const Dashboard = () => {
             <CardReport titleone="Least selling product this Month" />
             <OrdersTable />
             <div className="dash-graph-container">
-              <span>Revenue Chart Per Day</span>
+              <span>Daily Revenue Performance</span>
             <GridDemo RevenueRateChange={Ratedata ?? []} />
             </div>
             <div className="dash-graph-container">
@@ -118,7 +118,7 @@ export const Dashboard = () => {
               <AnimatedCard
                 icon={ TbSum}
                 details={"Total Generated Today"}
-                money={TotalGenerated}
+                money={TotalGenerated ?? 0}
               />
             </div>
             <Salesdeviation
