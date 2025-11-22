@@ -2,6 +2,7 @@ import "./dash.css";
 import { Search } from "../component/search/Search";
 import { Button } from "../component/button/Button";
 import { CardReport } from "../component/card-report/card";
+import { PendingPaymentSlider } from "../component/Pending/Pendingslide";
 import { IoNotificationsCircleSharp } from "react-icons/io5";
 import { Accountbar } from "../component/account/Account";
 import { Salesdeviation } from "../component/daysales/Salesdeviation";
@@ -101,6 +102,9 @@ export const Dashboard = () => {
             <div className="dash-graph-container">
               <span>Stock Out Chart Per Day </span>
             <GridDemo />
+            </div>
+            <div className="pending-container">
+              <PendingPaymentSlider payments={[]}/>
             </div>
           </div>
           <div className="sale-info">

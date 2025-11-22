@@ -22,21 +22,31 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
   const [showDetails, setShowDetails] = useState(false);
 
   const nextPayment = () => {
+    if (payments.length === 0) return;
     setDirection("right");
     setCurrentIndex((prev) => (prev + 1) % payments.length);
   };
 
   const prevPayment = () => {
+    if (payments.length === 0) return;
     setDirection("left");
     setCurrentIndex((prev) => (prev - 1 + payments.length) % payments.length);
   };
 
   useEffect(() => {
+    if (payments.length === 0) return;
     const timer = setInterval(nextPayment, 5000);
     return () => clearInterval(timer);
   }, [payments.length]);
 
-  const currentPayment = payments[currentIndex];
+  // Reset currentIndex if it's out of bounds
+  useEffect(() => {
+    if (payments.length > 0 && currentIndex >= payments.length) {
+      setCurrentIndex(0);
+    }
+  }, [payments.length, currentIndex]);
+
+  const currentPayment = payments.length > 0 ? payments[currentIndex] : null;
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -53,6 +63,33 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
     const diffTime = dueDate.getTime() - today.getTime();
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   };
+
+  // Early return if no payments
+  if (payments.length === 0 || !currentPayment) {
+    return (
+      <div className={styles.paymentSliderWrapper}>
+        <div className={styles.paymentCard}>
+          <div className={styles.paymentCardHeader}>
+            <div className={styles.paymentCardHeaderContent}>
+              <h2 className={styles.paymentCardTitle}>Pending Payments</h2>
+              <div className={styles.paymentCounter}>
+                <span>0</span>
+                <span>/</span>
+                <span>0</span>
+              </div>
+            </div>
+          </div>
+          <div className={styles.paymentSlideContainer}>
+            <div className={styles.paymentSlideContent}>
+              <p style={{ textAlign: "center", padding: "2rem", color: "#666" }}>
+                No pending payments at this time
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const daysUntilDue = getDaysUntilDue(currentPayment.dueDate);
 
