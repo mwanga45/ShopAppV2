@@ -27,14 +27,14 @@ export default function SalesToday() {
   const [retailsalesrecord, setretailsalesrecord] = useState<SalesRecord[]>([]);
   const [wholesaleprod, setWholesaleprod] = useState<wProduct[]>([]);
   const [retailsalesprod, setretailsaleprod] = useState<rProduct[]>([]);
-  const [Pendingpaymentsales, setPendingpaymentsales] = useState<SalesRecord[]>(
-    []
-  );
+  const [Pendingpaymentsales, setPendingpaymentsales] = useState<SalesRecord[]>([]);
   const [DebtInfo, setDebtInfo] = useState<DebtRecord[]>([]);
   const [showsalesAnalysis, setshowsalesAnalysis] = useState<boolean>(false);
   const [custdebtlist, setcustdebtlist] = useState<DebtRecord[]>([]);
   const [productTrack, setproductTrack] = useState<TrackRecord[]>([]);
   const [personDebtRec, setpersonDebtRec] = useState <PersonOverallDebtRec>()
+  const [Wpendexist, setWpendiexist] = useState<boolean>(false)
+  const [Rpendingexist, setRpendingexist] = useState<boolean>(false)
   const [openDebtComp, setopenDebtComp] = useState<boolean>(false);
 
   const handleDebtmoreifno = async (id: string) => {
@@ -88,6 +88,9 @@ export default function SalesToday() {
       setwholesalesrecord(response.data.data.Normalsaleswholereturn);
       setretailsalesrecord(response.data.data.Normalsalesretailreturn);
       setPendingpaymentsales(response.data.data.AllcombinedPending);
+      setWpendiexist(response.data.data.Wholepending ? true : false)
+      setRpendingexist(response.data.data.Retailpending ? true :false)
+
     };
     handleDebtRec();
     handleproductInfo();

@@ -761,9 +761,8 @@ export const SalesRecForm: React.FC<
 
       try {
         const response = await CreateDebtrecord(sentWithDebt);
-
         if (!response.data.success) {
-          alert(response.data.message || "Failed to create debt record");
+          alert(response.data.message);
           return;
         }
 
