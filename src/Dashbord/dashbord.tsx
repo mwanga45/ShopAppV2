@@ -136,12 +136,12 @@ export const Dashboard = () => {
               <AnimatedCard
                 icon={GiTakeMyMoney}
                 details={"cash money"}
-                money={Number(Cashmoney?.generated_today) ?? 0}
+                money={Number(Cashmoney?.generated_today ?? 0)}
               />
               <AnimatedCard
                 icon={BsBank2}
                 details={"Bank money"}
-                money={Number(Cashmoney?.bankRevenue) ?? 0}
+                money={Number(Cashmoney?.bankRevenue ?? 0)}
               />
               <AnimatedCard
                 icon={ TbSum}
