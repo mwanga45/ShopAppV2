@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "../button/Button";
 import styles from "./pending-payment-slider.module.css";
+import { FaArrowLeft } from "react-icons/fa6";
+import { FaArrowRight } from "react-icons/fa";
 
 interface Payment {
   id: string;
@@ -214,8 +216,8 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
         </div>
 
         <div className={styles.paymentFooter}>
-          <Button buttonName="Previous" Onclick={prevPayment} />
-
+    
+          <FaArrowLeft color="blue" onClick={prevPayment} size={25}/>
           <div className={styles.paymentDots}>
             {payments.map((_, index) => (
               <button
@@ -231,8 +233,7 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
               />
             ))}
           </div>
-
-          <Button buttonName="Next" Onclick={nextPayment} />
+          <FaArrowRight size={25} onClick={nextPayment} color="blue"/>
         </div>
       </div>
 
