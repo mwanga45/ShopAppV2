@@ -1,4 +1,3 @@
-import { Accountbar } from "../component/account/Account";
 import { FcSalesPerformance } from "react-icons/fc";
 import { Button } from "../component/button/Button";
 import { SummaryCard } from "../component/summaryCard/summarycard";
@@ -29,9 +28,6 @@ export default function Overview() {
   }, []);
   return (
     <div className="overview-container">
-      <div className="overview-Accountbar">
-        <Accountbar />
-      </div>
       <div className="overview-title">
         <p>Business OverView -Summary</p>
       </div>

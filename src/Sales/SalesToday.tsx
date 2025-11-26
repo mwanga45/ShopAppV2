@@ -1,5 +1,5 @@
 import "./sales.css";
-import { Accountbar } from "../component/account/Account";
+
 import { Search } from "../component/search/Search";
 import { Daysale_list, DayResult } from "../component/daysales/Daysales";
 import { AdminsalesAnaysis } from "../component/daysales/salesAnalysis";
@@ -109,9 +109,6 @@ export default function SalesToday() {
   }, [isFormOpen]);
   return (
     <div className="Wh-Rtsales-container">
-      <div className="salesbar">
-        <Accountbar />
-      </div>
       <div className="sales-header">
         <h1 className="page-title">Product Sales Today</h1>
       </div>

@@ -1,4 +1,3 @@
-import { Accountbar } from "../component/account/Account";
 import { CiSearch } from "react-icons/ci";
 import "./stock.css";
 import { Stockcard } from "../component/stock-card/stockcard";
@@ -49,9 +48,6 @@ export default function Stock() {
     <div className="stock-main-conatiner animated-enter">
       <div className="Sock-header">
         <h1 className="stpage-title">Stock Analysis page</h1>
-      </div>
-          <div className="account">
-        <Accountbar />
       </div>
       <div className="stock-content-main">
         <p className="filter-title">Filter by</p>

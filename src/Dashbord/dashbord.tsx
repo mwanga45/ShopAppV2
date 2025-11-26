@@ -4,7 +4,6 @@ import { Button } from "../component/button/Button";
 import { CardReport } from "../component/card-report/card";
 import { PendingPaymentSlider } from "../component/Pending/Pendingslide";
 import { IoNotificationsCircleSharp } from "react-icons/io5";
-import { Accountbar } from "../component/account/Account";
 import { Salesdeviation } from "../component/daysales/Salesdeviation";
 import { DonalChart } from "../component/donatchart/Donalchart";
 import { OrdersTable } from "../component/Ordercomp/OrderlistTable";
@@ -97,9 +96,6 @@ export const Dashboard = () => {
         </div>
         <div>
           <Search />
-        </div>
-        <div>
-          <Accountbar />
         </div>
       </div>
       <div className="title-part">
