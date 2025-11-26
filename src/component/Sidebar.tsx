@@ -86,7 +86,7 @@ export const Sidebar:React.FC = ()=>{
       </div>
       <div className="nav-Account-container">
           <div>
-            <div><FaUserShield color="blue"/></div>
+            <div><FaUserShield color="blue" size={45}/></div>
             <div><span>issa mwanga</span><span>email,com</span></div>
           </div>
       </div>
