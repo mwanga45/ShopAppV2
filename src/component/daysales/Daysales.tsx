@@ -17,19 +17,21 @@ export const Daysales = () => {
   );
 };
 
-export const DayResult = ({ title_name, total_value }: Result) => {
+export const DayResult = ({ title_name, total_value,ispending,howmany  }: Result) => {
   return (
     
     <div
      
       className="dayresult-contaier"
       style={{ background: `${color}`, minWidth: "250px" }}
-    >
+    > 
+    {ispending &&
       <div className="check-pending-number">
          <div>
-          <span>4</span>
+          <span>{howmany}</span>
          </div>
       </div>
+    }
       <div>
         <p className="dayanalys">{title_name}</p>
       </div>

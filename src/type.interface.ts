@@ -233,6 +233,8 @@ export type Result = {
   title_name: string;
   total_value: number;
   color: any;
+  ispending?:boolean
+  howmany?:number
 };
 export interface SalesSummaryResponsesales {
   data: SalesSummaryDatasales;

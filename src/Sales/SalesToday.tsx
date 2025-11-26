@@ -76,6 +76,9 @@ export default function SalesToday() {
   const handleClose = () => {
     setshowsalesAnalysis(false);
   };
+  let Wpending = 0;
+  let Rpending = 0;
+
   useEffect(() => {
     const handleDebtRec = async () => {
       const response = await Debtinfo();
@@ -88,8 +91,10 @@ export default function SalesToday() {
       setwholesalesrecord(response.data.data.Normalsaleswholereturn);
       setretailsalesrecord(response.data.data.Normalsalesretailreturn);
       setPendingpaymentsales(response.data.data.AllcombinedPending);
-      setWpendiexist(response.data.data.Wholepending ? true : false)
-      setRpendingexist(response.data.data.Retailpending ? true :false)
+      setWpendiexist(response.data.data.Wholepending.length > 0 ? true : false)
+      setRpendingexist(response.data.data.Retailpending.length > 0 ? true :false)
+      Wpending = response.data.data.Wholepending.length
+      Rpending =  response.data.data.Retailpending.length
     };
     handleDebtRec();
     handleproductInfo();
@@ -128,6 +133,8 @@ export default function SalesToday() {
           title_name="Total Retailsales Revenue"
           total_value={Allrecord?.data.totolRetailRevenue ?? 0}
           color={"rgb(29, 137, 23);"}
+          ispending ={Rpendingexist}
+          howmany={Rpending}
         />
         <DayResult
           title_name="Total Revenue"
@@ -138,6 +145,8 @@ export default function SalesToday() {
           title_name="Total Wholesales Revenue"
           total_value={Allrecord?.data.totalWholeRevenue ?? 0}
           color={"rgb(29, 137, 23);"}
+          ispending = {Wpendexist}
+          howmany={Wpending}
         />
       </div>
       <div className="resultTb-container">
