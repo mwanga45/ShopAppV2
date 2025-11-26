@@ -38,8 +38,6 @@ export const Dashboard = () => {
       console.error(err)
     }
   }
-
-  // Transform PendingReturnResult to Payment format
   const transformPendingToPayment = (pending: PendingReturnResult) => ({
     id: String(pending.id || pending.product_id || ''),
     product_name: pending.product_name || '',

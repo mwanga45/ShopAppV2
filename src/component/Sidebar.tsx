@@ -91,7 +91,7 @@ export const Sidebar:React.FC = ()=>{
           </li>
         </ul>
       </div>
-      <div className="nav-Account-container">
+      <div className="nav-Account-container" >
           <div>
             <div>{userInfo ? userInfo.role === 'admin'? <FaUserShield color="blue" size={45}/>:<FaUser color="green" size={45}/>:<FaCircleQuestion color="red" size={45}/>}</div>
             <div><span>{userInfo?.fullname}</span><span>{userInfo?.role}</span></div>

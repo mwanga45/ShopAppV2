@@ -169,6 +169,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+border-top: 5px solid #00A8FF;     
+border-right: 5px solid #9B00FF;   
+border-bottom: 5px solid #00FF85;  
+border-left: 5px solid #FFB100;    
+   
+
 
   box-shadow: rgba(0, 153, 255, 0.35) 0px 10px 20px,
     rgba(0, 153, 255, 0.25) 0px 6px 6px;
