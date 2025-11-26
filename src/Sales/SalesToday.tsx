@@ -35,7 +35,11 @@ export default function SalesToday() {
   const [personDebtRec, setpersonDebtRec] = useState <PersonOverallDebtRec>()
   const [Wpendexist, setWpendiexist] = useState<boolean>(false)
   const [Rpendingexist, setRpendingexist] = useState<boolean>(false)
+  const [Wpending, setWpending] = useState<number>(0)
+   const [Rpending, setRpending] = useState<number>(0)
+
   const [openDebtComp, setopenDebtComp] = useState<boolean>(false);
+  
 
   const handleDebtmoreifno = async (id: string) => {
     try {
@@ -76,8 +80,6 @@ export default function SalesToday() {
   const handleClose = () => {
     setshowsalesAnalysis(false);
   };
-  let Wpending = 0;
-  let Rpending = 0;
 
   useEffect(() => {
     const handleDebtRec = async () => {
@@ -93,12 +95,14 @@ export default function SalesToday() {
       setPendingpaymentsales(response.data.data.AllcombinedPending);
       setWpendiexist(response.data.data.Wholepending.length > 0 ? true : false)
       setRpendingexist(response.data.data.Retailpending.length > 0 ? true :false)
-      Wpending = response.data.data.Wholepending.length
-      Rpending =  response.data.data.Retailpending.length
+      setWpending(response.data.data.Wholepending.length)
+      setRpending(response.data.data.Retailpending.length)
     };
     handleDebtRec();
     handleproductInfo();
     handlereturnsalesdata();
+    console.log('W', Wpending)
+    console.log('R', Rpending)
   }, []);
   useEffect(() => {
     document.body.style.overflow = isFormOpen ? "hidden" : "auto";
