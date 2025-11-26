@@ -399,3 +399,9 @@ export interface PendingReturnResult {
   Category?: string;
   category?: string; // Backend returns lowercase
 }
+export interface TokenPayload {
+  sub: string | null;
+  email: string | null;
+  role: string | null;
+  fullname:string |null
+}

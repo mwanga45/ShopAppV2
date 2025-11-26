@@ -1,4 +1,5 @@
 import "./sidebar.css"
+import { jwtDecode } from "jwt-decode";
 import React, { useState } from "react"
 import { LuLayoutDashboard } from "react-icons/lu";
 import { SiShopware } from "react-icons/si";
@@ -8,7 +9,8 @@ import { GrOverview } from "react-icons/gr";
 import { FaShoppingCart} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom"; 
-import { FaUserShield } from "react-icons/fa6";
+import { FaCircleQuestion, FaUser, FaUserShield } from "react-icons/fa6";
+import type{ TokenPayload } from "../type.interface";
 
 export const Sidebar:React.FC = ()=>{
   const Navigate = useNavigate()
@@ -17,6 +19,11 @@ export const Sidebar:React.FC = ()=>{
   const isLinkActive = (path: string) => {
     return location.pathname === path;
   };
+  let userInfo :TokenPayload | null = null
+  const token =  localStorage.getItem('access_token')
+  if(token){
+    userInfo = jwtDecode<TokenPayload>(token)
+  }
 
   return(
     <div className={`nav-container ${isOpen ? 'open' : 'collapsed'}`}>
@@ -86,9 +93,9 @@ export const Sidebar:React.FC = ()=>{
       </div>
       <div className="nav-Account-container">
           <div>
-            <div><FaUserShield color="blue" size={45}/></div>
-            <div><span>issa mwanga</span><span>email,com</span></div>
-          </div>
+            <div>{userInfo ? userInfo.role === 'admin'? <FaUserShield color="blue" size={45}/>:<FaUser color="green" size={45}/>:<FaCircleQuestion color="red" size={45}/>}</div>
+            <div><span>{userInfo?.fullname}</span><span>{userInfo?.role}</span></div>
+          </div> 
       </div>
     </div>
   )

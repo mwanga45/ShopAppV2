@@ -11,16 +11,11 @@ interface TokenPayload {
 
 export const Accountbar = () => {
   const token = localStorage.getItem("access_token");
-
   let userInfo: TokenPayload | null = null;
-
   if (token) {
-
     userInfo = jwtDecode<TokenPayload>(token);
   }
-
   console.log(userInfo);
-
   return (
     <div className="ac-container">
       <div className="avator">
