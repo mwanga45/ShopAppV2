@@ -126,22 +126,58 @@
   display: flex;
   flex: 1;
   align-items: flex-end;
-  border: 1px solid white;
 }
-.nav-Account-container div{
+.nav-Account-container {
+  padding: 15px;
+  width: 100%;
+}
+
+.nav-Account-container > div {
   display: flex;
+  align-items: center;
+  gap: 12px;
   width: 100%;
   height: fit-content;
-  border: 2px solid green;
+  padding: 10px;
+  border-radius: 10px;
+  background: #f8f9fc;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
 
-}
-.nav-Account-container div div :first-child{
+/* Profile icon box */
+.nav-Account-container > div > div:first-child {
   width: 80px;
-  height:80px;
+  height: 80px;
   background-color: #ffffff;
-  border-radius: 50px;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow:
+    rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
+
+/* Name + email container */
+.nav-Account-container > div > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-Account-container span:first-child {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.nav-Account-container span:last-child {
+  font-size: 0.9rem;
+  color: #777;
+}
+
 
 /* Responsive behavior */
 @media (max-width: 1024px){
