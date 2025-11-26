@@ -1,10 +1,10 @@
-import { CiSearch } from "react-icons/ci";
 import "./stock.css";
 import { Stockcard } from "../component/stock-card/stockcard";
 import { Stocksheet } from "../component/stock-card/stocksheet";
 import { RiCloseFill } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import { StockCardResult } from "./stockservice";
+import { FiSearch } from "react-icons/fi";
 
 export interface Stockprops {
   product_id: number;
@@ -21,6 +21,7 @@ export interface Stockprops {
 export default function Stock() {
   const [Showupdate, setShowupdate] = useState<boolean>(false);
   const [Carddata, setCarddata] = useState<Stockprops[]>([]);
+  const [searchText, setsearchText] = useState('')
   const [selectedStock, setSelectedStock] = useState<Stockprops | null>(null);
   const handleShowUpdateForm: React.MouseEventHandler<HTMLButtonElement> = (
     e
@@ -44,6 +45,8 @@ export default function Stock() {
     handlecardData();
   }, []);
 
+  const filtercardData:Stockprops[] = Carddata.filter(items =>items.product_name.toLowerCase().includes(searchText.toLowerCase()) )
+
   return (
     <div className="stock-main-conatiner animated-enter">
       <div className="Sock-header">
@@ -57,14 +60,14 @@ export default function Stock() {
             <button name="">Type</button>
             <button name="">Category</button>
           </div>
-          <div className="filter-by-name">
-            <CiSearch />
-            <input type="text" name="search" placeholder="seach by name" />
+          <div className="filter-by-name-style">
+            <input type="text" name="searchText" placeholder="search by name" value={searchText} onChange={(e)=> setsearchText(e.target.value)}  style={{outline:"none"}} />
+            <FiSearch size={25} />
           </div>
         </div>
-        {Carddata ? (
+        {filtercardData ? (
           <div className="card-stock-list">
-            {Carddata.map((s) => (
+            {filtercardData.map((s) => (
               <Stockcard
                 key={s.product_id}
                 onclick={(e) => {
