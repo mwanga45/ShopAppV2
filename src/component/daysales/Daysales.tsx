@@ -23,10 +23,12 @@ export const DayResult = ({ title_name, total_value }: Result) => {
     <div
      
       className="dayresult-contaier"
-      style={{ background: `${color}`, minWidth: "200px" }}
+      style={{ background: `${color}`, minWidth: "250px" }}
     >
       <div className="check-pending-number">
-         
+         <div>
+          <span>4</span>
+         </div>
       </div>
       <div>
         <p className="dayanalys">{title_name}</p>

@@ -48,10 +48,31 @@
   border-radius: 20px;
   cursor: pointer;
   position: relative;
+  top: 0;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   animation: cardEntrance 0.8s ease-out;
   
+}
+.check-pending-number{
+  width: 100%;
+  height:fit-content;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1px;
+  /* background-color: red; */
+}
+.check-pending-number div{
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
 }
 
 .dayresult-contaier::before {
