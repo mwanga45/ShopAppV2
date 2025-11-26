@@ -131,9 +131,6 @@
     padding-left: 6px;
     border-radius: 10px;
 }
-.filter-by-name-style svg{
-    font-weight: bold;
-}
 .card-stock-list{
     width: 100%;
     min-height: 30vh;
@@ -143,4 +140,10 @@
     padding: 20px;
     align-items: start;
     justify-items: center;
+}
+.card-stock-list span{
+    color: #222a38;
+    font-size: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: italic;
 }

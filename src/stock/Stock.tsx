@@ -47,6 +47,7 @@ export default function Stock() {
 
   const filtercardData:Stockprops[] = Carddata.filter(items =>items.product_name.toLowerCase().includes(searchText.toLowerCase()) )
 
+
   return (
     <div className="stock-main-conatiner animated-enter">
       <div className="Sock-header">
@@ -88,7 +89,7 @@ export default function Stock() {
           </div>
         ) : (
           <div className="card-stock-list">
-            <p>Please No stock info is available</p>
+            <span>Please No stock info is available</span>
           </div>
         )}
         {Showupdate && selectedStock && (
