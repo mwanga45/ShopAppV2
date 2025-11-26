@@ -214,9 +214,7 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
             </div>
           </div>
         </div>
-
         <div className={styles.paymentFooter}>
-    
           <FaArrowLeft color="blue" onClick={prevPayment} size={25}/>
           <div className={styles.paymentDots}>
             {payments.map((_, index) => (
@@ -236,7 +234,6 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
           <FaArrowRight size={25} onClick={nextPayment} color="blue"/>
         </div>
       </div>
-
       {showDetails && (
         <div
           className={styles.paymentModalOverlay}
@@ -285,28 +282,24 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
                   {currentPayment.Revenue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Tsh
                 </p>
               </div>
-
               {currentPayment.Category && (
                 <div className={styles.paymentModalField}>
                   <p className={styles.paymentModalLabel}>Category</p>
                   <p className={styles.paymentModalValue}>{currentPayment.Category}</p>
                 </div>
               )}
-
               {currentPayment.total_quantity && (
                 <div className={styles.paymentModalField}>
                   <p className={styles.paymentModalLabel}>Quantity</p>
                   <p className={styles.paymentModalValue}>{currentPayment.total_quantity}</p>
                 </div>
               )}
-
               <div className={styles.paymentModalField}>
                 <p className={styles.paymentModalLabel}>Date</p>
                 <p className={styles.paymentModalValue}>
                   {formatDate(currentPayment.CreatedAt)}
                 </p>
               </div>
-
               <div className={styles.paymentModalActions}>
                 <Button buttonName="Pay Now" />
                 <Button

@@ -8,12 +8,12 @@ import { GrOverview } from "react-icons/gr";
 import { FaShoppingCart} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom"; 
+import { FaUserShield } from "react-icons/fa6";
 
-export const Sidebar = ()=>{
+export const Sidebar:React.FC = ()=>{
   const Navigate = useNavigate()
   const location = useLocation(); 
   const [isOpen,setIsOpen] = useState<boolean>(true)
-
   const isLinkActive = (path: string) => {
     return location.pathname === path;
   };
@@ -83,6 +83,12 @@ export const Sidebar = ()=>{
             </p>
           </li>
         </ul>
+      </div>
+      <div className="nav-Account-container">
+          <div>
+            <div><FaUserShield color="blue"/></div>
+            <div><span>issa mwanga</span><span>email,com</span></div>
+          </div>
       </div>
     </div>
   )
