@@ -90,7 +90,6 @@ export default function SalesToday() {
       setPendingpaymentsales(response.data.data.AllcombinedPending);
       setWpendiexist(response.data.data.Wholepending ? true : false)
       setRpendingexist(response.data.data.Retailpending ? true :false)
-
     };
     handleDebtRec();
     handleproductInfo();

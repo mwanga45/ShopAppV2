@@ -19,10 +19,15 @@ export const Daysales = () => {
 
 export const DayResult = ({ title_name, total_value }: Result) => {
   return (
+    
     <div
+     
       className="dayresult-contaier"
       style={{ background: `${color}`, minWidth: "200px" }}
     >
+      <div className="check-pending-number">
+         
+      </div>
       <div>
         <p className="dayanalys">{title_name}</p>
       </div>
