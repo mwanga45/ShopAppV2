@@ -101,7 +101,7 @@ export const Sidebar:React.FC = ()=>{
       <div className="user-details-logout">
         <div className="user-details-logout-main">
           <div className="icon-details-container">
-            <div>{userInfo ? userInfo.role === 'admin'? <FaUserShield color="blue" size={45}/>:<FaUser color="green" size={45}/>:<FaCircleQuestion color="red" size={45}/>}</div>
+            <div>{userInfo ? userInfo.role === 'admin'? <FaUserShield color="blue" size={55}/>:<FaUser color="green" size={55}/>:<FaCircleQuestion color="red" size={55}/>}</div>
           </div>
           <div className="seller-details"><span>{userInfo?.email}</span><span>{userInfo?.fullname}</span><span>{userInfo?.role}</span></div>
         </div>
