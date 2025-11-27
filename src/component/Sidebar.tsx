@@ -13,6 +13,7 @@ import { FaCircleQuestion, FaUser, FaUserShield } from "react-icons/fa6";
 import type{ TokenPayload } from "../type.interface";
 
 export const Sidebar:React.FC = ()=>{
+  const[showUserInfo, setshowUserInfo] = useState<boolean>(false)
   const Navigate = useNavigate()
   const location = useLocation(); 
   const [isOpen,setIsOpen] = useState<boolean>(true)
@@ -96,6 +97,14 @@ export const Sidebar:React.FC = ()=>{
             <div>{userInfo ? userInfo.role === 'admin'? <FaUserShield color="blue" size={45}/>:<FaUser color="green" size={45}/>:<FaCircleQuestion color="red" size={45}/>}</div>
             <div><span>{userInfo?.fullname}</span><span>{userInfo?.role}</span></div>
           </div> 
+      </div>
+      <div className="user-details-logout">
+        <div className="user-details-logout-main">
+          <div className="icon-details-container">
+            <div>{userInfo ? userInfo.role === 'admin'? <FaUserShield color="blue" size={45}/>:<FaUser color="green" size={45}/>:<FaCircleQuestion color="red" size={45}/>}</div>
+          </div>
+          <div className="seller-details"><span>{userInfo?.email}</span><span>{userInfo?.fullname}</span><span>{userInfo?.role}</span></div>
+        </div>
       </div>
     </div>
   )
