@@ -212,7 +212,7 @@
 }
 .user-details-logout-main{
    width: 600px;
-   height: 600px;
+   height: 400px;
    background-color: #f4f5f3;
    border-radius: 20px;
    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
@@ -226,14 +226,28 @@
   width: fit-content;
   height: fit-content;
   padding: 20px;
-  border:2px solid #00a8ff;
+  border:5px solid #00a8ff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-
 }
+.seller-details{
+  margin-top: 20px;
+  width: 100%;
+  color: #243447;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
 
 /* Responsive behavior */
 @media (max-width: 1024px) {
