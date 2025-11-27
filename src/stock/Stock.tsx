@@ -21,8 +21,12 @@ export interface Stockprops {
 export default function Stock() {
   const [Showupdate, setShowupdate] = useState<boolean>(false);
   const [Carddata, setCarddata] = useState<Stockprops[]>([]);
-  const [searchText, setsearchText] = useState('')
+  const [searchText, setsearchText] = useState("");
   const [selectedStock, setSelectedStock] = useState<Stockprops | null>(null);
+  const [selectedType, setSelectedType] = useState("All");
+  // const [selectedType, setSelectedType] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
   const handleShowUpdateForm: React.MouseEventHandler<HTMLButtonElement> = (
     e
   ) => {
@@ -45,8 +49,18 @@ export default function Stock() {
     handlecardData();
   }, []);
 
-  const filtercardData:Stockprops[] = Carddata.filter(items =>items.product_name.toLowerCase().includes(searchText.toLowerCase()) )
+  const filtercardData: Stockprops[] = Carddata.filter((items) => {
+    const matchesName = items.product_name
+      .toLowerCase()
+      .includes(searchText.toLowerCase());
+    const matchesType =
+      selectedType === "All" || items.product_category === selectedType;
 
+    const matchesCategory =
+      selectedCategory === "All" || items.product_category === selectedCategory;
+
+    return matchesName && matchesType && matchesCategory;
+  });
 
   return (
     <div className="stock-main-conatiner animated-enter">
@@ -57,12 +71,19 @@ export default function Stock() {
         <p className="filter-title">Filter by</p>
         <div className="filter-container">
           <div className="filter-by-category">
-            <button name="">All</button>
-            <button name="">Type</button>
-            <button name="">Category</button>
+            <button onClick={() => setSelectedType("All")}>All</button>
+            <button onClick={() => setSelectedType("Solid")}>Solid</button>
+            <button onClick={() => setSelectedType("Liquid")}>Liquid</button>
           </div>
           <div className="filter-by-name-style">
-            <input type="text" name="searchText" placeholder="search by name" value={searchText} onChange={(e)=> setsearchText(e.target.value)}  style={{outline:"none"}} />
+            <input
+              type="text"
+              name="searchText"
+              placeholder="search by name"
+              value={searchText}
+              onChange={(e) => setsearchText(e.target.value)}
+              style={{ outline: "none" }}
+            />
             <FiSearch size={25} />
           </div>
         </div>
