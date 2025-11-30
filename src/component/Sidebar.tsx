@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { FaCircleQuestion, FaUser, FaUserShield } from "react-icons/fa6";
 import type { TokenPayload } from "../type.interface";
+import { toast, ToastContainer } from "react-toastify";
+
 
 export const Sidebar: React.FC = () => {
   const [showUserInfo, setshowUserInfo] = useState<boolean>(false);
@@ -25,12 +27,20 @@ export const Sidebar: React.FC = () => {
   if (token) {
     userInfo = jwtDecode<TokenPayload>(token);
   }
+  console.log(userInfo)
   const handleSignOut =()=>{
-    const token = localStorage.getItem('')
+     localStorage.removeItem('access_token')
+     toast.success('successuly log out ')
+
+    setTimeout(()=> {
+      Navigate('/')
+    },1500)
+
   }
 
   return (
     <div className={`nav-container ${isOpen ? "open" : "collapsed"}`}>
+      <ToastContainer/>
       <div className="logo-container">
         <h2 className="brand-text">
           <span className="brand">ShoappV2</span>{" "}
@@ -157,14 +167,14 @@ export const Sidebar: React.FC = () => {
             </div>
           </div>
           <div className="seller-details">
-            <span>{userInfo?.email}</span>
-            <span>{userInfo?.fullname}</span>
-            <span>{userInfo?.role}</span>
+            <span>{userInfo?.email ? userInfo.email : 'unknown email'}</span>
+            <span>{userInfo?.fullname ? userInfo.fullname :'unknown user'}</span>
+            <span>{userInfo?.role ? userInfo.role :'undefined role'}</span>
           </div>
           
           <div className="logout-container-cancel">
             <button className="clean-btn" onClick={()=> setshowUserInfo(false)}>Close</button>
-             <button className="clean-btn" >SignOut</button>
+             <button className="clean-btn"onClick={handleSignOut} >SignOut</button>
           </div>
           
         </div>
