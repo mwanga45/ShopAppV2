@@ -25,6 +25,9 @@ export const Sidebar: React.FC = () => {
   if (token) {
     userInfo = jwtDecode<TokenPayload>(token);
   }
+  const handleSignOut =()=>{
+    const token = localStorage.getItem('')
+  }
 
   return (
     <div className={`nav-container ${isOpen ? "open" : "collapsed"}`}>
@@ -117,8 +120,8 @@ export const Sidebar: React.FC = () => {
           </li>
         </ul>
       </div>
-      <div className="nav-Account-container">
-        <div>
+      <div className="nav-Account-container" >
+        <div onClick={()=> setshowUserInfo(true)}>
           <div>
             {userInfo ? (
               userInfo.role === "admin" ? (
@@ -136,6 +139,8 @@ export const Sidebar: React.FC = () => {
           </div>
         </div>
       </div>
+      {
+        showUserInfo &&
       <div className="user-details-logout">
         <div className="user-details-logout-main">
           <div className="icon-details-container">
@@ -156,12 +161,15 @@ export const Sidebar: React.FC = () => {
             <span>{userInfo?.fullname}</span>
             <span>{userInfo?.role}</span>
           </div>
+          
           <div className="logout-container-cancel">
-            <button className="clean-btn">Click Me</button>
-             <button className="clean-btn">Click Me</button>
+            <button className="clean-btn" onClick={()=> setshowUserInfo(false)}>Close</button>
+             <button className="clean-btn" >SignOut</button>
           </div>
+          
         </div>
       </div>
+      }
     </div>
   );
 };
