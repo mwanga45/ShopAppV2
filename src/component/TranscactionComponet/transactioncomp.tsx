@@ -4,7 +4,7 @@ import { MdAdd } from "react-icons/md";
 import { FaEye } from "react-icons/fa6";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Services } from "./icon";
-import type { ServiceCategory, ServiceIconchoose } from "../../type.interface";
+import type { ServiceCategory, ServiceIconchoose, TransactionInterface } from "../../type.interface";
 import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
 import { FaBalanceScale } from "react-icons/fa";
@@ -26,7 +26,7 @@ import { FcCollect } from "react-icons/fc";
 import { Button } from "../button/Button";
 import { CreateService } from "../../AdminPanel/adminservice";
 import { toast } from "react-toastify";
-export const TransactionComp: React.FC = () => {
+export const TransactionComp: React.FC<TransactionInterface> = ({capital}) => {
   const [showAddServe, setshowAddServe] = useState<boolean>(false);
   const [showCapital, setshowCapital] = useState<boolean>(false)
   const [iconlist, seticonlist] = useState<ServiceCategory[]>([]);
@@ -58,7 +58,7 @@ export const TransactionComp: React.FC = () => {
                 <AnimatedCard
                   icon={"symbol"}
                   details={"Business Capital"}
-                  money={700000}
+                  money={capital ?? 0}
                 />
               </div>
 

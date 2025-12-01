@@ -405,3 +405,6 @@ export interface TokenPayload {
   role: string | null;
   fullname:string |null
 }
+export interface TransactionInterface{
+  capital?:number
+}
