@@ -407,4 +407,5 @@ export interface TokenPayload {
 }
 export interface TransactionInterface{
   capital?:number
+  withdraw?:number
 }

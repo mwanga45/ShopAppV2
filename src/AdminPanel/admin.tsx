@@ -40,6 +40,7 @@ export const AdminPanel = () => {
     []
   );
   const [StockWorth, setStockWorth] = useState<number | null>();
+  const [Withdraw, setwithdraw] = useState<number | null>()
   const [CustomerDebt, setCustomerDebt] = useState<number | null>();
   const [Businessnetworth, setBusinessnetworth] = useState<number | null>();
   const [transactionopen, settransactionopen] = useState<boolean>(false);
@@ -92,6 +93,7 @@ export const AdminPanel = () => {
       setrate_status(response.data.data.Revenue_Rate.data.rate_status)
       setcapital(response.data.data.capital_amount)
       setBankdebt(response.data.data.Bank_Debt)
+      setwithdraw(response.data.data.Withdraw_money.Withdraw)
       return;
     } catch (err) {
       alert(err);
@@ -259,7 +261,7 @@ export const AdminPanel = () => {
       )}
       {transactionopen && (
         <div>
-          <TransactionComp />
+          <TransactionComp capital={capital} withdraw={Withdraw ?? 0}/>
         </div>
       )}
     </motion.div>

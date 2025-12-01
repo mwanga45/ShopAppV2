@@ -97,6 +97,7 @@ export const BusinessWorthData = async()=>{
         throw err
     }
 }
+
 export const CapitalAssign = async(data:any)=>{
     try{
         const  response =await api.post('management/create&update', data)
