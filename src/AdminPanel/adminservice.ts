@@ -116,7 +116,7 @@ export const CreateService = async(data:any) => {
         console.log(err)
     }
 }
-export const BusinesServiceInfo = async()=>{
+export const BusinesServiceinfo = async()=>{
     try{
       const response  = await api.get('profit-dev/serviceInfo')
       return response

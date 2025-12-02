@@ -26,7 +26,7 @@ import { FcCollect } from "react-icons/fc";
 import { Button } from "../button/Button";
 import { CreateService } from "../../AdminPanel/adminservice";
 import { toast } from "react-toastify";
-export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdraw}) => {
+export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdraw,BusinesSev}) => {
   const [showAddServe, setshowAddServe] = useState<boolean>(false);
   const [showCapital, setshowCapital] = useState<boolean>(false)
   const [iconlist, seticonlist] = useState<ServiceCategory[]>([]);

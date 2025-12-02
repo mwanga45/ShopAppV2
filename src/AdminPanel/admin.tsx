@@ -11,10 +11,11 @@ import { ListComp } from "../component/List-comp/Listcomp";
 import { StockRegForm } from "../component/Form-comp/Form";
 import { useEffect, useState } from "react";
 import { OtherAc } from "../component/account/otherAc";
-import { BusinessWorthData, GetuserList } from "./adminservice";
+import { BusinessWorthData, GetuserList, BusinesServiceinfo } from "./adminservice";
 import { AdminReg } from "../component/admin-reg/admin-reg";
 import { TransactionComp } from "../component/TranscactionComponet/transactioncomp";
 import { ShowinfoCard } from "../component/card-report/shownInfo";
+import type{ BusinesServiceInfo } from "../type.interface";
 
 interface AccountUserRespose {
   id?: number;
@@ -36,9 +37,8 @@ export const AdminPanel = () => {
   const [rate_status, setrate_status] = useState('')
   const [capital, setcapital] = useState(0)
   const [Bankdebt, setBankdebt] = useState(0)
-  const [Accountdetails, setAccountdetails] = useState<AccountUserRespose[]>(
-    []
-  );
+  const [ListServ, setListServ] = useState<BusinesServiceInfo[]>([])
+  const [Accountdetails, setAccountdetails] = useState<AccountUserRespose[]>([]);
   const [StockWorth, setStockWorth] = useState<number | null>();
   const [Withdraw, setwithdraw] = useState<number | null>()
   const [CustomerDebt, setCustomerDebt] = useState<number | null>();
@@ -79,6 +79,14 @@ export const AdminPanel = () => {
       },
     },
   };
+  const handleServiceList = async() =>{
+    try{
+      const response = await BusinesServiceinfo()
+      setListServ(response?.data.data)
+    }catch(err){
+      console.error(err)
+    }
+  }
   const handleBusinessWorth = async () => {
     try {
       const response = await BusinessWorthData();
@@ -115,6 +123,7 @@ export const AdminPanel = () => {
       };
       handlegetuserAccount();
       handleBusinessWorth();
+      handleServiceList()
     } catch (err) {
       console.error(err);
       alert(err);
@@ -261,7 +270,7 @@ export const AdminPanel = () => {
       )}
       {transactionopen && (
         <div>
-          <TransactionComp capital={capital} withdraw={Withdraw ?? 0}/>
+          <TransactionComp capital={capital} withdraw={Withdraw ?? 0} BusinesSev={ListServ}/>
         </div>
       )}
     </motion.div>
