@@ -197,7 +197,7 @@ const STATIC_QUICK_SERVICES = [
     label: "Others",
     icon: FcCollect,
     iconColor: "white",
-    bgColor: "blue",
+    bgColor: "#7B79F7",
   },
 ] as const;
 
