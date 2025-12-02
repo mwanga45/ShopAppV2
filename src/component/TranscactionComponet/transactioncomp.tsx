@@ -182,8 +182,9 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
     <div className={styles.formContainer} style={{width:'100%'}}>
       <div className={styles.formContainerHead}>
         <span>Quick Action</span>
+        <span style={{fontSize:'14px',color:'grey'}}>Select service to make payment</span>
       </div>
-      <div className={styles.transactionFormserviceContainer}>
+      
         {BusinesSev && BusinesSev.map((item) =>{
         const Icon = FaIcons[item.icon_name as keyof typeof FaIcons] as React.ComponentType<{ color?: string; size?: number }>;
         return(
@@ -191,7 +192,7 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
           <div className={styles.iconContainer}>
             {Icon ? < Icon color="white" size={40} />: <span>No icon</span>}
           </div>
-          <span>{item.service_name}</span>
+          <span style={{fontSize:'14px',color:'black'}}>{item.service_name}</span>
         </div>
         )})
       }
@@ -199,21 +200,21 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
           <div className={styles.iconContainer}>
             < FaUniversity color="white" size={40} />
           </div>
-          <span>Bank</span>
+          <span style={{fontSize:'14px',color:'black'}}>Bank</span>
         </div> 
         <div>
           <div className={styles.iconContainer}>
             <RiWallet3Line color="blue" size={40} />
           </div>
-          <span>Withdraw</span>
+          <span style={{fontSize:'14px',color:'black'}}>Withdraw</span>
         </div>
         <div>
           <div className={styles.iconContainer} style={{backgroundColor:"blue",borderRadius:"50%"}}>
             <FcCollect color="white" size={40} />
           </div>
-          <span>Others</span>
+          <span style={{fontSize:'14px',color:'black'}}>Others</span>
         </div>
-      </div>
+      </div><div className={styles.transactionFormserviceContainer}>
       <div
         style={{ width: "100%", height: "2px", backgroundColor: "grey" }}
       ></div>
