@@ -21,6 +21,7 @@ import {
   FaRegCalendarAlt,
   FaRegStickyNote,
   FaTags,
+   FaUniversity
 } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
 import { FcCollect } from "react-icons/fc";
@@ -183,18 +184,6 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
         <span>Quick Action</span>
       </div>
       <div className={styles.transactionFormserviceContainer}>
-        {/* <div>
-          <div className={styles.iconContainer}>
-            <GiChickenOven color="gold" size={40} />
-          </div>
-          <span>Food Service</span>
-        </div>
-        <div>
-          <div className={styles.iconContainer}>
-            <FaBoltLightning color="white" size={40} />
-          </div>
-          <span>Electricity Service</span>
-        </div> */}
         {BusinesSev && BusinesSev.map((item) =>{
         const Icon = FaIcons[item.icon_name as keyof typeof FaIcons] as React.ComponentType<{ color?: string; size?: number }>;
         return(
@@ -208,15 +197,21 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
       }
         <div>
           <div className={styles.iconContainer}>
+            < FaUniversity color="white" size={40} />
+          </div>
+          <span>Bank</span>
+        </div> 
+        <div>
+          <div className={styles.iconContainer}>
             <RiWallet3Line color="blue" size={40} />
           </div>
-          <span>Withdraw Service</span>
+          <span>Withdraw</span>
         </div>
         <div>
           <div className={styles.iconContainer} style={{backgroundColor:"blue",borderRadius:"50%"}}>
             <FcCollect color="white" size={40} />
           </div>
-          <span>Other Service</span>
+          <span>Others</span>
         </div>
       </div>
       <div
@@ -499,7 +494,7 @@ export const ServiceFormregister: React.FC<ServiceIconchoose & { onClose?: () =>
       return;
     }else if(name.length < 3){
       toast.error('please make sure name of service have atleast 5 character ' )
-    }else if(name.length > 30){
+    }else if(name.length > 11){
       toast.error('please make sure the name of service have atmost 30 character')
     }
     if (!icon_name) {
