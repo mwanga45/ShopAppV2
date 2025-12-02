@@ -21,10 +21,10 @@ import {
   FaRegCalendarAlt,
   FaRegStickyNote,
   FaTags,
-   FaUniversity
 } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
 import { FcCollect } from "react-icons/fc";
+import { FaUniversity } from "react-icons/fa";
 import { Button } from "../button/Button";
 import { CreateService } from "../../AdminPanel/adminservice";
 import { toast } from "react-toastify";
@@ -177,44 +177,108 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
     </div>
   );
 };
+const STATIC_QUICK_SERVICES = [
+  {
+    id: "bank",
+    label: "Bank",
+    icon: FaUniversity,
+    iconColor: "white",
+    bgColor: undefined,
+  },
+  {
+    id: "withdraw",
+    label: "Withdraw",
+    icon: RiWallet3Line,
+    iconColor: "blue",
+    bgColor: undefined,
+  },
+  {
+    id: "others",
+    label: "Others",
+    icon: FcCollect,
+    iconColor: "white",
+    bgColor: "blue",
+  },
+] as const;
+
 export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => {
+  const [selectedServiceId, setSelectedServiceId] = useState<string | number | null>(null);
+  const [showAllServices, setShowAllServices] = useState(false);
+
+  const servicesToRender =
+    BusinesSev && BusinesSev.length > 0
+      ? showAllServices
+        ? BusinesSev
+        : BusinesSev.slice(0, 3)
+      : [];
+
+  const hasMoreServices = (BusinesSev?.length ?? 0) > 3;
+
+  const handleSelectService = (serviceId?: string | number) => {
+    if (!serviceId) return;
+    setSelectedServiceId((prev) => (prev === serviceId ? null : serviceId));
+  };
+
   return (
     <div className={styles.formContainer} style={{width:'100%'}}>
       <div className={styles.formContainerHead}>
         <span>Quick Action</span>
         <span style={{fontSize:'14px',color:'grey'}}>Select service to make payment</span>
       </div>
-      
-        {BusinesSev && BusinesSev.map((item) =>{
-        const Icon = FaIcons[item.icon_name as keyof typeof FaIcons] as React.ComponentType<{ color?: string; size?: number }>;
-        return(
-          <div>
-          <div className={styles.iconContainer}>
-            {Icon ? < Icon color="white" size={40} />: <span>No icon</span>}
+      <div className={styles.transactionFormserviceContainer}>
+        {servicesToRender.length > 0 ? (
+          servicesToRender.map((item) => {
+            const Icon = FaIcons[item.icon_name as keyof typeof FaIcons] as React.ComponentType<{ color?: string; size?: number }>;
+            const isActive = selectedServiceId === (item.id ?? item.service_name ?? "");
+            return (
+              <div
+                key={item.id ?? item.service_name}
+                className={`${styles.serviceTile} ${isActive ? styles.serviceTileActive : ""}`}
+                onClick={() => handleSelectService(item.id ?? item.service_name)}
+              >
+                <div className={styles.iconContainer}>
+                  {Icon ? <Icon color="white" size={40} /> : <span>No icon</span>}
+                </div>
+                <span style={{fontSize:'14px',color:'black'}}>{item.service_name}</span>
+              </div>
+            );
+          })
+        ) : null}
+
+        {STATIC_QUICK_SERVICES.map((svc) => {
+          const isActive = selectedServiceId === svc.id;
+          const Icon = svc.icon;
+          return (
+            <div
+              key={svc.id}
+              className={`${styles.serviceTile} ${isActive ? styles.serviceTileActive : ""}`}
+              onClick={() => handleSelectService(svc.id)}
+            >
+              <div
+                className={styles.iconContainer}
+                style={svc.bgColor ? { backgroundColor: svc.bgColor, borderRadius: "50%" } : undefined}
+              >
+                <Icon color={svc.iconColor} size={40} />
+              </div>
+              <span style={{fontSize:'14px',color:'black'}}>{svc.label}</span>
+            </div>
+          );
+        })}
+
+        {hasMoreServices && (
+          <div
+            className={styles.serviceTile}
+            onClick={() => setShowAllServices((prev) => !prev)}
+          >
+            <div className={styles.iconContainer}>
+              <FcCollect color="white" size={40} />
+            </div>
+            <span style={{fontSize:'14px',color:'black'}}>
+              {showAllServices ? "Show less" : `+${(BusinesSev?.length ?? 0) - 3} more`}
+            </span>
           </div>
-          <span style={{fontSize:'14px',color:'black'}}>{item.service_name}</span>
-        </div>
-        )})
-      }
-        <div>
-          <div className={styles.iconContainer}>
-            < FaUniversity color="white" size={40} />
-          </div>
-          <span style={{fontSize:'14px',color:'black'}}>Bank</span>
-        </div> 
-        <div>
-          <div className={styles.iconContainer}>
-            <RiWallet3Line color="blue" size={40} />
-          </div>
-          <span style={{fontSize:'14px',color:'black'}}>Withdraw</span>
-        </div>
-        <div>
-          <div className={styles.iconContainer} style={{backgroundColor:"blue",borderRadius:"50%"}}>
-            <FcCollect color="white" size={40} />
-          </div>
-          <span style={{fontSize:'14px',color:'black'}}>Others</span>
-        </div>
-      </div><div className={styles.transactionFormserviceContainer}>
+        )}
+      </div>
       <div
         style={{ width: "100%", height: "2px", backgroundColor: "grey" }}
       ></div>
