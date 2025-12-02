@@ -201,8 +201,8 @@ export const TransactionForm = () => {
           <span>Withdraw Service</span>
         </div>
         <div>
-          <div className={styles.iconContainer}>
-            <FcCollect color="black" size={40} />
+          <div className={styles.iconContainer} style={{backgroundColor:"blue",borderRadius:"50%"}}>
+            <FcCollect color="white" size={40} />
           </div>
           <span>Other Service</span>
         </div>

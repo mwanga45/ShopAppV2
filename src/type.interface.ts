@@ -408,4 +408,10 @@ export interface TokenPayload {
 export interface TransactionInterface{
   capital?:number
   withdraw?:number
+  BusinesSev?:BusinesServiceInfo[]
+}
+export interface BusinesServiceInfo{
+  id?:number
+  service_name?:string
+  icon_name?:string
 }
