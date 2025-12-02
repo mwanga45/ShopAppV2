@@ -9,6 +9,8 @@ import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
 import { FaBalanceScale } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import * as FaIcons from "react-icons/fa";
+
 
 import {
   FaCoins,
@@ -21,7 +23,6 @@ import {
   FaTags,
 } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
-import { GiChickenOven } from "react-icons/gi";
 import { FcCollect } from "react-icons/fc";
 import { Button } from "../button/Button";
 import { CreateService } from "../../AdminPanel/adminservice";
@@ -102,7 +103,7 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
           </div>
           <div className={styles.transactionAssign}>
             <div className={styles.transactionFormcontainer}>
-              <TransactionForm />
+              <TransactionForm BusinesSev={BusinesSev} />
             </div>
             <div>
               <div className={styles.serviceContainer}>
@@ -175,14 +176,14 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
     </div>
   );
 };
-export const TransactionForm = () => {
+export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => {
   return (
     <div className={styles.formContainer} style={{width:'100%'}}>
       <div className={styles.formContainerHead}>
         <span>Quick Action</span>
       </div>
       <div className={styles.transactionFormserviceContainer}>
-        <div>
+        {/* <div>
           <div className={styles.iconContainer}>
             <GiChickenOven color="gold" size={40} />
           </div>
@@ -193,7 +194,18 @@ export const TransactionForm = () => {
             <FaBoltLightning color="white" size={40} />
           </div>
           <span>Electricity Service</span>
+        </div> */}
+        {BusinesSev && BusinesSev.map((item) =>{
+        const Icon = FaIcons[item.icon_name as keyof typeof FaIcons] as React.ComponentType<{ color?: string; size?: number }>;
+        return(
+          <div>
+          <div className={styles.iconContainer}>
+            {Icon ? < Icon color="white" size={40} />: <span>No icon</span>}
+          </div>
+          <span>{item.service_name}</span>
         </div>
+        )})
+      }
         <div>
           <div className={styles.iconContainer}>
             <RiWallet3Line color="blue" size={40} />
