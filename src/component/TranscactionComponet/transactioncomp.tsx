@@ -10,6 +10,8 @@ import AnimatedCard from "../Admincord/animatedcard";
 import { FaBalanceScale } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import * as FaIcons from "react-icons/fa";
+import { GiCapitol } from "react-icons/gi";
+import { GrAtm } from "react-icons/gr";
 
 
 import {
@@ -58,7 +60,7 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
             <div className={styles.transactionsalaryContainer}>
               <div style={{ display: "flex", alignItems: "center", cursor:"pointer"}} onClick={()=> setshowCapital(true)}>
                 <AnimatedCard
-                  icon={"symbol"}
+                  icon={GiCapitol}
                   details={"Business Capital"}
                   money={capital ?? 0}
                 />
@@ -66,8 +68,8 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
 
               <div style={{ display: "flex", alignItems: "center" }}>
                 <AnimatedCard
-                  icon={"symbol"}
-                  details={"ON USE"}
+                  icon={ GrAtm }
+                  details={"withdraw money"}
                   money={withdraw}
                 />
               </div>
@@ -182,7 +184,7 @@ const STATIC_QUICK_SERVICES = [
     id: "bank",
     label: "Bank",
     icon: FaUniversity,
-    iconColor: "white",
+    iconColor: "blue",
     bgColor: undefined,
   },
   {

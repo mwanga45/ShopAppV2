@@ -123,3 +123,7 @@ export const BusinesServiceinfo = async()=>{
         console.log(err)
     }
 }
+export const ServiceRequest = async(data:any) => {
+    const response = await api.post('managemen/servieRequest', data)
+    return response
+}
