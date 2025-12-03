@@ -415,3 +415,7 @@ export interface BusinesServiceInfo{
   service_name?:string
   icon_name?:string
 }
+export interface ServiceRequest{
+  service_id:number,
+   payment_Amount:number
+}

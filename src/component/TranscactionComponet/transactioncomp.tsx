@@ -28,7 +28,7 @@ import { FaBoltLightning } from "react-icons/fa6";
 import { FcCollect } from "react-icons/fc";
 import { FaUniversity } from "react-icons/fa";
 import { Button } from "../button/Button";
-import { CreateService } from "../../AdminPanel/adminservice";
+import { CreateService, ServiceRequest } from "../../AdminPanel/adminservice";
 import { toast } from "react-toastify";
 export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdraw,BusinesSev}) => {
   const [showAddServe, setshowAddServe] = useState<boolean>(false);
@@ -206,6 +206,7 @@ const STATIC_QUICK_SERVICES = [
 export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => {
   const [selectedServiceId, setSelectedServiceId] = useState<string | number | null>(null);
   const [showAllServices, setShowAllServices] = useState(false);
+  const [servicerequest, setServicerequest] = useState()
 
   const servicesToRender =
     BusinesSev && BusinesSev.length > 0
@@ -289,7 +290,7 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
           htmlFor=""
           style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
         >
-          OnUse Amount
+          SpendAmount
         </label>
         <div className={styles.inputfieldContainer}>
           <div className={styles.inputfield}>
