@@ -4,7 +4,7 @@ import { MdAdd } from "react-icons/md";
 import { FaEye } from "react-icons/fa6";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Services } from "./icon";
-import type { ServiceCategory, ServiceIconchoose, TransactionInterface } from "../../type.interface";
+import type{ ServiceRequestInterface,  ServiceCategory,  ServiceIconchoose, TransactionInterface } from "../../type.interface";
 import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
 import { FaBalanceScale } from "react-icons/fa";
@@ -34,6 +34,8 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
   const [showAddServe, setshowAddServe] = useState<boolean>(false);
   const [showCapital, setshowCapital] = useState<boolean>(false)
   const [iconlist, seticonlist] = useState<ServiceCategory[]>([]);
+
+  const serviceNumber = BusinesSev ? BusinesSev.length :0 
   useEffect(() => {
     const handleIconlist = () => {
       seticonlist(Services);
@@ -117,7 +119,7 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
                     fontWeight: "bold",
                   }}
                 >
-                  Create servece & View service
+                  Create service & View service
                 </span>
                 <div className={styles.viewAddservece}>
                   <div className={styles.serviceNumber}>
@@ -138,7 +140,7 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
                         scale: "4.4",
                       }}
                     >
-                      5
+                      {serviceNumber}
                     </span>
                   </div>
                   <div className={styles.serviceAction}>
@@ -206,7 +208,7 @@ const STATIC_QUICK_SERVICES = [
 export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => {
   const [selectedServiceId, setSelectedServiceId] = useState<string | number | null>(null);
   const [showAllServices, setShowAllServices] = useState(false);
-  const [servicerequest, setServicerequest] = useState()
+  const [servAmount, setservAmount] = useState('')
 
   const servicesToRender =
     BusinesSev && BusinesSev.length > 0
@@ -216,12 +218,30 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
       : [];
 
   const hasMoreServices = (BusinesSev?.length ?? 0) > 3;
-
+ 
   const handleSelectService = (serviceId?: string | number) => {
     if (!serviceId) return;
     setSelectedServiceId((prev) => (prev === serviceId ? null : serviceId));
-  };
-
+  }; 
+  const handleSubmitRequest = async()=>{
+    const serviceRecordpalyoad:ServiceRequestInterface ={
+      service_id:Number(selectedServiceId),
+      payment_Amount:Number(servAmount)
+    } 
+    console.log(serviceRecordpalyoad)
+   try{
+    const response = await  ServiceRequest(serviceRecordpalyoad)
+    if(!response.data.success){
+      alert(response.data.message)
+      return
+    }
+    
+      
+   }catch(err){
+    console.error(err)
+   }
+  }
+  
   return (
     <div className={styles.formContainer} style={{width:'100%'}}>
       <div className={styles.formContainerHead}>
@@ -310,7 +330,7 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
         </label>
         <div className={styles.inputfieldContainer}>
           <div className={styles.inputfield}>
-            <input type="text" placeholder="Enter Amount" />
+            <input type="text" placeholder="Enter Amount" name="servAmount" onChange={(e)=> setservAmount(e.target.value)}/>
           </div>
         </div>
         <span className={styles.precaution}>
@@ -318,7 +338,7 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
           On use money to make request
         </span>
         <div className={styles.buttonCOntainer}>
-          <Button buttonName="Confirm payment for your service." />
+          <Button buttonName="Confirm payment for your service." Onclick={handleSubmitRequest} />
         </div>
       </div>
     </div>

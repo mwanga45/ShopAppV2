@@ -409,13 +409,14 @@ export interface TransactionInterface{
   capital?:number
   withdraw?:number
   BusinesSev?:BusinesServiceInfo[]
+  ServiceCount?:number
 }
 export interface BusinesServiceInfo{
   id?:number
   service_name?:string
   icon_name?:string
 }
-export interface ServiceRequest{
+export interface ServiceRequestInterface{
   service_id:number,
-   payment_Amount:number
+  payment_Amount:number
 }
