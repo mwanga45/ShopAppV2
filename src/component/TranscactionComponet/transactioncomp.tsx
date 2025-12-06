@@ -181,30 +181,6 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
     </div>
   );
 };
-const STATIC_QUICK_SERVICES = [
-  {
-    id: "bank",
-    label: "Bank",
-    icon: FaUniversity,
-    iconColor: "blue",
-    bgColor: undefined,
-  },
-  {
-    id: "withdraw",
-    label: "Withdraw",
-    icon: RiWallet3Line,
-    iconColor: "blue",
-    bgColor: undefined,
-  },
-  {
-    id: "others",
-    label: "Others",
-    icon: FcCollect,
-    iconColor: "white",
-    bgColor: "#7B79F7",
-  },
-] as const;
-
 export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => {
   const [selectedServiceId, setSelectedServiceId] = useState<string | number | null>(null);
   const [showAllServices, setShowAllServices] = useState(false);
@@ -275,27 +251,6 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
             );
           })
         ) : null}
-
-        {STATIC_QUICK_SERVICES.map((svc) => {
-          const isActive = selectedServiceId === svc.id;
-          const Icon = svc.icon;
-          return (
-            <div
-              key={svc.id}
-              className={`${styles.serviceTile} ${isActive ? styles.serviceTileActive : ""}`}
-              onClick={() => handleSelectService(svc.id)}
-            >
-              <div
-                className={styles.iconContainer}
-                style={svc.bgColor ? { backgroundColor: svc.bgColor, borderRadius: "50%" } : undefined}
-              >
-                <Icon color={svc.iconColor} size={40} />
-              </div>
-              <span style={{fontSize:'14px',color:'black'}}>{svc.label}</span>
-            </div>
-          );
-        })}
-
         {hasMoreServices && (
           <div
             className={styles.serviceTile}
