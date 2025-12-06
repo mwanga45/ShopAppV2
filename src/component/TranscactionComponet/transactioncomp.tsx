@@ -29,7 +29,7 @@ import { FcCollect } from "react-icons/fc";
 import { FaUniversity } from "react-icons/fa";
 import { Button } from "../button/Button";
 import { CreateService, ServiceRequest } from "../../AdminPanel/adminservice";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdraw,BusinesSev}) => {
   const [showAddServe, setshowAddServe] = useState<boolean>(false);
   const [showCapital, setshowCapital] = useState<boolean>(false)
@@ -208,6 +208,7 @@ const STATIC_QUICK_SERVICES = [
 export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => {
   const [selectedServiceId, setSelectedServiceId] = useState<string | number | null>(null);
   const [showAllServices, setShowAllServices] = useState(false);
+
   const [servAmount, setservAmount] = useState('')
 
   const servicesToRender =
@@ -220,7 +221,7 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
   const hasMoreServices = (BusinesSev?.length ?? 0) > 3;
  
   const handleSelectService = (serviceId?: string | number) => {
-    if (!serviceId) return;
+    if (!serviceId)  return;
     setSelectedServiceId((prev) => (prev === serviceId ? null : serviceId));
   }; 
   const handleSubmitRequest = async()=>{
@@ -229,14 +230,20 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
       payment_Amount:Number(servAmount)
     } 
     console.log(serviceRecordpalyoad)
+    let serviceSeparation = false
+      serviceSeparation = serviceRecordpalyoad.service_id > 0  ?true :false
+    console.log(serviceSeparation)
    try{
-    const response = await  ServiceRequest(serviceRecordpalyoad)
-    if(!response.data.success){
-      alert(response.data.message)
-      return
+    if(serviceSeparation){
+      const response = await  ServiceRequest(serviceRecordpalyoad)
+      if(!response.data.success){
+        alert(response.data.message)
+        return
+      }
+      toast.success(response.data.message)
     }
     
-      
+
    }catch(err){
     console.error(err)
    }
@@ -244,6 +251,7 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
   
   return (
     <div className={styles.formContainer} style={{width:'100%'}}>
+      <ToastContainer/>
       <div className={styles.formContainerHead}>
         <span>Quick Action</span>
         <span style={{fontSize:'14px',color:'grey'}}>Select service to make payment</span>

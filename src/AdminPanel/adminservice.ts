@@ -124,6 +124,6 @@ export const BusinesServiceinfo = async()=>{
     }
 }
 export const ServiceRequest = async(data:any) => {
-    const response = await api.post('managemen/servieRequest', data)
+    const response = await api.post('management/servieRequest', data)
     return response
 }
