@@ -26,7 +26,6 @@ import {
 } from "react-icons/fa";
 import { FaBoltLightning } from "react-icons/fa6";
 import { FcCollect } from "react-icons/fc";
-import { FaUniversity } from "react-icons/fa";
 import { Button } from "../button/Button";
 import { CreateService, ServiceRequest } from "../../AdminPanel/adminservice";
 import { toast, ToastContainer } from "react-toastify";
@@ -104,6 +103,10 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
                 <TransactionBar />
                 <TransactionBar />
               </div>
+            </div>
+            <div className={styles.moneyAllocation}>
+              <Button buttonName="Money Transfer"/>
+              <Button buttonName="Capital Addition"/>
             </div>
           </div>
           <div className={styles.transactionAssign}>
@@ -218,8 +221,6 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
       }
       toast.success(response.data.message)
     }
-    
-
    }catch(err){
     console.error(err)
    }
@@ -246,7 +247,7 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
                 <div className={styles.iconContainer}>
                   {Icon ? <Icon color="white" size={40} /> : <span>No icon</span>}
                 </div>
-                <span style={{fontSize:'14px',color:'black'}}>{item.service_name}</span>
+                <span >{item.service_name}</span>
               </div>
             );
           })
@@ -259,7 +260,7 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
             <div className={styles.iconContainer}>
               <FcCollect color="white" size={40} />
             </div>
-            <span style={{fontSize:'14px',color:'black'}}>
+            <span style={{fontSize:'14px',color:'white'}}>
               {showAllServices ? "Show less" : `+${(BusinesSev?.length ?? 0) - 3} more`}
             </span>
           </div>
