@@ -211,6 +211,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
   const [servname, setservname] = useState<string | null>("");
   const [servAmount, setservAmount] = useState("");
   const [bank_option, setbank_option] = useState("");
+  const [ withdrawFrom, setwithdrawFrom] = useState('')
 
   const servicesToRender =
     BusinesSev && BusinesSev.length > 0
@@ -238,7 +239,6 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
     console.log(serviceRecordpalyoad);
     let serviceSeparation = false;
     serviceSeparation = serviceRecordpalyoad.service_id > 0 ? true : false;
-    console.log(serviceSeparation);
     try {
       if (serviceSeparation) {
         const response = await ServiceRequest(serviceRecordpalyoad);
@@ -312,7 +312,54 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
         style={{ width: "100%", height: "2px", backgroundColor: "grey" }}
       ></div>
       {servname === "withdraw" ? (
-        <div className={styles.formMainContainer}></div>
+        <div className={styles.formMainContainer}>
+              <label
+            htmlFor="amount"
+            style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+          >
+            Withdraw Amount
+          </label>
+          <div className={styles.inputfieldContainer}>
+            <div className={styles.inputfield}>
+              <input
+                type="text"
+                placeholder="Enter Amount"
+                name="servAmount"
+                id="amount"
+                onChange={(e) => setservAmount(e.target.value)}
+              />
+            </div>
+          </div>
+          <label
+            htmlFor="option"
+            style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+          >
+            Withdraw From
+          </label>
+          <div className={styles.inputfieldContainer}>
+            <div className={styles.inputfield} style={{height:'70px'}}>
+              <select
+                name="bank_option"
+                id="option"
+                onChange={(e) => setwithdrawFrom(e.target.value)}
+              >
+                <option value="">select the option</option>
+                <option value="Bank">withdraw From Bank</option>
+                <option value="OnHand">withdraw From Cash</option>
+              </select>
+            </div>
+          </div>
+          <div className={styles.inputfieldContainer}></div>
+          <span className={styles.precaution}>
+            <FaExclamationCircle color="black " />  make sure the data is correct before  confirm 
+          </span>
+          <div className={styles.buttonCOntainer}>
+            <Button
+              buttonName="Confirm Withdraw"
+              Onclick={handleSubmitRequest}
+            />
+          </div>
+        </div>
       ) : servname === "Bank" ? (
         <div className={styles.formMainContainer}>
           <label
