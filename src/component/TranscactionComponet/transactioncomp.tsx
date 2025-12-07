@@ -4,7 +4,12 @@ import { MdAdd } from "react-icons/md";
 import { FaEye } from "react-icons/fa6";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Services } from "./icon";
-import type{ ServiceRequestInterface,  ServiceCategory,  ServiceIconchoose, TransactionInterface } from "../../type.interface";
+import type {
+  ServiceRequestInterface,
+  ServiceCategory,
+  ServiceIconchoose,
+  TransactionInterface,
+} from "../../type.interface";
 import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
 import { FaBalanceScale } from "react-icons/fa";
@@ -12,7 +17,6 @@ import { IoMdClose } from "react-icons/io";
 import * as FaIcons from "react-icons/fa";
 import { GiCapitol } from "react-icons/gi";
 import { GrAtm } from "react-icons/gr";
-
 
 import {
   FaCoins,
@@ -29,19 +33,23 @@ import { FcCollect } from "react-icons/fc";
 import { Button } from "../button/Button";
 import { CreateService, ServiceRequest } from "../../AdminPanel/adminservice";
 import { toast, ToastContainer } from "react-toastify";
-export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdraw,BusinesSev}) => {
+export const TransactionComp: React.FC<TransactionInterface> = ({
+  capital,
+  withdraw,
+  BusinesSev,
+}) => {
   const [showAddServe, setshowAddServe] = useState<boolean>(false);
-  const [showCapital, setshowCapital] = useState<boolean>(false)
+  const [showCapital, setshowCapital] = useState<boolean>(false);
   const [iconlist, seticonlist] = useState<ServiceCategory[]>([]);
 
-  const serviceNumber = BusinesSev ? BusinesSev.length :0 
+  const serviceNumber = BusinesSev ? BusinesSev.length : 0;
   useEffect(() => {
     const handleIconlist = () => {
       seticonlist(Services);
     };
     handleIconlist();
   }, []);
-  console.log(BusinesSev)
+  console.log(BusinesSev);
   return (
     <div className={styles.transctionmaincontainer}>
       <div className={styles.transcationtopbar}>
@@ -60,7 +68,14 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
         <div className={styles.transcionamountcontainer}>
           <div className={styles.transactionRecord}>
             <div className={styles.transactionsalaryContainer}>
-              <div style={{ display: "flex", alignItems: "center", cursor:"pointer"}} onClick={()=> setshowCapital(true)}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: "pointer",
+                }}
+                onClick={() => setshowCapital(true)}
+              >
                 <AnimatedCard
                   icon={GiCapitol}
                   details={"Business Capital"}
@@ -70,7 +85,7 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
 
               <div style={{ display: "flex", alignItems: "center" }}>
                 <AnimatedCard
-                  icon={ GrAtm }
+                  icon={GrAtm}
                   details={"withdraw money"}
                   money={withdraw}
                 />
@@ -106,8 +121,8 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
               </div>
             </div>
             <div className={styles.moneyAllocation}>
-              <Button buttonName="Money Transfer"/>
-              <Button buttonName="Capital Addition"/>
+              <Button buttonName="Money Transfer" />
+              <Button buttonName="Capital Addition" />
             </div>
           </div>
           <div className={styles.transactionAssign}>
@@ -171,25 +186,31 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
         </div>
         {showAddServe && (
           <div className={styles.popupCompocontainer}>
-            <ServiceFormregister Icon={iconlist} onClose={() => setshowAddServe(false)} />
+            <ServiceFormregister
+              Icon={iconlist}
+              onClose={() => setshowAddServe(false)}
+            />
           </div>
         )}
-        {
-          showCapital && (
-               <div className={styles.popupCompocontainer}>
-                <BusinessCapital onClose={() => setshowCapital(false)}/>
-               </div>
-          )
-        }
+        {showCapital && (
+          <div className={styles.popupCompocontainer}>
+            <BusinessCapital onClose={() => setshowCapital(false)} />
+          </div>
+        )}
       </div>
     </div>
   );
 };
-export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => {
-  const [selectedServiceId, setSelectedServiceId] = useState<string | number | null>(null);
+export const TransactionForm: React.FC<TransactionInterface> = ({
+  BusinesSev,
+}) => {
+  const [selectedServiceId, setSelectedServiceId] = useState<
+    string | number | null
+  >(null);
   const [showAllServices, setShowAllServices] = useState(false);
-  const [servname,setservname] = useState('')
-  const [servAmount, setservAmount] = useState('')
+  const [servname, setservname] = useState<string | null>("");
+  const [servAmount, setservAmount] = useState("");
+  const [bank_option, setbank_option] = useState("");
 
   const servicesToRender =
     BusinesSev && BusinesSev.length > 0
@@ -199,60 +220,78 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
       : [];
 
   const hasMoreServices = (BusinesSev?.length ?? 0) > 3;
- 
-  const handleSelectService = (serviceId?: string | number) => {
-    if (!serviceId)  return;
+
+  const handleSelectService = (
+    serviceId?: string | number,
+    servicename?: string
+  ) => {
+    setservname(servicename ?? "");
+    if (!serviceId) return;
     setSelectedServiceId((prev) => (prev === serviceId ? null : serviceId));
-  }; 
-  const handleSubmitRequest = async()=>{
-    const serviceRecordpalyoad:ServiceRequestInterface ={
-      service_id:Number(selectedServiceId),
-      payment_Amount:Number(servAmount)
-    } 
-    console.log(serviceRecordpalyoad)
-    let serviceSeparation = false
-      serviceSeparation = serviceRecordpalyoad.service_id > 0  ?true :false
-    console.log(serviceSeparation)
-   try{
-    if(serviceSeparation){
-      const response = await  ServiceRequest(serviceRecordpalyoad)
-      if(!response.data.success){
-        alert(response.data.message)
-        return
+  };
+  console.log(servname);
+  const handleSubmitRequest = async () => {
+    const serviceRecordpalyoad: ServiceRequestInterface = {
+      service_id: Number(selectedServiceId),
+      payment_Amount: Number(servAmount),
+    };
+    console.log(serviceRecordpalyoad);
+    let serviceSeparation = false;
+    serviceSeparation = serviceRecordpalyoad.service_id > 0 ? true : false;
+    console.log(serviceSeparation);
+    try {
+      if (serviceSeparation) {
+        const response = await ServiceRequest(serviceRecordpalyoad);
+        if (!response.data.success) {
+          alert(response.data.message);
+          return;
+        }
+        toast.success(response.data.message);
       }
-      toast.success(response.data.message)
+    } catch (err) {
+      console.error(err);
     }
-   }catch(err){
-    console.error(err)
-   }
-  }
-  
+  };
+
   return (
-    <div className={styles.formContainer} style={{width:'100%'}}>
-      <ToastContainer/>
+    <div className={styles.formContainer} style={{ width: "100%" }}>
+      <ToastContainer />
       <div className={styles.formContainerHead}>
         <span>Quick Action</span>
-        <span style={{fontSize:'14px',color:'grey'}}>Select service to make payment</span>
+        <span style={{ fontSize: "14px", color: "grey" }}>
+          Select service to make payment
+        </span>
       </div>
       <div className={styles.transactionFormserviceContainer}>
-        {servicesToRender.length > 0 ? (
-          servicesToRender.map((item) => {
-            const Icon = FaIcons[item.icon_name as keyof typeof FaIcons] as React.ComponentType<{ color?: string; size?: number }>;
-            const isActive = selectedServiceId === (item.id ?? item.service_name ?? "");
-            return (
-              <div
-                key={item.id ?? item.service_name}
-                className={`${styles.serviceTile} ${isActive ? styles.serviceTileActive : ""}`}
-                onClick={() => handleSelectService(item.id ?? item.service_name)}
-              >
-                <div className={styles.iconContainer}>
-                  {Icon ? <Icon color="white" size={40} /> : <span>No icon</span>}
+        {servicesToRender.length > 0
+          ? servicesToRender.map((item) => {
+              const Icon = FaIcons[
+                item.icon_name as keyof typeof FaIcons
+              ] as React.ComponentType<{ color?: string; size?: number }>;
+              const isActive =
+                selectedServiceId === (item.id ?? item.service_name ?? "");
+              return (
+                <div
+                  key={item.id ?? item.service_name}
+                  className={`${styles.serviceTile} ${
+                    isActive ? styles.serviceTileActive : ""
+                  }`}
+                  onClick={() =>
+                    handleSelectService(item.id, item.service_name)
+                  }
+                >
+                  <div className={styles.iconContainer}>
+                    {Icon ? (
+                      <Icon color="white" size={40} />
+                    ) : (
+                      <span>No icon</span>
+                    )}
+                  </div>
+                  <span>{item.service_name}</span>
                 </div>
-                <span >{item.service_name}</span>
-              </div>
-            );
-          })
-        ) : null}
+              );
+            })
+          : null}
         {hasMoreServices && (
           <div
             className={styles.serviceTile}
@@ -261,8 +300,10 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
             <div className={styles.iconContainer}>
               <FcCollect color="white" size={40} />
             </div>
-            <span style={{fontSize:'14px',color:'white'}}>
-              {showAllServices ? "Show less" : `+${(BusinesSev?.length ?? 0) - 3} more`}
+            <span style={{ fontSize: "14px", color: "white" }}>
+              {showAllServices
+                ? "Show less"
+                : `+${(BusinesSev?.length ?? 0) - 3} more`}
             </span>
           </div>
         )}
@@ -270,42 +311,103 @@ export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => 
       <div
         style={{ width: "100%", height: "2px", backgroundColor: "grey" }}
       ></div>
-      <div className={styles.formMainContainer}>
-        <label
-          htmlFor=""
-          style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
-        >
-          SpendAmount
-        </label>
-        <div className={styles.inputfieldContainer}>
-          <div className={styles.inputfield}>
-            <div>
-              <FaWallet size={30} color="gold" />
-            </div>
+      {servname === "withdraw" ? (
+        <div className={styles.formMainContainer}></div>
+      ) : servname === "Bank" ? (
+        <div className={styles.formMainContainer}>
+          <label
+            htmlFor="amount"
+            style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+          >
+            Amount
+          </label>
+          <div className={styles.inputfieldContainer}>
             <div className={styles.inputfield}>
-              <input type="text" value={"200,000"} />
+              <input
+                type="text"
+                placeholder="Enter Amount"
+                name="servAmount"
+                id="amount"
+                onChange={(e) => setservAmount(e.target.value)}
+              />
             </div>
           </div>
-        </div>
-        <label
-          htmlFor=""
-          style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
-        >
-          Amount for Service
-        </label>
-        <div className={styles.inputfieldContainer}>
-          <div className={styles.inputfield}>
-            <input type="text" placeholder="Enter Amount" name="servAmount" onChange={(e)=> setservAmount(e.target.value)}/>
+          <label
+            htmlFor="option"
+            style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+          >
+            Loan Option
+          </label>
+          <div className={styles.inputfieldContainer}>
+            <div className={styles.inputfield} style={{height:'70px'}}>
+              <select
+                name="bank_option"
+                id="option"
+                onChange={(e) => setbank_option(e.target.value)}
+              >
+                <option value="">select the option</option>
+                <option value="Return">Return Loan</option>
+                <option value="Take">Take Loan</option>
+              </select>
+            </div>
+          </div>
+          <div className={styles.inputfieldContainer}></div>
+          <span className={styles.precaution}>
+            <FaExclamationCircle color="black " />  make sure the data is correct before  confirm 
+          </span>
+          <div className={styles.buttonCOntainer}>
+            <Button
+              buttonName="Confirm Loan  Update"
+              Onclick={handleSubmitRequest}
+            />
           </div>
         </div>
-        <span className={styles.precaution}>
-          <FaExclamationCircle color="black " /> Make sure the you have Enough
-          On use money to make request
-        </span>
-        <div className={styles.buttonCOntainer}>
-          <Button buttonName="Confirm payment for your service." Onclick={handleSubmitRequest} />
+      ) : (
+        <div className={styles.formMainContainer}>
+          <label
+            htmlFor=""
+            style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+          >
+            SpendAmount
+          </label>
+          <div className={styles.inputfieldContainer}>
+            <div className={styles.inputfield}>
+              <div>
+                <FaWallet size={30} color="gold" />
+              </div>
+              <div className={styles.inputfield}>
+                <input type="text" value={"200,000"} />
+              </div>
+            </div>
+          </div>
+          <label
+            htmlFor=""
+            style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+          >
+            Amount for Service
+          </label>
+          <div className={styles.inputfieldContainer}>
+            <div className={styles.inputfield}>
+              <input
+                type="text"
+                placeholder="Enter Amount"
+                name="servAmount"
+                onChange={(e) => setservAmount(e.target.value)}
+              />
+            </div>
+          </div>
+          <span className={styles.precaution}>
+            <FaExclamationCircle color="black " /> Make sure the you have Enough
+            On use money to make request
+          </span>
+          <div className={styles.buttonCOntainer}>
+            <Button
+              buttonName="Confirm payment for your service."
+              Onclick={handleSubmitRequest}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
@@ -328,7 +430,9 @@ export const TransactionBar = () => {
     </div>
   );
 };
-export const BusinessCapital: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
+export const BusinessCapital: React.FC<{ onClose?: () => void }> = ({
+  onClose,
+}) => {
   const [formData, setFormData] = useState({
     amount: "",
     serviceAmount: "",
@@ -364,7 +468,7 @@ export const BusinessCapital: React.FC<{ onClose?: () => void }> = ({ onClose })
   };
 
   return (
-      <div className={styles.formContainer}>
+    <div className={styles.formContainer}>
       <div className={styles.BusinessCapital_close}>
         <button type="button" className={styles.iconButton} onClick={onClose}>
           <IoMdClose size={22} />
@@ -382,7 +486,9 @@ export const BusinessCapital: React.FC<{ onClose?: () => void }> = ({ onClose })
         <div className={styles.capitalSummaryCard}>
           <span>Total Capital</span>
           <strong>TZS 15,450,000</strong>
-          <small className={styles.capitalSummaryBadge}>+ 4.5% this month</small>
+          <small className={styles.capitalSummaryBadge}>
+            + 4.5% this month
+          </small>
         </div>
         <div className={styles.capitalSummaryCard}>
           <span>Allocated to services</span>
@@ -522,12 +628,14 @@ export const BusinessCapital: React.FC<{ onClose?: () => void }> = ({ onClose })
           </button>
         </div>
       </form>
-      </div>
+    </div>
   );
 };
-export const ServiceFormregister: React.FC<ServiceIconchoose & { onClose?: () => void }> = ({ Icon, onClose }) => {
+export const ServiceFormregister: React.FC<
+  ServiceIconchoose & { onClose?: () => void }
+> = ({ Icon, onClose }) => {
   const [name, setName] = useState("");
-  const [icon_name, seticon_name] = useState('')
+  const [icon_name, seticon_name] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [activeIcon, setActiveIcon] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -535,7 +643,7 @@ export const ServiceFormregister: React.FC<ServiceIconchoose & { onClose?: () =>
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) {
-      toast.error('please make sure fill service name');
+      toast.error("please make sure fill service name");
       return;
     }
     setSubmitted(true);
@@ -543,28 +651,30 @@ export const ServiceFormregister: React.FC<ServiceIconchoose & { onClose?: () =>
 
   const handleCreateservice = async () => {
     if (!name.trim()) {
-      toast.error('please make sure fill service name');
+      toast.error("please make sure fill service name");
       return;
-    }else if(name.length < 3){
-      toast.error('please make sure name of service have atleast 5 character ' )
-    }else if(name.length > 11){
-      toast.error('please make sure the name of service have atmost 30 character')
+    } else if (name.length < 3) {
+      toast.error("please make sure name of service have atleast 5 character ");
+    } else if (name.length > 11) {
+      toast.error(
+        "please make sure the name of service have atmost 30 character"
+      );
     }
     if (!icon_name) {
-      toast.error('please make sure choose icon of service');
+      toast.error("please make sure choose icon of service");
       return;
     }
 
     const finalPayload: any = {
       icon_name: icon_name,
-      service_name: name.trim()
+      service_name: name.trim(),
     };
-    console.log(finalPayload)
+    console.log(finalPayload);
     try {
       setIsLoading(true);
       const response = await CreateService(finalPayload);
       if (response?.data?.success) {
-        toast.success(response.data.message || 'Service created successfully!');
+        toast.success(response.data.message || "Service created successfully!");
         if (onClose) {
           onClose();
         }
@@ -573,21 +683,21 @@ export const ServiceFormregister: React.FC<ServiceIconchoose & { onClose?: () =>
         setSubmitted(false);
         setActiveIcon(null);
       } else {
-        toast.error(response?.data?.message || 'Failed to create service');
+        toast.error(response?.data?.message || "Failed to create service");
       }
     } catch (err: any) {
-      toast.error(err?.response?.data?.message || 'Something went wrong');
+      toast.error(err?.response?.data?.message || "Something went wrong");
       console.error(err);
     } finally {
       setIsLoading(false);
     }
   };
-  
+
   const handleIconClick = (iconKey: string, icon_name_value: string) => {
     setActiveIcon(activeIcon === iconKey ? null : iconKey);
-    seticon_name(activeIcon === iconKey ? '' : icon_name_value);
+    seticon_name(activeIcon === iconKey ? "" : icon_name_value);
   };
-  
+
   return (
     <div className={styles.container}>
       {onClose && (
@@ -623,13 +733,15 @@ export const ServiceFormregister: React.FC<ServiceIconchoose & { onClose?: () =>
               <div key={service.category} className={styles.serviceCard}>
                 <h3 className={styles.serviceTitle}>{service.category}</h3>
                 <div className={styles.iconGroup}>
-                  {service.icons.map(({ name, icon, color , icon_name}) => {
+                  {service.icons.map(({ name, icon, color, icon_name }) => {
                     const iconKey = `${service.category}-${name}`;
                     const isActive = activeIcon === iconKey;
                     return (
                       <div
                         key={iconKey}
-                        className={`${styles.icon} ${isActive ? styles.iconActive : ""}`}
+                        className={`${styles.icon} ${
+                          isActive ? styles.iconActive : ""
+                        }`}
                         onClick={() => handleIconClick(iconKey, icon_name)}
                       >
                         <span className={color}>{icon}</span>
@@ -641,12 +753,16 @@ export const ServiceFormregister: React.FC<ServiceIconchoose & { onClose?: () =>
               </div>
             ))}
           </div>
-          <Button 
-            buttonName={isLoading ? "Creating..." : "Create Service"} 
-            Onclick={isLoading || !icon_name ? undefined : (e) => {
-              e.preventDefault();
-              handleCreateservice();
-            }}
+          <Button
+            buttonName={isLoading ? "Creating..." : "Create Service"}
+            Onclick={
+              isLoading || !icon_name
+                ? undefined
+                : (e) => {
+                    e.preventDefault();
+                    handleCreateservice();
+                  }
+            }
           />
         </div>
       )}
