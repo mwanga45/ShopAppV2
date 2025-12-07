@@ -12,7 +12,7 @@ interface Stockupdate {
    
 
 }
-export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,UpdateAt,last_add_stock,last_stock,fullname, product_category})=> {
+export const Stocksheet:React.FC<Stockprops & { onUpdateSuccess?: () => void }> = ({product_id,product_name,UpdateAt,last_add_stock,last_stock,fullname, product_category, onUpdateSuccess})=> {
  const [StockupdateData, seStockupdateData] = useState<Partial<Stockupdate>>({})
  const [formValues, setFormValues] = useState<any>({})
  const [isSubmitting, setIsSubmitting] = useState(false)
@@ -56,6 +56,10 @@ export const Stocksheet:React.FC<Stockprops> = ({product_id,product_name,UpdateA
       alert((response as any)?.data?.message || 'Failed to update stock')
     } else {
       alert(response.data.message)
+      // Trigger refresh callback if provided
+      if (onUpdateSuccess) {
+        onUpdateSuccess();
+      }
     }
   }catch(err){
    alert('Failed to update stock')

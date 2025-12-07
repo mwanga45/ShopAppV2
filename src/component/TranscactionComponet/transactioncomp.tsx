@@ -235,6 +235,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
     const serviceRecordpalyoad: ServiceRequestInterface = {
       service_id: Number(selectedServiceId),
       payment_Amount: Number(servAmount),
+      withdrawFrom:withdrawFrom
     };
     console.log(serviceRecordpalyoad);
     let serviceSeparation = false;

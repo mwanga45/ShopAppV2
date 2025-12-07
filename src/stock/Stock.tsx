@@ -33,21 +33,37 @@ export default function Stock() {
     e.preventDefault();
     setShowupdate(!Showupdate);
   };
-  useEffect(() => {
-    const handlecardData = async () => {
-      try {
-        const response = await StockCardResult();
-        if (!response.data.success) {
-          alert(response.data.message);
-        }
-        setCarddata(response.data.data);
-      } catch (err) {
-        console.error("Something went");
-        alert("Something went wrong");
+
+  // Fetch stock data function
+  const fetchStockData = async () => {
+    try {
+      const response = await StockCardResult();
+      if (!response.data.success) {
+        console.error(response.data.message);
+        return;
       }
-    };
-    handlecardData();
-  }, []);
+      setCarddata(response.data.data);
+    } catch (err) {
+      console.error("Failed to fetch stock data:", err);
+    }
+  };
+
+  // Initial fetch and auto-refresh setup
+  useEffect(() => {
+    // Fetch immediately on mount
+    fetchStockData();
+
+    // Set up auto-refresh every 5 seconds
+    const refreshInterval = setInterval(() => {
+      // Only refresh if update form is not open
+      if (!Showupdate) {
+        fetchStockData();
+      }
+    }, 5000); // Refresh every 5 seconds
+
+    // Cleanup interval on unmount
+    return () => clearInterval(refreshInterval);
+  }, [Showupdate]); // Re-run when Showupdate changes
 
   const filtercardData: Stockprops[] = Carddata.filter((items) => {
     const matchesName = items.product_name
@@ -124,7 +140,13 @@ export default function Stock() {
               </div>
             </div>
             <div className="content-container-component">
-              <Stocksheet {...selectedStock} />
+              <Stocksheet 
+                {...selectedStock} 
+                onUpdateSuccess={() => {
+                  fetchStockData();
+                  setShowupdate(false);
+                }}
+              />
             </div>
           </div>
         )}

@@ -419,4 +419,11 @@ export interface BusinesServiceInfo{
 export interface ServiceRequestInterface{
   service_id:number,
   payment_Amount:number
+  withdrawFrom?:string
+}
+export interface IServiceRecord {
+  createdAt?: string;      
+  price?: string;        
+  serviceName?: string;    
+  icon_name?: string;      
 }
