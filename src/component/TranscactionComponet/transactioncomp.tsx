@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RiCloseFill, RiWallet3Line } from "react-icons/ri";
+import { RiCloseFill } from "react-icons/ri";
 import { MdAdd } from "react-icons/md";
 import { FaEye } from "react-icons/fa6";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -41,6 +41,7 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
     };
     handleIconlist();
   }, []);
+  console.log(BusinesSev)
   return (
     <div className={styles.transctionmaincontainer}>
       <div className={styles.transcationtopbar}>
@@ -187,7 +188,7 @@ export const TransactionComp: React.FC<TransactionInterface> = ({capital ,withdr
 export const TransactionForm:React.FC<TransactionInterface> = ({BusinesSev}) => {
   const [selectedServiceId, setSelectedServiceId] = useState<string | number | null>(null);
   const [showAllServices, setShowAllServices] = useState(false);
-
+  const [servname,setservname] = useState('')
   const [servAmount, setservAmount] = useState('')
 
   const servicesToRender =
