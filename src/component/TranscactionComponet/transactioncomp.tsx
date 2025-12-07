@@ -37,6 +37,8 @@ export const TransactionComp: React.FC<TransactionInterface> = ({
   capital,
   withdraw,
   BusinesSev,
+  thisWeekservRecord,
+  TodayservRecord
 }) => {
   const [showAddServe, setshowAddServe] = useState<boolean>(false);
   const [showCapital, setshowCapital] = useState<boolean>(false);
@@ -49,6 +51,8 @@ export const TransactionComp: React.FC<TransactionInterface> = ({
     };
     handleIconlist();
   }, []);
+  const ServiceForToday = TodayservRecord ? TodayservRecord.length :0
+  const ServiceForWeek =  thisWeekservRecord ? thisWeekservRecord.length :0
   console.log(BusinesSev);
   return (
     <div className={styles.transctionmaincontainer}>
@@ -95,16 +99,13 @@ export const TransactionComp: React.FC<TransactionInterface> = ({
               <span>Transaction History</span>
             </div>
             <span className={styles.transactionHistoryHead}>
-              Today Record(5)
+              Today Record({ServiceForToday})
             </span>
             <div className={styles.transactionInfoHistory}>
               <div className={styles.TransactionBarContainer}>
+                {
                 <TransactionBar />
-                <TransactionBar />
-                <TransactionBar />
-                <TransactionBar />
-                <TransactionBar />
-                <TransactionBar />
+                }
               </div>
             </div>
             <span className={styles.transactionHistoryHead}>
@@ -459,7 +460,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
     </div>
   );
 };
-export const TransactionBar = () => {
+export const TransactionBar:React.FC<TransactionInterface> = ({}) => {
   return (
     <div className={styles.barRecord}>
       <div>

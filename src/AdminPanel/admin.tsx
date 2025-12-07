@@ -15,7 +15,7 @@ import { BusinessWorthData, GetuserList, BusinesServiceinfo } from "./adminservi
 import { AdminReg } from "../component/admin-reg/admin-reg";
 import { TransactionComp } from "../component/TranscactionComponet/transactioncomp";
 import { ShowinfoCard } from "../component/card-report/shownInfo";
-import type{ BusinesServiceInfo } from "../type.interface";
+import type{ BusinesServiceInfo, IServiceRecord } from "../type.interface";
 
 interface AccountUserRespose {
   id?: number;
@@ -44,6 +44,8 @@ export const AdminPanel = () => {
   const [CustomerDebt, setCustomerDebt] = useState<number | null>();
   const [Businessnetworth, setBusinessnetworth] = useState<number | null>();
   const [transactionopen, settransactionopen] = useState<boolean>(false);
+  const [thisWeekservRecord, setthisWeekservRecord] = useState< IServiceRecord[] | null>([])
+  const [TodayservRecord, setTodayservRecord] = useState<IServiceRecord[] | null>([])
   const handleRegUser = () => {
     setregister(!register);
   };
@@ -102,6 +104,8 @@ export const AdminPanel = () => {
       setcapital(response.data.data.capital_amount)
       setBankdebt(response.data.data.Bank_Debt)
       setwithdraw(response.data.data.Withdraw_money.Withdraw)
+      setTodayservRecord(response.data.data.TodayservRecord)
+      setthisWeekservRecord(response.data.data.ThisweekServRecord)
       return;
     } catch (err) {
       alert(err);
@@ -270,7 +274,7 @@ export const AdminPanel = () => {
       )}
       {transactionopen && (
         <div>
-          <TransactionComp capital={capital} withdraw={Withdraw ?? 0} BusinesSev={ListServ}/>
+          <TransactionComp capital={capital} withdraw={Withdraw ?? 0} BusinesSev={ListServ} thisWeekservRecord={thisWeekservRecord ?? []} TodayservRecord={TodayservRecord ?? []}/>
         </div>
       )}
     </motion.div>

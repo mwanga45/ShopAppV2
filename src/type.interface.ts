@@ -409,7 +409,9 @@ export interface TransactionInterface{
   capital?:number
   withdraw?:number
   BusinesSev?:BusinesServiceInfo[]
-  ServiceCount?:number
+  ServiceCount?:number,
+  thisWeekservRecord?:IServiceRecord[]
+  TodayservRecord?:IServiceRecord[]
 }
 export interface BusinesServiceInfo{
   id?:number
