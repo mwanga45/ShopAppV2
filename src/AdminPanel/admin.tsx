@@ -133,6 +133,15 @@ export const AdminPanel = () => {
       alert(err);
     }
   }, []);
+  useEffect(()=>{
+   handleBusinessWorth()
+   const intervalLoad = setInterval(()=>{
+    if(transactionopen){
+      handleBusinessWorth()
+    }
+   },5000)
+   return ()=> clearInterval(intervalLoad)
+  },[transactionopen])
   return (
     <motion.div
       className="adminpanel-container"

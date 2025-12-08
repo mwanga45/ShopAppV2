@@ -30,6 +30,7 @@ import {
   FaTags,
 } from "react-icons/fa";
 import { FaCircleQuestion } from "react-icons/fa6";
+import { IoMdCloseCircle } from "react-icons/io";
 import { FcCollect } from "react-icons/fc";
 import { Button } from "../button/Button";
 import { CreateService, ServiceRequest } from "../../AdminPanel/adminservice";
@@ -109,21 +110,29 @@ export const TransactionComp: React.FC<TransactionInterface> = ({
                     return(
                       <TransactionBar icon_name={item.icon_name} serviceName={item.serviceName} price={item.price} createdAt={item.createdAt}/>
                     )
-                  }):<span>No Service Data Today</span>
+                  }):
+                  <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"100%", height:"100%", flexDirection:"column"}}>
+                    <span style={{color:"green", fontWeight:"bolder", fontSize:"30px"}}>No Service Data Today</span>
+                    < IoMdCloseCircle size={80} color="red"/>
+                  </div>
                 }
               </div>
             </div>
             <span className={styles.transactionHistoryHead}>
-              Summary of week(5)
+              Summary of week({ServiceForWeek})
             </span>
             <div className={styles.transactionInfoHistory}>
               <div className={styles.TransactionBarContainer}>
-                <TransactionBar />
-                <TransactionBar />
-                <TransactionBar />
-                <TransactionBar />
-                <TransactionBar />
-                <TransactionBar />
+                {
+                  thisWeekservRecord && thisWeekservRecord.length > 0 ? thisWeekservRecord.map((item)=>{
+                    return(
+                          <TransactionBar icon_name={item.icon_name} price={item.price} serviceName={item.serviceName} createdAt={item.createdAt}/>
+                    )
+                  }):  <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"100%", height:"100%", flexDirection:"column"}}>
+                    <span style={{color:"green", fontWeight:"bolder", fontSize:"30px"}}>No Service Data ThisWeek</span>
+                     < IoMdCloseCircle size={80} color="red" />
+                  </div>
+                }
               </div>
             </div>
             <div className={styles.moneyAllocation}>
@@ -466,7 +475,10 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
   );
 };
 export const TransactionBar:React.FC< IServiceRecord> = ({serviceName, icon_name, createdAt, price}) => {
-  const Icon = FaIcons[icon_name as keyof typeof FaCoins] as React.ComponentType<{color?: string; size ?:number}>
+
+      const Icon = FaIcons[
+                icon_name as keyof typeof FaIcons
+              ] as React.ComponentType<{ color?: string; size?: number }>;
        
   return (
     <div className={styles.barRecord}>
