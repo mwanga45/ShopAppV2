@@ -9,6 +9,7 @@ import type {
   ServiceCategory,
   ServiceIconchoose,
   TransactionInterface,
+  IServiceRecord,
 } from "../../type.interface";
 import styles from "./transaction.module.css";
 import AnimatedCard from "../Admincord/animatedcard";
@@ -28,7 +29,7 @@ import {
   FaRegStickyNote,
   FaTags,
 } from "react-icons/fa";
-import { FaBoltLightning } from "react-icons/fa6";
+import { FaCircleQuestion } from "react-icons/fa6";
 import { FcCollect } from "react-icons/fc";
 import { Button } from "../button/Button";
 import { CreateService, ServiceRequest } from "../../AdminPanel/adminservice";
@@ -104,7 +105,11 @@ export const TransactionComp: React.FC<TransactionInterface> = ({
             <div className={styles.transactionInfoHistory}>
               <div className={styles.TransactionBarContainer}>
                 {
-                <TransactionBar />
+                  TodayservRecord  && TodayservRecord.length > 0 ? TodayservRecord.map((item)=> {
+                    return(
+                      <TransactionBar icon_name={item.icon_name} serviceName={item.serviceName} price={item.price} createdAt={item.createdAt}/>
+                    )
+                  }):<span>No Service Data Today</span>
                 }
               </div>
             </div>
@@ -460,18 +465,25 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
     </div>
   );
 };
-export const TransactionBar:React.FC<TransactionInterface> = ({}) => {
+export const TransactionBar:React.FC< IServiceRecord> = ({serviceName, icon_name, createdAt, price}) => {
+  const Icon = FaIcons[icon_name as keyof typeof FaCoins] as React.ComponentType<{color?: string; size ?:number}>
+       
   return (
     <div className={styles.barRecord}>
       <div>
-        <FaBoltLightning size={20} />
+        {Icon ?(
+          <Icon size={20} />
+        ):(
+          <FaCircleQuestion size={20}/>
+        )
+        }
       </div>
       <div>
-        <span>Electricity</span>
+        <span>{serviceName}</span>
       </div>
       <div>
-        <span>Amount 5,000.Tsh</span>
-        <span> Date 5 Nov 2025</span>
+        <span>Amount {Number(price).toLocaleString()}.Tsh</span>
+        <span> Date { createdAt ? new Date(createdAt).toLocaleDateString('en-US'): 'none'}</span>
       </div>
       <div>
         <span>Successfuly</span>
