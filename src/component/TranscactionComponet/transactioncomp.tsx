@@ -40,7 +40,7 @@ export const TransactionComp: React.FC<TransactionInterface> = ({
   withdraw,
   BusinesSev,
   thisWeekservRecord,
-  TodayservRecord
+  TodayservRecord,
 }) => {
   const [showAddServe, setshowAddServe] = useState<boolean>(false);
   const [showCapital, setshowCapital] = useState<boolean>(false);
@@ -53,8 +53,8 @@ export const TransactionComp: React.FC<TransactionInterface> = ({
     };
     handleIconlist();
   }, []);
-  const ServiceForToday = TodayservRecord ? TodayservRecord.length :0
-  const ServiceForWeek =  thisWeekservRecord ? thisWeekservRecord.length :0
+  const ServiceForToday = TodayservRecord ? TodayservRecord.length : 0;
+  const ServiceForWeek = thisWeekservRecord ? thisWeekservRecord.length : 0;
   console.log(BusinesSev);
   return (
     <div className={styles.transctionmaincontainer}>
@@ -105,17 +105,40 @@ export const TransactionComp: React.FC<TransactionInterface> = ({
             </span>
             <div className={styles.transactionInfoHistory}>
               <div className={styles.TransactionBarContainer}>
-                {
-                  TodayservRecord  && TodayservRecord.length > 0 ? TodayservRecord.map((item)=> {
-                    return(
-                      <TransactionBar icon_name={item.icon_name} serviceName={item.serviceName} price={item.price} createdAt={item.createdAt}/>
-                    )
-                  }):
-                  <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"100%", height:"100%", flexDirection:"column"}}>
-                    <span style={{color:"green", fontWeight:"bolder", fontSize:"30px"}}>No Service Data Today</span>
-                    < IoMdCloseCircle size={80} color="red"/>
+                {TodayservRecord && TodayservRecord.length > 0 ? (
+                  TodayservRecord.map((item) => {
+                    return (
+                      <TransactionBar
+                        icon_name={item.icon_name}
+                        serviceName={item.serviceName}
+                        price={item.price}
+                        createdAt={item.createdAt}
+                      />
+                    );
+                  })
+                ) : (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "100%",
+                      height: "100%",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <span
+                      style={{
+                        color: "green",
+                        fontWeight: "bolder",
+                        fontSize: "30px",
+                      }}
+                    >
+                      No Service Data Today
+                    </span>
+                    <IoMdCloseCircle size={80} color="red" />
                   </div>
-                }
+                )}
               </div>
             </div>
             <span className={styles.transactionHistoryHead}>
@@ -123,16 +146,40 @@ export const TransactionComp: React.FC<TransactionInterface> = ({
             </span>
             <div className={styles.transactionInfoHistory}>
               <div className={styles.TransactionBarContainer}>
-                {
-                  thisWeekservRecord && thisWeekservRecord.length > 0 ? thisWeekservRecord.map((item)=>{
-                    return(
-                          <TransactionBar icon_name={item.icon_name} price={item.price} serviceName={item.serviceName} createdAt={item.createdAt}/>
-                    )
-                  }):  <div style={{display:"flex", justifyContent:"center", alignItems:"center", width:"100%", height:"100%", flexDirection:"column"}}>
-                    <span style={{color:"green", fontWeight:"bolder", fontSize:"30px"}}>No Service Data ThisWeek</span>
-                     < IoMdCloseCircle size={80} color="red" />
+                {thisWeekservRecord && thisWeekservRecord.length > 0 ? (
+                  thisWeekservRecord.map((item) => {
+                    return (
+                      <TransactionBar
+                        icon_name={item.icon_name}
+                        price={item.price}
+                        serviceName={item.serviceName}
+                        createdAt={item.createdAt}
+                      />
+                    );
+                  })
+                ) : (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "100%",
+                      height: "100%",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <span
+                      style={{
+                        color: "green",
+                        fontWeight: "bolder",
+                        fontSize: "30px",
+                      }}
+                    >
+                      No Service Data ThisWeek
+                    </span>
+                    <IoMdCloseCircle size={80} color="red" />
                   </div>
-                }
+                )}
               </div>
             </div>
             <div className={styles.moneyAllocation}>
@@ -153,7 +200,7 @@ export const TransactionComp: React.FC<TransactionInterface> = ({
                     fontWeight: "bold",
                   }}
                 >
-                  Create service & View service
+                  Create service & View service Information
                 </span>
                 <div className={styles.viewAddservece}>
                   <div className={styles.serviceNumber}>
@@ -226,7 +273,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
   const [servname, setservname] = useState<string | null>("");
   const [servAmount, setservAmount] = useState("");
   const [bank_option, setbank_option] = useState("");
-  const [ withdrawFrom, setwithdrawFrom] = useState('')
+  const [withdrawFrom, setwithdrawFrom] = useState("");
 
   const servicesToRender =
     BusinesSev && BusinesSev.length > 0
@@ -250,7 +297,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
     const serviceRecordpalyoad: ServiceRequestInterface = {
       service_id: Number(selectedServiceId),
       payment_Amount: Number(servAmount),
-      withdrawFrom:withdrawFrom
+      withdrawFrom: withdrawFrom,
     };
     console.log(serviceRecordpalyoad);
     let serviceSeparation = false;
@@ -329,7 +376,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
       ></div>
       {servname === "withdraw" ? (
         <div className={styles.formMainContainer}>
-              <label
+          <label
             htmlFor="amount"
             style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
           >
@@ -353,7 +400,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
             Withdraw From
           </label>
           <div className={styles.inputfieldContainer}>
-            <div className={styles.inputfield} style={{height:'70px'}}>
+            <div className={styles.inputfield} style={{ height: "70px" }}>
               <select
                 name="bank_option"
                 id="option"
@@ -367,7 +414,8 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
           </div>
           <div className={styles.inputfieldContainer}></div>
           <span className={styles.precaution}>
-            <FaExclamationCircle color="black " />  make sure the data is correct before  confirm 
+            <FaExclamationCircle color="black " /> make sure the data is correct
+            before confirm
           </span>
           <div className={styles.buttonCOntainer}>
             <Button
@@ -399,10 +447,29 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
             htmlFor="option"
             style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
           >
-            Loan Option
+            Bank Option
           </label>
           <div className={styles.inputfieldContainer}>
-            <div className={styles.inputfield} style={{height:'70px'}}>
+            <div className={styles.inputfield} style={{ height: "70px" }}>
+              <select
+                name="bank_option"
+                id="option"
+                onChange={(e) => setbank_option(e.target.value)}
+              >
+                <option value="">select the option</option>
+                <option value="Return">Return Loan</option>
+                <option value="Take">Take Loan</option>
+              </select>
+            </div>
+          </div>
+          <label
+            htmlFor="option"
+            style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+          >
+            {bank_option === "Return" ? "Take from" : "Deposite To"}
+          </label>
+          <div className={styles.inputfieldContainer}>
+            <div className={styles.inputfield} style={{ height: "70px" }}>
               <select
                 name="bank_option"
                 id="option"
@@ -416,7 +483,8 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
           </div>
           <div className={styles.inputfieldContainer}></div>
           <span className={styles.precaution}>
-            <FaExclamationCircle color="black " />  make sure the data is correct before  confirm 
+            <FaExclamationCircle color="black " /> make sure the data is correct
+            before confirm
           </span>
           <div className={styles.buttonCOntainer}>
             <Button
@@ -474,28 +542,29 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
     </div>
   );
 };
-export const TransactionBar:React.FC< IServiceRecord> = ({serviceName, icon_name, createdAt, price}) => {
+export const TransactionBar: React.FC<IServiceRecord> = ({
+  serviceName,
+  icon_name,
+  createdAt,
+  price,
+}) => {
+  const Icon = FaIcons[
+    icon_name as keyof typeof FaIcons
+  ] as React.ComponentType<{ color?: string; size?: number }>;
 
-      const Icon = FaIcons[
-                icon_name as keyof typeof FaIcons
-              ] as React.ComponentType<{ color?: string; size?: number }>;
-       
   return (
     <div className={styles.barRecord}>
-      <div>
-        {Icon ?(
-          <Icon size={20} />
-        ):(
-          <FaCircleQuestion size={20}/>
-        )
-        }
-      </div>
+      <div>{Icon ? <Icon size={20} /> : <FaCircleQuestion size={20} />}</div>
       <div>
         <span>{serviceName}</span>
       </div>
       <div>
         <span>Amount {Number(price).toLocaleString()}.Tsh</span>
-        <span> Date { createdAt ? new Date(createdAt).toLocaleDateString('en-US'): 'none'}</span>
+        <span>
+          {" "}
+          Date{" "}
+          {createdAt ? new Date(createdAt).toLocaleDateString("en-US") : "none"}
+        </span>
       </div>
       <div>
         <span>Successfuly</span>

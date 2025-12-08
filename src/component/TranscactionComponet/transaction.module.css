@@ -334,12 +334,12 @@ column-gap: 20px;
   width: min(95vw, 750px);
   margin: 0 auto;
   height: fit-content;
-  max-height: 90vh;
+  max-height: 95vh;
   box-shadow: rgba(15, 23, 42, 0.25) 0px 20px 40px -20px,
     rgba(0, 0, 0, 0.09) 0px 8px 30px;
   border-radius: 14px;
   background: linear-gradient(135deg, #ffffff 0%, #f4f8ff 100%);
-  padding: 16px 18px;
+  padding: 16px 15px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
