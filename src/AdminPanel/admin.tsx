@@ -11,11 +11,15 @@ import { ListComp } from "../component/List-comp/Listcomp";
 import { StockRegForm } from "../component/Form-comp/Form";
 import { useEffect, useState } from "react";
 import { OtherAc } from "../component/account/otherAc";
-import { BusinessWorthData, GetuserList, BusinesServiceinfo } from "./adminservice";
+import {
+  BusinessWorthData,
+  GetuserList,
+  BusinesServiceinfo,
+} from "./adminservice";
 import { AdminReg } from "../component/admin-reg/admin-reg";
 import { TransactionComp } from "../component/TranscactionComponet/transactioncomp";
 import { ShowinfoCard } from "../component/card-report/shownInfo";
-import type{ BusinesServiceInfo, IServiceRecord } from "../type.interface";
+import type { BusinesServiceInfo, IServiceRecord } from "../type.interface";
 
 interface AccountUserRespose {
   id?: number;
@@ -33,19 +37,25 @@ export const AdminPanel = () => {
   const [Productlist, setProductlist] = useState<boolean>(false);
   const [showStockreg, setShowStockreg] = useState<boolean>(false);
   const [register, setregister] = useState<boolean>(false);
-  const [rate , setrate] = useState(0)
-  const [rate_status, setrate_status] = useState('')
-  const [capital, setcapital] = useState(0)
-  const [Bankdebt, setBankdebt] = useState(0)
-  const [ListServ, setListServ] = useState<BusinesServiceInfo[]>([])
-  const [Accountdetails, setAccountdetails] = useState<AccountUserRespose[]>([]);
+  const [rate, setrate] = useState(0);
+  const [rate_status, setrate_status] = useState("");
+  const [capital, setcapital] = useState(0);
+  const [Bankdebt, setBankdebt] = useState(0);
+  const [ListServ, setListServ] = useState<BusinesServiceInfo[]>([]);
+  const [Accountdetails, setAccountdetails] = useState<AccountUserRespose[]>(
+    []
+  );
   const [StockWorth, setStockWorth] = useState<number | null>();
-  const [Withdraw, setwithdraw] = useState<number | null>()
+  const [Withdraw, setwithdraw] = useState<number | null>();
   const [CustomerDebt, setCustomerDebt] = useState<number | null>();
   const [Businessnetworth, setBusinessnetworth] = useState<number | null>();
   const [transactionopen, settransactionopen] = useState<boolean>(false);
-  const [thisWeekservRecord, setthisWeekservRecord] = useState< IServiceRecord[] | null>([])
-  const [TodayservRecord, setTodayservRecord] = useState<IServiceRecord[] | null>([])
+  const [thisWeekservRecord, setthisWeekservRecord] = useState<
+    IServiceRecord[] | null
+  >([]);
+  const [TodayservRecord, setTodayservRecord] = useState<
+    IServiceRecord[] | null
+  >([]);
   const handleRegUser = () => {
     setregister(!register);
   };
@@ -81,14 +91,14 @@ export const AdminPanel = () => {
       },
     },
   };
-  const handleServiceList = async() =>{
-    try{
-      const response = await BusinesServiceinfo()
-      setListServ(response?.data.data)
-    }catch(err){
-      console.error(err)
+  const handleServiceList = async () => {
+    try {
+      const response = await BusinesServiceinfo();
+      setListServ(response?.data.data);
+    } catch (err) {
+      console.error(err);
     }
-  }
+  };
   const handleBusinessWorth = async () => {
     try {
       const response = await BusinessWorthData();
@@ -99,13 +109,13 @@ export const AdminPanel = () => {
       setStockWorth(response.data.data.StockWorth);
       setCustomerDebt(response.data.data.CustomerDebt);
       setBusinessnetworth(response.data.data.networth);
-      setrate(response.data.data.Revenue_Rate.data.rate)
-      setrate_status(response.data.data.Revenue_Rate.data.rate_status)
-      setcapital(response.data.data.capital_amount)
-      setBankdebt(response.data.data.Bank_Debt)
-      setwithdraw(response.data.data.Withdraw_money.Withdraw)
-      setTodayservRecord(response.data.data.TodayservRecord)
-      setthisWeekservRecord(response.data.data.ThisweekServRecord)
+      setrate(response.data.data.Revenue_Rate.data.rate);
+      setrate_status(response.data.data.Revenue_Rate.data.rate_status);
+      setcapital(response.data.data.capital_amount);
+      setBankdebt(response.data.data.Bank_Debt);
+      setwithdraw(response.data.data.Withdraw_money.Withdraw);
+      setTodayservRecord(response.data.data.TodayservRecord);
+      setthisWeekservRecord(response.data.data.ThisweekServRecord);
       return;
     } catch (err) {
       alert(err);
@@ -127,21 +137,21 @@ export const AdminPanel = () => {
       };
       handlegetuserAccount();
       handleBusinessWorth();
-      handleServiceList()
+      handleServiceList();
     } catch (err) {
       console.error(err);
       alert(err);
     }
   }, []);
-  useEffect(()=>{
-   handleBusinessWorth()
-   const intervalLoad = setInterval(()=>{
-    if(transactionopen){
-      handleBusinessWorth()
-    }
-   },5000)
-   return ()=> clearInterval(intervalLoad)
-  },[transactionopen])
+  useEffect(() => {
+    handleBusinessWorth();
+    const intervalLoad = setInterval(() => {
+      if (transactionopen) {
+        handleBusinessWorth();
+      }
+    }, 5000);
+    return () => clearInterval(intervalLoad);
+  }, [transactionopen]);
   return (
     <motion.div
       className="adminpanel-container"
@@ -149,18 +159,20 @@ export const AdminPanel = () => {
       initial="hidden"
       animate="visible"
     >
-      <motion.div
-        className="sales-header"
-        variants={itemVariants}
-      >
-        <h1  className="page-title">Admin-Panel</h1>
+      <motion.div className="sales-header" variants={itemVariants}>
+        <h1 className="page-title">Admin-Panel</h1>
         {/* <Accountbar /> */}
       </motion.div>
       <motion.div
         className="busniess-details-container"
         variants={itemVariants}
       >
-        <ShowinfoCard discription="Rate of Capital growth" rate={rate ?? 0}totalAmount={Number(capital).toLocaleString() ?? 0} rate_status={rate_status} />
+        <ShowinfoCard
+          discription="Rate of Capital growth"
+          rate={rate ?? 0}
+          totalAmount={Number(capital).toLocaleString() ?? 0}
+          rate_status={rate_status}
+        />
         <ShowinfoCard />
       </motion.div>
       <motion.div className="admin-action-container" variants={itemVariants}>
@@ -283,7 +295,13 @@ export const AdminPanel = () => {
       )}
       {transactionopen && (
         <div>
-          <TransactionComp capital={capital} withdraw={Withdraw ?? 0} BusinesSev={ListServ} thisWeekservRecord={thisWeekservRecord ?? []} TodayservRecord={TodayservRecord ?? []}/>
+          <TransactionComp
+            capital={capital}
+            withdraw={Withdraw ?? 0}
+            BusinesSev={ListServ}
+            thisWeekservRecord={thisWeekservRecord ?? []}
+            TodayservRecord={TodayservRecord ?? []}
+          />
         </div>
       )}
     </motion.div>
