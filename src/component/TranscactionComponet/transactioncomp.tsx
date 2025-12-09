@@ -312,9 +312,10 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
           return;
         }
         toast.success(response.data.message);
-        setbank_option('')
-        setservAmount('')
-        setservname('')
+        setbank_option("");
+        setservAmount("");
+        setservname("");
+        setwithdrawFrom("");
       }
     } catch (err) {
       console.error(err);
@@ -433,7 +434,12 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
         <div className={styles.formMainContainer}>
           <label
             htmlFor="amount"
-            style={{ color: "black", fontSize: "20px", fontWeight: "bold", marginTop:"20px" }}
+            style={{
+              color: "black",
+              fontSize: "20px",
+              fontWeight: "bold",
+              marginTop: "20px",
+            }}
           >
             Amount
           </label>
@@ -552,7 +558,7 @@ export const TransactionBar: React.FC<IServiceRecord> = ({
   icon_name,
   createdAt,
   price,
-  Servicestatus
+  Servicestatus,
 }) => {
   const Icon = FaIcons[
     icon_name as keyof typeof FaIcons
