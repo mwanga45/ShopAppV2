@@ -275,6 +275,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
   const [servname, setservname] = useState<string | null>("");
   const [servAmount, setservAmount] = useState("");
   const [bank_option, setbank_option] = useState("");
+    const [bank_optionII, setbank_optionII] = useState("");
   const [withdrawFrom, setwithdrawFrom] = useState("");
 
   const servicesToRender =
@@ -294,12 +295,13 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
     if (!serviceId) return;
     setSelectedServiceId((prev) => (prev === serviceId ? null : serviceId));
   };
-  console.log(servname);
   const handleSubmitRequest = async () => {
     const serviceRecordpalyoad: ServiceRequestInterface = {
       service_id: Number(selectedServiceId),
       payment_Amount: Number(servAmount),
       withdrawFrom: withdrawFrom,
+      Bankoption:bank_option,
+      BankoptionII:bank_optionII
     };
     console.log(serviceRecordpalyoad);
     let serviceSeparation = false;
@@ -316,6 +318,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
         setservAmount("");
         setservname("");
         setwithdrawFrom("");
+        setSelectedServiceId('')
       }
     } catch (err) {
       console.error(err);
@@ -469,7 +472,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
               >
                 <option value="">select the option</option>
                 <option value="Return">Return Loan</option>
-                <option value="Take">Take Loan</option>
+                <option value="Take">Received Loan</option>
               </select>
             </div>
           </div>
@@ -484,7 +487,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
               <select
                 name="bank_option"
                 id="option"
-                onChange={(e) => setbank_option(e.target.value)}
+                onChange={(e) => setbank_optionII(e.target.value)}
               >
                 <option value="">select the option</option>
                 <option value="Cash">Cash Money</option>
