@@ -428,7 +428,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
         <div className={styles.formMainContainer}>
           <label
             htmlFor="amount"
-            style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+            style={{ color: "black", fontSize: "20px", fontWeight: "bold", marginTop:"20px" }}
           >
             Amount
           </label>
