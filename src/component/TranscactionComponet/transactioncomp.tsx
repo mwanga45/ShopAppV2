@@ -113,6 +113,7 @@ export const TransactionComp: React.FC<TransactionInterface> = ({
                         serviceName={item.serviceName}
                         price={item.price}
                         createdAt={item.createdAt}
+                        Servicestatus={item.Servicestatus}
                       />
                     );
                   })
@@ -154,6 +155,7 @@ export const TransactionComp: React.FC<TransactionInterface> = ({
                         price={item.price}
                         serviceName={item.serviceName}
                         createdAt={item.createdAt}
+                        Servicestatus={item.Servicestatus}
                       />
                     );
                   })
@@ -310,6 +312,9 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
           return;
         }
         toast.success(response.data.message);
+        setbank_option('')
+        setservAmount('')
+        setservname('')
       }
     } catch (err) {
       console.error(err);
@@ -476,8 +481,8 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
                 onChange={(e) => setbank_option(e.target.value)}
               >
                 <option value="">select the option</option>
-                <option value="Return">Return Loan</option>
-                <option value="Take">Take Loan</option>
+                <option value="Cash">Cash Money</option>
+                <option value="Bank">Bank Account</option>
               </select>
             </div>
           </div>
@@ -547,6 +552,7 @@ export const TransactionBar: React.FC<IServiceRecord> = ({
   icon_name,
   createdAt,
   price,
+  Servicestatus
 }) => {
   const Icon = FaIcons[
     icon_name as keyof typeof FaIcons
@@ -567,7 +573,7 @@ export const TransactionBar: React.FC<IServiceRecord> = ({
         </span>
       </div>
       <div>
-        <span>Successfuly</span>
+        <span>{Servicestatus}</span>
       </div>
     </div>
   );

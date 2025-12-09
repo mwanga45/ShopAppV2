@@ -193,12 +193,12 @@ export const AdminPanel = () => {
             Onclick={() => settransactionopen(true)}
           />
           <AnimatedCard
-            details="Bank-dept"
+            details="Bank-Dept"
             icon={FaPiggyBank}
             money={Bankdebt ?? 0}
           />
           <AnimatedCard
-            details="Debt"
+            details="Customer-Debt"
             icon={FcDebt}
             money={CustomerDebt ?? 0}
           />

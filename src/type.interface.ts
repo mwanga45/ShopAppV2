@@ -422,10 +422,17 @@ export interface ServiceRequestInterface{
   service_id:number,
   payment_Amount:number
   withdrawFrom?:string
+  BankoptionII?:string
+  Bankoption?:string
+  
+
 }
 export interface IServiceRecord {
   createdAt?: string;      
   price?: string;        
   serviceName?: string;    
-  icon_name?: string;      
+  icon_name?: string; 
+  Servicestatus?:string
+
 }
+
