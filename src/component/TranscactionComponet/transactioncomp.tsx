@@ -308,6 +308,11 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
     serviceSeparation = serviceRecordpalyoad.service_id > 0 ? true : false;
     try {
       if (serviceSeparation) {
+        const confirm = window.confirm('Confirm Process')
+        if(!confirm){
+          toast.success('successfuly terminate the process')
+          return
+        }
         const response = await ServiceRequest(serviceRecordpalyoad);
         if (!response.data.success) {
           alert(response.data.message);
@@ -319,6 +324,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
         setservname("");
         setwithdrawFrom("");
         setSelectedServiceId('')
+        setbank_optionII('')
       }
     } catch (err) {
       console.error(err);
