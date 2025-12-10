@@ -303,6 +303,7 @@ export const AdminPanel = () => {
             BusinesSev={ListServ}
             thisWeekservRecord={thisWeekservRecord ?? []}
             TodayservRecord={TodayservRecord ?? []}
+            close={()=> settransactionopen(false)}
           />
         </div>
       )}

@@ -412,6 +412,7 @@ export interface TransactionInterface{
   ServiceCount?:number,
   thisWeekservRecord?:IServiceRecord[]
   TodayservRecord?:IServiceRecord[]
+  close?:()=> void
 }
 export interface BusinesServiceInfo{
   id?:number
