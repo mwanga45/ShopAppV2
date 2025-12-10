@@ -80,7 +80,6 @@ export default function SalesToday() {
   const handleClose = () => {
     setshowsalesAnalysis(false);
   };
-
   useEffect(() => {
     const handleDebtRec = async () => {
       const response = await Debtinfo();
@@ -101,11 +100,15 @@ export default function SalesToday() {
     handleDebtRec();
     handleproductInfo();
     handlereturnsalesdata();
+    const RunInterval =  setInterval(()=>{
+      handlereturnsalesdata()
+      handleDebtRec()
+      handleproductInfo()
+      document.body.style.overflow = isFormOpen ? 'hidden' :'auto'
+    },5000)
+    return ()=> clearInterval(RunInterval)
     console.log('W', Wpending)
     console.log('R', Rpending)
-  }, []);
-  useEffect(() => {
-    document.body.style.overflow = isFormOpen ? "hidden" : "auto";
   }, [isFormOpen]);
   return (
     <div className="Wh-Rtsales-container">
