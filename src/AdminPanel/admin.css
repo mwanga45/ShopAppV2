@@ -231,3 +231,9 @@
     justify-content: center;
     align-items: center;
 }
+.transactionComp-container{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    right: 2px;
+}

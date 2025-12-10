@@ -149,6 +149,7 @@ export const AdminPanel = () => {
       if (transactionopen) {
         handleBusinessWorth();
         handleServiceList()
+        document.body.style.overflow = transactionopen ? 'hidden' :'auto'
       }
     }, 5000);
     return () => clearInterval(intervalLoad);
@@ -295,7 +296,7 @@ export const AdminPanel = () => {
         </div>
       )}
       {transactionopen && (
-        <div>
+        <div className='transactionComp-container'>
           <TransactionComp
             capital={capital}
             withdraw={Withdraw ?? 0}

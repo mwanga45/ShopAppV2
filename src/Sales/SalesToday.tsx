@@ -107,8 +107,6 @@ export default function SalesToday() {
       document.body.style.overflow = isFormOpen ? 'hidden' :'auto'
     },5000)
     return ()=> clearInterval(RunInterval)
-    console.log('W', Wpending)
-    console.log('R', Rpending)
   }, [isFormOpen]);
   return (
     <div className="Wh-Rtsales-container">

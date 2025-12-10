@@ -30,6 +30,8 @@
   width: 100%;
   height: auto;
   padding-left: 20px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-bottom: 5px solid rgb(5, 5, 185);
 }
 .transactiontitle span {
   color: rgb(48, 48, 48);
