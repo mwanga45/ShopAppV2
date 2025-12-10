@@ -35,6 +35,7 @@ import { FcCollect } from "react-icons/fc";
 import { Button } from "../button/Button";
 import { CreateService, ServiceRequest } from "../../AdminPanel/adminservice";
 import { toast, ToastContainer } from "react-toastify";
+import { DateFormat } from "../../format.helper";
 export const TransactionComp: React.FC<TransactionInterface> = ({
   capital,
   withdraw,
@@ -592,7 +593,7 @@ export const TransactionBar: React.FC<IServiceRecord> = ({
         <span>
           {" "}
           Date{" "}
-          {createdAt ? new Date(createdAt).toLocaleDateString("en-US") : "none"}
+          {createdAt ? DateFormat(createdAt) : "none"}
         </span>
       </div>
       <div>
