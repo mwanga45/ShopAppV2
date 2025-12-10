@@ -148,6 +148,7 @@ export const AdminPanel = () => {
     const intervalLoad = setInterval(() => {
       if (transactionopen) {
         handleBusinessWorth();
+        handleServiceList()
       }
     }, 5000);
     return () => clearInterval(intervalLoad);
