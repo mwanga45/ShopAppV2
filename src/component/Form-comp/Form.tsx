@@ -9,7 +9,11 @@ import { StockCreate } from "../../stock/stockservice";
 import { ProductInfo } from "./formservice";
 import Toggle from "../button/toggle";
 import { CreateDebtrecord, UpdateDebt } from "../../Sales/service/sales.api";
-import { CombinedProduct, customerInfo, CreateOrder } from "../../central-api/central-api";
+import {
+  CombinedProduct,
+  customerInfo,
+  CreateOrder,
+} from "../../central-api/central-api";
 import { toast, ToastContainer } from "react-toastify";
 
 import {
@@ -96,14 +100,14 @@ export default function FormComp({ onClose, isOpen = true }: FormCompProps) {
       alert("Product registered successfully!");
 
       setFormData({
-     product_name: "",
-    product_category: "wholesales",
-    product_type: "Solid",
-    Rs_price: "",
-    Ws_price: "",
-    wpurchase_price: "",
-    rpurchase_price: "",
-      })
+        product_name: "",
+        product_category: "wholesales",
+        product_type: "Solid",
+        Rs_price: "",
+        Ws_price: "",
+        wpurchase_price: "",
+        rpurchase_price: "",
+      });
     } catch (error: any) {
       console.error(
         "Error registering product:",
@@ -741,7 +745,6 @@ export const SalesRecForm: React.FC<
         paidmoney: Number(debtorInfo?.paidmoney) || 0,
       };
 
-
       const finaldebtPayload = {
         Debtor_name: debtPayload.Debtor_name,
         paidmoney: debtPayload.paidmoney,
@@ -808,7 +811,7 @@ export const SalesRecForm: React.FC<
 
       return;
     }
-     console.log(nextSales)
+    console.log(nextSales);
     const confirm = window.confirm("Confirm sales?");
     if (!confirm) {
       setmakesales({
@@ -835,7 +838,7 @@ export const SalesRecForm: React.FC<
       alert("Please select a payment method (Bank or Cash)");
       return;
     }
-    console.log(nextSales)
+    console.log(nextSales);
     try {
       const response = await makesalesrequest(nextSales);
       if (!response.data.success) {
@@ -1184,10 +1187,7 @@ export const SalesRecForm: React.FC<
                       onclick={handlemakesales}
                     />
                     <div className="input-value">
-                      <label
-                        htmlFor="paymentstatus"
-                        style={{ color: "white" }}
-                      >
+                      <label htmlFor="paymentstatus" style={{ color: "white" }}>
                         Choose payment style
                       </label>
                       <select
@@ -1203,10 +1203,7 @@ export const SalesRecForm: React.FC<
                       </select>
                     </div>
                     <div className="input-value">
-                      <label
-                        htmlFor="payment_via"
-                        style={{ color: "white" }}
-                      >
+                      <label htmlFor="payment_via" style={{ color: "white" }}>
                         Payment Method
                       </label>
                       <select
@@ -1640,12 +1637,14 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
   const [isproductexist, setproductexist] = useState<boolean>(false);
   const [customerdetails, setcustomerdetails] = useState<CustomerInfo[]>([]);
   const [searchTerm, setsearchTerm] = useState("");
-  const [CombinedProductstate, setCombinedProductstate] = useState<ProductItem[]>([]);
+  const [CombinedProductstate, setCombinedProductstate] = useState<
+    ProductItem[]
+  >([]);
   const handleCustomerSelection = (selectedCustomerName: string) => {
     const selectedCustomer = customerdetails.find(
       (customer) => customer.customer_name === selectedCustomerName
     );
-    
+
     if (selectedCustomer) {
       setOrderpayload((prev) => ({
         ...prev,
@@ -1661,7 +1660,7 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
     >
   ) => {
     const { name, value } = e.target;
-    
+
     if (name === "client_name" && iscustomerexist) {
       handleCustomerSelection(value);
     } else {
@@ -1690,16 +1689,24 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
     handleCustomerDetails();
     handleCombinedProduct();
   }, []);
-const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
-  (item) => item.product_name?.toLowerCase().includes(searchTerm.toLowerCase())
-);
+  const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
+    (item) =>
+      item.product_name?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const handleOrderSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate required fields
-    if (!Orderpayload?.product_name || !Orderpayload?.client_name || !Orderpayload?.client_phone || 
-        !Orderpayload?.OrderDate || !Orderpayload?.payamount || !Orderpayload?.Quantity || !Orderpayload?.Orderstatus) {
+    if (
+      !Orderpayload?.product_name ||
+      !Orderpayload?.client_name ||
+      !Orderpayload?.client_phone ||
+      !Orderpayload?.OrderDate ||
+      !Orderpayload?.payamount ||
+      !Orderpayload?.Quantity ||
+      !Orderpayload?.Orderstatus
+    ) {
       toast.error("Please fill in all required fields");
       return;
     }
@@ -1716,16 +1723,16 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
         Quantity: Orderpayload.Quantity,
         Phone_number: Orderpayload.client_phone, // Use client_phone as Phone_number
         Orderstatus: Orderpayload.Orderstatus,
-        Order_Description: Orderpayload.Order_Description || ""
+        Order_Description: Orderpayload.Order_Description || "",
       };
 
       console.log("Sending order data:", orderData);
-      
+
       const response = await CreateOrder(orderData);
       console.log("Order creation response:", response);
-      
+
       if (response.data.success) {
-        toast.success("Order created successfully!",{
+        toast.success("Order created successfully!", {
           onClose: () => {
             onclose?.();
           },
@@ -1738,7 +1745,10 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
       }
     } catch (error: any) {
       console.error("Order creation error:", error);
-      toast.error("Error creating order: " + (error.response?.data?.message || error.message));
+      toast.error(
+        "Error creating order: " +
+          (error.response?.data?.message || error.message)
+      );
     }
   };
 
@@ -1818,30 +1828,30 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
             <div className="two-column-inputs">
               {isproductexist === true ? (
                 <>
-                
-                <div className="input-value">
-                  <label htmlFor="productName">Product Name</label>
-                  <select
-                    id="productName"
-                    name="product_name"
-                    value={Orderpayload?.product_name || ""}
-                    onChange={handleChange}
-                  >
-                    <option value="">Select product name</option>
-                    {filtercombineproduct && filtercombineproduct.length > 0 ? (
-                      filtercombineproduct.map((item) => (
-                        <option
-                          key={item.product_name}
-                          value={item.product_name}
-                        >
-                          {item.product_name}
-                        </option>
-                      ))
-                    ) : (
-                      <option value="">No product available</option>
-                    )}
-                  </select>
-                </div>
+                  <div className="input-value">
+                    <label htmlFor="productName">Product Name</label>
+                    <select
+                      id="productName"
+                      name="product_name"
+                      value={Orderpayload?.product_name || ""}
+                      onChange={handleChange}
+                    >
+                      <option value="">Select product name</option>
+                      {filtercombineproduct &&
+                      filtercombineproduct.length > 0 ? (
+                        filtercombineproduct.map((item) => (
+                          <option
+                            key={item.product_name}
+                            value={item.product_name}
+                          >
+                            {item.product_name}
+                          </option>
+                        ))
+                      ) : (
+                        <option value="">No product available</option>
+                      )}
+                    </select>
+                  </div>
                 </>
               ) : (
                 <div className="input-value">
@@ -1922,7 +1932,9 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
               </select>
             </div>
             <div className="input-value">
-              <label htmlFor="orderDescription">Order Description (Optional)</label>
+              <label htmlFor="orderDescription">
+                Order Description (Optional)
+              </label>
               <textarea
                 name="Order_Description"
                 id="orderDescription"
@@ -1947,7 +1959,11 @@ const filtercombineproduct: ProductItem[] = CombinedProductstate.filter(
               </button>
             </div>
             <div className="btn-container">
-              <Submitbtn buttonName="Place Order" type="submit" onclick={handleOrderSubmit} />
+              <Submitbtn
+                buttonName="Place Order"
+                type="submit"
+                onclick={handleOrderSubmit}
+              />
             </div>
           </form>
         </div>
