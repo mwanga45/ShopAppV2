@@ -454,6 +454,7 @@ export const StockRegForm: React.FC<StockFormprops> = ({
     setisDefault(next);
     setHearder(next ? "Retalsales-Stock-Reg" : "Wholesales-Stock-Reg");
   };
+  console.log(ProductInfo)
   useEffect(() => {
     const handleproductInfo = async () => {
       try {
@@ -466,6 +467,10 @@ export const StockRegForm: React.FC<StockFormprops> = ({
       }
     };
     handleproductInfo();
+    const loadingNew = setInterval(()=>{
+      handleproductInfo()
+    },1000)
+    return ()=>clearInterval(loadingNew)
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

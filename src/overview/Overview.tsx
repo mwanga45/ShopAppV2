@@ -1,6 +1,7 @@
 import { FcSalesPerformance } from "react-icons/fc";
 import { Button } from "../component/button/Button";
 import { SummaryCard } from "../component/summaryCard/summarycard";
+import { SalesChart } from "../component/salesoverviewComp/sales-chart";
 import "./overview.css";
 import {
   Complinechart,
@@ -71,39 +72,27 @@ export default function Overview() {
         </div>
       </div>
       <div className="product-and-sales-comparison">
-        <h2 className="comarisons-title">Business Comparisons</h2>
+        <h2 className="comarisons-title">Business Performance</h2>
         <div className="comparison-chart">
           <div className="Linecomponet-container">
             <Complinechart
-              title="Wholesales Product Performance"
+              title="Sales Performance"
               LastWeek={LastWeek}
               Thisweek={Thisweek}
             />
           </div>
           <div className="Barcomponet-container">
             <BarCompChart
-              title="Wholesales Product Perfomance"
+              title="Sales Product Perfomance"
               LastWeek={LastWeek}
               Thisweek={Thisweek}
             />
           </div>
         </div>
-        <div className="comparison-chart">
-          <div className="Linecomponet-container">
-            <Complinechart
-              title="Retailsales Product Performance"
-              LastWeek={LastWeek}
-              Thisweek={Thisweek}
-            />
-          </div>
-          <div className="Barcomponet-container">
-            <BarCompChart
-              title="Retailsales Product Perfomance"
-              LastWeek={LastWeek}
-              Thisweek={Thisweek}
-            />
-          </div>
-        </div>
+      </div>
+      <div>
+        <span className="comarisons-title">Money Distribution Cycle</span>
+        <SalesChart />
       </div>
     </div>
   );
