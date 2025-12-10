@@ -591,8 +591,8 @@ export const TransactionBar: React.FC<IServiceRecord> = ({
       <div>
         <span>Amount {Number(price).toLocaleString()}.Tsh</span>
         <span>
-          {" "}
-          Date{" "}
+          {"    "}
+          Date{"    "}
           {createdAt ? DateFormat(createdAt) : "none"}
         </span>
       </div>
