@@ -296,6 +296,14 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
     setSelectedServiceId((prev) => (prev === serviceId ? null : serviceId));
   };
   const handleSubmitRequest = async () => {
+    if(!servAmount){
+      toast.error('Please make sure you fill the Amount')
+      return
+    }
+    if(!selectedServiceId){
+      toast.error('Please make sure you choose the service first by click those icon above the page')
+      return
+    }
     const serviceRecordpalyoad: ServiceRequestInterface = {
       service_id: Number(selectedServiceId),
       payment_Amount: Number(servAmount),

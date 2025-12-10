@@ -1,3 +1,4 @@
+
 import {
   FaBolt,
   FaUserTie,
@@ -8,6 +9,7 @@ import {
   FaArrowCircleDown,
   FaEllipsisH,
   FaChartPie,
+  FaTruckMoving
 } from "react-icons/fa";
 
 export const Services = [
@@ -24,6 +26,7 @@ export const Services = [
     icons: [
       { name: "Electricity", icon: <FaBolt key="electricity" />, color: "text-yellow-400", icon_name:'FaBolt' },
       { name: "Others", icon: <FaEllipsisH key="others" />, color: "text-gray-400" , icon_name:'FaEllipsisH'},
+      {name:"Transport", icon:<FaTruckMoving key = "transport"/>, color:"text-yellow-400", icon_name:"FaTruckMoving"}
     ],
   },
   {
