@@ -94,7 +94,16 @@ export default function FormComp({ onClose, isOpen = true }: FormCompProps) {
       await productRegister(payload);
 
       alert("Product registered successfully!");
-      handleClose();
+
+      setFormData({
+     product_name: "",
+    product_category: "wholesales",
+    product_type: "Solid",
+    Rs_price: "",
+    Ws_price: "",
+    wpurchase_price: "",
+    rpurchase_price: "",
+      })
     } catch (error: any) {
       console.error(
         "Error registering product:",
