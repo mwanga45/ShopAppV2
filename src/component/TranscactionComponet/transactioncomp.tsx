@@ -61,7 +61,7 @@ export const TransactionComp: React.FC<TransactionInterface> = ({
   return (
     <div className={styles.transctionmaincontainer}>
       <div className={styles.transcationtopbar}>
-        <div className={styles.transactionIconContainer} onClick={()=>close}>
+        <div className={styles.transactionIconContainer} onClick={close}>
           <FaExchangeAlt size={35} color="white" />
           <FaCoins size={35} color="white" />
         </div>
