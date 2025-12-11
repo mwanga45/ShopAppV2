@@ -32,7 +32,6 @@ export const Dashboard = () => {
      const response = await Pendingsalesreturn()
      if(response.data.success && response.data.data.PendingcombineResult) {
        setPendinglist(response.data.data.PendingcombineResult)
-      console.log(` somthing here ${response.data.data.PendingcombineResult}`)
      }
     }catch(err){
       console.error(err)
@@ -40,12 +39,14 @@ export const Dashboard = () => {
   }
   const transformPendingToPayment = (pending: PendingReturnResult) => ({
     id: String(pending.id || pending.product_id || ''),
+    product_id:pending.product_id,
     product_name: pending.product_name || '',
     Revenue: Number(pending.revenue || pending.Revenue || 0),
     CreatedAt: pending.createdat || pending.CreatedAt || new Date().toISOString(),
     seller: pending.seller || '',
     Category: pending.category || pending.Category,
     total_quantity: pending.total_quantity ? Number(pending.total_quantity) : undefined,
+    
   })
   const handleDashResponse = async () => {
     try {
@@ -59,6 +60,7 @@ export const Dashboard = () => {
       setPercentage_deviation(response.data.data.Percentage_deviation ?? 100);
       setDeviateAmount(response.data.data.Deviation[0] ?? response.data.data.averageRevenue );
       setExpectedRevenue(response.data.data.averageRevenue);
+    
       return
     } catch (err) {
       alert("Network Error");

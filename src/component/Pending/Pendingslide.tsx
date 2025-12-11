@@ -12,6 +12,7 @@ interface Payment {
   seller: string;
   Category?: string;
   total_quantity?: number;
+  productId?:number
 }
 
 interface PendingPaymentSliderProps {
@@ -37,7 +38,7 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
 
   useEffect(() => {
     if (payments.length === 0) return;
-    const timer = setInterval(nextPayment, 5000);
+    const timer = setInterval(nextPayment, 50000);
     return () => clearInterval(timer);
   }, [payments.length]);
 
@@ -48,6 +49,10 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
   }, [payments.length, currentIndex]);
 
   const currentPayment = payments.length > 0 ? payments[currentIndex] : null;
+
+  const handlePaidPending = async(data:any)=>{
+    console.log(data)
+  }
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -301,7 +306,7 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
                 </p>
               </div>
               <div className={styles.paymentModalActions}>
-                <Button buttonName="Pay Now" />
+                <Button buttonName="Pay Now" Onclick={()=> handlePaidPending(currentPayment)} />
                 <Button
                   buttonName="Close"
                   Onclick={() => setShowDetails(false)}

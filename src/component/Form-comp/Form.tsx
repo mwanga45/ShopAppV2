@@ -1730,12 +1730,8 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
         Orderstatus: Orderpayload.Orderstatus,
         Order_Description: Orderpayload.Order_Description || "",
       };
-
-      console.log("Sending order data:", orderData);
-
       const response = await CreateOrder(orderData);
-      console.log("Order creation response:", response);
-
+  
       if (response.data.success) {
         toast.success("Order created successfully!", {
           onClose: () => {
