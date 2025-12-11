@@ -22,3 +22,12 @@ export const Pendingsalesreturn =async() =>{
       throw err
    }
 }
+export const PendingSalesRequest = async(data:any)=>{
+   try{
+      const response = await api.post('sales/updatePending',data)
+      return response
+   }catch(err){
+      console.error(err)
+      throw err
+   }
+}

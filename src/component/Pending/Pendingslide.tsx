@@ -4,6 +4,8 @@ import styles from "./pending-payment-slider.module.css";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa";
 import type { PaidPendingInterface } from "../../type.interface";
+import { PendingSalesRequest } from "../../Dashbord/dash.api";
+import { toast } from "react-toastify";
 
 interface Payment {
   id: string;
@@ -58,6 +60,16 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
       UpdateType:'paidpending'
     }
     console.log(finalupdatePayload)
+    try{
+      const response = await PendingSalesRequest(finalupdatePayload)
+      if(!response.data.success){
+        toast.error(response.data.message)
+      }
+      toast.success(response.data.message)
+    }catch(err){
+      console.log(err)
+      alert(err)
+    }
   }
 
   const formatDate = (dateString: string) => {
