@@ -758,7 +758,7 @@ export const SalesRecForm: React.FC<
         PaymentDateAt: debtPayload.PaymentDateAt,
       };
 
-      // Create the sales data with correct field names
+
       const salesData = {
         Total_pc_pkg_litre: nextSales.Total_pc_pkg_litre,
         ProductId: nextSales.ProductId,
@@ -817,7 +817,7 @@ export const SalesRecForm: React.FC<
       return;
     }
     console.log(nextSales);
-    const confirm = window.confirm("Confirm sales?");
+    const confirm = window.confirm(`Confirm sales? payment style ${nextSales.paymentstatus} and payment via ${nextSales.payment_via}`);
     if (!confirm) {
       setmakesales({
         Total_pc_pkg_litre: 0,
@@ -1717,7 +1717,7 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
     }
 
     try {
-      // Prepare the order data
+ 
       const orderData = {
         product_name: Orderpayload.product_name,
         client_name: Orderpayload.client_name,
@@ -1726,7 +1726,7 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
         paidMoney: Number(Orderpayload.paidMoney) || 0,
         payamount: Number(Orderpayload.payamount),
         Quantity: Orderpayload.Quantity,
-        Phone_number: Orderpayload.client_phone, // Use client_phone as Phone_number
+        Phone_number: Orderpayload.client_phone, 
         Orderstatus: Orderpayload.Orderstatus,
         Order_Description: Orderpayload.Order_Description || "",
       };
