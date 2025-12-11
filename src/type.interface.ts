@@ -436,4 +436,9 @@ export interface IServiceRecord {
   Servicestatus?:string
 
 }
+export interface PaidPendingInterface{
+  Sales_id:number,
+  Product_id:number,
+  UpdateType:string
+}
 

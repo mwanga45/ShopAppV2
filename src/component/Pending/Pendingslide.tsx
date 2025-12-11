@@ -3,6 +3,7 @@ import { Button } from "../button/Button";
 import styles from "./pending-payment-slider.module.css";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa";
+import type { PaidPendingInterface } from "../../type.interface";
 
 interface Payment {
   id: string;
@@ -12,7 +13,7 @@ interface Payment {
   seller: string;
   Category?: string;
   total_quantity?: number;
-  productId?:number
+  product_id?:number
 }
 
 interface PendingPaymentSliderProps {
@@ -50,8 +51,13 @@ export function PendingPaymentSlider({ payments }: PendingPaymentSliderProps) {
 
   const currentPayment = payments.length > 0 ? payments[currentIndex] : null;
 
-  const handlePaidPending = async(data:any)=>{
-    console.log(data)
+  const handlePaidPending = async(data:Payment)=>{
+    const finalupdatePayload:PaidPendingInterface = {
+      Sales_id:Number(data.id),
+      Product_id:Number(data.product_id),
+      UpdateType:'paidpending'
+    }
+    console.log(finalupdatePayload)
   }
 
   const formatDate = (dateString: string) => {
