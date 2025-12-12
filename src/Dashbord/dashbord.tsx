@@ -26,6 +26,8 @@ export const Dashboard = () => {
   const [ExpectedRevenue, setExpectedRevenue] = useState();
   const [Ratedata , setRatedata] =useState<RevenueRatechange[] | null>([])
   const [Pendinglist, setPendinglist] = useState<PendingReturnResult[]>([])
+  
+
 
   const handlePendingResult = async() => {
     try{
@@ -37,6 +39,7 @@ export const Dashboard = () => {
       console.error(err)
     }
   }
+  
   const transformPendingToPayment = (pending: PendingReturnResult) => ({
     id: String(pending.id || pending.product_id || ''),
     product_id:pending.product_id,
@@ -85,6 +88,10 @@ export const Dashboard = () => {
     handleDashResponse();
     handlGrphData();
     handlePendingResult();
+    // const loadPendingResult = setInterval(()=>{
+    //   handlePendingResult()
+    // },9000)
+    // return ()=> clearInterval(loadPendingResult)
   }, []);
 
   const [openOrder, setopenOrder] = useState<boolean>(false);
