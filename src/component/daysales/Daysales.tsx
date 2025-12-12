@@ -4,6 +4,7 @@ import { SiMoneygram } from "react-icons/si";
 import React, { useState, useEffect } from "react";
 import type { Result, SalesSummaryDatasales } from "../../type.interface";
 import { BsInfoCircleFill } from "react-icons/bs";
+import { DateFormat } from "../../format.helper";
 export const Daysales = () => {
   return (
     <div className="sales-container">
@@ -293,10 +294,10 @@ export const Daysale_list: React.FC<SalesSummaryDatasales> = ({
 
                     <td className="profit-generated">{item.payment_status}</td>
                     <td className="product-category">
-                      {String(item.createdat).split("T")[0]}
+                      {DateFormat(item.createdat ?? '')}
                     </td>
                     <td className="product-category">
-                      {String(item.updated_at).split("T")[0]}
+                      {DateFormat(item.updated_at ?? '')}
                     </td>
                     <td className="product-pc">
                       <span style={{ cursor: "pointer" }} onClick={()=> Onclick(String(item.debt_id))}>

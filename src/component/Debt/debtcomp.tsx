@@ -20,6 +20,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { SmsPopup } from "../sms-compo/sms-popup";
 import { FiUser } from "react-icons/fi";
 import { Editdebt } from "../Form-comp/Form";
+import { DateFormat } from "../../format.helper";
 export const Debtcompo: React.FC<DebtResponse> = ({
   PersonDebt,
   PersonOverallDebtRec,
@@ -231,7 +232,7 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
                 {tracks && tracks.length > 0 ? (
                   tracks.map((t, idx) => (
                     <div className="series-list-payment" key={idx}>
-                      <span>{String(t.updated_at).split("T")[0]}</span>
+                      <span>{DateFormat(t.updated_at ?? '')}</span>
                       <span>
                         {t.updated_at
                           ? new Date(t.updated_at).toLocaleTimeString("en-KE", {
@@ -315,8 +316,8 @@ export const Displayboard: React.FC<DebtRecord & DebtResponse> = ({
             </span>
           </div>
           <div>
-            <span>CreatedAt:{String(createdat).split("T")[0]}</span>
-            <span>Deadline Date:{String(deadlinedate).split("T")[0]}</span>
+            <span>CreatedAt:{DateFormat(createdat ?? '')}</span>
+            <span>Deadline Date:{DateFormat(deadlinedate ?? '')}</span>
           </div>
         </div>
         {opensms && (
