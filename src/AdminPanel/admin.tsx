@@ -19,7 +19,8 @@ import {
 import { AdminReg } from "../component/admin-reg/admin-reg";
 import { TransactionComp } from "../component/TranscactionComponet/transactioncomp";
 import { ShowinfoCard } from "../component/card-report/shownInfo";
-import type { BusinesServiceInfo, IServiceRecord } from "../type.interface";
+import { type MostOverViewRec, type BusinesServiceInfo, type IServiceRecord } from "../type.interface";
+import { DateFormat } from "../format.helper";
 
 interface AccountUserRespose {
   id?: number;
@@ -42,6 +43,8 @@ export const AdminPanel = () => {
   const [capital, setcapital] = useState(0);
   const [Bankdebt, setBankdebt] = useState(0);
   const [ListServ, setListServ] = useState<BusinesServiceInfo[]>([]);
+  const [mostsales, setmostsales] = useState<MostOverViewRec>()
+  const [leastsales, setleastsales] = useState<MostOverViewRec>()
   const [Accountdetails, setAccountdetails] = useState<AccountUserRespose[]>(
     []
   );
@@ -116,6 +119,8 @@ export const AdminPanel = () => {
       setwithdraw(response.data.data.Withdraw_money.Withdraw);
       setTodayservRecord(response.data.data.TodayservRecord);
       setthisWeekservRecord(response.data.data.ThisweekServRecord);
+      setmostsales(response.data.data.findMostSalesDay)
+      setleastsales(response.data.data. findLeastSalesDay)
       return;
     } catch (err) {
       alert(err);
@@ -216,13 +221,13 @@ export const AdminPanel = () => {
         >
           <div className="report-card black">
             <h3>Most Selling Day</h3>
-            <p className="detail-item">Date: 2024-07-20</p>
-            <p className="detail-item">Sales: 1,000,000 Tsh</p>
+            <p className="detail-item">{DateFormat(mostsales?.Date ?? '')}</p>
+            <p className="detail-item">Sales:{Number(mostsales?.Revenue ?? 0).toLocaleString()}.Tsh</p>
           </div>
           <div className="report-card white">
             <h3>Least Selling Day</h3>
-            <p className="detail-item">Date: 2024-07-15</p>
-            <p className="detail-item">Sales: 100,000 Tsh</p>
+            <p className="detail-item">{DateFormat(leastsales?.Date ?? '')}</p>
+            <p className="detail-item">Sales{Number(leastsales?.Revenue ?? 0).toLocaleString()}Tsh</p>
           </div>
           <div className="report-card green">
             <h3>Biggest Debt</h3>

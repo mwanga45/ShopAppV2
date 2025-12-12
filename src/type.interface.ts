@@ -441,4 +441,8 @@ export interface PaidPendingInterface{
   Product_id:number,
   UpdateType:string
 }
+export interface MostOverViewRec {
+  Date:string,
+  Revenue:string
+}
 

@@ -88,10 +88,6 @@ export const Dashboard = () => {
     handleDashResponse();
     handlGrphData();
     handlePendingResult();
-    // const loadPendingResult = setInterval(()=>{
-    //   handlePendingResult()
-    // },9000)
-    // return ()=> clearInterval(loadPendingResult)
   }, []);
 
   const [openOrder, setopenOrder] = useState<boolean>(false);
