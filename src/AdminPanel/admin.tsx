@@ -221,23 +221,23 @@ export const AdminPanel = () => {
         >
           <div className="report-card black">
             <h3>Most Selling Day</h3>
-            <p className="detail-item">{DateFormat(mostsales?.Date ?? '')}</p>
-            <p className="detail-item">Sales:{Number(mostsales?.Revenue ?? 0).toLocaleString()}.Tsh</p>
+            <span className="detail-item">{DateFormat(mostsales?.Date ?? '')}</span>
+            <span className="detail-item">Sales:{Number(mostsales?.Revenue ?? 0).toLocaleString()}.Tsh</span>
           </div>
           <div className="report-card white">
             <h3>Least Selling Day</h3>
-            <p className="detail-item">{DateFormat(leastsales?.Date ?? '')}</p>
-            <p className="detail-item">Sales{Number(leastsales?.Revenue ?? 0).toLocaleString()}Tsh</p>
+            <span className="detail-item" >{DateFormat(leastsales?.Date ?? '')}</span>
+            <span className="detail-item">Sales{Number(leastsales?.Revenue ?? 0).toLocaleString()}Tsh</span>
           </div>
           <div className="report-card green">
             <h3>Biggest Debt</h3>
-            <p className="detail-item">Customer: John Doe</p>
-            <p className="detail-item">Amount: 500,000 Tsh</p>
+            <span className="detail-item">Customer: John Doe</span>
+            <span className="detail-item">Amount: 500,000 Tsh</span>
           </div>
           <div className="report-card black">
             <h3>Business Situation</h3>
-            <p className="detail-item">Overall: Stable</p>
-            <p className="detail-item">Trend: Upward</p>
+            <span className="detail-item">Overall: Stable</span>
+            <span className="detail-item">Trend: Upward</span>
           </div>
         </motion.div>
         <motion.div
