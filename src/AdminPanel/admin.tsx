@@ -53,6 +53,7 @@ export const AdminPanel = () => {
   const [CustomerDebt, setCustomerDebt] = useState<number | null>();
   const [Businessnetworth, setBusinessnetworth] = useState<number | null>();
   const [transactionopen, settransactionopen] = useState<boolean>(false);
+  const [largerDebt, setlargerDebt] = useState<MostOverViewRec>()
   const [thisWeekservRecord, setthisWeekservRecord] = useState<
     IServiceRecord[] | null
   >([]);
@@ -121,6 +122,7 @@ export const AdminPanel = () => {
       setthisWeekservRecord(response.data.data.ThisweekServRecord);
       setmostsales(response.data.data.findMostSalesDay)
       setleastsales(response.data.data. findLeastSalesDay)
+      setlargerDebt(response.data.data.findlargestDebtRec)
       return;
     } catch (err) {
       alert(err);
@@ -221,18 +223,18 @@ export const AdminPanel = () => {
         >
           <div className="report-card black">
             <h3>Most Selling Day</h3>
-            <span className="detail-item">{DateFormat(mostsales?.Date ?? '')}</span>
-            <span className="detail-item">Sales:{Number(mostsales?.Revenue ?? 0).toLocaleString()}.Tsh</span>
+            <span className="detail-item">Date:  {' '}{DateFormat(mostsales?.Date ?? '')}</span>
+            <span className="detail-item">Sales:  {' '}{Number(mostsales?.Revenue ?? 0).toLocaleString()}.Tsh</span>
           </div>
           <div className="report-card white">
             <h3>Least Selling Day</h3>
-            <span className="detail-item" >{DateFormat(leastsales?.Date ?? '')}</span>
-            <span className="detail-item">Sales{Number(leastsales?.Revenue ?? 0).toLocaleString()}Tsh</span>
+            <span className="detail-item" >Date:  {' '}{DateFormat(leastsales?.Date ?? '')}</span>
+            <span className="detail-item">Sales: {' '}{Number(leastsales?.Revenue ?? 0).toLocaleString()}Tsh</span>
           </div>
           <div className="report-card green">
             <h3>Biggest Debt</h3>
-            <span className="detail-item">Customer: John Doe</span>
-            <span className="detail-item">Amount: 500,000 Tsh</span>
+            <span className="detail-item">Customer: {largerDebt?.customerName}</span>
+            <span className="detail-item">Amount: {' '} {Number(largerDebt?.Revenue ?? 0).toLocaleString()} Tsh</span>
           </div>
           <div className="report-card black">
             <h3>Business Situation</h3>
