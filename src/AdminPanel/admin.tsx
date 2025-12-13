@@ -1,6 +1,5 @@
-import { FaWallet, FaPiggyBank } from "react-icons/fa";
+import { FaPiggyBank,FaBoxes,FaCoins } from "react-icons/fa";
 import { FcDebt } from "react-icons/fc";
-import { FaCoins } from "react-icons/fa";
 import "./admin.css";
 import { Button } from "../component/button/Button";
 import AnimatedCard from "../component/Admincord/animatedcard";
@@ -262,7 +261,7 @@ export const AdminPanel = () => {
           </div>
           <AnimatedCard
             details="Stock Worth"
-            icon={FaWallet}
+            icon={FaBoxes}
             money={StockWorth ?? 0}
           />
         </motion.div>

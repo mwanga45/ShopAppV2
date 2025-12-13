@@ -128,7 +128,7 @@ export const Stocksheet:React.FC<Stockprops & { onUpdateSuccess?: () => void }> 
 
                 <div className="text-area-stock">
                 <div className="update-input-container">
-                    <label htmlFor="res">Reasons</label>
+                    <label htmlFor="res">Reasons (Option)</label>
                     <textarea  name='reasons' id='res' onChange={handleOnchage} style={{color:"black", fontSize:"18px" , fontWeight:"500", background:"white", border:"none"}}/>
                 </div>
               </div>
