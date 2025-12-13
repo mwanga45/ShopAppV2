@@ -151,7 +151,7 @@ export const CardDiscription: React.FC<CardDiscriptionInterface> = ({
           </span>
         </div>
         <div className="crd-dcs-date-container">
-          <span>{String(date).split("T")[0]}</span>
+          <span>{DateFormat(date ?? '')}</span>
           <span>{Icon && <Icon color ={color} />}</span>
         </div>
       </div>

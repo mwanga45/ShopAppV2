@@ -108,6 +108,7 @@ export default function SalesToday() {
     },5000)
     return ()=> clearInterval(RunInterval)
   }, [isFormOpen]);
+
   return (
     <div className="Wh-Rtsales-container">
       <div className="sales-header">
@@ -188,7 +189,7 @@ export default function SalesToday() {
                 <RiCloseFill color="black" size={30} fontWeight={500} />
               </div>
             </div>
-            <Debtcompo PersonDebt={custdebtlist} findtrack={productTrack} PersonOverallDebtRec={personDebtRec} />
+            <Debtcompo PersonDebt={custdebtlist} findtrack={productTrack} PersonOverallDebtRec={personDebtRec}/>
           </div>
         </div>
       )}
