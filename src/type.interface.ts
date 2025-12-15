@@ -447,3 +447,16 @@ export interface MostOverViewRec {
   customerName?:string
 }
 
+export interface StockTransactionInterface {
+  Date: string;                 
+  product_category: string;  
+  Method: 'add' | 'remove';   
+  prev_stock: number;      
+  new_stock: number;         
+  total_pc: number;           
+  reasons: string;           
+  character: string;          
+  Pname: string;              
+  Movement: 'IN' | 'OUT';    
+}
+

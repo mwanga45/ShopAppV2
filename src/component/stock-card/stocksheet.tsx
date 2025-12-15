@@ -52,11 +52,11 @@ export const Stocksheet:React.FC<Stockprops & { onUpdateSuccess?: () => void }> 
     seStockupdateData(payload)
     console.log(payload)
     if (!payload.product_id) throw new Error('Missing product id')
-    if (typeof payload.total_stock === 'undefined'){
-    alert('Provide add or deduct amount')
-  throw new Error('Provide add or deduct amount')
+  //   if (typeof payload.total_stock === 'undefined'){
+  //   alert('Provide add or deduct amount')
+  // throw new Error('Provide add or deduct amount') // Allow 0
 
-  } 
+  // } 
 
     const response = await StockUpdate( payload)
       if(!response.data.success){

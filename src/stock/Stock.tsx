@@ -5,6 +5,7 @@ import { RiCloseFill } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import { StockCardResult } from "./stockservice";
 import { FiSearch } from "react-icons/fi";
+import type{ StockTransactionInterface } from "../type.interface";
 
 export interface Stockprops {
   product_id: number;
@@ -24,9 +25,9 @@ export default function Stock() {
   const [searchText, setsearchText] = useState("");
   const [selectedStock, setSelectedStock] = useState<Stockprops | null>(null);
   const [selectedType, setSelectedType] = useState("All");
-  // const [selectedType, setSelectedType] = useState("All");
+  const [isTrans, setisTrans] = useState<boolean>(false)
   const [selectedCategory, setSelectedCategory] = useState("All");
-
+  const [stockTransaction, setstockTransaction] = useState<StockTransactionInterface[]>()
   const handleShowUpdateForm: React.MouseEventHandler<HTMLButtonElement> = (
     e
   ) => {
@@ -42,7 +43,8 @@ export default function Stock() {
         console.error(response.data.message);
         return;
       }
-      setCarddata(response.data.data);
+      setCarddata(response.data.data.finalresult);
+      setstockTransaction(response.data.data.returnStockTransaction)
     } catch (err) {
       console.error("Failed to fetch stock data:", err);
     }
@@ -83,7 +85,8 @@ export default function Stock() {
       <div className="Sock-header">
         <h1 className="stpage-title">Stock Analysis page</h1>
       </div>
-      <div className="stock-content-main">
+      {isTrans === false ?
+             <div className="stock-content-main">
         <p className="filter-title">Filter by</p>
         <div className="filter-container">
           <div className="filter-by-category">
@@ -150,7 +153,8 @@ export default function Stock() {
             </div>
           </div>
         )}
-      </div>
+      </div>: <div className="stock-content-main"></div>
+      }
     </div>
   );
 }
