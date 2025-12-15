@@ -9,6 +9,7 @@ interface Stockupdate {
     total_stock?: number
     Reasons?: string
     product_category?: string
+    Movement?:string
    
 
 }
@@ -35,21 +36,32 @@ export const Stocksheet:React.FC<Stockprops & { onUpdateSuccess?: () => void }> 
     if (!isNaN(addVal) && addVal > 0) total_stock = addVal
     if (!isNaN(deductVal) && deductVal > 0) total_stock = deductVal
 
+    if(!formValues.movement)
+      alert('please make sure you select stock movent ')
+
 
     const payload: Stockupdate = {
       product_id,
       Method,
       total_stock,
       Reasons: formValues?.reasons,
-      product_category: product_category 
+      product_category: product_category ,
+      Movement:formValues?.movement
     }
     
     seStockupdateData(payload)
-    if (!payload.product_id) throw new Error('Missing product id')
-    if (typeof payload.total_stock === 'undefined') throw new Error('Provide add or deduct amount') // Allow 0
-     console.log(payload,product_id)
-    const response = await StockUpdate( payload)
     console.log(payload)
+    if (!payload.product_id) throw new Error('Missing product id')
+    if (typeof payload.total_stock === 'undefined'){
+    alert('Provide add or deduct amount')
+  throw new Error('Provide add or deduct amount')
+
+  } 
+
+    const response = await StockUpdate( payload)
+      if(!response.data.success){
+        console.log(response.data.d)
+      }
     console.log("userId", response.data.data)
 
     if ((response as any)?.data?.success === false) {
@@ -109,14 +121,15 @@ export const Stocksheet:React.FC<Stockprops & { onUpdateSuccess?: () => void }> 
                   formValues?.method === 'add' ?(
                   <div className="update-input-container">
                     <label htmlFor="mv">Stock Move (IN/OUT)</label>
-                    <select name='move_category' id='mv' onChange={handleOnchage} defaultValue="IN" style={{color:"black", fontSize:"18px" , fontWeight:"500"}}>
+                    <select name='movement' id='mv' onChange={handleOnchage} defaultValue="" style={{color:"black", fontSize:"18px" , fontWeight:"500"}}>
+                      <option value="">Choose Stock Movement</option>
                       <option value="IN">IN</option>
                     </select>
                 </div>
                   ):formValues?.method === 'removed'?(
                      <div className="update-input-container">
                     <label htmlFor="mv">Stock Move (IN/OUT)</label>
-                    <select name='move_category' id='mv' onChange={handleOnchage} defaultValue="" style={{color:"black", fontSize:"18px" , fontWeight:"500"}}>
+                    <select name='movement' id='mv' onChange={handleOnchage} defaultValue="" style={{color:"black", fontSize:"18px" , fontWeight:"500"}}>
                       <option value="" disabled>Select move</option>
                       <option value="IN">IN</option>
                       <option value="OUT">OUT</option>
