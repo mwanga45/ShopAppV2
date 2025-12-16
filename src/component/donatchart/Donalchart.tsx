@@ -31,7 +31,7 @@ export const DonalChart: React.FC = () => {
           alert(response.data.message)
           return
         }
-        const nomalizedata:Stockprops[] = response.data.data.map((item:any)=>(
+        const nomalizedata:Stockprops[] = response.data.data.finalresult.map((item:any)=>(
           {
             ...item,
             last_add_stock: parseFloat(item.last_add_stock),
