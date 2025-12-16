@@ -10,10 +10,11 @@ import {
 import { GraphInfomation } from "./overview.api";
 import { useEffect, useState } from "react";
 import type { weekChartData } from "../type.interface";
+import { RiCloseFill } from "react-icons/ri";
 
 export default function Overview() {
   const [Thisweek, setThisweek] = useState<weekChartData[]>([]);
-  const [ViewCustomer, setViewCustomer] = useState<boolean>(true)
+  const [ViewCustomer, setViewCustomer] = useState<boolean>(false);
   const [LastWeek, setLastWeek] = useState<weekChartData[]>([]);
   const handleGraphData = async () => {
     const response = await GraphInfomation();
@@ -24,11 +25,10 @@ export default function Overview() {
     setThisweek(response.data.data.Thisweek);
     setLastWeek(response.data.data.Lastweek);
     console.log("this week data", Thisweek);
-    
   };
   useEffect(() => {
     handleGraphData();
-    document.body.style.overflow = ViewCustomer ? 'hidden':'auto'
+    document.body.style.overflow = ViewCustomer ? "hidden" : "auto";
   }, []);
 
   return (
@@ -37,7 +37,10 @@ export default function Overview() {
         <p>Business OverView -Summary</p>
       </div>
       <div className="overView-info-container">
-        <Button buttonName="Customer-Information" />
+        <Button
+          buttonName="Customer-Information"
+          Onclick={() => setViewCustomer(true)}
+        />
       </div>
       <div className="business-summary">
         <div className="category-summary">
@@ -98,12 +101,18 @@ export default function Overview() {
         <span className="comarisons-title">Money Distribution Cycle</span>
         <SalesChart />
       </div>
-      {
-      ViewCustomer &&
-      <div className="Customer-View-Container">
-          
-      </div> 
-      }
+      {ViewCustomer && (
+        <div className="Customer-View-Container">
+          <div className="customer-view-bar">
+            <div>
+              <span>Customer Information </span>
+            </div>
+            <div className="close-circle">
+             <RiCloseFill size={30} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
