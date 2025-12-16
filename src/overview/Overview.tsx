@@ -13,6 +13,7 @@ import type { weekChartData } from "../type.interface";
 
 export default function Overview() {
   const [Thisweek, setThisweek] = useState<weekChartData[]>([]);
+  const [ViewCustomer, setViewCustomer] = useState<boolean>(true)
   const [LastWeek, setLastWeek] = useState<weekChartData[]>([]);
   const handleGraphData = async () => {
     const response = await GraphInfomation();
@@ -23,17 +24,20 @@ export default function Overview() {
     setThisweek(response.data.data.Thisweek);
     setLastWeek(response.data.data.Lastweek);
     console.log("this week data", Thisweek);
+    
   };
   useEffect(() => {
     handleGraphData();
+    document.body.style.overflow = ViewCustomer ? 'hidden':'auto'
   }, []);
+
   return (
     <div className="overview-container">
       <div className="overview-title">
         <p>Business OverView -Summary</p>
       </div>
       <div className="overView-info-container">
-        <Button buttonName="Debtor" />
+        <Button buttonName="Customer-Information" />
       </div>
       <div className="business-summary">
         <div className="category-summary">
@@ -94,6 +98,12 @@ export default function Overview() {
         <span className="comarisons-title">Money Distribution Cycle</span>
         <SalesChart />
       </div>
+      {
+      ViewCustomer &&
+      <div className="Customer-View-Container">
+          
+      </div> 
+      }
     </div>
   );
 }
