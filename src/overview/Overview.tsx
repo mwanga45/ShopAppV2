@@ -105,7 +105,7 @@ export default function Overview() {
         <div className="Customer-View-Container">
           <div className="customer-view-bar">
             <div>
-              <span>Customer Information </span>
+              <span className="Customer-title">Customer Information </span>
             </div>
             <div className="close-circle">
              <RiCloseFill size={30} />
