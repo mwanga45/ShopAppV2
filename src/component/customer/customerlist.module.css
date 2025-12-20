@@ -1,24 +1,45 @@
-.customerlisttable{
-    width: 100%;
-    height:fit-content;
+.customerlisttable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-.customerlisttable thead{
-    height: 35px;
-    background-color: rgb(97, 3, 120);
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 
+
+.customerlisttable thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: rgb(97, 3, 120);
+  color: white;
 }
-.customerlisttable tr{
-    border:none;
-    border-radius: 12px;
-    
+
+.customerlisttable tbody {
+  display: block;       
+  max-height: 500px;      
+  overflow-y: auto;
+  width: 100%;
+  color: black;
+  background-color: aliceblue;
 }
-.customerlisttable tbody{
-    background-color: aliceblue;
-    overflow-y: auto;
-    height: 500px;
-    color: black;
+
+
+.customerlisttable thead tr,
+.customerlisttable tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
-th, td{
-    border: none;
+
+.customerlisttable th,
+.customerlisttable td {
+  padding: 12px;
+  border: none;
+  text-align: left;
+}
+tbody tr:hover{
+    transition: all ease-in 300ms;
+    cursor: pointer;
+    background-color: rgb(65, 105, 250);
+    color: aliceblue;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
