@@ -108,17 +108,20 @@ export default function Overview() {
             <div>
               <span className="Customer-title">Customer Information </span>
             </div>
-            <div className="close-circle">
-             <RiCloseFill size={30} />
+            <div className="close-circle" onClick={()=>setViewCustomer(false)}>
+              <RiCloseFill size={30} />
             </div>
           </div>
           <div className="Debtor-bar">
             <span>Debt Summary</span>
             <div className="Debtor-Infolist">
-              <AnimatedCard icon={"symbol"} details={""} money={undefined}/>
-                <AnimatedCard icon={"symbol"} details={""} money={undefined}/>
-                  <AnimatedCard icon={"symbol"} details={""} money={undefined}/>
+              <AnimatedCard icon={"symbol"} details={""} money={undefined} />
+              <AnimatedCard icon={"symbol"} details={""} money={undefined} />
+              <AnimatedCard icon={"symbol"} details={""} money={undefined} />
             </div>
+          </div>
+          <div className="Customer-list-container">
+            <span>Customer-list</span>
           </div>
         </div>
       )}
