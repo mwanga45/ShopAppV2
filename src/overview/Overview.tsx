@@ -11,6 +11,7 @@ import { GraphInfomation } from "./overview.api";
 import { useEffect, useState } from "react";
 import type { weekChartData } from "../type.interface";
 import { RiCloseFill } from "react-icons/ri";
+import AnimatedCard from "../component/Admincord/animatedcard";
 
 export default function Overview() {
   const [Thisweek, setThisweek] = useState<weekChartData[]>([]);
@@ -113,7 +114,11 @@ export default function Overview() {
           </div>
           <div className="Debtor-bar">
             <span>Debt Summary</span>
-            
+            <div className="Debtor-Infolist">
+              <AnimatedCard icon={"symbol"} details={""} money={undefined}/>
+                <AnimatedCard icon={"symbol"} details={""} money={undefined}/>
+                  <AnimatedCard icon={"symbol"} details={""} money={undefined}/>
+            </div>
           </div>
         </div>
       )}

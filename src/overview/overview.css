@@ -162,6 +162,11 @@
   margin-right:12px ;
   
 }
+.close-circle:hover{
+  transition: all ease 300ms;
+  border: 5px solid  white;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
 .Customer-title {
   font-size: 40px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
@@ -183,4 +188,13 @@
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-style: italic;
   font-weight: 600;
+}
+.Debtor-Infolist{
+  width: 100%;
+  height: fit-content;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
 }
