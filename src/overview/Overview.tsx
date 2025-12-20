@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import type { weekChartData } from "../type.interface";
 import { RiCloseFill } from "react-icons/ri";
 import AnimatedCard from "../component/Admincord/animatedcard";
+import { Daysale_list } from "../component/daysales/Daysales";
+import { Debtcompo } from "../component/Debt/debtcomp";
 
 export default function Overview() {
   const [Thisweek, setThisweek] = useState<weekChartData[]>([]);
@@ -122,6 +124,7 @@ export default function Overview() {
           </div>
           <div className="Customer-list-container">
             <span>Customer-list</span>
+            {/* <Debtcompo/> */}
           </div>
         </div>
       )}
