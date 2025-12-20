@@ -13,3 +13,7 @@
     border-radius: 12px;
     
 }
+.customerlisttable tbody{
+    overflow-y: auto;
+    
+}

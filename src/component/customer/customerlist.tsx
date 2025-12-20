@@ -11,10 +11,12 @@ export const CustomerList = () => {
             <td>Phone Number</td>
             <td>Debt-status</td>
             <td>RegisteredAt</td>
+            <td>View More details</td>
           </tr>
         </thead>
         <tbody>
             <tr>
+                
             </tr>
         </tbody>
       </table>
