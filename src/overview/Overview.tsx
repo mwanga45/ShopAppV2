@@ -111,6 +111,10 @@ export default function Overview() {
              <RiCloseFill size={30} />
             </div>
           </div>
+          <div className="Debtor-bar">
+            <span>Debt Summary</span>
+            
+          </div>
         </div>
       )}
     </div>
