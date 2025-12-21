@@ -4,7 +4,7 @@ export interface ServiceIcon {
   name: string;
   icon: React.ReactNode;
   color: string;
-  icon_name:string
+  icon_name: string;
 }
 
 export interface ServiceCategory {
@@ -19,33 +19,33 @@ export interface ServiceIconchoose {
 export interface Product {
   id?: number;
   product_name?: string;
-  product_category?: 'wholesales' | 'retailsales' | '';
+  product_category?: "wholesales" | "retailsales" | "";
   product_type?: string;
   wholesales_price?: string | null;
   retailsales_price?: string | null;
   Total_stock?: number | null;
-  Pnum?:number
+  Pnum?: number;
 }
 export interface wProduct {
   id: number;
   product_name: string;
-  product_category: 'wholesales' 
+  product_category: "wholesales";
   product_type: string;
-  wholesales_price: string 
+  wholesales_price: string;
   Total_stock: number | null;
 }
 
 export interface rProduct {
   id: number;
   product_name: string;
-  product_category: 'retailsales';
+  product_category: "retailsales";
   product_type: string;
-  retailsales_price: string 
+  retailsales_price: string;
   Total_stock: number | null;
 }
-export interface receiveProduct{
-    wholesales:wProduct[];
-    retailsales:rProduct[]
+export interface receiveProduct {
+  wholesales: wProduct[];
+  retailsales: rProduct[];
 }
 export interface DiscInterface {
   product_id?: number;
@@ -94,15 +94,15 @@ export interface productInfoprops {
   product_category: string;
   product_name: string;
 }
-export interface SaleResponseOne{
-    ProductId:number;
-    Selling_price:number;
-    Total_product:number;
+export interface SaleResponseOne {
+  ProductId: number;
+  Selling_price: number;
+  Total_product: number;
 }
 
 export interface StockCheckData {
   totalstock: number;
-  product_status: 'Enough' | 'Less' | string;
+  product_status: "Enough" | "Less" | string;
 }
 
 export interface StockCheckResponse {
@@ -147,7 +147,6 @@ export interface SalesSummaryData {
   stock_check: StockCheckResponse;
   DiscontResult: DiscountResponse;
   CalculateDeviation: DeviationResponse;
-  
 }
 
 export interface SalesSummaryResponse {
@@ -155,27 +154,25 @@ export interface SalesSummaryResponse {
   success: boolean;
   data: SalesSummaryData;
 }
-export interface paymentstatus{
-    Paid:'paid',
-    Pending:'pending',
-    Parctial: 'partialpaid' 
-} 
-
-export const paymentvia = {
-  Bank: 'bank',
-  Cash: 'cash'
-} as const;
-
-export type PaymentVia = typeof paymentvia[keyof typeof paymentvia]; 
-export interface StockStatus{
-  Enough:'Enough',
-  NotEnough:'NotEnough'
-
+export interface paymentstatus {
+  Paid: "paid";
+  Pending: "pending";
+  Parctial: "partialpaid";
 }
 
-export interface override{
-  override: 'Override'
-  
+export const paymentvia = {
+  Bank: "bank",
+  Cash: "cash",
+} as const;
+
+export type PaymentVia = (typeof paymentvia)[keyof typeof paymentvia];
+export interface StockStatus {
+  Enough: "Enough";
+  NotEnough: "NotEnough";
+}
+
+export interface override {
+  override: "Override";
 }
 export interface Salerequest {
   Total_pc_pkg_litre?: number;
@@ -183,7 +180,7 @@ export interface Salerequest {
   Expecte_profit?: number;
   Net_profit?: number;
   Discount_percentage?: string;
-  Percentage_deviation?: number ;
+  Percentage_deviation?: number;
   Revenue?: number | null;
   profit_deviation?: number;
   Stock_status?: string;
@@ -202,7 +199,7 @@ export interface FetchLastRec {
   product: {
     product_name?: string;
   };
-  Onclick?:() => void
+  Onclick?: () => void;
 }
 
 export interface SalesRecord {
@@ -213,75 +210,72 @@ export interface SalesRecord {
   total_quantity?: string;
   total_revenue?: string;
   total_profit?: string;
-  status?:string
+  status?: string;
 }
 
 export interface SalesSummaryDatasales {
   Normalsaleswholereturn?: SalesRecord[];
   Normalsalesretailreturn?: SalesRecord[];
-  Pendingsalesreturn?:SalesRecord[];
-  AllDebtRecord?:DebtRecord[]
+  Pendingsalesreturn?: SalesRecord[];
+  AllDebtRecord?: DebtRecord[];
   Allcombined?: SalesRecord[];
   totalRevenue?: number;
   totalWholeRevenue?: number;
   totolRetailRevenue?: number;
-  category?:string
-  Onclick:(id:string) => void
+  category?: string;
+  Onclick: (id: string) => void;
 }
 
 export type Result = {
   title_name: string;
   total_value: number;
   color: any;
-  ispending?:boolean
-  howmany?:number
+  ispending?: boolean;
+  howmany?: number;
 };
 export interface SalesSummaryResponsesales {
   data: SalesSummaryDatasales;
 }
 
-export interface Debtinfo{
-  Debtor_name?:string
-  paidmoney?:number
-  Phone_number?:string
-  location?:string
-  PaymentDateAt?:Date
-
+export interface Debtinfo {
+  Debtor_name?: string;
+  paidmoney?: number;
+  Phone_number?: string;
+  location?: string;
+  PaymentDateAt?: Date;
 }
 
- export interface DebtorOtherinfoProps {
-    Debtnumber?: number,
-    countUnpaid?: number,
-    countpaid?: number,
-    CountPaidMoney?:number,
-    countUnpaidMoney?: number,
-    total_revenue?: number
-    Location?:string
-    Debtor_name?:string
-    Phone_number?:string
-    PaidOutDate?:number
-
+export interface DebtorOtherinfoProps {
+  Debtnumber?: number;
+  countUnpaid?: number;
+  countpaid?: number;
+  CountPaidMoney?: number;
+  countUnpaidMoney?: number;
+  total_revenue?: number;
+  Location?: string;
+  Debtor_name?: string;
+  Phone_number?: string;
+  PaidOutDate?: number;
 }
-export  interface PersonOverallDebtRec {
-    Debtnumber?: number,
-    countUnpaid?: number,
-    countpaid?: number,
-    CountPaidMoney?:number,
-    countUnpaidMoney?: number,
-    total_revenue?: number
-    Location?:{
-     Location?:string 
-     Phone_number?:string
-    }
-    customer_name?:string
-    PaidOutDate?:number
+export interface PersonOverallDebtRec {
+  Debtnumber?: number;
+  countUnpaid?: number;
+  countpaid?: number;
+  CountPaidMoney?: number;
+  countUnpaidMoney?: number;
+  total_revenue?: number;
+  Location?: {
+    Location?: string;
+    Phone_number?: string;
+  };
+  customer_name?: string;
+  PaidOutDate?: number;
 }
 export interface DebtResponse {
-    findUserDebtInfo?: DebtRecord[];
-    findtrack?: TrackRecord[];
-    PersonDebt?: DebtRecord[];
-    PersonOverallDebtRec?:PersonOverallDebtRec
-  
+  findUserDebtInfo?: DebtRecord[];
+  findtrack?: TrackRecord[];
+  PersonDebt?: DebtRecord[];
+  PersonOverallDebtRec?: PersonOverallDebtRec;
 }
 
 export interface DebtRecord {
@@ -295,37 +289,32 @@ export interface DebtRecord {
   product_name?: string;
   updated_at?: string;
   createdat?: string;
-  deadlinedate?: string; 
-  tracks?:TrackRecord[];
-  Onclose?:() => void
-  
+  deadlinedate?: string;
+  tracks?: TrackRecord[];
+  Onclose?: () => void;
 }
-
 
 export interface TrackRecord {
   paidmoney?: number;
-  updated_at?:string
+  updated_at?: string;
 }
-
 
 export interface CardDiscriptionInterface {
-  name?:string;
-  date?:string;
-  amount?:string;
-  title?:string;
-  id?:any
-  Icon?:React.ElementType
-  color:string
+  name?: string;
+  date?: string;
+  amount?: string;
+  title?: string;
+  id?: any;
+  Icon?: React.ElementType;
+  color: string;
 }
 export interface CustomerInfo {
-  Location?:string,
-  phone_number?:string,
-  customer_name?:string,
-  Cid?:string
+  Location?: string;
+  phone_number?: string;
+  customer_name?: string;
+  Cid?: string;
 }
-export interface UpdateDebt{
-  
-}
+export interface UpdateDebt {}
 export interface ICreateOrder {
   product_name?: string;
   client_name?: string;
@@ -340,7 +329,7 @@ export interface ICreateOrder {
 }
 
 export interface Oncloseform {
-  onclose?: ()=> void
+  onclose?: () => void;
 }
 
 export interface ProductItem {
@@ -348,7 +337,7 @@ export interface ProductItem {
   selling_price?: string;
 }
 export interface CombinedProductUNoN {
-  combinedResult?: ProductItem[]
+  combinedResult?: ProductItem[];
 }
 
 export interface weekChartData {
@@ -369,7 +358,6 @@ export interface ChartPops {
   }>;
 }
 
-
 export interface TodayRev {
   generated_today?: string;
   bankRevenue?: string;
@@ -378,85 +366,87 @@ export interface TodayRev {
 export interface RevenueRatechange {
   date?: string | Date;
   rate?: number;
-
 }
 export interface ShowInfoCard {
-   totalAmount?:string,
-   discription?:string,
-   rate?:number,
-   rate_status?:string
+  totalAmount?: string;
+  discription?: string;
+  rate?: number;
+  rate_status?: string;
 }
 export interface PendingReturnResult {
-  id?:number
+  id?: number;
   product_id?: number;
   product_name?: string;
   seller?: string;
   Revenue?: string;
   revenue?: string;
-  total_quantity?: string | number; 
+  total_quantity?: string | number;
   CreatedAt?: string;
-  createdat?: string; 
+  createdat?: string;
   Category?: string;
-  category?: string; 
+  category?: string;
 }
 export interface TokenPayload {
   sub: string | null;
   email: string | null;
   role: string | null;
-  fullname:string |null
+  fullname: string | null;
 }
-export interface TransactionInterface{
-  capital?:number
-  withdraw?:number
-  BusinesSev?:BusinesServiceInfo[]
-  ServiceCount?:number,
-  thisWeekservRecord?:IServiceRecord[]
-  TodayservRecord?:IServiceRecord[]
+export interface TransactionInterface {
+  capital?: number;
+  withdraw?: number;
+  BusinesSev?: BusinesServiceInfo[];
+  ServiceCount?: number;
+  thisWeekservRecord?: IServiceRecord[];
+  TodayservRecord?: IServiceRecord[];
   close?: () => void;
 }
-export interface BusinesServiceInfo{
-  id?:number
-  service_name?:string
-  icon_name?:string
+export interface BusinesServiceInfo {
+  id?: number;
+  service_name?: string;
+  icon_name?: string;
 }
-export interface ServiceRequestInterface{
-  service_id:number,
-  payment_Amount:number
-  withdrawFrom?:string
-  BankoptionII?:string
-  Bankoption?:string
-  
-
+export interface ServiceRequestInterface {
+  service_id: number;
+  payment_Amount: number;
+  withdrawFrom?: string;
+  BankoptionII?: string;
+  Bankoption?: string;
 }
 export interface IServiceRecord {
-  createdAt?: string;      
-  price?: string;        
-  serviceName?: string;    
-  icon_name?: string; 
-  Servicestatus?:string
-
+  createdAt?: string;
+  price?: string;
+  serviceName?: string;
+  icon_name?: string;
+  Servicestatus?: string;
 }
-export interface PaidPendingInterface{
-  Sales_id:number,
-  Product_id:number,
-  UpdateType:string
+export interface PaidPendingInterface {
+  Sales_id: number;
+  Product_id: number;
+  UpdateType: string;
 }
 export interface MostOverViewRec {
-  Date?:string,
-  Revenue:string,
-  customerName?:string
+  Date?: string;
+  Revenue: string;
+  customerName?: string;
 }
 
 export interface StockTransactionInterface {
-  Date: string;                 
-  product_category: string;  
-  Method: 'add' | 'remove';   
-  prev_stock: number;      
-  new_stock: number;         
-  total_pc: number;           
-  reasons: string;           
-  character: string;          
-  Pname: string;              
-  Movement: 'IN' | 'OUT';    
+  Date: string;
+  product_category: string;
+  Method: "add" | "remove";
+  prev_stock: number;
+  new_stock: number;
+  total_pc: number;
+  reasons: string;
+  character: string;
+  Pname: string;
+  Movement: "IN" | "OUT";
 }
-
+export interface CustomerInfo {
+  RegisteredAt?: string;
+  customerName?: string;
+  Dial?: string;
+  location?: string;
+  DebtStatus?: boolean;
+}
