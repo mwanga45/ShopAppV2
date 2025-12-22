@@ -306,7 +306,14 @@
   align-items: center;
   justify-content: center;
   column-gap: 50px;
-  border: 2px solid red;
+  margin-top: 22px;
   padding: 10px;
+  
+}
+.RegiFormContainerTitle{
+  font-size: 35px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 700;
+
   
 }

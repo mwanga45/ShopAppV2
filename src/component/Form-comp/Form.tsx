@@ -454,7 +454,7 @@ export const StockRegForm: React.FC<StockFormprops> = ({
     setisDefault(next);
     setHearder(next ? "Retalsales-Stock-Reg" : "Wholesales-Stock-Reg");
   };
-  console.log(ProductInfo)
+  console.log(ProductInfo);
   useEffect(() => {
     const handleproductInfo = async () => {
       try {
@@ -467,10 +467,10 @@ export const StockRegForm: React.FC<StockFormprops> = ({
       }
     };
     handleproductInfo();
-    const loadingNew = setInterval(()=>{
-      handleproductInfo()
-    },1000)
-    return ()=>clearInterval(loadingNew)
+    const loadingNew = setInterval(() => {
+      handleproductInfo();
+    }, 1000);
+    return () => clearInterval(loadingNew);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -758,7 +758,6 @@ export const SalesRecForm: React.FC<
         PaymentDateAt: debtPayload.PaymentDateAt,
       };
 
-
       const salesData = {
         Total_pc_pkg_litre: nextSales.Total_pc_pkg_litre,
         ProductId: nextSales.ProductId,
@@ -817,7 +816,9 @@ export const SalesRecForm: React.FC<
       return;
     }
     console.log(nextSales);
-    const confirm = window.confirm(`Confirm sales? payment style ${nextSales.paymentstatus} and payment via ${nextSales.payment_via}`);
+    const confirm = window.confirm(
+      `Confirm sales? payment style ${nextSales.paymentstatus} and payment via ${nextSales.payment_via}`
+    );
     if (!confirm) {
       setmakesales({
         Total_pc_pkg_litre: 0,
@@ -1717,7 +1718,6 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
     }
 
     try {
- 
       const orderData = {
         product_name: Orderpayload.product_name,
         client_name: Orderpayload.client_name,
@@ -1726,12 +1726,12 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
         paidMoney: Number(Orderpayload.paidMoney) || 0,
         payamount: Number(Orderpayload.payamount),
         Quantity: Orderpayload.Quantity,
-        Phone_number: Orderpayload.client_phone, 
+        Phone_number: Orderpayload.client_phone,
         Orderstatus: Orderpayload.Orderstatus,
         Order_Description: Orderpayload.Order_Description || "",
       };
       const response = await CreateOrder(orderData);
-  
+
       if (response.data.success) {
         toast.success("Order created successfully!", {
           onClose: () => {
@@ -1980,3 +1980,4 @@ export const useFormClose = () => {
 
   return { isOpen, openForm, closeForm };
 };
+
