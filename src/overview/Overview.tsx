@@ -9,19 +9,22 @@ import {
 } from "../component/comparisonchart/Complinechart";
 import { GraphInfomation,CustomerInfo } from "./overview.api";
 import { useEffect, useState } from "react";
-import type { weekChartData , CustomerInfoInterface} from "../type.interface";
+import type { weekChartData , CustomerInfoInterface, DebtAmountInfo} from "../type.interface";
 import { RiCloseFill } from "react-icons/ri";
 import AnimatedCard from "../component/Admincord/animatedcard";
 import { Debtcompo } from "../component/Debt/debtcomp";
 import { CustomerList } from "../component/customer/customerlist";
-import { PlusCircle } from "lucide-react";
+import { HatGlassesIcon, PlusCircle } from "lucide-react";
+import { SiToptal } from "react-icons/si";
 
 
 export default function Overview() {
   const [Thisweek, setThisweek] = useState<weekChartData[]>([]);
   const [ViewCustomer, setViewCustomer] = useState<boolean>(false);
+  const [showReg, setshowReg] = useState<boolean>(false)
   const [LastWeek, setLastWeek] = useState<weekChartData[]>([]);
   const [customerList, setCustomerList] = useState<CustomerInfoInterface[]>([])
+  const [DebtAmountInf,setDebtAmountInf] = useState<DebtAmountInfo>()
   const [searchName , setsearchName] = useState('')
   const handleCustomerInfo = async()=>{
     try{
@@ -31,6 +34,7 @@ export default function Overview() {
         return
        }
        setCustomerList(response.data.data.CustomerInfo)
+       setDebtAmountInf(response.data.data.DebtAmountInfo)
     }catch(err){
       alert(err)
     }
@@ -54,6 +58,7 @@ export default function Overview() {
      const filtercustomerName = customerList.filter((items)=> {
       return items.customerName?.toLowerCase().includes(searchName.toLowerCase())
      })
+     const CalculateRemainDebt = Number(DebtAmountInf?.TotalDebtRec ) - Number(DebtAmountInf?.PaidMoney)
   return (
     <div className="overview-container">
       <div className="overview-title">
@@ -137,14 +142,14 @@ export default function Overview() {
           <div className="Debtor-bar">
             <span>Debt Summary</span>
             <div className="Debtor-Infolist">
-              <AnimatedCard icon={"symbol"} details={"Total paid and Unpaid Debt"} money={undefined} />
-              <AnimatedCard icon={"symbol"} details={"Total Remain Debt"} money={undefined} />
-              <AnimatedCard icon={"symbol"} details={"Total Paid Debt"} money={undefined} />
-            </div>
+              <AnimatedCard icon={SiToptal} details={"Total paid and Unpaid Debt"} money={Number(DebtAmountInf?.TotalDebtRec ?? 0)} />
+              <AnimatedCard icon={HatGlassesIcon} details={"Total Remain Debt"} money={Number(CalculateRemainDebt ?? 0)} />
+              <AnimatedCard icon={"symbol"} details={"Total Paid Debt"} money={Number(DebtAmountInf?.PaidMoney ?? 0)}/>
+            </div> 
           </div>
           <div className="CustomerRegisterSecection">
             <div>
-              <button><PlusCircle/>Add Customer</button>
+              <button onClick={()=> setshowReg(true)}><PlusCircle/>Add Customer</button>   
             </div>
           </div>
           <div className="Customer-list-container">
@@ -154,6 +159,14 @@ export default function Overview() {
             </div>
              <CustomerList CustomerDetails={filtercustomerName}/>
           </div>
+             {showReg &&
+             <div className="RegiFormContainer">
+                <div>
+                  
+                </div>
+             </div>
+
+             }
         </div>
       )}
     </div>

@@ -453,3 +453,7 @@ export interface CustomerInfoInterface {
 export interface CustomerInfoCollection{
   CustomerDetails?:CustomerInfoInterface[]
 }
+export interface DebtAmountInfo{
+   TotalDebtRec?: string,
+     PaidMoney?: string
+}
