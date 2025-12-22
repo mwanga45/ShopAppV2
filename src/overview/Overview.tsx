@@ -21,6 +21,7 @@ export default function Overview() {
   const [ViewCustomer, setViewCustomer] = useState<boolean>(false);
   const [LastWeek, setLastWeek] = useState<weekChartData[]>([]);
   const [customerList, setCustomerList] = useState<CustomerInfoInterface[]>([])
+  const [searchName , setsearchName] = useState('')
   const handleCustomerInfo = async()=>{
     try{
       const response = await CustomerInfo()
@@ -49,7 +50,9 @@ export default function Overview() {
     handleCustomerInfo()
     document.body.style.overflow = ViewCustomer ? "hidden" : "auto";
   }, []);
-
+     const filtercustomerName = customerList.filter((items)=> {
+      return items.customerName?.toLowerCase().includes(searchName.toLowerCase())
+     })
   return (
     <div className="overview-container">
       <div className="overview-title">
@@ -141,9 +144,9 @@ export default function Overview() {
           <div className="Customer-list-container">
             <span>Customer-list</span>
             <div>
-            <input type="text" />
+            <input type="text" placeholder="search customer name..." name="" onChange={(e)=> setsearchName(e.target.value)} value={searchName} />
             </div>
-             <CustomerList CustomerDetails={customerList}/>
+             <CustomerList CustomerDetails={filtercustomerName}/>
           </div>
         </div>
       )}

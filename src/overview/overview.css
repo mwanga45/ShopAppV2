@@ -238,7 +238,8 @@
   width: 25%;
   height: 50px;
   border-radius: 20px;
-  border: 2px solid red;
+  border: 2px solid #ffffff;
   color: white;
   font-size: 18px;
+  outline: none;
 }

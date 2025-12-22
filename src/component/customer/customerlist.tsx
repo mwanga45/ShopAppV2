@@ -28,11 +28,11 @@ export const CustomerList: React.FC<CustomerInfoCollection> = ({
                   <td>{`C.${(index + 1).toString().padStart(3, "0")}`}</td>
                   <td>{i.customerName}</td>
                   <td>{i.location}</td>
-                  <td>{i.Dial}</td>
+                  <td>+{i.Dial}</td>
                   <td>{i.DebtStatus ?'exist':'not exist'}</td>
                   <td>{DateFormat(i.RegisteredAt ?? '')}</td>
                   <td>
-                    <PiDotsThreeCircle size={16} />
+                    <PiDotsThreeCircle size={36} enableBackground={2} color="yellow" />
                   </td>
                 </tr>
               ))
