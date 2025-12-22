@@ -133,13 +133,16 @@ export default function Overview() {
           <div className="Debtor-bar">
             <span>Debt Summary</span>
             <div className="Debtor-Infolist">
-              <AnimatedCard icon={"symbol"} details={""} money={undefined} />
-              <AnimatedCard icon={"symbol"} details={""} money={undefined} />
-              <AnimatedCard icon={"symbol"} details={""} money={undefined} />
+              <AnimatedCard icon={"symbol"} details={"Total paid and Unpaid Debt"} money={undefined} />
+              <AnimatedCard icon={"symbol"} details={"Total Remain Debt"} money={undefined} />
+              <AnimatedCard icon={"symbol"} details={"Total Paid Debt"} money={undefined} />
             </div>
           </div>
           <div className="Customer-list-container">
             <span>Customer-list</span>
+            <div>
+            <input type="text" />
+            </div>
              <CustomerList CustomerDetails={customerList}/>
           </div>
         </div>

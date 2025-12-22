@@ -134,13 +134,18 @@
   animation-delay: var(--delay);
 }
 .Customer-View-Container {
-  position: absolute;
-  height: 100vh;
-  width: 100%;
-  background-color: rgba(102, 102, 102, 0.5);
-  backdrop-filter: blur(20px);
-  border-radius: 10px;
-  padding: 20px;
+   background-color:rgba(0, 0, 0,0.7);
+   z-index: 100;
+   animation: fadeIn 0.5s ease-out;
+   backdrop-filter: blur(8px);
+   position:fixed;
+    top:0;
+    bottom: 0;
+    left: 27vh;
+    right: 0;
+    flex: 1;
+    padding:20px;
+    
 }
 .customer-view-bar {
   width: 100%;
@@ -182,12 +187,20 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-left:10px solid red;
+  border-right: 10px solid blue;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  row-gap: 12px;
 }
 .Debtor-bar span{
   font-size: 25px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-style: italic;
   font-weight: 600;
+  border-bottom: 1px solid whitesmoke;
+
 }
 .Debtor-Infolist{
   width: 100%;
@@ -201,5 +214,31 @@
 .Customer-list-container{
   width: 100%;
   height: fit-content;
-  border: 2px solid green;
+  display: flex;
+  flex-direction: column;
+  border-top: 10px solid rgb(0, 55, 128);
+  border-radius: 20px;
+  padding: 10px;
+  row-gap: 20px;
+}
+.Customer-list-container span{
+  font-weight: 600;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 25px;
+}
+.Customer-list-container div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+  height: fit-content;
+}
+.Customer-list-container div input{
+  width: 25%;
+  height: 50px;
+  border-radius: 20px;
+  border: 2px solid red;
+  color: white;
+  font-size: 18px;
 }
