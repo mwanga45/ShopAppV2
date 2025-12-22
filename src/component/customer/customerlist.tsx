@@ -1,6 +1,6 @@
 import type React from "react";
 import styles from "./customerlist.module.css";
-import type { CustomerInfoCollection } from "../../type.interface";
+import type { CustomerInfoCollection, SimplebarInterface } from "../../type.interface";
 import { PiDotsThreeCircle } from "react-icons/pi";
 import { DateFormat } from "../../format.helper";
 export const CustomerList: React.FC<CustomerInfoCollection> = ({
@@ -47,3 +47,15 @@ export const CustomerList: React.FC<CustomerInfoCollection> = ({
     </div>
   );
 };
+
+export const Simplebar:React.FC<SimplebarInterface>=({Value, description})=>{
+  return(
+       <div className="stat-chip stat-wholesale">
+          <div className="stat-dot" />
+          <div>
+            <span className="stat-label">{description}</span>
+            <span className="stat-value">{Value}</span>
+          </div>
+        </div>
+  )
+}

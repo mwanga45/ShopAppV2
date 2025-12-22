@@ -457,3 +457,7 @@ export interface DebtAmountInfo{
    TotalDebtRec?: string,
      PaidMoney?: string
 }
+export interface SimplebarInterface{
+  description?:string,
+  Value?:number
+}

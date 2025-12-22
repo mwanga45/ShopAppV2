@@ -13,7 +13,7 @@ import type { weekChartData , CustomerInfoInterface, DebtAmountInfo} from "../ty
 import { RiCloseFill } from "react-icons/ri";
 import AnimatedCard from "../component/Admincord/animatedcard";
 import { Debtcompo } from "../component/Debt/debtcomp";
-import { CustomerList } from "../component/customer/customerlist";
+import { CustomerList, Simplebar } from "../component/customer/customerlist";
 import { HatGlassesIcon, PlusCircle } from "lucide-react";
 import { SiToptal } from "react-icons/si";
 
@@ -161,8 +161,10 @@ export default function Overview() {
           </div>
              {showReg &&
              <div className="RegiFormContainer">
-                <div>
-                  
+                <div className="customer-panel">
+                  <Simplebar description="Total Customer" Value={50}/>
+                   <Simplebar description="Total Customer Debt" Value={25}/>
+                    <Simplebar description="None Debt Customer " Value={25}/>
                 </div>
              </div>
 

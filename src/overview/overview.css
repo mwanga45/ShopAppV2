@@ -299,3 +299,14 @@
   flex: 1;
   padding: 20px;
 }
+.customer-panel{
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 50px;
+  border: 2px solid red;
+  padding: 10px;
+  
+}

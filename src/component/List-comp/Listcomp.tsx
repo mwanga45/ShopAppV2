@@ -7,6 +7,7 @@ import { RiCloseFill } from "react-icons/ri";
 import { CutoffCard } from "../Admincord/CutoffCard";
 import { specDisc } from "../../AdminPanel/adminservice";
 import { FaSearch } from "react-icons/fa";
+import { DateFormat } from "../../format.helper";
 export interface DiscountInfo {
   UpdateAt?: string;
   percentage?: string;
@@ -154,7 +155,7 @@ export const ListComp = () => {
                     <td>{p.wpurchase_price ?? p.rpurchase_price ?? 0}</td>
                     <td>{p.wholesales_price ?? p.retailsales_price ?? 0}</td>
                     <td>{p.user.fullname}</td>
-                    <td>{p.UpdateAt.substring(0, 10)}</td>
+                    <td>{DateFormat(p.UpdateAt)}</td>
                     <td>
                       <button
                         className="Actin-btn"
