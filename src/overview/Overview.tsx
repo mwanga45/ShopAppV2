@@ -14,6 +14,7 @@ import { RiCloseFill } from "react-icons/ri";
 import AnimatedCard from "../component/Admincord/animatedcard";
 import { Debtcompo } from "../component/Debt/debtcomp";
 import { CustomerList } from "../component/customer/customerlist";
+import { PlusCircle } from "lucide-react";
 
 
 export default function Overview() {
@@ -139,6 +140,11 @@ export default function Overview() {
               <AnimatedCard icon={"symbol"} details={"Total paid and Unpaid Debt"} money={undefined} />
               <AnimatedCard icon={"symbol"} details={"Total Remain Debt"} money={undefined} />
               <AnimatedCard icon={"symbol"} details={"Total Paid Debt"} money={undefined} />
+            </div>
+          </div>
+          <div className="CustomerRegisterSecection">
+            <div>
+              <button><PlusCircle/>Add Customer</button>
             </div>
           </div>
           <div className="Customer-list-container">
