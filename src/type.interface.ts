@@ -443,10 +443,13 @@ export interface StockTransactionInterface {
   Pname: string;
   Movement: "IN" | "OUT";
 }
-export interface CustomerInfo {
+export interface CustomerInfoInterface {
   RegisteredAt?: string;
   customerName?: string;
   Dial?: string;
   location?: string;
   DebtStatus?: boolean;
+}
+export interface CustomerInfoCollection{
+  CustomerDetails?:CustomerInfoInterface[]
 }

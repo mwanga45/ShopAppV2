@@ -7,19 +7,33 @@ import {
   Complinechart,
   BarCompChart,
 } from "../component/comparisonchart/Complinechart";
-import { GraphInfomation } from "./overview.api";
+import { GraphInfomation,CustomerInfo } from "./overview.api";
 import { useEffect, useState } from "react";
-import type { weekChartData } from "../type.interface";
+import type { weekChartData , CustomerInfoInterface} from "../type.interface";
 import { RiCloseFill } from "react-icons/ri";
 import AnimatedCard from "../component/Admincord/animatedcard";
-import { Daysale_list } from "../component/daysales/Daysales";
 import { Debtcompo } from "../component/Debt/debtcomp";
 import { CustomerList } from "../component/customer/customerlist";
+
 
 export default function Overview() {
   const [Thisweek, setThisweek] = useState<weekChartData[]>([]);
   const [ViewCustomer, setViewCustomer] = useState<boolean>(false);
   const [LastWeek, setLastWeek] = useState<weekChartData[]>([]);
+  const [customerList, setCustomerList] = useState<CustomerInfoInterface[]>([])
+  const handleCustomerInfo = async()=>{
+    try{
+      const response = await CustomerInfo()
+       if(!response.data.success){
+        alert(response.data.message)
+        return
+       }
+       setCustomerList(response.data.data)
+    }catch(err){
+      alert(err)
+    }
+  }
+  
   const handleGraphData = async () => {
     const response = await GraphInfomation();
     if (!response.data.success) {
@@ -32,6 +46,7 @@ export default function Overview() {
   };
   useEffect(() => {
     handleGraphData();
+    handleCustomerInfo()
     document.body.style.overflow = ViewCustomer ? "hidden" : "auto";
   }, []);
 
@@ -125,7 +140,7 @@ export default function Overview() {
           </div>
           <div className="Customer-list-container">
             <span>Customer-list</span>
-             <CustomerList/>
+             <CustomerList CustomerDetails={customerList}/>
           </div>
         </div>
       )}
