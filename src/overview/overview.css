@@ -134,18 +134,17 @@
   animation-delay: var(--delay);
 }
 .Customer-View-Container {
-   background-color:rgba(0, 0, 0,0.7);
-   z-index: 100;
-   animation: fadeIn 0.5s ease-out;
-   backdrop-filter: blur(8px);
-   position:fixed;
-    top:0;
-    bottom: 0;
-    left: 27vh;
-    right: 0;
-    flex: 1;
-    padding:20px;
-    
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  animation: fadeIn 0.5s ease-out;
+  backdrop-filter: blur(8px);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 27vh;
+  right: 0;
+  flex: 1;
+  padding: 20px;
 }
 .customer-view-bar {
   width: 100%;
@@ -153,7 +152,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
 }
 .close-circle {
   width: 60px;
@@ -164,12 +162,11 @@
   align-items: center;
   justify-content: center;
   background-color: rgb(210, 12, 12);
-  margin-right:12px ;
-  
+  margin-right: 12px;
 }
-.close-circle:hover{
+.close-circle:hover {
   transition: all ease 300ms;
-  border: 5px solid  white;
+  border: 5px solid white;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 .Customer-title {
@@ -179,7 +176,7 @@
   font-weight: 600;
   color: rgb(255, 255, 255);
 }
-.Debtor-bar{
+.Debtor-bar {
   width: 100%;
   height: fit-content;
   padding: 5px;
@@ -187,31 +184,30 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border-left:10px solid red;
+  border-left: 10px solid red;
   border-right: 10px solid blue;
   border-radius: 20px;
   margin-bottom: 20px;
   margin-top: 20px;
   row-gap: 12px;
 }
-.Debtor-bar span{
+.Debtor-bar span {
   font-size: 25px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   font-style: italic;
   font-weight: 600;
   border-bottom: 1px solid whitesmoke;
-
 }
-.Debtor-Infolist{
+.Debtor-Infolist {
   width: 100%;
   height: fit-content;
   padding: 5px;
   display: flex;
   align-items: center;
   justify-content: space-around;
-
 }
-.Customer-list-container{
+.Customer-list-container {
   width: 100%;
   height: fit-content;
   display: flex;
@@ -221,12 +217,13 @@
   padding: 10px;
   row-gap: 20px;
 }
-.Customer-list-container span{
+.Customer-list-container span {
   font-weight: 600;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   font-size: 25px;
 }
-.Customer-list-container div{
+.Customer-list-container div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -234,7 +231,7 @@
   width: 100%;
   height: fit-content;
 }
-.Customer-list-container div input{
+.Customer-list-container div input {
   width: 25%;
   height: 50px;
   border-radius: 20px;
@@ -244,33 +241,46 @@
   outline: none;
   padding: 10px;
 }
-.CustomerRegisterSecection{
-  display:flex ;
+.CustomerRegisterSecection {
+  display: flex;
   justify-content: flex-end;
   align-items: center;
   padding: 10px;
   height: fit-content;
   width: 100%;
-
-
 }
-.CustomerRegisterSecection div{
+.CustomerRegisterSecection div {
   height: fit-content;
   width: 25%;
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
-.CustomerRegisterSecection div button{
-  display:flex ;
+.CustomerRegisterSecection div button {
+  display: flex;
   align-items: center;
   justify-content: center;
   column-gap: 2px;
   background-color: rgb(36, 36, 250);
   width: 200px;
   height: 60px;
-  border:1px solid #f8f9fa;
+  border: 1px solid #f8f9fa;
   border-radius: 20px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px,
+    rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px,
+    rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.CustomerRegisterSecection div button:hover {
+  transition: all ease-in-out 500ms;
+  background-color: rgb(26, 190, 26);
+  scale: 1.1;
+  border: 4px solid #f8f9fa;
 }

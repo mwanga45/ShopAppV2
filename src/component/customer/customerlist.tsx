@@ -30,8 +30,8 @@ export const CustomerList: React.FC<CustomerInfoCollection> = ({
                   <td>{i.location}</td>
                   <td>+{i.Dial}</td>
                   <td>{i.DebtStatus ?'exist':'not exist'}</td>
-                  <td>{DateFormat(i.RegisteredAt ?? '')}</td>
-                  <td>
+                  <td >{DateFormat(i.RegisteredAt ?? '')}</td>
+                  <td className={styles.customizedtd}>
                     <PiDotsThreeCircle size={36} enableBackground={2} color="yellow" />
                   </td>
                 </tr>
