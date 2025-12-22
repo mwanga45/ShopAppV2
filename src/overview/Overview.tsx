@@ -30,7 +30,7 @@ export default function Overview() {
         alert(response.data.message)
         return
        }
-       setCustomerList(response.data.data)
+       setCustomerList(response.data.data.CustomerInfo)
     }catch(err){
       alert(err)
     }

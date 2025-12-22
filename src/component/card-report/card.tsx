@@ -6,25 +6,24 @@ import {
   FaPercentage,
 } from "react-icons/fa";
 import { GiArmoredBoomerang } from "react-icons/gi";
-import type { CardReportType } from "../../type.interface";
+// import type { CardReportType } from "../../type.interface";
 import type React from "react";
 interface otherInfo {
   titleone?: string;
   titleTwo?: string;
 }
-export const CardReport: React.FC<CardReportType & otherInfo> = ({
+export const CardReport = ({
 //   mostSoldProductRetail,
 //   mostSoldProductWholesales,
 //   leastSoldProduct,
 //   leastSoldProductRetails,
-  titleTwo,
-  titleone,
+
 }) => {
   return (
     <div className="card-container">
       <div className="card-title">
         <FaChartLine className="card-icon" />
-        <p className="fast-low">{titleone}</p>
+        <p className="fast-low"></p>
       </div>
       <div className="product-class">
         <ul>
@@ -41,7 +40,7 @@ export const CardReport: React.FC<CardReportType & otherInfo> = ({
       <div className="percentage-remain">
         <p className="card-title">
           <FaPercentage className="card-icon" />
-          {titleTwo}
+    
         </p>
         <div className="product-class">
           <ul>
