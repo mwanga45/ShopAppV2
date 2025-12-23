@@ -13,7 +13,7 @@ export const  CutoffCard:React.FC<DiscountInfo> =({id, product_name, percentage,
           <MdLocalOffer  size={30} color="red"/>
       </div>
       <div className="product-name">
-        <p>{product_name}</p>
+        <span style={{color:"white", fontSize:"23px", fontWeight:"bold"}}>{product_name}</span>
         <div className="precentage-background">
             <p style={{fontSize:"25px"}}>{Number(percentage?? "0").toFixed(1)}%</p>
         </div>

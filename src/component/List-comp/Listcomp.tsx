@@ -187,12 +187,12 @@ export const ListComp = () => {
           </div>
           <div>
             <div className="Edit-title-container">
-              <p>Welcome To Edit Page!</p>
+              <span>Welcome To Edit Page!</span>
             </div>
             <div className="edit-container">
               <div className="product-edit-info">
                 <div className="edit-title-product">
-                  <p>Edited Product-details</p>
+                  <span>{EditRow?.product_name} Product details</span>
                 </div>
                 <ul>
                   <div className="edit-info">
@@ -262,7 +262,7 @@ export const ListComp = () => {
               </div>
             </div>
             <div className="Edit-title-container">
-              <p>Product Other Info</p>
+              <span>Product Other Info</span>
             </div>
             <div className="container-product-info">
               <div className="cuttoff-details">

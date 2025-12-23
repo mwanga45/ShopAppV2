@@ -225,12 +225,14 @@
 
 
 }
-.Edit-title-container p{
+.Edit-title-container span{
   font-size: 40px;
   font-weight: 900;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  display: inline-block;
-  -webkit-box-reflect: below 0 linear-gradient(transparent, rgba(255, 255, 255));
+  color: #e5e9f2;
+  margin-top: 12px;
+  margin-bottom: 12px;
+
 }
 .edit-title-product {
   width: 400px;              
@@ -241,10 +243,10 @@
   text-align: center;      
 }
 
-.edit-title-product p {
-  font-size: 20px;           
+.edit-title-product span {
+  font-size: 22px;           
   font-weight: 600;        
-  color: #333;              
+  color: #f6f6f6;              
   margin: 0;                 
   letter-spacing: 1px;       
   text-transform: uppercase; 
@@ -256,9 +258,9 @@
 }
 
 .product-edit-info{
-  width: 420px;
+  width: 500px;
   height: 500px;
-  background-color: #e9ecef;
+  backdrop-filter: blur(10px);
   border-radius: 30px;
   box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 
@@ -290,6 +292,9 @@
   align-items: flex-start;
   justify-content: flex-start;
 
+}
+.edit-info li :nth-child(2){
+ margin-left: 500px;
 }
 .updated-info{
   font-weight:900;
