@@ -75,7 +75,7 @@ tbody tr:hover{
 }
 .formTitle{
   width: 100%;
-  height: auto;
+  height: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,11 +89,33 @@ tbody tr:hover{
   font-size: 22px;
   font-weight: 700;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin-bottom: 12px;
 }
 .mainFormContainer{
   width: 100%;
   height: 500px;
   border: 2px solid black;
   display: flex;
+  color: black;
+}
+.inputContainer{
+  width: 100%;
+  height: 10vh;
+  border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   
+ 
+}
+.inputContainer label{
+    color: grey;
+    font-size: 20px;
+    font-weight: 900;
+}
+.inputContainer input{
+  width: 75%;
+  height: 50px;
+  border-radius: 12px;
 }

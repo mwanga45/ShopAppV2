@@ -64,7 +64,10 @@ export  const CreateCustomerForm =()=>{
     <div className={styles.formContainer}>
      <div className={styles.formTitle}><span>Add Customer</span></div> 
      <form className={styles.mainFormContainer}>
-      <div></div>
+      <div className={styles.inputContainer}>
+        <label htmlFor="name">CustomerName</label>
+        <input type="text" name="CustomerName" />
+      </div>
      </form>
 
     </div>
