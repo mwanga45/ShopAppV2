@@ -3,6 +3,7 @@ import styles from "./customerlist.module.css";
 import type { CustomerInfoCollection, SimplebarInterface } from "../../type.interface";
 import { PiDotsThreeCircle } from "react-icons/pi";
 import { DateFormat } from "../../format.helper";
+import { Button } from "../button/Button";
 export const CustomerList: React.FC<CustomerInfoCollection> = ({
   CustomerDetails,
 }) => {
@@ -66,8 +67,18 @@ export  const CreateCustomerForm =()=>{
      <form className={styles.mainFormContainer}>
       <div className={styles.inputContainer}>
        <div><label htmlFor="name">CustomerName</label></div> 
-        <input type="text" name="CustomerName" />
+        <input type="text" name="CustomerName" placeholder="Enter customer-name"/>
       </div>
+            <div className={styles.inputContainer}>
+       <div><label htmlFor="name">Phone Number</label></div> 
+        <input type="text" name="CustomerName" placeholder="Enter Phone Number" />
+      </div>
+            <div className={styles.inputContainer}>
+       <div><label htmlFor="name">Customer Location(Optional)</label></div> 
+        <input type="text" name="CustomerName" placeholder="Enter Customer location" />
+      </div>
+
+      <div className={styles.ClassicBtnContainer}><Button buttonName="Create Customer"/></div>
      </form>
 
     </div>
