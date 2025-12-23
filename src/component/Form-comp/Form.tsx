@@ -1972,6 +1972,7 @@ export const PlaceOrder: React.FC<Oncloseform> = ({ onclose }) => {
     </>
   );
 };
+
 export const useFormClose = () => {
   const [isOpen, setIsOpen] = useState(true);
 

@@ -63,3 +63,20 @@ tbody tr:hover{
   transition: all ease-in-out 500ms;
   background-color: red;
 }
+
+/* form styles */
+
+.formContainer{
+  width: 500px;
+  height: 600px;
+  background-color: aliceblue;
+  padding: 10px;
+}
+.formTitle{
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}

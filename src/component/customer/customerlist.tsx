@@ -59,3 +59,10 @@ export const Simplebar:React.FC<SimplebarInterface>=({Value, description})=>{
         </div>
   )
 }
+export  const CreateCustomerForm =()=>{
+  return(
+    <div className={styles.formContainer}>
+     <div className={styles.formTitle}><span>Add Customer</span></div> 
+    </div>
+  )
+}

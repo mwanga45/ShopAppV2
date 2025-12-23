@@ -17,9 +17,10 @@ import type {
 import { RiCloseFill } from "react-icons/ri";
 import AnimatedCard from "../component/Admincord/animatedcard";
 import { Debtcompo } from "../component/Debt/debtcomp";
-import { CustomerList, Simplebar } from "../component/customer/customerlist";
+import { CreateCustomerForm, CustomerList, Simplebar } from "../component/customer/customerlist";
 import { HatGlassesIcon, PlusCircle } from "lucide-react";
 import { SiToptal } from "react-icons/si";
+
 
 export default function Overview() {
   const [Thisweek, setThisweek] = useState<weekChartData[]>([]);
@@ -195,6 +196,7 @@ export default function Overview() {
                 <Simplebar description="Total Customer Debt" Value={25} />
                 <Simplebar description="None Debt Customer " Value={25} />
               </div>
+                <CreateCustomerForm/>
             </div>
           )}
         </div>
