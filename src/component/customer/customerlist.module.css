@@ -117,5 +117,8 @@ tbody tr:hover{
 .inputContainer input{
   width: 75%;
   height: 50px;
-  border-radius: 12px;
+  border-radius: 22px;
+  padding:12px ;
+  background-color: aliceblue;
+  outline: none;
 }
