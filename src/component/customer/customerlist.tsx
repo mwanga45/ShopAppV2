@@ -77,23 +77,26 @@ const handleOnchange =(e:React.ChangeEvent<HTMLInputElement>)=>{
   CustomerName:formData?.customerName,
   Location:formData?.location
  }
-const handleValidateForm =()=>{
+
+const handleSubmit = async(e:React.FormEvent)=>{
+  e.preventDefault()
  if(!finalPayload.CustomerName){
-   return alert('please Enter Custpmer Name')
+   return alert('please Enter Customer Name')
  }
  if(finalPayload.CustomerName.length > 25 || finalPayload.CustomerName.length <5){
   return alert('customer name must have atleast 5 character and almost 25 character')
  }
-}
-const handleSubmit = async(e:React.FormEvent)=>{
-  e.preventDefault()
-  handleValidateForm()
   try{
    const response = await CreateCustomer(finalPayload)
    if(!response.data.success){
     return toast.error(response.data.message)
    }
   toast.success(response.data.message)
+  setformData({
+    customerName:"",
+    Dial:"",
+    location:""
+  })
   }catch(err){
     alert(err)
   }
