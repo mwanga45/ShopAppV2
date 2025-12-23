@@ -72,6 +72,7 @@ tbody tr:hover{
   background-color: aliceblue;
   padding: 10px;
   border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 .formTitle{
   width: 100%;
@@ -82,7 +83,8 @@ tbody tr:hover{
   padding: 5px;
   border-right:2px solid red ;
   border-left: 2px solid blue;
-  border-radius: 25px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .formTitle span{
   color: rgb(5, 63, 135);
@@ -99,7 +101,7 @@ tbody tr:hover{
   flex-direction: column;
   row-gap: 32px;
   color: black;
-      /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; */
+
 }
 .inputContainer{
   width: 100%;
@@ -126,7 +128,7 @@ tbody tr:hover{
 .inputContainer input{
   width: 75%;
   height: 50px;
-  border-radius: 22px;
+  border-radius: 10px;
   padding:12px ;
   background-color: aliceblue;
   color: black;
