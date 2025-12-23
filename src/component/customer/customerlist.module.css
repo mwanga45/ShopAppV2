@@ -71,6 +71,7 @@ tbody tr:hover{
   height: 600px;
   background-color: aliceblue;
   padding: 10px;
+  border-radius: 12px;
 }
 .formTitle{
   width: 100%;
@@ -79,4 +80,13 @@ tbody tr:hover{
   align-items: center;
   justify-content: center;
   padding: 5px;
+  border-right:2px solid red ;
+  border-left: 2px solid blue;
+  border-radius: 25px;
+}
+.formTitle span{
+  color: rgb(5, 63, 135);
+  font-size: 22px;
+  font-weight: 700;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
