@@ -90,3 +90,8 @@ tbody tr:hover{
   font-weight: 700;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+.mainFormContainer{
+  width: 100%;
+  display: flex;
+  
+}
