@@ -99,20 +99,20 @@ const handleSubmit = async(e:React.FormEvent)=>{
   }
 }
   return(
-    <div className={styles.formContainer}>
+    <div className={styles.formContainer} onSubmit={handleSubmit}>
      <div className={styles.formTitle}><span>Add Customer</span></div> 
      <form className={styles.mainFormContainer}>
       <div className={styles.inputContainer}>
-       <div><label htmlFor="name">CustomerName</label></div> 
-        <input type="text" name="CustomerName" placeholder="Enter customer-name"/>
+       <div><label htmlFor="Cn">CustomerName</label></div> 
+        <input type="text" id="Cn" name="customerName" placeholder="Enter customer-name" value={formData?.customerName} onChange={handleOnchange}/>
       </div>
             <div className={styles.inputContainer}>
-       <div><label htmlFor="name">Phone Number</label></div> 
-        <input type="text" name="CustomerName" placeholder="Enter Phone Number" />
+       <div><label htmlFor="Ph">Phone Number</label></div> 
+        <input type="text" id="Ph" name="Dial" placeholder="Enter Phone Number" value={formData?.Dial} onChange={handleOnchange}/>
       </div>
             <div className={styles.inputContainer}>
-       <div><label htmlFor="name">Customer Location(Optional)</label></div> 
-        <input type="text" name="CustomerName" placeholder="Enter Customer location" />
+       <div><label htmlFor="loc">Customer Location(Optional)</label></div> 
+        <input type="text" name="location" id= 'loc' placeholder="Enter Customer location" value={formData?.location} onChange={handleOnchange} />
       </div>
       <div className={styles.ClassicBtnContainer}><Button buttonName="Create Customer"/></div>
      </form>
