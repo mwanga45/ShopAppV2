@@ -190,7 +190,12 @@ export default function Overview() {
           </div>
           {showReg && (
             <div className="RegiFormContainer">
-              <span className="RegiFormContainerTitle">Welcome to Customer Panel! </span>
+              <div className="customer-view-bar"><span className="RegiFormContainerTitle">Welcome to Customer Panel! </span>       <div
+              className="close-circle"
+              onClick={() => setshowReg(false)}
+            >
+              <RiCloseFill size={30} />
+            </div></div>
               <div className="customer-panel">
                 <Simplebar description="Total Customer" Value={50} />
                 <Simplebar description="Total Customer Debt" Value={25} />

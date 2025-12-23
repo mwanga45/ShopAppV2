@@ -92,11 +92,11 @@ const handleSubmit = async(e:React.FormEvent)=>{
     return toast.error(response.data.message)
    }
   toast.success(response.data.message)
-  setformData({
-    customerName:"",
-    Dial:"",
-    location:""
-  })
+  // setformData({
+  //   customerName:"",
+  //   Dial:"",
+  //   location:""
+  // })
   }catch(err){
     alert(err)
   }
@@ -111,7 +111,7 @@ const handleSubmit = async(e:React.FormEvent)=>{
       </div>
             <div className={styles.inputContainer}>
        <div><label htmlFor="Ph">Phone Number</label></div> 
-        <input type="text" id="Ph" name="Dial" placeholder="Enter Phone Number" value={formData?.Dial} onChange={handleOnchange}/>
+        <input type="text" id="Ph" name="Dial" placeholder="Enter Phone Number 07...or 06..." value={formData?.Dial} onChange={handleOnchange}/>
       </div>
             <div className={styles.inputContainer}>
        <div><label htmlFor="loc">Customer Location(Optional)</label></div> 
