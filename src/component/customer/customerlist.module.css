@@ -109,7 +109,13 @@ tbody tr:hover{
   
  
 }
+.inputContainer div{
+  display: flex;
+  width: 75%;
+  margin-bottom: 2px;
+}
 .inputContainer label{
+    margin-right: 12px;
     color: grey;
     font-size: 20px;
     font-weight: 900;
@@ -121,4 +127,5 @@ tbody tr:hover{
   padding:12px ;
   background-color: aliceblue;
   outline: none;
+  
 }
