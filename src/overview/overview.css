@@ -145,6 +145,7 @@
   right: 0;
   flex: 1;
   padding: 20px;
+
 }
 .customer-view-bar {
   width: 100%;
@@ -298,6 +299,9 @@
   right: 0;
   flex: 1;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 22px;
 }
 .customer-panel{
   width: 100%;
@@ -314,6 +318,9 @@
   font-size: 35px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-weight: 700;
-
-  
+}
+.CformContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

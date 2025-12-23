@@ -196,7 +196,7 @@ export default function Overview() {
                 <Simplebar description="Total Customer Debt" Value={25} />
                 <Simplebar description="None Debt Customer " Value={25} />
               </div>
-                <CreateCustomerForm/>
+                <div className="CformContainer"><CreateCustomerForm/></div>
             </div>
           )}
         </div>
