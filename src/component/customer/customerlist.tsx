@@ -1,9 +1,13 @@
 import type React from "react";
 import styles from "./customerlist.module.css";
-import type { CustomerInfoCollection, SimplebarInterface } from "../../type.interface";
+import type{ CustomerInfoInterface, CustomerInfoCollection,  SimplebarInterface } from "../../type.interface";
 import { PiDotsThreeCircle } from "react-icons/pi";
 import { DateFormat } from "../../format.helper";
 import { Button } from "../button/Button";
+import { useState} from "react";
+import { CreateCustomer } from "../../overview/overview.api";
+import { toast } from "react-toastify";
+
 export const CustomerList: React.FC<CustomerInfoCollection> = ({
   CustomerDetails,
 }) => {
@@ -61,6 +65,39 @@ export const Simplebar:React.FC<SimplebarInterface>=({Value, description})=>{
   )
 }
 export  const CreateCustomerForm =()=>{
+const [formData, setformData] = useState<CustomerInfoInterface>()
+
+const handleOnchange =(e:React.ChangeEvent<HTMLInputElement>)=>{
+ const {name , value} = e.target;
+ setformData((prev) => ({...prev, [name]:value}));
+}
+
+ const finalPayload = {
+  PhoneNumber:formData?.Dial,
+  CustomerName:formData?.customerName,
+  Location:formData?.location
+ }
+const handleValidateForm =()=>{
+ if(!finalPayload.CustomerName){
+   return alert('please Enter Custpmer Name')
+ }
+ if(finalPayload.CustomerName.length > 25 || finalPayload.CustomerName.length <5){
+  return alert('customer name must have atleast 5 character and almost 25 character')
+ }
+}
+const handleSubmit = async(e:React.FormEvent)=>{
+  e.preventDefault()
+  handleValidateForm()
+  try{
+   const response = await CreateCustomer(finalPayload)
+   if(!response.data.success){
+    return toast.error(response.data.message)
+   }
+  toast.success(response.data.message)
+  }catch(err){
+    alert(err)
+  }
+}
   return(
     <div className={styles.formContainer}>
      <div className={styles.formTitle}><span>Add Customer</span></div> 
@@ -77,7 +114,6 @@ export  const CreateCustomerForm =()=>{
        <div><label htmlFor="name">Customer Location(Optional)</label></div> 
         <input type="text" name="CustomerName" placeholder="Enter Customer location" />
       </div>
-
       <div className={styles.ClassicBtnContainer}><Button buttonName="Create Customer"/></div>
      </form>
 

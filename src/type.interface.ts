@@ -461,3 +461,8 @@ export interface SimplebarInterface{
   description?:string,
   Value?:number
 }
+export interface CreateCustomerInterface{
+  PhoneNumber:string,
+  CustomerName:string
+  Location?:string
+}

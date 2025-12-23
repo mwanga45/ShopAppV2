@@ -8,3 +8,7 @@ export  const CustomerInfo = async()=>{
     const response = await api.get('debt/CustomerInfo')
     return response
 }
+export const CreateCustomer = async(data:any)=>{
+    const response = await api.post('management/CreateCustomer', data)
+    return response
+}
