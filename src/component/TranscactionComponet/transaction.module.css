@@ -72,6 +72,7 @@
 .transactionFormcontainer {
   height: fit-content;
   width: 100%;
+  padding-bottom: 5px;
   background-color:transparent;
   border-left: 2px solid red;
   border-right: 2px solid blue;
@@ -181,7 +182,7 @@
 }
 
 .barRecord div:nth-child(2) span {
-  color: rgb(46, 46, 46);
+  color: #4a3aff;
   font-size: large;
   font-weight: 400;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",

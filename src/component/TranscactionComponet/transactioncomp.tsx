@@ -95,7 +95,7 @@ export const TransactionComp: React.FC<TransactionInterface> = ({
                 <AnimatedCard
                   icon={GrAtm}
                   details={"withdraw money"}
-                  money={withdraw}
+                  money={Number(withdraw).toFixed(0)}
                 />
               </div>
             </div>

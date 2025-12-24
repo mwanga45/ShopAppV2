@@ -74,10 +74,10 @@ export const ListComp = () => {
       }
     };
     fetchallproduct();
-    const isloadAt  = setInterval(() => {
-      fetchallproduct()
-    }, 5000);
-    return ()=> clearInterval(isloadAt)
+    // const isloadAt  = setInterval(() => {
+    //   fetchallproduct()
+    // }, 5000);
+    // return ()=> clearInterval(isloadAt)
   }, []);
 console.log(product)
   const filterProduct = product.filter((item)=>{
