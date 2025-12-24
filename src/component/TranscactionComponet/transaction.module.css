@@ -3,7 +3,8 @@
   flex-direction: column;
   row-gap: 5px;
   flex: 1;
-  /* background-color: #ededed; */
+  background-color:transparent;
+  backdrop-filter: blur(10px);
   width: 100%;
   min-height: fit-content;
   padding: 15px;
@@ -74,7 +75,7 @@
   background-color: #e9eeff;
 }
 .transactionsalaryContainer {
-  background-color: rgb(228, 228, 228);
+  background-color: transparent;
   width: 100%;
   height: 190px;
   padding: 15px;
@@ -82,23 +83,26 @@
   justify-content: space-between;
   margin-bottom: 5px;
   border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
-    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  border: 2px solid rgb(89, 89, 253);
+
 }
 .transactionHistory {
   width: 100%;
   height: 100px;
-  background-color: #e9eeff;
+  background-color:transparent;
   border-radius: 12px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 5px;
+
 }
 .transactionHistory span {
-  color: grey;
+  color: rgb(255, 255, 255);
   font-size: 25px;
   font-weight: 600;
+  border-radius: 50px;
+  width: 100%;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
@@ -109,13 +113,16 @@
   margin-top: 12px;
   overflow-y: auto;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
-  background-color: aliceblue;
+  /* background-color: aliceblue; */
+  border-left:2px solid red;
+  padding: 10px;
+  border-right: 2px solid rgb(61, 61, 255);
+  border-radius:15px ;
 }
 .transactionHistoryHead {
   color: rgb(132, 255, 0);
   font-size: 22px;
   font-weight: 500;
-  margin-left: 40px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   margin-top: 12px;
@@ -146,9 +153,10 @@
   justify-content: space-between;
   padding: 15px;
   color: black;
-  background-color: #e9eeff;
+  background-color:transparent;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  border: 3px solid rgb(7, 219, 7);
 }
 .barRecord div:first-child {
   width: 60px;
