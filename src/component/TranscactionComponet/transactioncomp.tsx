@@ -66,7 +66,7 @@ export const TransactionComp: React.FC<TransactionInterface> = ({
           <FaCoins size={35} color="white" />
         </div>
         <div className="icon-close">
-          <RiCloseFill size={30} color="black" />
+          <RiCloseFill size={30} color="white" />
         </div>
       </div>
       <div className={styles.transactiontitle}>
@@ -346,7 +346,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
       <ToastContainer />
       <div className={styles.formContainerHead}>
         <span>Quick Action</span>
-        <span style={{ fontSize: "14px", color: "grey" }}>
+        <span style={{ fontSize: "14px", color: "white" }}>
           Select service to make payment
         </span>
       </div>
@@ -403,7 +403,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
         <div className={styles.formMainContainer}>
           <label
             htmlFor="amount"
-            style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+            style={{ color: "white", fontSize: "20px", fontWeight: "bold" }}
           >
             Withdraw Amount
           </label>
@@ -420,7 +420,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
           </div>
           <label
             htmlFor="option"
-            style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+            style={{ color: "white", fontSize: "20px", fontWeight: "bold" }}
           >
             Withdraw From
           </label>
@@ -454,7 +454,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
           <label
             htmlFor="amount"
             style={{
-              color: "black",
+              color: "white",
               fontSize: "20px",
               fontWeight: "bold",
               marginTop: "20px",
@@ -475,7 +475,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
           </div>
           <label
             htmlFor="option"
-            style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+            style={{ color: "white", fontSize: "20px", fontWeight: "bold" }}
           >
             Bank Option
           </label>
@@ -494,7 +494,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
           </div>
           <label
             htmlFor="option"
-            style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+            style={{ color: "white", fontSize: "20px", fontWeight: "bold" }}
           >
             {bank_option === "Return" ? "Take from" : "Deposite To"}
           </label>
@@ -527,7 +527,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
         <div className={styles.formMainContainer}>
           <label
             htmlFor=""
-            style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+            style={{ color: "white", fontSize: "20px", fontWeight: "bold" }}
           >
             SpendAmount
           </label>
@@ -543,7 +543,7 @@ export const TransactionForm: React.FC<TransactionInterface> = ({
           </div>
           <label
             htmlFor=""
-            style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}
+            style={{ color: "white", fontSize: "20px", fontWeight: "bold" }}
           >
             Amount for Service
           </label>
@@ -585,7 +585,7 @@ export const TransactionBar: React.FC<IServiceRecord> = ({
 
   return (
     <div className={styles.barRecord}>
-      <div>{Icon ? <Icon size={20} /> : <FaCircleQuestion size={20} />}</div>
+      <div>{Icon ? <Icon size={20} color="white" /> : <FaCircleQuestion size={20} />}</div>
       <div>
         <span>{serviceName}</span>
       </div>

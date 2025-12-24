@@ -72,7 +72,13 @@
 .transactionFormcontainer {
   height: fit-content;
   width: 100%;
-  background-color: #e9eeff;
+  background-color:transparent;
+  border-left: 2px solid red;
+  border-right: 2px solid blue;
+  border-radius: 15px;
+  border-bottom: 2px solid red;
+  border-top: 2px solid blue;
+  backdrop-filter: blur(10px);
 }
 .transactionsalaryContainer {
   background-color: transparent;
@@ -164,6 +170,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2px solid blue;
+  border-radius: 50%;
+  background-color: rgb(0, 17, 255);
   box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
     rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
     rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
@@ -304,7 +313,7 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30p
   display: flex;
   justify-content: space-between;
   overflow-x: auto;
-  background-color: #00318d;
+  background-color: transparent;
     border-radius: 5px;
 }
 
@@ -345,7 +354,7 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30p
   box-shadow: rgba(15, 23, 42, 0.25) 0px 20px 40px -20px,
     rgba(0, 0, 0, 0.09) 0px 8px 30px;
   border-radius: 14px;
-  background: linear-gradient(135deg, #ffffff 0%, #f4f8ff 100%);
+  background-color: transparent;
   padding: 16px 15px;
   display: flex;
   flex-direction: column;
@@ -358,7 +367,7 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30p
   margin-bottom: 4px;
 }
 .formContainerHead span {
-  color: grey;
+  color: rgb(186, 186, 186);
   font-size: 22px;
   font-weight: 700;
   display: block;
@@ -410,7 +419,6 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30p
   display: flex;
   align-items: center;
   gap: 10px;
-  background-color: #fff;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
   padding: 8px 12px;
@@ -422,7 +430,7 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30p
 }
 
 .inputfield:hover {
-  border-color: #d1b000;
+  border-color: #006cd1;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
 }
 
@@ -434,7 +442,7 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30p
   font-size: 18px;
   font-weight: 500;
   background: transparent;
-  color: #333;
+  color: #fefefe;
   padding: 0;
 }
 .inputfield select{
@@ -445,7 +453,7 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30p
   font-size: 18px;
   font-weight: 500;
   background: transparent;
-  color: #333;
+  color: #ebebeb;
   padding: 0;
 }
 
@@ -456,7 +464,7 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30p
 }
 
 input[type="text"]::placeholder {
-  color: #999;
+  color: #e5e5e5;
   font-size: 15px;
 }
 
