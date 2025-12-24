@@ -74,7 +74,12 @@ export const ListComp = () => {
       }
     };
     fetchallproduct();
+    const isloadAt  = setInterval(() => {
+      fetchallproduct()
+    }, 5000);
+    return ()=> clearInterval(isloadAt)
   }, []);
+console.log(product)
   const filterProduct = product.filter((item)=>{
     return item.product_name.toLowerCase().includes(searchText.toLowerCase())
   })
@@ -284,7 +289,7 @@ export const ListComp = () => {
                       product_name={item.product_name}
                       percentage={item.percentage}
                       start_from={item.start_from}
-                      CashDiscount={item.start_from}
+                      CashDiscount={item.CashDiscount}
                     />
                   ))}
                 </div>

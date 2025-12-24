@@ -3,7 +3,7 @@
   flex-direction: column;
   row-gap: 5px;
   flex: 1;
-  background-color: #ededed;
+  /* background-color: #ededed; */
   width: 100%;
   min-height: fit-content;
   padding: 15px;
@@ -31,10 +31,11 @@
   height: auto;
   padding-left: 20px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  border-bottom: 5px solid rgb(5, 5, 185);
+  border-bottom: 5px solid rgb(52, 52, 254);
+  border-radius: 20px;
 }
 .transactiontitle span {
-  color: rgb(48, 48, 48);
+  color: rgb(255, 255, 255);
   font-size: 45px;
   font-weight: 400;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
@@ -111,7 +112,7 @@
   background-color: aliceblue;
 }
 .transactionHistoryHead {
-  color: grey;
+  color: rgb(132, 255, 0);
   font-size: 22px;
   font-weight: 500;
   margin-left: 40px;

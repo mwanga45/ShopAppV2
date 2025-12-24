@@ -7,6 +7,7 @@ import { StockCardResult } from "./stockservice";
 import { FiSearch } from "react-icons/fi";
 import type{ StockTransactionInterface } from "../type.interface";
 import { FaExchangeAlt } from "react-icons/fa";
+import { DateFormat } from "../format.helper";
 
 export interface Stockprops {
   product_id: number;
@@ -243,7 +244,7 @@ export default function Stock() {
               })
               .map((t, idx) => (
                 <tr key={`${t.Date}-${idx}`}>
-                  <td>{new Date(t.Date).toLocaleDateString()}</td>
+                  <td>{DateFormat(t.Date )}</td>
                   <td className="nowrap">{t.Pname}</td>
                   <td>{t.product_category}</td>
                   <td>{Number(t.prev_stock).toFixed(0)}-Pc</td>
